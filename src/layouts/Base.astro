@@ -1,0 +1,53 @@
+---
+import '../styles/global.css';
+import { getSettings, url } from '../lib/content';
+
+interface Props {
+  title?: string;
+  description?: string | null;
+}
+
+const { title, description } = Astro.props;
+const settings = await getSettings();
+const siteName = settings?.name || 'Portfolio';
+const nav = [
+  ['ux', 'UX'],
+  ['visual', 'Visual'],
+  ['art', 'Art'],
+  ['photography', 'Photography'],
+  ['timeline', 'Timeline'],
+  ['about', 'About'],
+];
+const current = Astro.url.pathname;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href={url('favicon.svg')} />
+    <title>{title ? `${title} · ${siteName}` : siteName}</title>
+    {description && <meta name="description" content={description} />}
+  </head>
+  <body>
+    <header class="site-header">
+      <a href={url('/')} class="wordmark">{siteName}</a>
+      <nav>
+        {
+          nav.map(([path, label]) => (
+            <a href={url(path)} aria-current={current.startsWith(url(path)) ? 'page' : undefined}>
+              {label}
+            </a>
+          ))
+        }
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      {settings?.email && <a href={`mailto:${settings.email}`}>{settings.email}</a>}
+      {settings?.links.map((l) => l.url && <a href={l.url}>{l.label}</a>)}
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { projectUrl, formatRange } from '../lib/content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, summary, cover, coverAlt, status, startDate, endDate } = project.data;
+---
+
+<li class="card">
+  <a href={projectUrl(project)}>
+    {cover && <Image src={cover} alt={coverAlt ?? ''} width={800} />}
+    <h3>
+      {title}
+      {status === 'draft' && <span class="badge draft">Draft</span>}
+    </h3>
+  </a>
+  {summary && <p>{summary}</p>}
+  <p class="muted">{formatRange(startDate, endDate)}</p>
+</li>
+
+<style>
+  .card a { text-decoration: none; }
+  .card h3 { margin: 0.75rem 0 0.25rem; }
+  .card p { margin: 0.25rem 0; }
+</style>

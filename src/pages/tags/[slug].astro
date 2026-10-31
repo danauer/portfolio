@@ -1,0 +1,70 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import CloudinaryImage from '../../components/CloudinaryImage.astro';
+import { getProjects, getPhotoGroups, url } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const tags = await getCollection('tags');
+  return tags.map((tag) => ({ params: { slug: tag.id }, props: { tag } }));
+}
+
+const { tag } = Astro.props;
+const has = (e: { data: { tags: { id: string }[] } }) => e.data.tags.some((t) => t.id === tag.id);
+
+const projects = (await getProjects()).filter(has);
+const groups = (await getPhotoGroups()).filter(has);
+const photos = (await getCollection('photos')).filter(has);
+const positions = (await getCollection('positions')).filter(has);
+---
+
+<Base title={tag.data.name} description={tag.data.description}>
+  <p class="muted"><a href={url('tags')}>Tags</a></p>
+  <h1>{tag.data.name}</h1>
+  {tag.data.description && <p class="prose">{tag.data.description}</p>}
+
+  {
+    projects.length > 0 && (
+      <section>
+        <h2>Projects</h2>
+        <ul class="grid">{projects.map((project) => <ProjectCard project={project} />)}</ul>
+      </section>
+    )
+  }
+
+  {
+    groups.length > 0 && (
+      <section>
+        <h2>Photo groups</h2>
+        <ul>{groups.map((g) => <li><a href={url(`photography/${g.id}`)}>{g.data.title}</a></li>)}</ul>
+      </section>
+    )
+  }
+
+  {
+    photos.length > 0 && (
+      <section>
+        <h2>Photos</h2>
+        <ul class="grid">
+          {photos.map((p) => (
+            <li>
+              <a href={url(`photos/${p.id}`)}>
+                <CloudinaryImage publicId={p.data.cloudinaryId} alt={p.data.alt ?? ''} aspect={1} sizes="20rem" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    positions.length > 0 && (
+      <section>
+        <h2>Roles</h2>
+        <ul>{positions.map((p) => <li><a href={url(`timeline#${p.id}`)}>{p.data.title}</a></li>)}</ul>
+      </section>
+    )
+  }
+</Base>

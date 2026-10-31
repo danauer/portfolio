@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import { getSettings, url } from '../lib/content';
+
+const settings = await getSettings();
+---
+
+<Base title="About">
+  <h1>About</h1>
+  <div class="prose">
+    {settings?.bio?.split(/\n{2,}/).map((para) => <p>{para}</p>)}
+    {settings?.location && <p class="muted">Based in {settings.location}</p>}
+    <p><a href={url('timeline')}>See my career timeline →</a></p>
+  </div>
+</Base>

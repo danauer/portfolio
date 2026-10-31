@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { disciplines, getProjects, type Discipline } from '../../lib/content';
+
+export function getStaticPaths() {
+  return Object.entries(disciplines).map(([discipline, { path }]) => ({
+    params: { discipline: path },
+    props: { discipline: discipline as Discipline },
+  }));
+}
+
+const { discipline } = Astro.props;
+const { label } = disciplines[discipline];
+const projects = await getProjects(discipline);
+---
+
+<Base title={label}>
+  <h1>{label}</h1>
+  {
+    projects.length ? (
+      <ul class="grid">
+        {projects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </ul>
+    ) : (
+      <p class="muted">Nothing here yet.</p>
+    )
+  }
+</Base>

@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getProjects, getSettings } from '../lib/content';
+
+const settings = await getSettings();
+const featured = (await getProjects()).filter((p) => p.data.featured);
+---
+
+<Base description={settings?.headline}>
+  <section class="intro">
+    <h1>{settings?.headline}</h1>
+  </section>
+
+  {
+    featured.length > 0 && (
+      <section>
+        <h2>Selected work</h2>
+        <ul class="grid">
+          {featured.map((project) => (
+            <ProjectCard project={project} />
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</Base>
+
+<style>
+  .intro h1 { font-size: clamp(1.75rem, 4vw, 3rem); max-width: 20em; font-weight: 500; }
+</style>

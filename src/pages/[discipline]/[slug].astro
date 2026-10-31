@@ -1,0 +1,77 @@
+---
+import { Image } from 'astro:assets';
+import { getEntry, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Tags from '../../components/Tags.astro';
+import Credits from '../../components/Credits.astro';
+import { disciplines, getProjects, formatRange, url } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project) => ({
+    params: { discipline: disciplines[project.data.discipline].path, slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const d = project.data;
+const client = d.client && (await getEntry(d.client));
+const position = d.position && (await getEntry(d.position));
+const employer = position && (await getEntry(position.data.organization));
+---
+
+<Base title={d.title} description={d.summary}>
+  <article>
+    <header>
+      <p class="muted">
+        <a href={url(disciplines[d.discipline].path)}>{disciplines[d.discipline].label}</a>
+        {d.status === 'draft' && <span class="badge draft">Draft</span>}
+      </p>
+      <h1>{d.title}</h1>
+      {d.summary && <p class="lede">{d.summary}</p>}
+
+      <dl class="meta">
+        {d.role && (<><dt>Role</dt><dd>{d.role}</dd></>)}
+        {client && (<><dt>Client</dt><dd>{client.data.name}</dd></>)}
+        {employer && (<><dt>While at</dt><dd><a href={url(`timeline#${position.id}`)}>{employer.data.name}</a></dd></>)}
+        {(d.startDate || d.endDate) && (<><dt>When</dt><dd>{formatRange(d.startDate, d.endDate)}</dd></>)}
+        {d.medium && (<><dt>Medium</dt><dd>{d.medium}</dd></>)}
+        {d.dimensions && (<><dt>Dimensions</dt><dd>{d.dimensions}</dd></>)}
+      </dl>
+    </header>
+
+    {d.cover && <Image class="cover" src={d.cover} alt={d.coverAlt ?? ''} width={2000} loading="eager" />}
+
+    {
+      d.outcomes.length > 0 && (
+        <section>
+          <h2>Outcomes</h2>
+          <ul>{d.outcomes.map((o) => <li>{o}</li>)}</ul>
+        </section>
+      )
+    }
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {
+      d.gallery.map((item) => (
+        <figure>
+          <Image src={item.image} alt={item.alt ?? ''} width={2000} />
+          {item.caption && <figcaption>{item.caption}</figcaption>}
+        </figure>
+      ))
+    }
+
+    <Credits credits={d.credits} />
+    <Tags tags={d.tags} />
+  </article>
+</Base>
+
+<style>
+  .lede { font-size: 1.25rem; max-width: 40rem; }
+  .cover { margin-block: 2rem; width: 100%; }
+</style>

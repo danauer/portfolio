@@ -1,0 +1,29 @@
+---
+import { getEntries } from 'astro:content';
+import { url } from '../lib/content';
+
+interface Props {
+  tags: { collection: 'tags'; id: string }[];
+}
+
+const tags = await getEntries(Astro.props.tags);
+---
+
+{
+  tags.length > 0 && (
+    <ul class="tags">
+      {tags.map((t) => (
+        <li>
+          <a class="badge" href={url(`tags/${t.id}`)}>
+            {t.data.name}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+<style>
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; padding: 0; }
+  .tags a { text-decoration: none; }
+</style>

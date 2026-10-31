@@ -1,0 +1,46 @@
+---
+import { getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CloudinaryImage from '../../components/CloudinaryImage.astro';
+import { getPhotoGroups, url } from '../../lib/content';
+
+const groups = await Promise.all(
+  (await getPhotoGroups()).map(async (group) => {
+    const coverRef = group.data.cover ?? group.data.photos[0];
+    return { group, cover: coverRef && (await getEntry(coverRef)) };
+  }),
+);
+---
+
+<Base title="Photography">
+  <h1>Photography</h1>
+  <ul class="grid">
+    {
+      groups.map(({ group, cover }) => (
+        <li>
+          <a href={url(`photography/${group.id}`)}>
+            {cover && (
+              <CloudinaryImage
+                publicId={cover.data.cloudinaryId}
+                alt={cover.data.alt ?? ''}
+                aspect={4 / 3}
+                sizes="(min-width: 60rem) 33vw, 100vw"
+              />
+            )}
+            <h3>
+              {group.data.title}
+              {group.data.status === 'draft' && <span class="badge draft">Draft</span>}
+            </h3>
+          </a>
+          <p class="muted">{group.data.photos.length} photos</p>
+        </li>
+      ))
+    }
+  </ul>
+</Base>
+
+<style>
+  a { text-decoration: none; }
+  h3 { margin: 0.75rem 0 0.25rem; }
+  p { margin: 0; }
+</style>
