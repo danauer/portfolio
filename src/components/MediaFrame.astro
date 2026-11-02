@@ -6,7 +6,7 @@ interface Props {
 
 const { ratio } = Astro.props;
 // A slot holding a falsy expression (e.g. `{cover && ...}`) still counts as passed, so check the output.
-const media = (await Astro.slots.render('default')).trim();
+const media = Astro.slots.has('default') ? (await Astro.slots.render('default')).trim() : '';
 ---
 
 <div class="frame" style={`aspect-ratio: ${ratio}`} aria-hidden={media ? undefined : 'true'} set:html={media} />

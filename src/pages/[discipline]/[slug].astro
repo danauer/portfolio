@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { getEntry, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Tags from '../../components/Tags.astro';
+import MediaFrame from '../../components/MediaFrame.astro';
 import Credits from '../../components/Credits.astro';
 import { disciplines, getProjects, formatYears, url } from '../../lib/content';
 
@@ -20,58 +21,159 @@ const d = project.data;
 const client = d.client && (await getEntry(d.client));
 const position = d.position && (await getEntry(d.position));
 const employer = position && (await getEntry(position.data.organization));
+const hasGallery = Boolean(d.cover) || d.gallery.length > 0;
 ---
 
 <Base title={d.title} description={d.summary}>
-  <article>
-    <header>
-      <p class="muted">
-        <a href={url(disciplines[d.discipline].path)}>{disciplines[d.discipline].label}</a>
-        {d.status === 'draft' && <span class="badge draft">Draft</span>}
-      </p>
+  <article class="project" data-details="shown">
+    <div class="bar">
+      <a class="icon-button" href={url(disciplines[d.discipline].path)} aria-label={`Back to ${disciplines[d.discipline].label}`}>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M19 12H5" />
+          <path d="m12 19-7-7 7-7" />
+        </svg>
+      </a>
       <h1>{d.title}</h1>
-      {d.summary && <p class="lede">{d.summary}</p>}
-
-      <dl class="meta">
-        {d.role && (<><dt>Role</dt><dd>{d.role}</dd></>)}
-        {client && (<><dt>Client</dt><dd>{client.data.name}</dd></>)}
-        {employer && (<><dt>While at</dt><dd><a href={url(`timeline#${position.id}`)}>{employer.data.name}</a></dd></>)}
-        {(d.startDate || d.endDate) && (<><dt>Year</dt><dd>{formatYears(d.startDate, d.endDate)}</dd></>)}
-        {d.medium && (<><dt>Medium</dt><dd>{d.medium}</dd></>)}
-        {d.dimensions && (<><dt>Dimensions</dt><dd>{d.dimensions}</dd></>)}
-      </dl>
-    </header>
-
-    {d.cover && <Image class="cover" src={d.cover} alt={d.coverAlt ?? ''} width={2000} loading="eager" />}
-
-    {
-      d.outcomes.length > 0 && (
-        <section>
-          <h2>Outcomes</h2>
-          <ul>{d.outcomes.map((o) => <li>{o}</li>)}</ul>
-        </section>
-      )
-    }
-
-    <div class="prose">
-      <Content />
+      {d.status === 'draft' && <span class="badge draft">Draft</span>}
+      <button type="button" class="details-toggle" aria-expanded="true" aria-controls="project-details">
+        Details
+        <svg class="eye" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+        <svg class="eye-off" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z" />
+          <circle cx="12" cy="12" r="3" />
+          <path d="m3 3 18 18" />
+        </svg>
+      </button>
     </div>
 
-    {
-      d.gallery.map((item) => (
-        <figure>
-          <Image src={item.image} alt={item.alt ?? ''} width={2000} />
-          {item.caption && <figcaption>{item.caption}</figcaption>}
-        </figure>
-      ))
-    }
+    <div class="columns">
+      <div class="gallery">
+        {
+          hasGallery ? (
+            <>
+              {d.cover && (
+                <figure>
+                  <Image src={d.cover} alt={d.coverAlt ?? ''} width={2000} loading="eager" />
+                </figure>
+              )}
+              {d.gallery.map((item) => (
+                <figure>
+                  <Image src={item.image} alt={item.alt ?? ''} width={2000} />
+                  {item.caption && <figcaption>{item.caption}</figcaption>}
+                </figure>
+              ))}
+            </>
+          ) : (
+            <MediaFrame ratio="16 / 9" />
+          )
+        }
+      </div>
 
-    <Credits credits={d.credits} />
-    <Tags tags={d.tags} />
+      <div class="details" id="project-details">
+        {d.summary && <p class="lede">{d.summary}</p>}
+
+        <dl class="meta">
+          {d.role && (<><dt>Role</dt><dd>{d.role}</dd></>)}
+          {client && (<><dt>Client</dt><dd>{client.data.name}</dd></>)}
+          {employer && (<><dt>While at</dt><dd><a href={url(`timeline#${position.id}`)}>{employer.data.name}</a></dd></>)}
+          {(d.startDate || d.endDate) && (<><dt>Year</dt><dd>{formatYears(d.startDate, d.endDate)}</dd></>)}
+          {d.medium && (<><dt>Medium</dt><dd>{d.medium}</dd></>)}
+          {d.dimensions && (<><dt>Dimensions</dt><dd>{d.dimensions}</dd></>)}
+        </dl>
+
+        {
+          d.outcomes.length > 0 && (
+            <section>
+              <h2>Outcomes</h2>
+              <ul>{d.outcomes.map((o) => <li>{o}</li>)}</ul>
+            </section>
+          )
+        }
+
+        <div class="prose">
+          <Content />
+        </div>
+
+        <Credits credits={d.credits} />
+        <Tags tags={d.tags} />
+      </div>
+    </div>
   </article>
 </Base>
 
+<script>
+  // Re-run on every client-side navigation, not just the first page load.
+  document.addEventListener('astro:page-load', () => {
+    const project = document.querySelector<HTMLElement>('.project');
+    const toggle = project?.querySelector<HTMLButtonElement>('.details-toggle');
+    toggle?.addEventListener('click', () => {
+      const hidden = project!.dataset.details !== 'hidden';
+      project!.dataset.details = hidden ? 'hidden' : 'shown';
+      toggle.setAttribute('aria-expanded', String(!hidden));
+    });
+  });
+</script>
+
 <style>
-  .lede { font-size: 1.25rem; max-width: 40rem; }
-  .cover { margin-block: 2rem; width: 100%; }
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .bar h1 { margin: 0; font-size: 1rem; line-height: 1.55; }
+
+  .icon-button,
+  .details-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    border: 1px solid var(--line);
+    background: none;
+    color: inherit;
+    font: inherit;
+    font-family: var(--font-heading);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .icon-button { width: 2.5rem; flex: none; }
+  .details-toggle { gap: 0.5rem; margin-left: auto; padding-inline: 0.875rem; }
+  .icon-button:hover,
+  .details-toggle:hover { background: color-mix(in srgb, var(--fg) 5%, transparent); }
+  .eye-off { display: none; }
+  .details-toggle[aria-expanded='false'] .eye { display: none; }
+  .details-toggle[aria-expanded='false'] .eye-off { display: block; }
+
+  .columns {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 26rem);
+    gap: var(--gap);
+    align-items: start;
+    margin-top: 1.5rem;
+  }
+  .project[data-details='hidden'] .columns { grid-template-columns: minmax(0, 1fr); }
+  .project[data-details='hidden'] .details { display: none; }
+
+  .gallery figure:last-child { margin-bottom: 0; }
+
+  .details {
+    position: sticky;
+    top: 1rem;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+  }
+  .details > :first-child { margin-top: 0; }
+  .lede { font-size: 1.25rem; }
+  .details .prose { max-width: none; }
+
+  @media (max-width: 767px) {
+    .columns { grid-template-columns: minmax(0, 1fr); }
+    .details { position: static; max-height: none; overflow: visible; }
+  }
 </style>
