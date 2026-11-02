@@ -34,24 +34,28 @@ const current = Astro.url.pathname;
     <ClientRouter />
   </head>
   <body>
-    <header class="site-header">
-      <a href={url('/')} class="wordmark">{siteName}</a>
-      <nav>
-        {
-          nav.map(([path, label]) => (
-            <a href={url(path)} aria-current={current.startsWith(url(path)) ? 'page' : undefined}>
-              {label}
-            </a>
-          ))
-        }
-      </nav>
-    </header>
-    <main>
-      <slot />
-    </main>
-    <footer class="site-footer">
-      {settings?.email && <a href={`mailto:${settings.email}`}>{settings.email}</a>}
-      {settings?.links.map((l) => l.url && <a href={l.url}>{l.label}</a>)}
-    </footer>
+    <div class="shell">
+      <header class="site-header">
+        <a href={url('/')} class="wordmark">{siteName}</a>
+        <nav>
+          {
+            nav.map(([path, label]) => (
+              <a href={url(path)} aria-current={current.startsWith(url(path)) ? 'page' : undefined}>
+                {label}
+              </a>
+            ))
+          }
+        </nav>
+      </header>
+      <div class="content">
+        <main>
+          <slot />
+        </main>
+        <footer class="site-footer">
+          {settings?.email && <a href={`mailto:${settings.email}`}>{settings.email}</a>}
+          {settings?.links.map((l) => l.url && <a href={l.url}>{l.label}</a>)}
+        </footer>
+      </div>
+    </div>
   </body>
 </html>

@@ -126,14 +126,19 @@ const tagsCollection = defineCollection({
 
 const site = defineCollection({
   loader: yaml('site'),
-  schema: z.object({
-    name: text(),
-    headline: text(),
-    bio: text(),
-    email: text(),
-    location: text(),
-    links: z.array(z.object({ label: z.string(), url: text() })).default([]),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      name: text(),
+      headline: text(),
+      bio: text(),
+      portrait: image().nullish(),
+      portraitAlt: text(),
+      email: text(),
+      location: text(),
+      links: z.array(z.object({ label: z.string(), url: text() })).default([]),
+      experience: z.array(z.object({ name: z.string(), years: text() })).default([]),
+      clients: z.array(z.object({ category: z.string(), names: text() })).default([]),
+    }),
 });
 
 export const collections = {
