@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { url } from '../../lib/content';
+
+const tags = await getCollection('tags');
+const categories = Object.groupBy(tags, (t) => t.data.category);
+const labels: Record<string, string> = {
+  skill: 'Skills',
+  tool: 'Tools',
+  industry: 'Industries',
+  medium: 'Mediums',
+  theme: 'Themes',
+  other: 'Other',
+};
+---
+
+<Base title="Tags">
+  <h1>Tags</h1>
+  {
+    Object.entries(categories).map(([category, items]) => (
+      <section>
+        <h2>{labels[category]}</h2>
+        <ul class="tags">
+          {items!
+            .sort((a, b) => a.data.name.localeCompare(b.data.name))
+            .map((t) => (
+              <li>
+                <a class="badge" href={url(`tags/${t.id}`)}>{t.data.name}</a>
+              </li>
+            ))}
+        </ul>
+      </section>
+    ))
+  }
+</Base>
+
+<style>
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; padding: 0; }
+  .tags a { text-decoration: none; }
+</style>

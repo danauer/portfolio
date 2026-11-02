@@ -1,0 +1,27 @@
+---
+import { getEntry } from 'astro:content';
+
+interface Props {
+  credits: { person: { collection: 'people'; id: string }; role?: string | null }[];
+}
+
+const credits = await Promise.all(
+  Astro.props.credits.map(async (c) => ({ person: (await getEntry(c.person))!, role: c.role })),
+);
+---
+
+{
+  credits.length > 0 && (
+    <section>
+      <h2>Credits</h2>
+      <dl class="meta">
+        {credits.map(({ person, role }) => (
+          <>
+            <dt>{role || 'Contributor'}</dt>
+            <dd>{person.data.website ? <a href={person.data.website}>{person.data.name}</a> : person.data.name}</dd>
+          </>
+        ))}
+      </dl>
+    </section>
+  )
+}

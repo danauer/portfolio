@@ -1,0 +1,6 @@
+name: Northwind Bank (sample)
+kinds:
+  - client
+industry: Financial services
+tags:
+  - fintech

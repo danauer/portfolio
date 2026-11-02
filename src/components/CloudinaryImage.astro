@@ -1,0 +1,30 @@
+---
+import { cldUrl, cldSrcset } from '../lib/cloudinary';
+
+interface Props {
+  publicId: string;
+  alt: string;
+  /** Intrinsic size of the original, used to reserve space and avoid layout shift. */
+  width?: number | null;
+  height?: number | null;
+  /** Crop to a fixed aspect ratio (width / height), e.g. 1 for square thumbnails. */
+  aspect?: number;
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+const { publicId, alt, width, height, aspect, sizes = '100vw', loading = 'lazy' } = Astro.props;
+const crop = aspect ? 'fill' : 'limit';
+const ratio = aspect ?? (width && height ? width / height : undefined);
+---
+
+<img
+  src={cldUrl(publicId, { width: 1200, height: aspect ? Math.round(1200 / aspect) : undefined, crop })}
+  srcset={cldSrcset(publicId, { crop, aspect })}
+  sizes={sizes}
+  alt={alt}
+  width={ratio ? 1200 : undefined}
+  height={ratio ? Math.round(1200 / ratio) : undefined}
+  loading={loading}
+  decoding="async"
+/>

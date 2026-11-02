@@ -1,0 +1,50 @@
+---
+import { getEntries } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CloudinaryImage from '../../components/CloudinaryImage.astro';
+import Tags from '../../components/Tags.astro';
+import { getPhotoGroups, url } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const groups = await getPhotoGroups();
+  return groups.map((group) => ({ params: { slug: group.id }, props: { group } }));
+}
+
+const { group } = Astro.props;
+const photos = await getEntries(group.data.photos);
+---
+
+<Base title={group.data.title} description={group.data.description}>
+  <p class="muted"><a href={url('photography')}>Photography</a></p>
+  <h1>{group.data.title}</h1>
+  {group.data.description && <p class="prose">{group.data.description}</p>}
+  <Tags tags={group.data.tags} />
+
+  <ul class="photos">
+    {
+      photos.map((photo) => (
+        <li>
+          <a href={url(`photos/${photo.id}`)}>
+            <CloudinaryImage
+              publicId={photo.data.cloudinaryId}
+              alt={photo.data.alt ?? ''}
+              width={photo.data.width}
+              height={photo.data.height}
+              sizes="(min-width: 60rem) 50vw, 100vw"
+            />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Base>
+
+<style>
+  .photos {
+    list-style: none;
+    padding: 0;
+    columns: 2 20rem;
+    column-gap: var(--gap);
+  }
+  .photos li { break-inside: avoid; margin-bottom: var(--gap); }
+</style>

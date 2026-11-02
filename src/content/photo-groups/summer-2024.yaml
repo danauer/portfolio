@@ -1,0 +1,11 @@
+title: Summer 2024 (sample)
+status: published
+date: 2024-08-01
+description: A sample photo group using Cloudinary's demo images.
+photos:
+  - beach-boat
+  - nature-mountains
+  - architecture-signs
+  - girl-urban-view
+tags:
+  - landscape

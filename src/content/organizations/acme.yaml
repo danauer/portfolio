@@ -1,0 +1,8 @@
+name: Acme (sample)
+kinds:
+  - employer
+industry: Software
+location: New York, NY
+website: https://example.com
+description: Sample employer — replace or delete.
+tags: []

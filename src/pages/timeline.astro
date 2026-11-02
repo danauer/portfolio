@@ -1,0 +1,102 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { getProjects, projectUrl, formatRange, formatDuration } from '../lib/content';
+
+const positions = (await getCollection('positions')).sort(
+  (a, b) => b.data.startDate.getTime() - a.data.startDate.getTime(),
+);
+const projects = await getProjects();
+
+// Group consecutive positions at the same organization, so promotions read as
+// one stint with several titles.
+type Stint = { org: NonNullable<Awaited<ReturnType<typeof getEntry<'organizations', string>>>>; positions: typeof positions };
+const stints: Stint[] = [];
+for (const position of positions) {
+  const last = stints.at(-1);
+  if (last && last.org.id === position.data.organization.id) {
+    last.positions.push(position);
+  } else {
+    stints.push({ org: (await getEntry(position.data.organization))!, positions: [position] });
+  }
+}
+
+const projectsFor = (positionId: string) => projects.filter((p) => p.data.position?.id === positionId);
+const employment: Record<string, string> = {
+  'full-time': 'Full-time',
+  'part-time': 'Part-time',
+  contract: 'Contract',
+  freelance: 'Freelance',
+  internship: 'Internship',
+};
+---
+
+<Base title="Timeline">
+  <h1>Timeline</h1>
+
+  <ol class="timeline">
+    {
+      stints.map(({ org, positions }) => {
+        const start = positions.at(-1)!.data.startDate;
+        const end = positions[0].data.endDate;
+        return (
+          <li class="stint">
+            <header>
+              <h2>{org.data.website ? <a href={org.data.website}>{org.data.name}</a> : org.data.name}</h2>
+              <p class="muted">
+                {formatRange(start, end)} · {formatDuration(start, end)}
+              </p>
+            </header>
+
+            {positions.map((p) => {
+              const related = projectsFor(p.id);
+              return (
+                <section class="position" id={p.id}>
+                  <h3>{p.data.title}</h3>
+                  <p class="muted">
+                    {formatRange(p.data.startDate, p.data.endDate)} · {formatDuration(p.data.startDate, p.data.endDate)}
+                    {' · '}
+                    {employment[p.data.employmentType]}
+                    {p.data.location && ` · ${p.data.location}`}
+                  </p>
+                  {p.data.summary && <p>{p.data.summary}</p>}
+                  {p.data.highlights.length > 0 && <ul>{p.data.highlights.map((h) => <li>{h}</li>)}</ul>}
+                  {related.length > 0 && (
+                    <p>
+                      <span class="muted">Projects: </span>
+                      {related.map((proj, i) => (
+                        <>
+                          {i > 0 && ', '}
+                          <a href={projectUrl(proj)}>{proj.data.title}</a>
+                        </>
+                      ))}
+                    </p>
+                  )}
+                </section>
+              );
+            })}
+          </li>
+        );
+      })
+    }
+  </ol>
+</Base>
+
+<style>
+  .timeline { list-style: none; padding: 0; max-width: 46rem; }
+  .stint { border-left: 2px solid var(--line); padding: 0 0 2rem 1.5rem; position: relative; }
+  .stint::before {
+    content: '';
+    position: absolute;
+    left: -0.4rem;
+    top: 0.45rem;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background: var(--fg);
+  }
+  .stint h2 { margin: 0; }
+  .stint header p { margin: 0.25rem 0 1rem; }
+  .position h3 { margin: 1rem 0 0; }
+  .position p { margin: 0.25rem 0; }
+</style>

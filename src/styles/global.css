@@ -1,0 +1,92 @@
+/* Intentionally minimal — a neutral starting point to design over. */
+:root {
+  --fg: #111;
+  --muted: #666;
+  --line: #e4e4e4;
+  --bg: #fff;
+  --accent: #1a5cff;
+  --max: 72rem;
+  --gap: clamp(1rem, 3vw, 2rem);
+  color-scheme: light dark;
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  line-height: 1.55;
+  color: var(--fg);
+  background: var(--bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fg: #eee;
+    --muted: #999;
+    --line: #2a2a2a;
+    --bg: #111;
+    --accent: #7aa2ff;
+  }
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+h1, h2, h3 { line-height: 1.2; }
+
+main, .site-header, .site-footer {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gap);
+}
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-block: 1.5rem;
+}
+.site-header nav { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+.site-header a { text-decoration: none; }
+.site-header nav a[aria-current] { text-decoration: underline; text-underline-offset: 0.3em; }
+.wordmark { font-weight: 600; }
+
+.site-footer {
+  display: flex;
+  gap: 1.5rem;
+  padding-block: 3rem;
+  margin-top: 4rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.muted { color: var(--muted); }
+.prose { max-width: 42rem; }
+.prose img { margin-block: 2rem; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: var(--gap);
+  padding: 0;
+  list-style: none;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 0.1rem 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+}
+.badge.draft { border-color: orange; color: orange; }
+
+.meta {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.25rem 1.5rem;
+}
+.meta dt { color: var(--muted); }
+.meta dd { margin: 0; }
+
+figure { margin: 0 0 2rem; }
+figcaption { color: var(--muted); font-size: 0.9rem; margin-top: 0.5rem; }

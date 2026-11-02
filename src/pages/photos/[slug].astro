@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CloudinaryImage from '../../components/CloudinaryImage.astro';
+import Credits from '../../components/Credits.astro';
+import Tags from '../../components/Tags.astro';
+import { getPhotoGroups, url } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const photos = await getCollection('photos');
+  const groups = await getPhotoGroups();
+  return photos.map((photo) => ({
+    params: { slug: photo.id },
+    props: { photo, groups: groups.filter((g) => g.data.photos.some((p) => p.id === photo.id)) },
+  }));
+}
+
+const { photo, groups } = Astro.props;
+const d = photo.data;
+const dateFmt = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' });
+---
+
+<Base title={d.title} description={d.caption}>
+  <CloudinaryImage publicId={d.cloudinaryId} alt={d.alt ?? ''} width={d.width} height={d.height} loading="eager" />
+
+  <h1>{d.title}</h1>
+  {d.caption && <p class="prose">{d.caption}</p>}
+
+  <dl class="meta">
+    {d.takenAt && (<><dt>Date</dt><dd>{dateFmt.format(d.takenAt)}</dd></>)}
+    {d.location && (<><dt>Location</dt><dd>{d.location}</dd></>)}
+    {d.camera && (<><dt>Camera</dt><dd>{d.camera}</dd></>)}
+    {d.lens && (<><dt>Lens</dt><dd>{d.lens}</dd></>)}
+    {d.exposure && (<><dt>Exposure</dt><dd>{d.exposure}</dd></>)}
+    {
+      groups.length > 0 && (
+        <>
+          <dt>In</dt>
+          <dd>{groups.map((g, i) => (<>{i > 0 && ', '}<a href={url(`photography/${g.id}`)}>{g.data.title}</a></>))}</dd>
+        </>
+      )
+    }
+  </dl>
+
+  <Credits credits={d.credits} />
+  <Tags tags={d.tags} />
+</Base>

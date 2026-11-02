@@ -1,0 +1,77 @@
+---
+title: GameSpot News Reading Experience
+discipline: ux
+status: published
+featured: true
+summary: Improved the reading experience for GameSpot.
+client: gamespot
+role: Design Lead
+startDate: 2021-01-01
+endDate: 2021-01-01
+credits:
+  - person: erica-schoonmaker
+    role: Design
+  - person: karen-chiu
+    role: Design
+  - person: laura-fiebing
+    role: Engineering
+  - person: chris-james
+    role: Engineering
+  - person: will-carle
+    role: Engineering
+  - person: regina-luk
+    role: Engineering
+  - person: joel-downs
+    role: Product
+  - person: angela-hsiao
+    role: Product
+tags:
+  - gaming
+---
+## Outcome
+
+### Page View Increase
+
+We found a minor increase in pageviews for users who participated in the News beta and found them gravitating more content in the feeds provided for them over the users continually scrolling from one article to the next in the seamless layout.
+
+### More Cohesive SEO Strategy
+
+Exploring AMP-based article layouts allowed articles to be better suited for SEO so that users could find what they were looking for from their search results. Beyond AMP layouts, the team adopted their learnings and implemented them to the site proper.
+
+### Page Load Reduced
+
+Load times for articles improved due to removal of underperforming ad units and unnecessary UI elements. This resulted in a faster, smoother experience for users.
+
+### Various UI Improvements
+
+Through continuous exploration and incremental updates, the visual experience for articles, feeds, and hubs were refined and modernized for a more focused and easier to read experience for users.
+
+## Additional details
+
+### Strategic Overview
+
+The broad strategy within product and engineering teams was to continually improve the news reading experience for GameSpot. The site, a property that is more than two decades into its prime, had been a staple in games media. Together, the team explored ideas of what improving the reading experience could look like and how to measure whether we were on the right track. Three high-level goals were established to help guide the team at large:
+
+- A faster experience for users of the site
+- Reduce the barrier to relevant content
+- A more personal experience for visitors and repeat users
+
+### Explorations
+
+#### AMP Integration
+
+The team explored an alternative to the standard implementation of displaying articles through the custom framework GameSpot is built on. AMP, a framework provided by Google, allowed a faster and smoother experience for users in their path from their search results to relevant content that they're looking for.
+
+The team designed and built a beta for a News section of GameSpot that was React-based instead of the PHP-based like the rest of the property. This gave users an experience that felt faster and more seamless between feeds of content and the articles themselves. We were also then capable of providing additional smaller features like a "read" state for items in feeds so that users could more quickly and confidently browse.
+
+#### Seamless Articles
+
+While seamless content – when additional articles load in at the end of the one the user chose to read – was not new to GameSpot, we stepped back to rethink the logic of what is provided for the user and why. Previously the additional content was supplied by the feed of most recent content that's displayed on the homepage. In the spirit of our goal to find ways in making the site feel more personal, we explored various logic for displaying subsequent content: popular content, articles related to titles or franchises in the current piece, game genres, etc. These different content mixes could help provide a feeling close to personalization without the need of user accounts or other methods for creating algorithms catered to individual users.
+
+#### Ad Mix Reduction
+
+A major factor in pageload is the ad mix for display ads and video prerolls. A proposal was made to reduce the amount of ads served on articles so that the user could view and read article content more quickly. It was also found that CLS (Content Layout Shift), a factor in SEO standing, was also impacted by ads loading into the layout after the user had already arrived and started reading.
+
+#### Layout Explorations
+
+Along with content mixes and tech-heavy explorations, the team also experimented with layout updates for articles on the proper GameSpot website. We took it as an opportunity to further reduce the complexity of the page and remove elements and functionality that was implemented at some point but no longer serves a valuable purpose to users.
