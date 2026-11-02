@@ -63,6 +63,7 @@ const positions = defineCollection({
     title: z.string(),
     organization: reference('organizations'),
     employmentType: z.enum(['full-time', 'part-time', 'contract', 'freelance', 'internship']),
+    roleType: z.enum(['management', 'split', 'lead', 'individual', 'contractor', 'personal']).nullish(),
     startDate: z.coerce.date(),
     endDate: date(),
     location: text(),

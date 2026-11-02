@@ -5,10 +5,12 @@
   --line: #e4e4e4;
   --bg: #fff;
   --accent: #1a5cff;
-  --max: 72rem;
   --gap: clamp(1rem, 3vw, 2rem);
+  --edge: clamp(1.5rem, 6vw, 6rem);
+  --font-body: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-heading: 'Cal Sans', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   color-scheme: light dark;
-  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
   line-height: 1.55;
   color: var(--fg);
   background: var(--bg);
@@ -28,12 +30,15 @@
 body { margin: 0; }
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; }
-h1, h2, h3 { line-height: 1.2; }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.2;
+}
 
 main, .site-header, .site-footer {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 0 var(--gap);
+  width: 100%;
+  padding-inline: var(--edge);
 }
 
 .site-header {
@@ -47,7 +52,7 @@ main, .site-header, .site-footer {
 .site-header nav { display: flex; flex-wrap: wrap; gap: 1.25rem; }
 .site-header a { text-decoration: none; }
 .site-header nav a[aria-current] { text-decoration: underline; text-underline-offset: 0.3em; }
-.wordmark { font-weight: 600; }
+.wordmark { font-family: var(--font-heading); font-size: 1.125rem; }
 
 .site-footer {
   display: flex;

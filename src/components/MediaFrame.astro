@@ -1,0 +1,25 @@
+---
+interface Props {
+  /** CSS aspect-ratio of the frame, e.g. "16 / 9" for projects or "1 / 1" for photos. */
+  ratio: string;
+}
+
+const { ratio } = Astro.props;
+// A slot holding a falsy expression (e.g. `{cover && ...}`) still counts as passed, so check the output.
+const media = (await Astro.slots.render('default')).trim();
+---
+
+<div class="frame" style={`aspect-ratio: ${ratio}`} aria-hidden={media ? undefined : 'true'} set:html={media} />
+
+<style>
+  .frame {
+    overflow: hidden;
+    background: color-mix(in srgb, var(--fg) 6%, transparent);
+  }
+  /* Images fill the frame and are cropped to fit; empty frames stay as a placeholder block. */
+  .frame :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>

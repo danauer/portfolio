@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import MediaFrame from './MediaFrame.astro';
 import { projectUrl, formatYears } from '../lib/content';
 
 interface Props {
@@ -13,7 +14,9 @@ const { title, summary, cover, coverAlt, status, startDate, endDate } = project.
 
 <li class="card">
   <a href={projectUrl(project)}>
-    {cover && <Image src={cover} alt={coverAlt ?? ''} width={800} />}
+    <MediaFrame ratio="16 / 9">
+      {cover && <Image src={cover} alt={coverAlt ?? ''} width={800} height={450} />}
+    </MediaFrame>
     <h3>
       {title}
       {status === 'draft' && <span class="badge draft">Draft</span>}
