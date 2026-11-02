@@ -6,16 +6,19 @@ import { projectUrl, formatYears } from '../lib/content';
 
 interface Props {
   project: CollectionEntry<'projects'>;
+  /** Shape of the cover frame. */
+  shape?: 'wide' | 'square';
 }
 
-const { project } = Astro.props;
+const { project, shape = 'wide' } = Astro.props;
+const [ratio, height] = shape === 'square' ? (['1 / 1', 800] as const) : (['16 / 9', 450] as const);
 const { title, summary, cover, coverAlt, status, startDate, endDate } = project.data;
 ---
 
 <li class="card">
   <a href={projectUrl(project)}>
-    <MediaFrame ratio="16 / 9">
-      {cover && <Image src={cover} alt={coverAlt ?? ''} width={800} height={450} />}
+    <MediaFrame ratio={ratio}>
+      {cover && <Image src={cover} alt={coverAlt ?? ''} width={800} height={height} />}
     </MediaFrame>
     <h3>
       {title}

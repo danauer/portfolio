@@ -19,10 +19,11 @@ const projects = await getProjects(discipline);
 // The UX page groups projects by client organization. Projects are already
 // newest-first, so sections are ordered by their most recent project, and
 // projects without a client go last. Other disciplines show one flat grid.
-type Section = { id: string; name: string; logo?: ImageMetadata | null; projects: typeof projects };
+type Section = { id: string; name: string; description?: string | null; logo?: ImageMetadata | null; projects: typeof projects };
 const sections: Section[] = [];
 const unassigned: typeof projects = [];
 const grouped = discipline === 'ux';
+const tiles = discipline === 'visual';
 for (const project of projects) {
   const client = project.data.client;
   if (!grouped || !client) {
@@ -32,7 +33,7 @@ for (const project of projects) {
   let section = sections.find((s) => s.id === client.id);
   if (!section) {
     const org = (await getEntry(client))!.data;
-    section = { id: client.id, name: org.name, logo: org.logo, projects: [] };
+    section = { id: client.id, name: org.name, description: org.description, logo: org.logo, projects: [] };
     sections.push(section);
   }
   section.projects.push(project);
@@ -55,9 +56,10 @@ if (unassigned.length) {
               {section.name}
             </h2>
           )}
-          <ul class="grid">
+          {section.description && <p class="org-description muted">{section.description}</p>}
+          <ul class:list={['grid', { tiles }]}>
             {section.projects.map((project) => (
-              <ProjectCard project={project} />
+              <ProjectCard project={project} shape={tiles ? 'square' : 'wide'} />
             ))}
           </ul>
         </section>
@@ -70,6 +72,13 @@ if (unassigned.length) {
 
 <style>
   .org { margin-top: 3rem; }
+  /* Visual: square cards, 1px apart, at most three per row. */
+  .tiles {
+    gap: 1px;
+    grid-template-columns: repeat(auto-fill, minmax(max(18rem, calc((100% - 2px) / 3)), 1fr));
+  }
+  .tiles :global(.card) { padding-bottom: 1.5rem; }
+  .org-description { max-width: 40rem; margin: 0 0 1.5rem; }
   .org h2 { display: flex; align-items: center; gap: 0.75rem; margin: 0 0 1rem; font-size: 1.5rem; }
   .logo { height: 2.5rem; width: auto; }
 </style>
