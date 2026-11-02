@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import { disciplines, getProjects, type Discipline } from '../../lib/content';
@@ -13,19 +15,61 @@ export function getStaticPaths() {
 const { discipline } = Astro.props;
 const { label } = disciplines[discipline];
 const projects = await getProjects(discipline);
+
+// The UX page groups projects by client organization. Projects are already
+// newest-first, so sections are ordered by their most recent project, and
+// projects without a client go last. Other disciplines show one flat grid.
+type Section = { id: string; name: string; logo?: ImageMetadata | null; projects: typeof projects };
+const sections: Section[] = [];
+const unassigned: typeof projects = [];
+const grouped = discipline === 'ux';
+for (const project of projects) {
+  const client = project.data.client;
+  if (!grouped || !client) {
+    unassigned.push(project);
+    continue;
+  }
+  let section = sections.find((s) => s.id === client.id);
+  if (!section) {
+    const org = (await getEntry(client))!.data;
+    section = { id: client.id, name: org.name, logo: org.logo, projects: [] };
+    sections.push(section);
+  }
+  section.projects.push(project);
+}
+if (unassigned.length) {
+  // With no organizations to group under, skip the heading entirely.
+  sections.push({ id: 'other', name: sections.length ? 'Other' : '', projects: unassigned });
+}
 ---
 
 <Base title={label}>
   <h1>{label}</h1>
   {
-    projects.length ? (
-      <ul class="grid">
-        {projects.map((project) => (
-          <ProjectCard project={project} />
-        ))}
-      </ul>
+    sections.length ? (
+      sections.map((section) => (
+        <section class="org">
+          {section.name && (
+            <h2 id={section.id}>
+              {section.logo && <Image class="logo" src={section.logo} alt="" height={80} />}
+              {section.name}
+            </h2>
+          )}
+          <ul class="grid">
+            {section.projects.map((project) => (
+              <ProjectCard project={project} />
+            ))}
+          </ul>
+        </section>
+      ))
     ) : (
       <p class="muted">Nothing here yet.</p>
     )
   }
 </Base>
+
+<style>
+  .org { margin-top: 3rem; }
+  .org h2 { display: flex; align-items: center; gap: 0.75rem; margin: 0 0 1rem; font-size: 1.5rem; }
+  .logo { height: 2.5rem; width: auto; }
+</style>
