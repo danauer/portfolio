@@ -5,10 +5,12 @@
   --line: #e4e4e4;
   --bg: #fff;
   --accent: #1a5cff;
-  --max: 72rem;
   --gap: clamp(1rem, 3vw, 2rem);
+  --edge: clamp(1.5rem, 6vw, 6rem);
+  --font-body: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-heading: 'Cal Sans', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   color-scheme: light dark;
-  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
   line-height: 1.55;
   color: var(--fg);
   background: var(--bg);
@@ -28,34 +30,55 @@
 body { margin: 0; }
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; }
-h1, h2, h3 { line-height: 1.2; }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.2;
+}
 
-main, .site-header, .site-footer {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 0 var(--gap);
+/* Left-hand sidebar (name + nav) beside the page content. */
+.shell {
+  display: grid;
+  grid-template-columns: 12rem minmax(0, 1fr);
+  column-gap: calc(var(--edge) / 2);
+  padding-inline: calc(var(--edge) / 2);
+  min-height: 100vh;
 }
 
 .site-header {
+  position: sticky;
+  top: 0;
+  align-self: start;
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 2rem;
-  justify-content: space-between;
-  align-items: baseline;
+  flex-direction: column;
+  gap: 2rem;
   padding-block: 1.5rem;
 }
-.site-header nav { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+.site-header nav { display: flex; flex-direction: column; gap: 0.5rem; }
 .site-header a { text-decoration: none; }
+.site-header nav a { font-family: var(--font-heading); }
 .site-header nav a[aria-current] { text-decoration: underline; text-underline-offset: 0.3em; }
-.wordmark { font-weight: 600; }
+.wordmark { font-family: var(--font-heading); font-size: 1.5rem; line-height: 1.2; }
+
+.content { display: flex; flex-direction: column; min-width: 0; }
+main { flex: 1; padding-top: 1.5rem; }
+/* Page titles match the sidebar wordmark in size and top alignment. */
+h1 { font-size: 1.5rem; margin: 0 0 1.5rem; }
 
 .site-footer {
   display: flex;
+  flex-wrap: wrap;
   gap: 1.5rem;
   padding-block: 3rem;
   margin-top: 4rem;
   border-top: 1px solid var(--line);
   color: var(--muted);
+}
+
+@media (max-width: 767px) {
+  .shell { display: block; }
+  .site-header { position: static; gap: 1rem; }
+  .site-header nav { flex-direction: row; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
 }
 
 .muted { color: var(--muted); }
@@ -68,6 +91,32 @@ main, .site-header, .site-footer {
   gap: var(--gap);
   padding: 0;
   list-style: none;
+}
+
+/* Grid items fade in one after another. Items past the 12th share the last delay, so long lists don't drag. */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(0.75rem); }
+  to { opacity: 1; transform: none; }
+}
+.grid > li {
+  animation: fade-up 0.5s ease-out both;
+  animation-delay: 770ms;
+}
+.grid > li:nth-child(1) { animation-delay: 0ms; }
+.grid > li:nth-child(2) { animation-delay: 70ms; }
+.grid > li:nth-child(3) { animation-delay: 140ms; }
+.grid > li:nth-child(4) { animation-delay: 210ms; }
+.grid > li:nth-child(5) { animation-delay: 280ms; }
+.grid > li:nth-child(6) { animation-delay: 350ms; }
+.grid > li:nth-child(7) { animation-delay: 420ms; }
+.grid > li:nth-child(8) { animation-delay: 490ms; }
+.grid > li:nth-child(9) { animation-delay: 560ms; }
+.grid > li:nth-child(10) { animation-delay: 630ms; }
+.grid > li:nth-child(11) { animation-delay: 700ms; }
+.grid > li:nth-child(12) { animation-delay: 770ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .grid > li { animation: none; }
 }
 
 .badge {

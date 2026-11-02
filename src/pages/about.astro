@@ -1,15 +1,105 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import { getSettings, url } from '../lib/content';
 
 const settings = await getSettings();
+const lines = (text?: string | null) => text?.split('\n').map((l) => l.trim()).filter(Boolean) ?? [];
+const years = (text?: string | null) => text?.split(',').map((y) => y.trim()).filter(Boolean) ?? [];
 ---
 
 <Base title="About">
   <h1>About</h1>
-  <div class="prose">
-    {settings?.bio?.split(/\n{2,}/).map((para) => <p>{para}</p>)}
-    {settings?.location && <p class="muted">Based in {settings.location}</p>}
-    <p><a href={url('timeline')}>See my career timeline →</a></p>
+
+  <div class="about">
+    <div class="details">
+      <div class="description">
+        {settings?.bio?.split(/\n{2,}/).map((para) => <p>{para}</p>)}
+        <p><a href={url('timeline')}>See my career timeline →</a></p>
+      </div>
+
+      {
+        settings && settings.experience.length > 0 && (
+          <section>
+            <h2>Experience</h2>
+            <h3>In-House</h3>
+            <ul class="experience">
+              {settings.experience.map((job) => (
+                <li>
+                  <span class="name">{job.name}</span>
+                  <span class="years">
+                    {years(job.years).map((y) => (
+                      <span class="caption">{y}</span>
+                    ))}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+
+      {
+        settings && settings.clients.length > 0 && (
+          <section>
+            <h3>Select Freelance Clients</h3>
+            <div class="clients">
+              {settings.clients.map((group) => (
+                <div>
+                  <h4>{group.category}</h4>
+                  <ul>
+                    {lines(group.names).map((name) => (
+                      <li>{name}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+        )
+      }
+    </div>
+
+    {
+      settings?.portrait && (
+        <Image
+          class="portrait"
+          src={settings.portrait}
+          alt={settings.portraitAlt ?? ''}
+          widths={[600, 900, 1280]}
+          sizes="(min-width: 60rem) 40vw, 100vw"
+          loading="eager"
+        />
+      )
+    }
   </div>
 </Base>
+
+<style>
+  .about { display: flex; flex-wrap: wrap; gap: 3rem; margin-top: 4rem; align-items: flex-start; }
+  .details { flex: 1 1 28rem; display: flex; flex-direction: column; gap: 3rem; }
+  .description { max-width: 40rem; }
+  .description p:first-child { margin-top: 0; }
+  .portrait { flex: 1 1 24rem; max-width: 40rem; width: 100%; height: auto; position: sticky; top: 1.5rem; }
+
+  h2, h3, h4 { margin: 0 0 0.75rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+  h4 { font-size: 1rem; }
+  section { display: flex; flex-direction: column; }
+
+  ul { list-style: none; margin: 0; padding: 0; }
+  .experience { display: flex; flex-direction: column; gap: 0.5rem; max-width: 30rem; }
+  .experience li { display: flex; align-items: center; gap: 1rem; }
+  .name { flex: 0 0 8rem; }
+  .years { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; }
+  .caption { font-size: 0.75rem; color: var(--muted); }
+
+  .clients { display: flex; flex-wrap: wrap; gap: 3rem; }
+
+  @media (max-width: 767px) {
+    .about { margin-top: 2rem; flex-direction: column-reverse; }
+    .portrait { position: static; }
+    .clients { flex-direction: column; gap: 1.5rem; }
+  }
+</style>

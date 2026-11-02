@@ -1,11 +1,57 @@
 name: Dan Auer
 headline: Product designer focused on making complex tools feel simple.
 bio: |-
-  This is placeholder bio text. Edit it in Keystatic under Site → Site settings.
+  I've been a practitioner in design since 2000. I'm grateful to have experience across a growing collection of industries in capacities as an individual contributor, leader, and in mixed roles.
 
-  Paragraphs are separated by a blank line.
+  My primary focus is towards user experience design with a rich background in multi-use design systems meant to support several web properties. I began designing to support user generated content at my first startup in 2008. Beyond UX I have an extensive background in visual communication and visual identity.
+portrait: ../../assets/images/about/portrait.png
+portraitAlt: A portrait image of Dan Auer in front of a living space
 email: danauer@icloud.com
 location: New York, NY
 links:
   - label: LinkedIn
     url: https://www.linkedin.com/
+experience:
+  - name: Pragma
+    years: 2024, 2025
+  - name: Fanbyte
+    years: 2023, 2024
+  - name: Giant Bomb
+    years: 2015, 2016, ..., 2020, 2021
+  - name: GameSpot
+    years: 2015, 2016, ..., 2020, 2021
+  - name: Fitmob
+    years: 2013, 2014, 2015
+  - name: Tagged
+    years: 2012, 2013
+  - name: iContact
+    years: 2010, 2011, 2012
+  - name: GameVee
+    years: 2007, 2008
+clients:
+  - category: Gaming
+    names: |-
+      50cc
+      Fandom
+      Feminist Frequency
+      Friends Per Second
+      Indie Megabooth
+      King Gothalion
+      noclip
+  - category: Music
+    names: |-
+      akissforjersey
+      Alesana
+      Chiodos
+      Endwell
+      Glamour Kills Clothing
+      Silverstein
+      Tragic Hero Records
+  - category: Tech
+    names: |-
+      Bull City Bucks
+      Cureat
+      Desks Near Me
+      ElasticSearch
+      PaceKeepr
+      Pathos Ethos

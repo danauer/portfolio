@@ -1,102 +1,260 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import { getProjects, projectUrl, formatRange, formatDuration } from '../lib/content';
+import { getProjects, projectUrl } from '../lib/content';
 
-const positions = (await getCollection('positions')).sort(
-  (a, b) => b.data.startDate.getTime() - a.data.startDate.getTime(),
-);
+type RoleType = NonNullable<Awaited<ReturnType<typeof getCollection<'positions'>>>[number]['data']['roleType']>;
+
+// Legend order matches the original timeline.
+const roleTypes: { key: RoleType; label: string; description: string }[] = [
+  { key: 'management', label: 'Management', description: 'Management/Strategic' },
+  { key: 'split', label: 'Split Role', description: '50/50 Management/IC' },
+  { key: 'lead', label: 'Lead Contributor', description: 'Lead/Principal IC' },
+  { key: 'individual', label: 'Individual Contributor', description: 'Mid-Level IC' },
+  { key: 'contractor', label: 'Contractor', description: 'Contract Role' },
+  { key: 'personal', label: 'Personal Work', description: 'Non-Career Focus' },
+];
+const roleLabel = Object.fromEntries(roleTypes.map((r) => [r.key, r.label]));
+
+const positions = await getCollection('positions');
 const projects = await getProjects();
 
-// Group consecutive positions at the same organization, so promotions read as
-// one stint with several titles.
-type Stint = { org: NonNullable<Awaited<ReturnType<typeof getEntry<'organizations', string>>>>; positions: typeof positions };
-const stints: Stint[] = [];
-for (const position of positions) {
-  const last = stints.at(-1);
-  if (last && last.org.id === position.data.organization.id) {
-    last.positions.push(position);
-  } else {
-    stints.push({ org: (await getEntry(position.data.organization))!, positions: [position] });
-  }
-}
+const year = (d: Date) => d.getUTCFullYear();
+const thisYear = new Date().getUTCFullYear();
 
-const projectsFor = (positionId: string) => projects.filter((p) => p.data.position?.id === positionId);
-const employment: Record<string, string> = {
-  'full-time': 'Full-time',
-  'part-time': 'Part-time',
-  contract: 'Contract',
-  freelance: 'Freelance',
-  internship: 'Internship',
-};
+// One row per calendar year, newest first, listing the position(s) held that
+// year and every project whose dates cover it.
+const years = positions.flatMap((p) => {
+  const first = year(p.data.startDate);
+  const last = p.data.endDate ? year(p.data.endDate) : thisYear;
+  return Array.from({ length: last - first + 1 }, (_, i) => first + i);
+});
+const rows = await Promise.all(
+  [...new Set(years)]
+    .sort((a, b) => b - a)
+    .map(async (y) => {
+      const held = positions
+        .filter((p) => year(p.data.startDate) <= y && y <= (p.data.endDate ? year(p.data.endDate) : thisYear))
+        .sort((a, b) => b.data.startDate.getTime() - a.data.startDate.getTime());
+      return {
+        year: y,
+        positions: await Promise.all(
+          held.map(async (p) => ({ ...p, org: (await getEntry(p.data.organization))! })),
+        ),
+        works: projects.filter((proj) => {
+          const start = proj.data.startDate && year(proj.data.startDate);
+          const end = (proj.data.endDate && year(proj.data.endDate)) || start;
+          return start && end && start <= y && y <= end;
+        }),
+      };
+    }),
+);
+
+// Tag pages link to `/timeline#<position id>`, so anchor each position on its newest row.
+const anchorFor = new Map<string, number>();
+for (const row of rows) for (const p of row.positions) if (!anchorFor.has(p.id)) anchorFor.set(p.id, row.year);
 ---
 
 <Base title="Timeline">
   <h1>Timeline</h1>
 
-  <ol class="timeline">
-    {
-      stints.map(({ org, positions }) => {
-        const start = positions.at(-1)!.data.startDate;
-        const end = positions[0].data.endDate;
-        return (
-          <li class="stint">
-            <header>
-              <h2>{org.data.website ? <a href={org.data.website}>{org.data.name}</a> : org.data.name}</h2>
-              <p class="muted">
-                {formatRange(start, end)} · {formatDuration(start, end)}
-              </p>
-            </header>
+  <div class="preface">
+    <h2>Career Timeline</h2>
+    <div class="legend">
+      <div class="legend-roles">
+        <h3>Role Types</h3>
+        {
+          roleTypes.map((r) => (
+            <div class="legend-role" data-role={r.key}>
+              <span class="role-pill">{r.label}</span>
+              <span>{r.description}</span>
+            </div>
+          ))
+        }
+      </div>
+      <div class="legend-works">
+        <h3>Related Works</h3>
+        <p>
+          Projects listed are non-exhaustive and mostly reflective of work produced as an individual contributor. Other
+          projects during management and split roles include examples of larger projects where my responsibilities were
+          largely through direction and strategy while occasionally still producing tactical results. Projects added into
+          the main portfolio are automatically linked here.
+        </p>
+      </div>
+    </div>
+  </div>
 
-            {positions.map((p) => {
-              const related = projectsFor(p.id);
-              return (
-                <section class="position" id={p.id}>
-                  <h3>{p.data.title}</h3>
-                  <p class="muted">
-                    {formatRange(p.data.startDate, p.data.endDate)} · {formatDuration(p.data.startDate, p.data.endDate)}
-                    {' · '}
-                    {employment[p.data.employmentType]}
-                    {p.data.location && ` · ${p.data.location}`}
-                  </p>
-                  {p.data.summary && <p>{p.data.summary}</p>}
-                  {p.data.highlights.length > 0 && <ul>{p.data.highlights.map((h) => <li>{h}</li>)}</ul>}
-                  {related.length > 0 && (
-                    <p>
-                      <span class="muted">Projects: </span>
-                      {related.map((proj, i) => (
-                        <>
-                          {i > 0 && ', '}
-                          <a href={projectUrl(proj)}>{proj.data.title}</a>
-                        </>
-                      ))}
-                    </p>
-                  )}
-                </section>
-              );
-            })}
+  <div class="view-toggle" role="group" aria-label="Timeline view options">
+    <button type="button" data-view="roles" aria-pressed="true">Roles &amp; Responsibilities</button>
+    <button type="button" data-view="works" aria-pressed="false">Related Works</button>
+  </div>
+
+  <section id="timeline" class="timeline" data-view="roles">
+    <ol>
+      {
+        rows.map((row) => (
+          <li class="row">
+            <div class="year-line">
+              <div class="year">
+                {row.year}
+                <span class="dot" aria-hidden="true" />
+              </div>
+            </div>
+
+            <div class="career">
+              {row.positions.map((p) => (
+                <div class="position" id={anchorFor.get(p.id) === row.year ? p.id : undefined} data-role={p.data.roleType ?? 'personal'}>
+                  <span class="marker" aria-hidden="true" />
+                  <div class="details">
+                    <div class="org">{p.org.data.name}</div>
+                    <span class="role-pill">{roleLabel[p.data.roleType ?? 'personal']}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <ul class="works">
+              {row.works.map((w) => (
+                <li>
+                  <a href={projectUrl(w)}>{w.data.title}</a>
+                </li>
+              ))}
+            </ul>
           </li>
-        );
-      })
-    }
-  </ol>
+        ))
+      }
+    </ol>
+  </section>
 </Base>
 
+<script>
+  // Re-run on every client-side navigation, not just the first page load.
+  document.addEventListener('astro:page-load', () => {
+    const section = document.querySelector<HTMLElement>('#timeline');
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.view-toggle button');
+    if (!section) return;
+    buttons.forEach((button) =>
+      button.addEventListener('click', () => {
+        section.dataset.view = button.dataset.view;
+        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+      }),
+    );
+  });
+</script>
+
 <style>
-  .timeline { list-style: none; padding: 0; max-width: 46rem; }
-  .stint { border-left: 2px solid var(--line); padding: 0 0 2rem 1.5rem; position: relative; }
-  .stint::before {
-    content: '';
+  /* Role colors, shared by the legend, the career column and its marker bar. */
+  [data-role] {
+    --role: var(--fg);
+    --role-strength: 10%;
+  }
+  [data-role='management'] { --role: #c963da; --role-strength: 30%; }
+  [data-role='split'] { --role: #ff65ab; --role-strength: 30%; }
+  [data-role='lead'] { --role: #ff8d7a; --role-strength: 40%; }
+  [data-role='individual'] { --role: #f9f871; --role-strength: 40%; }
+  [data-role='contractor'] { --role: #2fe4b2; --role-strength: 40%; }
+  [data-role='personal'] { --role: var(--fg); --role-strength: 10%; }
+
+  .role-pill {
+    display: inline-block;
+    padding: 0.25rem;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    line-height: 0.75rem;
+    letter-spacing: 0.01rem;
+    background: color-mix(in srgb, var(--role) var(--role-strength), transparent);
+  }
+
+  .preface { display: flex; flex-direction: column; margin-top: 3rem; }
+  .preface h2 { margin: 0; font-size: clamp(1.5rem, 2vw, 2rem); }
+  .preface h3 { margin: 0 0 0.75rem; font-size: 1.25rem; }
+  .legend { display: flex; flex-wrap: wrap; gap: 3rem; margin-top: 3rem; }
+  .legend-roles { width: 20rem; max-width: 100%; display: flex; flex-direction: column; gap: 0.75rem; }
+  .legend-roles h3 { margin-bottom: 0; }
+  .legend-role { display: flex; justify-content: space-between; align-items: center; gap: 3rem; }
+  .legend-works { max-width: 30rem; }
+  .legend-works p { margin: 0; }
+
+  .view-toggle { display: none; }
+
+  .timeline { margin-block: 4vh 10vh; }
+  .timeline ol { list-style: none; margin: 0; padding: 0; }
+  .row { display: flex; gap: 3rem; }
+
+  /* Career column sits left of the year line on wide screens. */
+  .career {
+    order: -1;
+    min-width: 20rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    background: color-mix(in srgb, var(--fg) 3%, transparent);
+  }
+  .position { display: flex; flex: 1; }
+  .marker {
+    flex: none;
+    width: 0.125rem;
+    margin-right: 1rem;
+    background: var(--role);
+  }
+  .details { padding-block: 0.25rem; }
+  .org { font-family: var(--font-heading); }
+
+  .year-line { border-left: 1px solid var(--line); align-self: stretch; }
+  .year {
+    position: relative;
+    padding: 0.25rem 0.5rem 0 1rem;
+    font-family: var(--font-heading);
+  }
+  .dot {
     position: absolute;
-    left: -0.4rem;
-    top: 0.45rem;
-    width: 0.7rem;
-    height: 0.7rem;
-    border-radius: 50%;
+    top: 0.8125rem;
+    left: -0.375rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 1rem;
+    border: 2px solid var(--bg);
     background: var(--fg);
   }
-  .stint h2 { margin: 0; }
-  .stint header p { margin: 0.25rem 0 1rem; }
-  .position h3 { margin: 1rem 0 0; }
-  .position p { margin: 0.25rem 0; }
+
+  .works { list-style: none; margin: 0.125rem 0 1rem; padding: 0; }
+
+  @media (max-width: 991px) {
+    .row { gap: 2rem; }
+    .career { order: 0; min-width: 10rem; }
+    .year-line { width: 5rem; }
+  }
+
+  @media (max-width: 767px) {
+    .legend { flex-direction: column; gap: 3rem; }
+    .legend-roles { width: 100%; }
+    .timeline { margin-top: 4rem; margin-bottom: 5rem; }
+    .row { gap: 1.5rem; }
+    .career { flex: 1; margin-right: 0.5rem; }
+
+    .view-toggle {
+      display: flex;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      padding-block: 0.5rem 1rem;
+      background: var(--bg);
+    }
+    .view-toggle button {
+      padding: 0;
+      border: 0;
+      background: none;
+      color: var(--muted);
+      font: inherit;
+      font-family: var(--font-heading);
+    }
+    .view-toggle button[aria-pressed='true'] { color: var(--fg); text-decoration: underline; text-underline-offset: 0.3em; }
+
+    /* One view at a time on small screens. */
+    .timeline[data-view='roles'] .works { display: none; }
+    .timeline[data-view='works'] .career { display: none; }
+    .timeline[data-view='works'] .works { flex: 1; }
+  }
 </style>

@@ -1,6 +1,7 @@
 ---
 import { getEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import MediaFrame from '../../components/MediaFrame.astro';
 import CloudinaryImage from '../../components/CloudinaryImage.astro';
 import { getPhotoGroups, url } from '../../lib/content';
 
@@ -19,14 +20,16 @@ const groups = await Promise.all(
       groups.map(({ group, cover }) => (
         <li>
           <a href={url(`photography/${group.id}`)}>
-            {cover && (
-              <CloudinaryImage
-                publicId={cover.data.cloudinaryId}
-                alt={cover.data.alt ?? ''}
-                aspect={4 / 3}
-                sizes="(min-width: 60rem) 33vw, 100vw"
-              />
-            )}
+            <MediaFrame ratio="1 / 1">
+              {cover && (
+                <CloudinaryImage
+                  publicId={cover.data.cloudinaryId}
+                  alt={cover.data.alt ?? ''}
+                  aspect={1}
+                  sizes="(min-width: 60rem) 33vw, 100vw"
+                />
+              )}
+            </MediaFrame>
             <h3>
               {group.data.title}
               {group.data.status === 'draft' && <span class="badge draft">Draft</span>}

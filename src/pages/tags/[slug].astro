@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import MediaFrame from '../../components/MediaFrame.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import CloudinaryImage from '../../components/CloudinaryImage.astro';
 import { getProjects, getPhotoGroups, url } from '../../lib/content';
@@ -50,7 +51,9 @@ const positions = (await getCollection('positions')).filter(has);
           {photos.map((p) => (
             <li>
               <a href={url(`photos/${p.id}`)}>
-                <CloudinaryImage publicId={p.data.cloudinaryId} alt={p.data.alt ?? ''} aspect={1} sizes="20rem" />
+                <MediaFrame ratio="1 / 1">
+                  <CloudinaryImage publicId={p.data.cloudinaryId} alt={p.data.alt ?? ''} aspect={1} sizes="20rem" />
+                </MediaFrame>
               </a>
             </li>
           ))}

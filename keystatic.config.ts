@@ -181,6 +181,19 @@ export default config({
           ],
           defaultValue: 'full-time',
         }),
+        roleType: fields.select({
+          label: 'Role type',
+          description: 'Sets the color coding on the career timeline.',
+          options: [
+            { label: 'Management', value: 'management' },
+            { label: 'Split role (50/50 management/IC)', value: 'split' },
+            { label: 'Lead contributor', value: 'lead' },
+            { label: 'Individual contributor', value: 'individual' },
+            { label: 'Contractor', value: 'contractor' },
+            { label: 'Personal work (non-career focus)', value: 'personal' },
+          ],
+          defaultValue: 'individual',
+        }),
         startDate: fields.date({ label: 'Start date', validation: { isRequired: true } }),
         endDate: fields.date({ label: 'End date', description: 'Leave empty if this is your current role.' }),
         location: fields.text({ label: 'Location' }),
@@ -302,7 +315,14 @@ export default config({
       schema: {
         name: fields.text({ label: 'Your name' }),
         headline: fields.text({ label: 'Headline', description: 'Shown on the home page.' }),
-        bio: fields.text({ label: 'Bio', multiline: true }),
+        bio: fields.text({ label: 'Bio', multiline: true, description: 'Shown on the About page. Separate paragraphs with a blank line.' }),
+        portrait: fields.image({
+          label: 'Portrait',
+          description: 'Shown on the About page.',
+          directory: 'src/assets/images/about',
+          publicPath: '../../assets/images/about/',
+        }),
+        portraitAlt: fields.text({ label: 'Portrait alt text' }),
         email: fields.text({ label: 'Contact email' }),
         location: fields.text({ label: 'Location' }),
         links: fields.array(
@@ -311,6 +331,31 @@ export default config({
             url: fields.url({ label: 'URL' }),
           }),
           { label: 'Links', itemLabel: (props) => props.fields.label.value },
+        ),
+        experience: fields.array(
+          fields.object({
+            name: fields.text({ label: 'Organization', validation: { isRequired: true } }),
+            years: fields.text({
+              label: 'Years',
+              description: 'Comma-separated, e.g. "2015, 2016, ..., 2020, 2021".',
+            }),
+          }),
+          {
+            label: 'In-house experience',
+            description: 'Listed on the About page, in this order.',
+            itemLabel: (props) => props.fields.name.value,
+          },
+        ),
+        clients: fields.array(
+          fields.object({
+            category: fields.text({ label: 'Category', validation: { isRequired: true } }),
+            names: fields.text({ label: 'Clients', description: 'One per line.', multiline: true }),
+          }),
+          {
+            label: 'Select freelance clients',
+            description: 'Grouped by category on the About page.',
+            itemLabel: (props) => props.fields.category.value,
+          },
         ),
       },
     }),
