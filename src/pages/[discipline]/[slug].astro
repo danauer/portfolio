@@ -4,7 +4,7 @@ import { getEntry, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Tags from '../../components/Tags.astro';
 import Credits from '../../components/Credits.astro';
-import { disciplines, getProjects, formatRange, url } from '../../lib/content';
+import { disciplines, getProjects, formatYears, url } from '../../lib/content';
 
 export async function getStaticPaths() {
   const projects = await getProjects();
@@ -36,7 +36,7 @@ const employer = position && (await getEntry(position.data.organization));
         {d.role && (<><dt>Role</dt><dd>{d.role}</dd></>)}
         {client && (<><dt>Client</dt><dd>{client.data.name}</dd></>)}
         {employer && (<><dt>While at</dt><dd><a href={url(`timeline#${position.id}`)}>{employer.data.name}</a></dd></>)}
-        {(d.startDate || d.endDate) && (<><dt>When</dt><dd>{formatRange(d.startDate, d.endDate)}</dd></>)}
+        {(d.startDate || d.endDate) && (<><dt>Year</dt><dd>{formatYears(d.startDate, d.endDate)}</dd></>)}
         {d.medium && (<><dt>Medium</dt><dd>{d.medium}</dd></>)}
         {d.dimensions && (<><dt>Dimensions</dt><dd>{d.dimensions}</dd></>)}
       </dl>

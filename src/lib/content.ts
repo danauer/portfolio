@@ -47,6 +47,14 @@ export function formatRange(start?: Date | null, end?: Date | null, { ongoing = 
   return `${monthYear.format(start)} – ${end ? monthYear.format(end) : ongoing}`;
 }
 
+/** Year-level range for projects: "2019", "2017–2021". */
+export function formatYears(start?: Date | null, end?: Date | null) {
+  const s = start?.getUTCFullYear();
+  const e = end?.getUTCFullYear();
+  if (!s || !e || s === e) return String(s ?? e ?? '');
+  return `${s}–${e}`;
+}
+
 export function formatDuration(start: Date, end?: Date | null) {
   const e = end ?? new Date();
   const months = (e.getUTCFullYear() - start.getUTCFullYear()) * 12 + (e.getUTCMonth() - start.getUTCMonth()) + 1;

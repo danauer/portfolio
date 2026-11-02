@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import { projectUrl, formatRange } from '../lib/content';
+import { projectUrl, formatYears } from '../lib/content';
 
 interface Props {
   project: CollectionEntry<'projects'>;
@@ -20,7 +20,7 @@ const { title, summary, cover, coverAlt, status, startDate, endDate } = project.
     </h3>
   </a>
   {summary && <p>{summary}</p>}
-  <p class="muted">{formatRange(startDate, endDate)}</p>
+  <p class="muted">{formatYears(startDate, endDate)}</p>
 </li>
 
 <style>
