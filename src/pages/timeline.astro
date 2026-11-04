@@ -173,7 +173,7 @@ for (const row of rows) for (const p of row.positions) if (!anchorFor.has(p.id))
   .legend-roles h3 { margin-bottom: 0; }
   .legend-role { display: flex; justify-content: space-between; align-items: center; gap: 3rem; }
   .legend-works { max-width: 30rem; }
-  .legend-works p { margin: 0; }
+  .legend-works p { margin: 0; color: var(--text-tertiary); }
 
   .view-toggle { display: none; }
 
@@ -198,7 +198,7 @@ for (const row of rows) for (const p of row.positions) if (!anchorFor.has(p.id))
     background: var(--role);
   }
   .details { padding-block: 0.25rem; }
-  .org { font-family: var(--font-heading); }
+  .org { font-family: var(--font-heading); color: var(--text-primary); }
 
   .year-line { border-left: 1px solid var(--line); align-self: stretch; }
   .year {
@@ -246,11 +246,11 @@ for (const row of rows) for (const p of row.positions) if (!anchorFor.has(p.id))
       padding: 0;
       border: 0;
       background: none;
-      color: var(--muted);
+      color: var(--text-secondary);
       font: inherit;
       font-family: var(--font-heading);
     }
-    .view-toggle button[aria-pressed='true'] { color: var(--fg); text-decoration: underline; text-underline-offset: 0.3em; }
+    .view-toggle button[aria-pressed='true'] { color: var(--text-primary); text-decoration: underline; text-underline-offset: 0.3em; }
 
     /* One view at a time on small screens. */
     .timeline[data-view='roles'] .works { display: none; }

@@ -13,6 +13,11 @@ export function getStaticPaths() {
 }
 
 const { discipline } = Astro.props;
+
+// Size logos to a shared visual area (in rem²) rather than a shared height or width,
+// so a very wide wordmark and a chunkier badge feel balanced next to each other.
+const LOGO_AREA = 32;
+const logoWidth = (logo: ImageMetadata) => +Math.sqrt(LOGO_AREA * (logo.width / logo.height)).toFixed(2);
 const { label } = disciplines[discipline];
 const projects = await getProjects(discipline);
 
@@ -49,17 +54,24 @@ if (unassigned.length) {
   {
     sections.length ? (
       sections.map((section) => (
-        <section class="org">
-          {section.name && (
-            <h2 id={section.id}>
-              {section.logo && <Image class="logo" src={section.logo} alt="" height={80} />}
-              {section.name}
-            </h2>
+        <section class:list={['org', { split: grouped }]}>
+          {(section.name || section.description) && (
+            <div class="org-info">
+              {section.name && (
+                <h2 id={section.id}>
+                  {section.logo ? (
+                    <Image class="logo" src={section.logo} alt={section.name} height={160} style={`width: ${logoWidth(section.logo)}rem`} />
+                  ) : (
+                    section.name
+                  )}
+                </h2>
+              )}
+              {section.description && <p class="org-description">{section.description}</p>}
+            </div>
           )}
-          {section.description && <p class="org-description muted">{section.description}</p>}
-          <ul class:list={['grid', { tiles }]}>
+          <ul class:list={['grid', { tiles, stack: grouped }]}>
             {section.projects.map((project) => (
-              <ProjectCard project={project} shape={tiles ? 'square' : 'wide'} />
+              <ProjectCard project={project} shape={tiles ? 'square' : 'wide'} row={grouped} />
             ))}
           </ul>
         </section>
@@ -78,7 +90,25 @@ if (unassigned.length) {
     grid-template-columns: repeat(auto-fill, minmax(max(18rem, calc((100% - 2px) / 3)), 1fr));
   }
   .tiles :global(.card) { padding-bottom: 1.5rem; }
-  .org-description { max-width: 40rem; margin: 0 0 1.5rem; }
-  .org h2 { display: flex; align-items: center; gap: 0.75rem; margin: 0 0 1rem; font-size: 1.5rem; }
-  .logo { height: 2.5rem; width: auto; }
+  .org-description { max-width: 40rem; margin: 0; color: var(--text-tertiary); }
+  .org h2 { margin: 0 0 1rem; font-size: 1.5rem; }
+  /* Width is set inline to give every logo the same area; never overflow the column. */
+  .logo { height: auto; max-width: 100%; }
+
+  /* UX: client details on the left, that client's projects stacked on the right. The logo/name
+     sits in a row of its own, so the projects line up with the top of the description below it. */
+  .stack { grid-template-columns: minmax(0, 1fr); margin: 0; }
+  @media (min-width: 768px) {
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+      grid-template-rows: auto 1fr;
+      column-gap: var(--gap);
+      align-items: start;
+    }
+    .split .org-info { display: contents; }
+    .split h2 { grid-area: 1 / 1; }
+    .split .org-description { grid-area: 2 / 1; }
+    .split .stack { grid-area: 2 / 2; }
+  }
 </style>

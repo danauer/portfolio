@@ -1,10 +1,16 @@
 /* Intentionally minimal — a neutral starting point to design over. */
 :root {
-  --fg: #111;
-  --muted: #666;
-  --line: #e4e4e4;
-  --bg: #fff;
-  --accent: #1a5cff;
+  /* light-dark() follows `color-scheme`, which is the OS setting unless the visitor picks a theme. */
+  --fg: light-dark(#111, #eee);
+  /* Text tokens. Headings use primary; body copy, labels and captions use secondary. */
+  --text-primary: light-dark(#111111, #ffffff);
+  --text-secondary: light-dark(rgb(17 17 17 / 0.8), rgb(255 255 255 / 0.8));
+  --text-tertiary: light-dark(rgb(17 17 17 / 0.6), rgb(255 255 255 / 0.6));
+  --line: light-dark(#e4e4e4, #2a2a2a);
+  --bg: light-dark(#fff, #111);
+  --accent: light-dark(#1a5cff, #7aa2ff);
+  --pill: #e8b020; /* burnt yellow */
+  --pill-fg: #111;
   --gap: clamp(1rem, 3vw, 2rem);
   --edge: clamp(1.5rem, 6vw, 6rem);
   --font-body: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -12,19 +18,12 @@
   color-scheme: light dark;
   font-family: var(--font-body);
   line-height: 1.55;
-  color: var(--fg);
+  color: var(--text-secondary);
   background: var(--bg);
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --fg: #eee;
-    --muted: #999;
-    --line: #2a2a2a;
-    --bg: #111;
-    --accent: #7aa2ff;
-  }
-}
+/* Set by the theme switch; no attribute means follow the OS. */
+:root[data-theme='light'] { color-scheme: light; }
+:root[data-theme='dark'] { color-scheme: dark; }
 
 * { box-sizing: border-box; }
 body { margin: 0; }
@@ -34,6 +33,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 400;
   line-height: 1.2;
+  color: var(--text-primary);
 }
 
 /* Left-hand sidebar (name + nav) beside the page content. */
@@ -49,39 +49,45 @@ h1, h2, h3, h4, h5, h6 {
   position: sticky;
   top: 0;
   align-self: start;
+  /* Full window height, so the theme switch can sit at the bottom of the column. */
+  height: 100vh;
+  height: 100svh;
   display: flex;
   flex-direction: column;
   gap: 2rem;
   padding-block: 1.5rem;
 }
-.site-header nav { display: flex; flex-direction: column; gap: 0.5rem; }
+.site-header .theme-toggle { margin-top: auto; }
+.site-header nav { display: flex; flex-direction: column; gap: 1.5rem; }
+.nav-group { display: flex; flex-direction: column; gap: 0.25rem; }
+.nav-label { font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary); }
 .site-header a { text-decoration: none; }
-.site-header nav a { font-family: var(--font-heading); }
-.site-header nav a[aria-current] { text-decoration: underline; text-underline-offset: 0.3em; }
-.wordmark { font-family: var(--font-heading); font-size: 1.5rem; line-height: 1.2; }
+.site-header nav a {
+  font-family: var(--font-heading);
+  align-self: flex-start;
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  transition: background-color 0.15s, color 0.15s;
+}
+.site-header nav a:hover { background: color-mix(in srgb, var(--pill) 30%, transparent); }
+.site-header nav a[aria-current] { background: var(--pill); color: var(--pill-fg); }
+.wordmark { font-family: var(--font-heading); font-size: 1.5rem; line-height: 1.2; color: var(--text-primary); }
 
 .content { display: flex; flex-direction: column; min-width: 0; }
 main { flex: 1; padding-top: 1.5rem; }
 /* Page titles match the sidebar wordmark in size and top alignment. */
 h1 { font-size: 1.5rem; margin: 0 0 1.5rem; }
 
-.site-footer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  padding-block: 3rem;
-  margin-top: 4rem;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-}
-
 @media (max-width: 767px) {
   .shell { display: block; }
-  .site-header { position: static; gap: 1rem; }
-  .site-header nav { flex-direction: row; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+  .site-header { position: static; height: auto; gap: 1rem; }
+  .site-header .theme-toggle { margin-top: 0; }
+  .site-header nav { gap: 0.75rem; }
+  .nav-group { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.5rem; }
+  .nav-label { margin-inline-end: 0.5rem; }
 }
 
-.muted { color: var(--muted); }
+.muted { color: var(--text-secondary); }
 .prose { max-width: 42rem; }
 .prose img { margin-block: 2rem; }
 
@@ -125,7 +131,7 @@ h1 { font-size: 1.5rem; margin: 0 0 1.5rem; }
   padding: 0.1rem 0.5rem;
   border: 1px solid var(--line);
   border-radius: 999px;
-  color: var(--muted);
+  color: var(--text-secondary);
 }
 .badge.draft { border-color: orange; color: orange; }
 
@@ -134,8 +140,8 @@ h1 { font-size: 1.5rem; margin: 0 0 1.5rem; }
   grid-template-columns: max-content 1fr;
   gap: 0.25rem 1.5rem;
 }
-.meta dt { color: var(--muted); }
+.meta dt { color: var(--text-secondary); }
 .meta dd { margin: 0; }
 
 figure { margin: 0 0 2rem; }
-figcaption { color: var(--muted); font-size: 0.9rem; margin-top: 0.5rem; }
+figcaption { color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem; }

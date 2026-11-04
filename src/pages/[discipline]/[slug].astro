@@ -21,7 +21,7 @@ const d = project.data;
 const client = d.client && (await getEntry(d.client));
 const position = d.position && (await getEntry(d.position));
 const employer = position && (await getEntry(position.data.organization));
-const hasGallery = Boolean(d.cover) || d.gallery.length > 0;
+const hasGallery = d.gallery.length > 0;
 ---
 
 <Base title={d.title} description={d.summary}>
@@ -54,11 +54,6 @@ const hasGallery = Boolean(d.cover) || d.gallery.length > 0;
         {
           hasGallery ? (
             <>
-              {d.cover && (
-                <figure>
-                  <Image src={d.cover} alt={d.coverAlt ?? ''} width={2000} loading="eager" />
-                </figure>
-              )}
               {d.gallery.map((item) => (
                 <figure>
                   <Image src={item.image} alt={item.alt ?? ''} width={2000} />

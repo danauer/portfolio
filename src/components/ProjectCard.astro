@@ -8,29 +8,66 @@ interface Props {
   project: CollectionEntry<'projects'>;
   /** Shape of the cover frame. */
   shape?: 'wide' | 'square';
+  /** Lay out as a text-only line item, with no cover image. */
+  row?: boolean;
 }
 
-const { project, shape = 'wide' } = Astro.props;
+const { project, shape = 'wide', row = false } = Astro.props;
 const [ratio, height] = shape === 'square' ? (['1 / 1', 800] as const) : (['16 / 9', 450] as const);
 const { title, summary, cover, coverAlt, status, startDate, endDate } = project.data;
 ---
 
-<li class="card">
-  <a href={projectUrl(project)}>
-    <MediaFrame ratio={ratio}>
-      {cover && <Image src={cover} alt={coverAlt ?? ''} width={800} height={height} />}
-    </MediaFrame>
-    <h3>
-      {title}
-      {status === 'draft' && <span class="badge draft">Draft</span>}
-    </h3>
-  </a>
-  {summary && <p>{summary}</p>}
-  <p class="muted">{formatYears(startDate, endDate)}</p>
-</li>
+{
+  row ? (
+    <li class="card row">
+      <h3>
+        <a href={projectUrl(project)}>
+          <span class="title">{title}</span>
+          <svg class="arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg>
+        </a>
+        {status === 'draft' && <span class="badge draft">Draft</span>}
+      </h3>
+      {summary && <p>{summary}</p>}
+      <p class="years">{formatYears(startDate, endDate)}</p>
+    </li>
+  ) : (
+    <li class="card">
+      <a href={projectUrl(project)}>
+        <MediaFrame ratio={ratio}>
+          {cover && <Image src={cover} alt={coverAlt ?? ''} width={800} height={height} />}
+        </MediaFrame>
+        <h3>
+          {title}
+          {status === 'draft' && <span class="badge draft">Draft</span>}
+        </h3>
+      </a>
+      {summary && <p>{summary}</p>}
+      <p class="years">{formatYears(startDate, endDate)}</p>
+    </li>
+  )
+}
 
 <style>
   .card a { text-decoration: none; }
   .card h3 { margin: 0.75rem 0 0.25rem; }
   .card p { margin: 0.25rem 0; }
+  .card .years { color: var(--text-tertiary); }
+  .row h3 { margin-top: 0; }
+  .row a:hover .title, .row a:focus-visible .title { text-decoration: underline; text-underline-offset: 0.2em; }
+  /* Sits low enough that the arrow's center lines up with the middle of the lowercase letters. */
+  .row .arrow {
+    display: inline-block;
+    width: 0.85em;
+    height: 0.85em;
+    margin-left: 0.35em;
+    vertical-align: -0.125em;
+    transition: transform 0.2s ease;
+  }
+  .row a:hover .arrow, .row a:focus-visible .arrow { transform: translateX(0.3em); }
+  @media (prefers-reduced-motion: reduce) {
+    .row .arrow { transition: none; }
+  }
 </style>

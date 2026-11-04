@@ -3,6 +3,7 @@ import { ClientRouter } from 'astro:transitions';
 import '@fontsource/cal-sans';
 import '@fontsource-variable/inter';
 import '../styles/global.css';
+import ThemeToggle from '../components/ThemeToggle.astro';
 import { getSettings, url } from '../lib/content';
 
 interface Props {
@@ -14,12 +15,21 @@ const { title, description } = Astro.props;
 const settings = await getSettings();
 const siteName = settings?.name || 'Portfolio';
 const nav = [
-  ['ux', 'UX'],
-  ['visual', 'Visual'],
-  ['art', 'Art'],
-  ['photography', 'Photography'],
-  ['timeline', 'Timeline'],
-  ['about', 'About'],
+  {
+    label: 'Works',
+    links: [
+      ['ux', 'UX'],
+      ['visual', 'Visual'],
+      // Hidden for now: ['art', 'Art'], ['photography', 'Photography'],
+    ],
+  },
+  {
+    label: 'Details',
+    links: [
+      ['timeline', 'Timeline'],
+      ['about', 'About'],
+    ],
+  },
 ];
 const current = Astro.url.pathname;
 ---
@@ -31,6 +41,15 @@ const current = Astro.url.pathname;
     <link rel="icon" type="image/svg+xml" href={url('favicon.svg')} />
     <title>{title ? `${title} · ${siteName}` : siteName}</title>
     {description && <meta name="description" content={description} />}
+    <script is:inline>
+      // Apply the saved theme before first paint so there's no flash, and keep it across page swaps.
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light' || saved === 'dark') document.documentElement.dataset.theme = saved;
+      document.addEventListener('astro:before-swap', (event) => {
+        const theme = document.documentElement.dataset.theme;
+        if (theme) event.newDocument.documentElement.dataset.theme = theme;
+      });
+    </script>
     <ClientRouter />
   </head>
   <body>
@@ -39,22 +58,24 @@ const current = Astro.url.pathname;
         <a href={url('/')} class="wordmark">{siteName}</a>
         <nav>
           {
-            nav.map(([path, label]) => (
-              <a href={url(path)} aria-current={current.startsWith(url(path)) ? 'page' : undefined}>
-                {label}
-              </a>
+            nav.map((group) => (
+              <div class="nav-group">
+                <span class="nav-label">{group.label}</span>
+                {group.links.map(([path, label]) => (
+                  <a href={url(path)} aria-current={current.startsWith(url(path)) ? 'page' : undefined}>
+                    {label}
+                  </a>
+                ))}
+              </div>
             ))
           }
         </nav>
+        <ThemeToggle />
       </header>
       <div class="content">
         <main>
           <slot />
         </main>
-        <footer class="site-footer">
-          {settings?.email && <a href={`mailto:${settings.email}`}>{settings.email}</a>}
-          {settings?.links.map((l) => l.url && <a href={l.url}>{l.label}</a>)}
-        </footer>
       </div>
     </div>
   </body>
