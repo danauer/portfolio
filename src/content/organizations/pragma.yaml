@@ -1,7 +1,13 @@
 name: Pragma
 kinds:
   - employer
-tags: []
+industry: Gaming
 website: https://pragma.gg
-description: |-
-  A backend platform for multiplayer and live-service games. It gives studios ready-made infrastructure for player accounts, matchmaking, parties, social features, battle passes, in-game economies, and live operations, so their teams can spend more time on gameplay than on servers.
+logo: ../../assets/images/organizations/pragma/logo.svg
+description: >-
+  A backend platform for multiplayer and live-service games. It gives studios
+  ready-made infrastructure for player accounts, matchmaking, parties, social
+  features, battle passes, in-game economies, and live operations, so their
+  teams can spend more time on gameplay than on servers.
+tags:
+  - gaming
