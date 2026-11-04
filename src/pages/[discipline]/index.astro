@@ -71,7 +71,7 @@ if (unassigned.length) {
           )}
           <ul class:list={['grid', { tiles, stack: grouped }]}>
             {section.projects.map((project) => (
-              <ProjectCard project={project} shape={tiles ? 'square' : 'wide'} row={grouped} />
+              <ProjectCard project={project} shape={tiles ? 'square' : 'wide'} row={grouped} hoverPattern={tiles} />
             ))}
           </ul>
         </section>
