@@ -1,9 +1,12 @@
-tags:
-  - gaming
 name: GameSpot
 kinds:
   - employer
 industry: Games media
 website: https://www.gamespot.com
-description: |-
-  One of the longest-running and most widely read games media sites. Since 1996 it has published news, reviews, previews, and video about games for millions of players.
+logo: ../../assets/images/organizations/gamespot/logo.svg
+description: >-
+  One of the longest-running and most widely read games media sites. Since 1996
+  it has published news, reviews, previews, and video about games for millions
+  of players.
+tags:
+  - gaming
