@@ -98,6 +98,10 @@ if (unassigned.length) {
   /* UX: client details on the left, that client's projects stacked on the right. The logo/name
      sits in a row of its own, so the projects line up with the top of the description below it. */
   .stack { grid-template-columns: minmax(0, 1fr); margin: 0; }
+  /* Below 768px the description stacks directly above the projects, so give it room. */
+  @media (max-width: 767px) {
+    .org-description { margin-bottom: 1.5rem; }
+  }
   @media (min-width: 768px) {
     .split {
       display: grid;
