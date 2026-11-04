@@ -1,31 +1,260 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import { getProjects, getSettings } from '../lib/content';
+import { getProjects, getSettings, projectUrl, formatYears, disciplines } from '../lib/content';
 
 const settings = await getSettings();
-const featured = (await getProjects()).filter((p) => p.data.featured);
+// The showcase is all about the imagery, so only featured projects with a cover make it in.
+const featured = (await getProjects()).filter((p) => p.data.featured && p.data.cover);
 ---
 
 <Base description={settings?.headline}>
-  <section class="intro">
-    <h1>{settings?.headline}</h1>
-  </section>
-
   {
     featured.length > 0 && (
-      <section>
-        <h2>Selected work</h2>
-        <ul class="grid">
-          {featured.map((project) => (
-            <ProjectCard project={project} />
-          ))}
-        </ul>
+      <section class="showcase" aria-roledescription="carousel" aria-label="Selected work">
+        <div class="stage">
+          <h1 class="headline">{settings?.headline}</h1>
+          <ul class="slides">
+            {featured.map((project, i) => (
+              <li class="slide" data-active={i === 0 ? '' : undefined} aria-roledescription="slide" aria-label={`${i + 1} of ${featured.length}`}>
+                <a href={projectUrl(project)}>
+                  <Image src={project.data.cover!} alt={project.data.coverAlt ?? ''} width={1800} height={1000} loading="eager" />
+                  <div class="caption">
+                    <span class="meta">
+                      {disciplines[project.data.discipline].label} · {formatYears(project.data.startDate, project.data.endDate)}
+                    </span>
+                    <h3>{project.data.title}</h3>
+                    {project.data.summary && <p>{project.data.summary}</p>}
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+          {featured.length > 1 && (
+            <div class="controls">
+              <button type="button" class="step" data-dir="-1" aria-label="Previous project">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M19 12H5" />
+                  <path d="m12 19-7-7 7-7" />
+                </svg>
+              </button>
+              <button type="button" class="step" data-dir="1" aria-label="Next project">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          )}
+          <ol class="progress">
+            {featured.map((project, i) => (
+              <li>
+                <button type="button" class="seg" data-state={i === 0 ? 'active' : 'idle'} aria-label={`Show ${project.data.title}`}>
+                  <span class="bar"><span class="fill" /></span>
+                  <span class="label"><span class="num">{String(i + 1).padStart(2, '0')}</span> {project.data.title}</span>
+                </button>
+              </li>
+            ))}
+          </ol>
+        </div>
       </section>
     )
   }
+  {featured.length === 0 && <h1 class="plain">{settings?.headline}</h1>}
 </Base>
 
+<script>
+  // Re-run on every client-side navigation, not just the first page load.
+  document.addEventListener('astro:page-load', () => {
+    const stage = document.querySelector<HTMLElement>('.stage');
+    if (!stage) return;
+    const showcase = stage.closest<HTMLElement>('.showcase')!;
+    const slides = [...stage.querySelectorAll<HTMLElement>('.slide')];
+    const segs = [...showcase.querySelectorAll<HTMLButtonElement>('.seg')];
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let current = 0;
+
+    // `direction` picks which way the wipe travels: 1 sweeps left to right, -1 right to left.
+    function show(n: number, direction = 1) {
+      const previous = current;
+      current = (n + slides.length) % slides.length;
+      if (!reduced && current !== previous) {
+        // The outgoing slide stays put underneath until the incoming one has wiped over it.
+        slides.forEach((slide) => slide.removeAttribute('data-leaving'));
+        slides[previous].setAttribute('data-leaving', '');
+        stage!.dataset.dir = direction > 0 ? 'next' : 'prev';
+      }
+      slides.forEach((slide, i) => slide.toggleAttribute('data-active', i === current));
+      segs.forEach((seg, i) => {
+        seg.dataset.state = i < current ? 'done' : i === current ? 'active' : 'idle';
+        seg.toggleAttribute('aria-current', i === current);
+      });
+    }
+
+    segs.forEach((seg, i) => seg.addEventListener('click', () => show(i, i > current ? 1 : -1)));
+    showcase.querySelectorAll<HTMLButtonElement>('.step').forEach((button) => {
+      const direction = Number(button.dataset.dir);
+      button.addEventListener('click', () => show(current + direction, direction));
+    });
+
+    // The progress bar's CSS animation is the timer: when it finishes, move on.
+    // Hovering or focusing the slideshow pauses that animation (see styles), and so the timer.
+    if (reduced) return;
+    showcase.dataset.autoplay = '';
+    showcase.addEventListener('animationend', (event) => {
+      const target = event.target as HTMLElement;
+      if (target.classList.contains('fill')) show(current + 1);
+      // Only the slide itself runs the wipe, so this means it's finished.
+      if (target.classList.contains('slide')) target.parentElement!.querySelector('[data-leaving]')?.removeAttribute('data-leaving');
+    });
+  });
+</script>
+
 <style>
-  .intro h1 { font-size: clamp(1.75rem, 4vw, 3rem); max-width: 20em; }
+  .plain { font-size: clamp(2.5rem, 6.5vw, 6rem); line-height: 1.05; letter-spacing: -0.02em; max-width: 14em; }
+
+  .showcase { --dur: 6s; }
+  .controls {
+    position: absolute;
+    right: clamp(1rem, 3vw, 2rem);
+    bottom: 5.5rem;
+    z-index: 2;
+    display: flex;
+    gap: 0.5rem;
+  }
+  .step {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.2);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+  }
+  .step:hover { background: var(--pill); color: var(--pill-fg); }
+
+  /* Fills the width of the content column, bleeds off the right edge of the window, and is the
+     full height of the window (cancelling the page's top padding so it starts flush with the top).
+     Slides are stacked, and each new one wipes over the last. */
+  .stage {
+    position: relative;
+    height: 100vh;
+    height: 100svh;
+    margin-top: -1.5rem;
+    /* Bleeds through the page's right gutter to the edge of the window. */
+    margin-right: calc(var(--edge) / -2);
+    overflow: hidden;
+    background: color-mix(in srgb, var(--fg) 6%, transparent);
+  }
+  /* The headline floats over every slide; clicks pass through to the project link underneath. */
+  .headline {
+    position: absolute;
+    inset: 0 0 auto 0;
+    z-index: 1;
+    margin: 0;
+    padding: clamp(1.25rem, 3.5vw, 3rem);
+    padding-right: 15%;
+    padding-bottom: 6rem;
+    background: linear-gradient(to bottom, rgb(0 0 0 / 0.55), transparent);
+    color: #fff;
+    font-size: clamp(2rem, 5.5vw, 5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    pointer-events: none;
+    animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .slides { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; }
+  .slide {
+    position: absolute;
+    inset: 0;
+    visibility: hidden;
+  }
+  .slide[data-leaving] { visibility: visible; z-index: 1; }
+  .slide[data-active] { visibility: visible; z-index: 2; }
+  .stage[data-dir='next'] .slide[data-active] { animation: wipe-next 0.9s cubic-bezier(0.7, 0, 0.2, 1) both; }
+  .stage[data-dir='prev'] .slide[data-active] { animation: wipe-prev 0.9s cubic-bezier(0.7, 0, 0.2, 1) both; }
+  @keyframes wipe-next {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0); }
+  }
+  @keyframes wipe-prev {
+    from { clip-path: inset(0 0 0 100%); }
+    to { clip-path: inset(0); }
+  }
+  .slide a { position: absolute; inset: 0; display: block; color: #fff; text-decoration: none; }
+  .slide :global(img) { width: 100%; height: 100%; object-fit: cover; }
+
+  .caption {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 4rem clamp(1rem, 3vw, 2.5rem) 6.5rem;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.7), transparent);
+  }
+  .caption > * { margin: 0; }
+  .caption h3 { font-size: clamp(1.5rem, 3.5vw, 3rem); line-height: 1.1; }
+  .caption p { margin-top: 0.5rem; max-width: 34rem; opacity: 0.85; }
+  .meta { font-size: 0.875rem; opacity: 0.85; }
+  .slide[data-active] .caption > * { animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .slide[data-active] .caption > :nth-child(1) { animation-delay: 0.45s; }
+  .slide[data-active] .caption > :nth-child(2) { animation-delay: 0.55s; }
+  .slide[data-active] .caption > :nth-child(3) { animation-delay: 0.7s; }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(1.25rem); }
+    to { opacity: 1; transform: none; }
+  }
+
+  /* One segment per project: it fills while its slide shows, and fills the timer. */
+  .progress {
+    position: absolute;
+    inset: auto 0 1.5rem 0;
+    z-index: 2;
+    display: flex;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0 clamp(1rem, 3vw, 2.5rem);
+    list-style: none;
+  }
+  .progress li { flex: 1; min-width: 0; }
+  .seg {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: rgb(255 255 255 / 0.7);
+    font: inherit;
+    font-size: 0.875rem;
+    text-align: left;
+    cursor: pointer;
+  }
+  .seg[data-state='active'], .seg:hover { color: #fff; }
+  .bar { display: block; height: 3px; border-radius: 999px; background: rgb(255 255 255 / 0.3); overflow: hidden; }
+  .fill { display: block; height: 100%; width: 0; background: var(--pill); }
+  .seg[data-state='done'] .fill, .seg[data-state='active'] .fill { width: 100%; }
+  [data-autoplay] .seg[data-state='active'] .fill { width: 0; animation: fill var(--dur) linear forwards; }
+  @keyframes fill { to { width: 100%; } }
+  /* Hovering or focusing the slideshow holds it in place. */
+  .showcase:hover .fill, .showcase:focus-within .fill { animation-play-state: paused; }
+  .label { display: block; margin-top: 0.5rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .num { font-family: var(--font-heading); }
+
+  @media (max-width: 767px) {
+    .label { display: none; }
+    /* The sidebar becomes a header above the page here, so don't pull the stage up under it. */
+    .stage { margin-top: 0; height: 80svh; }
+    .controls { bottom: 2.25rem; }
+    .progress { bottom: 1rem; }
+    .caption { padding-bottom: 5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slide[data-active],
+    .slide[data-active] .caption > *,
+    .headline { animation: none; }
+  }
 </style>
