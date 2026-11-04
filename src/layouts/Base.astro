@@ -4,6 +4,7 @@ import '@fontsource/cal-sans';
 import '@fontsource-variable/inter';
 import '../styles/global.css';
 import ThemeToggle from '../components/ThemeToggle.astro';
+import pixelPattern from '../assets/patterns/pixel-pattern.svg';
 import { getSettings, url } from '../lib/content';
 
 interface Props {
@@ -54,23 +55,33 @@ const current = Astro.url.pathname;
   </head>
   <body>
     <div class="shell">
-      <header class="site-header">
-        <a href={url('/')} class="wordmark">{siteName}</a>
-        <nav>
-          {
-            nav.map((group) => (
-              <div class="nav-group">
-                <span class="nav-label">{group.label}</span>
-                {group.links.map(([path, label]) => (
-                  <a href={url(path)} aria-current={current.startsWith(url(path)) ? 'page' : undefined}>
-                    {label}
-                  </a>
-                ))}
-              </div>
-            ))
-          }
-        </nav>
-        <ThemeToggle />
+      <header class="site-header" style={`--pattern: url(${pixelPattern.src})`}>
+        <div class="header-bar">
+          <a href={url('/')} class="wordmark">{siteName}</a>
+          <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-menu" aria-label="Menu">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path class="menu-open" d="M4 7h16M4 12h16M4 17h16" />
+              <path class="menu-close" d="M6 6l12 12M18 6 6 18" />
+            </svg>
+          </button>
+        </div>
+        <div class="site-menu" id="site-menu">
+          <nav>
+            {
+              nav.map((group) => (
+                <div class="nav-group">
+                  <span class="nav-label">{group.label}</span>
+                  {group.links.map(([path, label]) => (
+                    <a href={url(path)} aria-current={current.startsWith(url(path)) ? 'page' : undefined}>
+                      {label}
+                    </a>
+                  ))}
+                </div>
+              ))
+            }
+          </nav>
+          <ThemeToggle />
+        </div>
       </header>
       <div class="content">
         <main>
@@ -78,5 +89,25 @@ const current = Astro.url.pathname;
         </main>
       </div>
     </div>
+    <script>
+      // Mobile menu toggle. Re-bound on every client-side navigation; the header is re-rendered, so the menu starts closed.
+      document.addEventListener('astro:page-load', () => {
+        const header = document.querySelector<HTMLElement>('.site-header');
+        const button = header?.querySelector<HTMLButtonElement>('.menu-button');
+        if (!header || !button) return;
+        const setOpen = (open: boolean) => {
+          header.dataset.menu = open ? 'open' : 'closed';
+          button.setAttribute('aria-expanded', String(open));
+          button.setAttribute('aria-label', open ? 'Close menu' : 'Menu');
+        };
+        button.addEventListener('click', () => setOpen(header.dataset.menu !== 'open'));
+        header.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && header.dataset.menu === 'open') {
+            setOpen(false);
+            button.focus();
+          }
+        });
+      });
+    </script>
   </body>
 </html>

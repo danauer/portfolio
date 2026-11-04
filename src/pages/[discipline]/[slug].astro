@@ -160,18 +160,14 @@ const hasGallery = d.gallery.length > 0;
 
   .gallery figure:last-child { margin-bottom: 0; }
 
-  .details {
-    position: sticky;
-    top: 1rem;
-    max-height: calc(100vh - 2rem);
-    overflow-y: auto;
-  }
   .details > :first-child { margin-top: 0; }
   .lede { font-size: 1.25rem; }
   .details .prose { max-width: none; }
 
   @media (max-width: 767px) {
     .columns { grid-template-columns: minmax(0, 1fr); }
-    .details { position: static; max-height: none; overflow: visible; }
+    /* The details always stack below the gallery here, so there's nothing to toggle. */
+    .details-toggle { display: none; }
+    .project[data-details='hidden'] .details { display: block; }
   }
 </style>
