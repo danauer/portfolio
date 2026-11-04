@@ -158,6 +158,11 @@ const featured = (await getProjects()).filter((p) => p.data.featured && p.data.c
     font-size: clamp(2rem, 5.5vw, 5rem);
     line-height: 1.05;
     letter-spacing: -0.02em;
+    /* A wide, soft halo in the page's background colour lifts the text off whatever is behind it. */
+    text-shadow:
+      0 2px 12px color-mix(in srgb, var(--bg) 25%, transparent),
+      0 4px 32px color-mix(in srgb, var(--bg) 30%, transparent),
+      0 8px 72px color-mix(in srgb, var(--bg) 35%, transparent);
     pointer-events: none;
     animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   }
@@ -212,12 +217,13 @@ const featured = (await getProjects()).filter((p) => p.data.featured && p.data.c
   /* One segment per project: it fills while its slide shows, and fills the timer. */
   .progress {
     position: absolute;
-    inset: auto 0 1.5rem 0;
+    inset: auto 0 0 0;
     z-index: 3;
     display: flex;
     gap: 0.75rem;
     margin: 0;
-    padding: 0 clamp(1rem, 3vw, 2.5rem);
+    padding: 1.25rem clamp(1rem, 3vw, 2.5rem);
+    background: var(--bg);
     list-style: none;
   }
   .progress li { flex: 1; min-width: 0; }
@@ -249,7 +255,7 @@ const featured = (await getProjects()).filter((p) => p.data.featured && p.data.c
     /* The sidebar becomes a header above the page here, so don't pull the stage up under it. */
     .stage { margin-top: 0; height: 80svh; }
     .controls { bottom: 2.25rem; }
-    .progress { bottom: 1rem; }
+    .progress { padding-block: 1rem; }
   }
 
   @media (prefers-reduced-motion: reduce) {
