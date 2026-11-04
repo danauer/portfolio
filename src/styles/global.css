@@ -63,14 +63,29 @@ h1, h2, h3, h4, h5, h6 {
 .nav-label { font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary); }
 .site-header a { text-decoration: none; }
 .site-header nav a {
+  position: relative;
   font-family: var(--font-heading);
   align-self: flex-start;
-  padding: 0.3rem 0.9rem;
-  border-radius: 999px;
-  transition: background-color 0.15s, color 0.15s;
+  padding-block: 0.3rem;
 }
-.site-header nav a:hover { background: color-mix(in srgb, var(--pill) 30%, transparent); }
-.site-header nav a[aria-current] { background: var(--pill); color: var(--pill-fg); }
+/* A 1px underline that grows from the left to the full width of the text: half strength on hover,
+   solid for the current page. */
+.site-header nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0.1rem;
+  width: 0;
+  height: 1px;
+  background: var(--pill);
+  opacity: 0.5;
+  transition: width 0.2s ease;
+}
+.site-header nav a:hover::after, .site-header nav a:focus-visible::after { width: 100%; }
+.site-header nav a[aria-current]::after { width: 100%; opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .site-header nav a::after { transition: none; }
+}
 .wordmark { font-family: var(--font-heading); font-size: 1.5rem; line-height: 1.2; color: var(--text-primary); }
 
 .content { display: flex; flex-direction: column; min-width: 0; }

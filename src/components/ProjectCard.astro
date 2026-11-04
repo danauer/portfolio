@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import MediaFrame from './MediaFrame.astro';
 import { projectUrl, formatYears } from '../lib/content';
+import pixelPattern from '../assets/patterns/pixel-pattern.svg';
 
 interface Props {
   project: CollectionEntry<'projects'>;
@@ -10,9 +11,11 @@ interface Props {
   shape?: 'wide' | 'square';
   /** Lay out as a text-only line item, with no cover image. */
   row?: boolean;
+  /** Overlay the pixel pattern on the cover while the card is hovered or focused. */
+  hoverPattern?: boolean;
 }
 
-const { project, shape = 'wide', row = false } = Astro.props;
+const { project, shape = 'wide', row = false, hoverPattern = false } = Astro.props;
 const [ratio, height] = shape === 'square' ? (['1 / 1', 800] as const) : (['16 / 9', 450] as const);
 const { title, summary, cover, coverAlt, status, startDate, endDate } = project.data;
 ---
@@ -36,9 +39,11 @@ const { title, summary, cover, coverAlt, status, startDate, endDate } = project.
   ) : (
     <li class="card">
       <a href={projectUrl(project)}>
-        <MediaFrame ratio={ratio}>
-          {cover && <Image src={cover} alt={coverAlt ?? ''} width={800} height={height} />}
-        </MediaFrame>
+        <div class:list={['cover', { pattern: hoverPattern }]} style={`--pattern: url(${pixelPattern.src})`}>
+          <MediaFrame ratio={ratio}>
+            {cover && <Image src={cover} alt={coverAlt ?? ''} width={800} height={height} />}
+          </MediaFrame>
+        </div>
         <h3>
           {title}
           {status === 'draft' && <span class="badge draft">Draft</span>}
@@ -55,6 +60,20 @@ const { title, summary, cover, coverAlt, status, startDate, endDate } = project.
   .card h3 { margin: 0.75rem 0 0.25rem; }
   .card p { margin: 0.25rem 0; }
   .card .years { color: var(--text-tertiary); }
+  /* The pattern SVG is a 2×2 checkerboard, used as a mask so the squares take the theme's background
+     color. Sized to 2px, each square is 1 CSS px. */
+  .cover { position: relative; }
+  .cover.pattern::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg);
+    -webkit-mask: var(--pattern) 0 0 / 2px 2px;
+    mask: var(--pattern) 0 0 / 2px 2px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .card a:hover .cover.pattern::after, .card a:focus-visible .cover.pattern::after { opacity: 0.5; }
   .row h3 { margin-top: 0; }
   .row a:hover .title, .row a:focus-visible .title { text-decoration: underline; text-underline-offset: 0.2em; }
   /* Sits low enough that the arrow's center lines up with the middle of the lowercase letters. */
