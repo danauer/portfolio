@@ -147,6 +147,11 @@ export default config({
           publicPath: '../../assets/images/organizations/',
         }),
         description: fields.text({ label: 'Description', multiline: true }),
+        myRole: fields.text({
+          label: 'My role',
+          description: 'A short blurb about the work I did there, shown under the description on the UX page.',
+          multiline: true,
+        }),
         tags,
       },
     }),

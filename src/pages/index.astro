@@ -133,13 +133,14 @@ const featured = (await getProjects()).filter((p) => p.data.featured && p.data.c
   .step:hover { background: var(--pill); color: var(--pill-fg); }
 
   /* Fills the width of the content column, bleeds off the right edge of the window, and is the
-     full height of the window (cancelling the page's top padding so it starts flush with the top).
+     full height of the window (cancelling the page's top and bottom padding so it fills the window exactly).
      Slides are stacked, and each new one wipes over the last. */
   .stage {
     position: relative;
     height: 100vh;
     height: 100svh;
     margin-top: -1.5rem;
+    margin-bottom: calc(var(--page-end) * -1);
     /* Bleeds through the page's right gutter to the edge of the window. */
     margin-right: calc(var(--edge) / -2);
     overflow: hidden;
@@ -253,7 +254,7 @@ const featured = (await getProjects()).filter((p) => p.data.featured && p.data.c
   @media (max-width: 767px) {
     .label { display: none; }
     /* The sidebar becomes a header above the page here, so don't pull the stage up under it. */
-    .stage { margin-top: 0; height: 80svh; }
+    .stage { margin-top: 0; margin-bottom: 0; height: 80svh; }
     .controls { bottom: 2.25rem; }
     .progress { padding-block: 1rem; }
   }

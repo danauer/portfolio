@@ -24,7 +24,14 @@ const projects = await getProjects(discipline);
 // The UX page groups projects by client organization. Projects are already
 // newest-first, so sections are ordered by their most recent project, and
 // projects without a client go last. Other disciplines show one flat grid.
-type Section = { id: string; name: string; description?: string | null; logo?: ImageMetadata | null; projects: typeof projects };
+type Section = {
+  id: string;
+  name: string;
+  description?: string | null;
+  myRole?: string | null;
+  logo?: ImageMetadata | null;
+  projects: typeof projects;
+};
 const sections: Section[] = [];
 const unassigned: typeof projects = [];
 const grouped = discipline === 'ux';
@@ -38,7 +45,7 @@ for (const project of projects) {
   let section = sections.find((s) => s.id === client.id);
   if (!section) {
     const org = (await getEntry(client))!.data;
-    section = { id: client.id, name: org.name, description: org.description, logo: org.logo, projects: [] };
+    section = { id: client.id, name: org.name, description: org.description, myRole: org.myRole, logo: org.logo, projects: [] };
     sections.push(section);
   }
   section.projects.push(project);
@@ -66,7 +73,17 @@ if (unassigned.length) {
                   )}
                 </h2>
               )}
-              {section.description && <p class="org-description">{section.description}</p>}
+              {(section.description || section.myRole) && (
+                <div class="org-text">
+                  {section.description && <p class="org-description">{section.description}</p>}
+                  {section.myRole && (
+                    <div class="org-role">
+                      <span class="nav-label">My role</span>
+                      <p>{section.myRole}</p>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
           <ul class:list={['grid', { tiles, stack: grouped }]}>
@@ -90,7 +107,10 @@ if (unassigned.length) {
     grid-template-columns: repeat(auto-fill, minmax(max(18rem, calc((100% - 2px) / 3)), 1fr));
   }
   .tiles :global(.card) { padding-bottom: 1.5rem; }
-  .org-description { max-width: 40rem; margin: 0; color: var(--text-tertiary); }
+  .org-text { max-width: 40rem; }
+  .org-description { margin: 0; color: var(--text-tertiary); }
+  .org-role { margin-top: 1.25rem; }
+  .org-role p { margin: 0.375rem 0 0; }
   .org h2 { margin: 0 0 1rem; font-size: 1.5rem; }
   /* Width is set inline to give every logo the same area; never overflow the column. */
   .logo { height: auto; max-width: 100%; }
@@ -98,9 +118,9 @@ if (unassigned.length) {
   /* UX: client details on the left, that client's projects stacked on the right. The logo/name
      sits in a row of its own, so the projects line up with the top of the description below it. */
   .stack { grid-template-columns: minmax(0, 1fr); margin: 0; }
-  /* Below 768px the description stacks directly above the projects, so give it room. */
+  /* Below 768px the description and role stack directly above the projects, so give them room. */
   @media (max-width: 767px) {
-    .org-description { margin-bottom: 1.5rem; }
+    .org-text { margin-bottom: 1.5rem; }
   }
   @media (min-width: 768px) {
     .split {
@@ -112,7 +132,7 @@ if (unassigned.length) {
     }
     .split .org-info { display: contents; }
     .split h2 { grid-area: 1 / 1; }
-    .split .org-description { grid-area: 2 / 1; }
+    .split .org-text { grid-area: 2 / 1; }
     .split .stack { grid-area: 2 / 2; }
   }
 </style>
