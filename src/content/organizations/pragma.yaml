@@ -9,5 +9,9 @@ description: >-
   ready-made infrastructure for player accounts, matchmaking, parties, social
   features, battle passes, in-game economies, and live operations, so their
   teams can spend more time on gameplay than on servers.
+myRole: >-
+  I managed a small team of design engineers maintaining the frontend for
+  firstlook.gg and creators.gg, and also shipped a collection of features
+  myself, from sentiment summaries to analytics and an in-page agent.
 tags:
   - gaming

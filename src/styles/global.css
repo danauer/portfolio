@@ -13,6 +13,8 @@
   --pill-fg: #111;
   --gap: clamp(1rem, 3vw, 2rem);
   --edge: clamp(1.5rem, 6vw, 6rem);
+  /* Space below the last thing on every page, so content never sits on the bottom of the window. */
+  --page-end: clamp(3rem, 8vw, 6rem);
   --font-body: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-heading: 'Cal Sans', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   color-scheme: light dark;
@@ -92,7 +94,7 @@ h1, h2, h3, h4, h5, h6 {
 .wordmark { font-family: var(--font-heading); font-size: 1.5rem; line-height: 1.2; color: var(--text-primary); }
 
 .content { display: flex; flex-direction: column; min-width: 0; }
-main { flex: 1; padding-top: 1.5rem; }
+main { flex: 1; padding-block: 1.5rem var(--page-end); }
 /* Page titles match the sidebar wordmark in size and top alignment. */
 h1 { font-size: 1.5rem; margin: 0 0 1.5rem; }
 
