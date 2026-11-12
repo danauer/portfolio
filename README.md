@@ -1,4 +1,4 @@
-# Patchbay
+# Audiotool
 
 A node-based instrument builder in the browser. Patch sources, note processors, sound
 generators, modulators and effects together with cables, and play the result.

@@ -1,4 +1,4 @@
-# Patchbay: agent notes
+# Audiotool: agent notes
 
 A prototype node-based instrument builder that runs in the browser. Users patch modules
 (sources, note FX, sound generators, modulators, effects) together with typed cables and
@@ -19,7 +19,7 @@ Not verified: real MIDI hardware, Safari, Firefox. There are no automated tests 
 python3 -m http.server 8765   # open http://localhost:8765
 ```
 
-`.claude/launch.json` defines this server as `patchbay` for preview tools. There's no build
+`.claude/launch.json` defines this server as `audiotool` for preview tools. There's no build
 step, no package.json and no dependencies: just native ES modules and the Web Audio API.
 Keep it that way unless a change clearly needs a bundler.
 
@@ -63,10 +63,10 @@ editor.js  ──calls──▶  patch.js  ──owns──▶  node instances (
 
 ## Verifying changes
 
-`window.patchbay = { ctx, patch, editor }` is exposed for debugging. Pattern used so far:
+`window.audiotool = { ctx, patch, editor }` is exposed for debugging. Pattern used so far:
 
 ```js
-const { patch, ctx } = window.patchbay;
+const { patch, ctx } = window.audiotool;
 await ctx.resume();
 patch.nodes.get('kb').instance.play(60, true);          // or patch.setParam('seq','running',true)
 await new Promise(r => setTimeout(r, 600));
@@ -77,7 +77,7 @@ Math.max(...d.map(Math.abs));                             // > 0 means sound rea
 
 Gotchas:
 - The AudioContext starts suspended until a user gesture. `main.js` resumes it on the first pointer or key event.
-- The patch autosaves to `localStorage['patchbay:v1']` and reloads it on start. Clear it
+- The patch autosaves to `localStorage['audiotool:v1']` and reloads it on start. Clear it
   (or load a preset) when you need a known starting state.
 - Background tabs throttle `setInterval`, so sequencers stutter when the tab is hidden. That's expected for now.
 - Every Keyboard node listens to global key events, so two Keyboard nodes both play.

@@ -6,14 +6,14 @@ import { NODE_TYPES, CATEGORIES } from './nodes.js';
 import { PRESETS } from './presets.js';
 import { h } from './util.js';
 
-const STORAGE_KEY = 'patchbay:v1';
+const STORAGE_KEY = 'audiotool:v1';
 const $ = (s) => document.querySelector(s);
 
 // Browsers start AudioContexts suspended until a user gesture; we resume on the first one.
 const ctx = new AudioContext({ latencyHint: 'interactive' });
 const patch = new Patch(ctx, NODE_TYPES);
 const editor = new Editor($('#viewport'), patch);
-window.patchbay = { ctx, patch, editor }; // handy for poking at things in devtools
+window.audiotool = { ctx, patch, editor }; // handy for poking at things in devtools
 
 // ---- audio on/off status ----------------------------------------------------
 const status = $('#audio-status');
