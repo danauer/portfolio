@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Patchbay</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="toolbar">
+      <div class="brand"><span class="logo">⬡</span> Patchbay</div>
+      <label class="field">BPM <input id="bpm" type="number" min="20" max="300" value="110" /></label>
+      <select id="preset" title="Load a starter patch">
+        <option value="">Load preset…</option>
+      </select>
+      <button id="fit" title="Fit all nodes in view">Fit</button>
+      <button id="panic" title="Release all notes">Panic</button>
+      <div class="spacer"></div>
+      <button id="import">Import</button>
+      <button id="export">Export</button>
+      <input id="import-file" type="file" accept="application/json,.json" hidden />
+      <span id="audio-status" class="pill"></span>
+    </header>
+    <div class="app">
+      <aside id="palette" class="palette"></aside>
+      <main id="viewport"></main>
+    </div>
+    <footer class="hint-bar">
+      <span><i class="sw audio"></i>audio</span>
+      <span><i class="sw note"></i>notes</span>
+      <span><i class="sw mod"></i>modulation</span>
+      <span class="sep">Drag from an output dot to an input · grab a connected input to re-patch · click a wire to cut it · drag empty space to pan · pinch to zoom</span>
+    </footer>
+    <div id="toast"></div>
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>
