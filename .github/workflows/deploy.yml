@@ -32,15 +32,15 @@ jobs:
           SITE_URL: https://www.auer.co
           BASE_PATH: /
           PUBLIC_CLOUDINARY_CLOUD_NAME: ${{ vars.CLOUDINARY_CLOUD_NAME }}
-      # Patchbay lives on its own orphan branch (no build step) and is served
-      # from /patchbay/ alongside the portfolio.
+      # Audiotool lives on its own orphan branch (no build step) and is served
+      # from /audiotool/ alongside the portfolio.
       - uses: actions/checkout@v7
         with:
-          ref: patchbay
-          path: patchbay-src
+          ref: audiotool
+          path: audiotool-src
       - run: |
-          mkdir -p dist/patchbay
-          rsync -a --exclude '.git' --exclude '.claude' --exclude 'CLAUDE.md' patchbay-src/ dist/patchbay/
+          mkdir -p dist/audiotool
+          rsync -a --exclude '.git' --exclude '.claude' --exclude 'CLAUDE.md' audiotool-src/ dist/audiotool/
       - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
