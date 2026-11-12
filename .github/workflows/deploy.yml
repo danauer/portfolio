@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, patchbay]
   workflow_dispatch:
 
 permissions:
@@ -32,6 +32,15 @@ jobs:
           SITE_URL: https://www.auer.co
           BASE_PATH: /
           PUBLIC_CLOUDINARY_CLOUD_NAME: ${{ vars.CLOUDINARY_CLOUD_NAME }}
+      # Patchbay lives on its own orphan branch (no build step) and is served
+      # from /patchbay/ alongside the portfolio.
+      - uses: actions/checkout@v7
+        with:
+          ref: patchbay
+          path: patchbay-src
+      - run: |
+          mkdir -p dist/patchbay
+          rsync -a --exclude '.git' --exclude '.claude' --exclude 'CLAUDE.md' patchbay-src/ dist/patchbay/
       - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
