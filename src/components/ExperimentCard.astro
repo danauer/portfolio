@@ -1,0 +1,35 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import MediaFrame from './MediaFrame.astro';
+import { experimentHref } from '../lib/content';
+
+interface Props {
+  experiment: CollectionEntry<'experiments'>;
+}
+
+// Experiments have no page of their own; the card goes straight to the page the entry links to.
+const { experiment } = Astro.props;
+const { title, summary, cover, coverAlt, status, date } = experiment.data;
+---
+
+<li class="card">
+  <a href={experimentHref(experiment)}>
+    <MediaFrame ratio="16 / 9">
+      {cover && <Image src={cover} alt={coverAlt ?? ''} width={800} height={450} />}
+    </MediaFrame>
+    <h3>
+      {title}
+      {status === 'draft' && <span class="badge draft">Draft</span>}
+    </h3>
+  </a>
+  {summary && <p>{summary}</p>}
+  {date && <p class="year">{date.getUTCFullYear()}</p>}
+</li>
+
+<style>
+  .card a { text-decoration: none; }
+  .card h3 { margin: 0.75rem 0 0.25rem; }
+  .card p { margin: 0.25rem 0; }
+  .card .year { color: var(--text-tertiary); }
+</style>

@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+import ExperimentCard from '../../components/ExperimentCard.astro';
+import { getExperiments } from '../../lib/content';
+
+const experiments = await getExperiments();
+---
+
+<Base title="Experiments">
+  <h1>Experiments</h1>
+  {
+    experiments.length ? (
+      <ul class="grid">
+        {experiments.map((experiment) => <ExperimentCard experiment={experiment} />)}
+      </ul>
+    ) : (
+      <p class="muted">Nothing here yet.</p>
+    )
+  }
+</Base>
+
+<style>
+  ul { margin-top: 3rem; }
+</style>

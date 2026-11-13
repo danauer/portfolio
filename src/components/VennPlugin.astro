@@ -1,0 +1,448 @@
+---
+// Interactive copy of the Venn plugin's interface. It makes no sound: the controls
+// move stand-in values, and the theme switch re-themes the whole page.
+// Behaviour lives in src/lib/venn-ui.js; this file is the markup and styles.
+//
+// Colours are the plugin's own, as light-dark() pairs keyed off the page's
+// color-scheme. The --v-* tokens are defined by the page (see pages/venn.astro).
+interface Props {
+  version: string;
+}
+const { version } = Astro.props;
+---
+
+<div class="venn-frame">
+  <div class="venn-ui" data-venn-ui>
+    <header>
+      <div class="header-start">
+        <!-- EQ position. Saturation and Tone also swap places in the first column (.eq-pre). -->
+        <div class="tone-position">
+          <span class="header-label" id="venn-eq-label">Tone:</span>
+          <div class="segmented" data-eq-position role="radiogroup" aria-labelledby="venn-eq-label">
+            <button type="button" role="radio" data-pre="true" title="EQ before saturation">Pre</button>
+            <button type="button" role="radio" data-pre="false" title="EQ after saturation">Post</button>
+          </div>
+        </div>
+      </div>
+      <div class="header-end">
+        <div class="tips">
+          <button type="button" class="tips-button" aria-label="Tips" aria-expanded="false" aria-controls="venn-tips-text">
+            <svg aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm16-40a8,8,0,0,1-8,8,16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40A8,8,0,0,1,144,176ZM112,84a12,12,0,1,1,12,12A12,12,0,0,1,112,84Z"></path></svg>
+          </button>
+          <div class="tips-text" id="venn-tips-text">
+            <p>Drag to adjust</p>
+            <p>Shift for fine control</p>
+            <p>Double-click to reset</p>
+          </div>
+        </div>
+        <span class="version">{version}</span>
+        <!-- Icons: Phosphor (https://phosphoricons.com), MIT licence. Regular weight when unselected, Fill when selected. -->
+        <div class="theme-switch" data-theme-switch role="radiogroup" aria-label="Page theme">
+          <button type="button" role="radio" data-theme-choice="auto" title="Auto (match system)" aria-label="Auto">
+            <svg class="ph-regular" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,16.37a86.4,86.4,0,0,1,16,3V212.67a86.4,86.4,0,0,1-16,3Zm32,9.26a87.81,87.81,0,0,1,16,10.54V195.83a87.81,87.81,0,0,1-16,10.54ZM40,128a88.11,88.11,0,0,1,80-87.63V215.63A88.11,88.11,0,0,1,40,128Zm160,50.54V77.46a87.82,87.82,0,0,1,0,101.08Z"></path></svg>
+            <svg class="ph-fill" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM40,128a88.1,88.1,0,0,1,88-88V216A88.1,88.1,0,0,1,40,128Z"></path></svg>
+          </button>
+          <button type="button" role="radio" data-theme-choice="light" title="Light" aria-label="Light">
+            <svg class="ph-regular" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"></path></svg>
+            <svg class="ph-fill" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm8,24a64,64,0,1,0,64,64A64.07,64.07,0,0,0,128,64ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"></path></svg>
+          </button>
+          <button type="button" role="radio" data-theme-choice="dark" title="Dark" aria-label="Dark">
+            <svg class="ph-regular" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"></path></svg>
+            <svg class="ph-fill" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M235.54,150.21a104.84,104.84,0,0,1-37,52.91A104,104,0,0,1,32,120,103.09,103.09,0,0,1,52.88,57.48a104.84,104.84,0,0,1,52.91-37,8,8,0,0,1,10,10,88.08,88.08,0,0,0,109.8,109.8,8,8,0,0,1,10,10Z"></path></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Three columns: Saturation + Tone | Venn (the double) | Output.
+         Saturation and Tone swap places when the EQ is set to Pre (.eq-pre). -->
+    <div class="columns">
+      <div class="column col-tone" data-tone-chain>
+        <section class="module mod-sat">
+          <h3 class="heading">Saturation</h3>
+          <div class="knobs">
+            <div class="knob" data-param="drive" data-label="Drive"></div>
+          </div>
+        </section>
+        <section class="module mod-tone">
+          <h3 class="heading">Tone</h3>
+          <div class="knobs">
+            <div class="knob" data-param="lowCut" data-label="Low Cut"></div>
+            <div class="knob" data-param="highCut" data-label="High Cut"></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="column col-venn">
+        <section class="module mod-double">
+          <p class="plugin-name">Venn</p>
+          <!-- Original (left) and double (right): they drift apart as Time increases. -->
+          <div class="venn" aria-hidden="true"></div>
+          <div class="sliders">
+            <div class="slider" data-param="time" data-label="Time" data-track="line"></div>
+            <div class="slider" data-param="wobble" data-label="Wobble" data-track="wave"></div>
+            <div class="slider" data-param="width" data-label="Width" data-track="wedge"></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="column col-out">
+        <section class="module mod-out">
+          <h3 class="heading">Output</h3>
+          <div class="faders">
+            <div class="fader" data-param="double" data-label="Double"></div>
+            <div class="fader" data-param="gain" data-label="Output"></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { mountVenn } from '../lib/venn-ui.js';
+
+  // Rebuilt after every client-side navigation (the markup is swapped in with the page).
+  let unmount: (() => void) | undefined;
+  document.addEventListener('astro:page-load', () => {
+    unmount?.();
+    const root = document.querySelector<HTMLElement>('[data-venn-ui]');
+    unmount = root ? mountVenn(root) : undefined;
+  });
+  document.addEventListener('astro:before-swap', () => {
+    unmount?.();
+    unmount = undefined;
+  });
+</script>
+
+<style is:global>
+  /* The plugin window. Sizes are the plugin's (820 wide, 36/40/56 padding); below that
+     width the three columns stack, so it stays usable on a phone. */
+  .venn-frame {
+    container: venn / inline-size;
+    max-width: 820px;
+  }
+
+  .venn-ui {
+    --knob-size: 56px;
+    --v-font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+    /* Derived from the page tokens in pages/venn.astro. */
+    --accent: var(--v-text); /* accent = the highest-contrast neutral */
+    --accent-ink: var(--v-panel);
+    --thumb: var(--v-text);
+    --thumb-shadow: drop-shadow(0 1px 2px light-dark(rgb(32 36 18 / 0.3), rgb(0 0 0 / 0.5)));
+    --cap-shadow: drop-shadow(0 1px 1.5px light-dark(rgb(32 36 18 / 0.18), transparent));
+    --well-active-shadow: 0 1px 2px light-dark(rgb(32 36 18 / 0.15), transparent);
+
+    display: flex;
+    flex-direction: column;
+    min-height: 408px;
+    padding: 36px 40px 56px;
+    background: var(--v-panel);
+    border: 1px solid var(--v-hairline);
+    border-radius: 14px;
+    color: var(--v-text);
+    font-family: var(--v-font);
+    font-size: 16px;
+    line-height: normal;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+
+    *, *::before, *::after { box-sizing: border-box; }
+    h3, p { margin: 0; }
+    button { font: inherit; }
+
+    /* Header --------------------------------------------------------------- */
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between; /* Tone toggle at left; tips, version, theme switch at right */
+      align-items: center;
+      gap: 12px 24px;
+    }
+    .header-start, .header-end { display: flex; align-items: center; gap: 10px; }
+    .tone-position { display: flex; align-items: center; gap: 8px; }
+    .header-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--v-muted);
+    }
+
+    /* The plugin name, used as the middle column's heading. */
+    .plugin-name {
+      align-self: center;
+      height: 14px;
+      line-height: 14px; /* same box as the other headings, so all three line up */
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .theme-switch {
+      display: flex;
+      padding: 2px;
+      background: var(--v-well);
+      border: 1px solid var(--v-hairline);
+      border-radius: 8px;
+    }
+    .theme-switch button {
+      display: grid;
+      place-items: center;
+      width: 24px;
+      height: 20px;
+      padding: 0;
+      color: var(--v-muted);
+      background: none;
+      border: 0;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .theme-switch button:hover { color: var(--v-text); }
+    .theme-switch button:focus-visible { outline: 1px solid var(--v-muted); outline-offset: 1px; }
+    .theme-switch button[aria-checked='true'] {
+      color: var(--v-text);
+      background: var(--v-well-active);
+      box-shadow: var(--well-active-shadow);
+    }
+    .theme-switch svg { width: 13px; height: 13px; }
+    .theme-switch .ph-fill,
+    .theme-switch button[aria-checked='true'] .ph-regular { display: none; }
+    .theme-switch button[aria-checked='true'] .ph-fill { display: block; }
+
+    /* Tips: info icon that opens a small popover on click. */
+    .tips { position: relative; display: flex; }
+    .tips-button {
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      padding: 0;
+      color: var(--v-muted);
+      background: none;
+      border: 0;
+      border-radius: 50%;
+      cursor: help;
+    }
+    .tips-button:hover, .tips-button:focus-visible,
+    .tips-button[aria-expanded='true'] { color: var(--v-text); }
+    .tips-button:focus-visible { outline: 1px solid var(--v-muted); outline-offset: 1px; }
+    .tips-button svg { width: 15px; height: 15px; }
+
+    .tips-text {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0; /* opens leftward, so it never runs off the window edge */
+      z-index: 10;
+      padding: 8px 10px;
+      font-size: 11px;
+      line-height: 1.6;
+      white-space: nowrap;
+      color: var(--v-panel); /* inverted, like the selected Pre/Post button */
+      background: var(--v-text);
+      border-radius: 8px;
+      box-shadow: 0 4px 14px rgb(0 0 0 / 0.2);
+      opacity: 0;
+      transform: translateY(-2px);
+      pointer-events: none;
+      transition: opacity 0.12s ease, transform 0.12s ease;
+    }
+    .tips-button[aria-expanded='true'] + .tips-text { opacity: 1; transform: none; }
+
+    .version {
+      font-size: 10px;
+      color: var(--v-muted);
+      border: 1px solid var(--v-track);
+      border-radius: 999px;
+      padding: 2px 8px;
+    }
+
+    /* Layout: three columns ------------------------------------------------ */
+
+    .columns {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr; /* equal outer columns keep the middle one centred */
+      column-gap: 24px;
+      margin-top: 28px;
+    }
+    .column { display: flex; flex-direction: column; gap: 14px; }
+    .module { display: flex; flex-direction: column; align-items: center; }
+    .mod-double, .mod-out { flex: 1; }
+
+    .mod-sat { order: 1; }
+    .mod-tone { order: 2; }
+    /* EQ before saturation: Tone moves above Saturation. */
+    .column.eq-pre .mod-tone { order: 1; }
+    .column.eq-pre .mod-sat { order: 2; }
+    /* The lower module of the first column sits at the bottom, so its values share
+       a baseline with the Output faders' values. */
+    .mod-tone { margin-top: auto; }
+    .column.eq-pre .mod-tone { margin-top: 0; }
+    .column.eq-pre .mod-sat { margin-top: auto; }
+
+    .heading {
+      align-self: center;
+      height: 14px;
+      line-height: 14px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--v-muted);
+    }
+
+    .knobs { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+
+    /* Knobs ---------------------------------------------------------------- */
+
+    .knob { width: 60px; display: flex; flex-direction: column; align-items: center; }
+    .dial {
+      width: var(--knob-size);
+      height: var(--knob-size);
+      cursor: ns-resize;
+      outline: none;
+      touch-action: none;
+    }
+    .dial svg { width: 100%; height: 100%; overflow: visible; }
+
+    .track, .fill { fill: none; stroke-width: 4.5; stroke-linecap: round; }
+    .track { stroke: var(--v-track); }
+    .fill { stroke: var(--accent); }
+    .fill.cut { stroke: var(--v-cut); }
+    .origin-tick { stroke: var(--v-muted); stroke-width: 1; stroke-linecap: round; fill: none; }
+
+    .cap {
+      fill: var(--v-cap);
+      stroke: var(--v-cap-border);
+      stroke-width: 0.75;
+      filter: var(--cap-shadow);
+    }
+    .dial:focus-visible { outline: 1px solid var(--v-muted); outline-offset: 2px; border-radius: 50%; }
+    .pointer { stroke: var(--v-text); stroke-width: 2.5; stroke-linecap: round; }
+
+    .knob-label {
+      margin-top: 2px;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--v-muted);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .knob-value, .slider-value, .fader-value {
+      font-size: 12px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .knob-value { margin-top: 1px; }
+
+    /* Venn + sliders ------------------------------------------------------- */
+
+    .venn { width: 220px; height: 104px; margin-top: 10px; }
+    .venn svg { width: 100%; height: 100%; overflow: visible; }
+    .venn-dry, .venn-double { fill: none; stroke: var(--accent); stroke-width: 1; }
+    /* Where the two circles overlap: the double's circle, clipped to the original's. */
+    .venn-overlap { fill: var(--accent); fill-opacity: 0.16; }
+
+    .sliders { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+    .slider-head { display: flex; justify-content: space-between; align-items: baseline; }
+    .slider-label { font-size: 10px; font-weight: 500; color: var(--v-muted); }
+
+    .slider-track {
+      display: block;
+      width: 220px;
+      height: 16px;
+      margin-top: 2px;
+      cursor: ew-resize;
+      outline: none;
+      touch-action: none;
+    }
+    .slider-track svg { display: block; overflow: visible; }
+    .slider-bg { fill: var(--v-track); }
+    .slider-bg.stroked, .slider-fill.stroked { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .slider-bg.stroked { stroke: var(--v-track); }
+    .slider-fill { fill: var(--accent); }
+    .slider-fill.stroked { stroke: var(--accent); }
+    .slider-fill.stroked.cut { stroke: var(--v-cut); }
+    .slider-thumb { fill: var(--thumb); filter: var(--thumb-shadow); }
+    .slider-track:focus-visible { outline: 1px solid var(--v-muted); outline-offset: 3px; border-radius: 4px; }
+
+    /* Output faders -------------------------------------------------------- */
+
+    .faders {
+      flex: 1;
+      display: flex;
+      align-items: flex-end; /* values at the bottom, level with the first column's */
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .fader { width: 56px; display: flex; flex-direction: column; align-items: center; }
+    .fader-label { font-size: 10px; font-weight: 500; color: var(--v-muted); white-space: nowrap; }
+    .fader-track {
+      width: 24px;
+      height: 180px;
+      margin: 6px 0 4px;
+      cursor: ns-resize;
+      outline: none;
+      touch-action: none;
+    }
+    .fader-track svg { display: block; overflow: visible; }
+    .fader-track:focus-visible { outline: 1px solid var(--v-muted); outline-offset: 3px; border-radius: 4px; }
+
+    /* Pre/Post toggle ------------------------------------------------------ */
+
+    .segmented {
+      display: flex;
+      padding: 2px;
+      background: var(--v-well);
+      border: 1px solid var(--v-hairline);
+      border-radius: 8px;
+    }
+    .segmented button {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--v-muted);
+      background: none;
+      border: 0;
+      border-radius: 6px;
+      height: 20px; /* same height as the theme switch beside it */
+      padding: 0 12px;
+      cursor: pointer;
+    }
+    .segmented button:hover { color: var(--v-text); }
+    .segmented button:focus-visible { outline: 1px solid var(--v-muted); outline-offset: 1px; }
+    .segmented button[aria-checked='true'] { color: var(--accent-ink); background: var(--accent); }
+  }
+
+  /* Narrow: stack the columns. Venn first, then Saturation and Tone, then Output. */
+  @container venn (max-width: 779px) {
+    .venn-ui {
+      padding: 24px 16px 40px;
+      min-height: 0;
+    }
+    .venn-ui .columns { grid-template-columns: 1fr; row-gap: 44px; margin-top: 28px; }
+    .venn-ui .col-venn { order: -1; }
+    .venn-ui .col-out { order: 1; }
+    .venn-ui .mod-tone,
+    .venn-ui .column.eq-pre .mod-sat { margin-top: 0; }
+    .venn-ui .faders { gap: 24px; justify-content: center; }
+  }
+
+  /* Cross-fade the colours, only while the theme is being switched. */
+  @media (prefers-reduced-motion: no-preference) {
+    :root.theme-switching,
+    :root.theme-switching *,
+    :root.theme-switching *::before,
+    :root.theme-switching *::after {
+      transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease,
+        fill 0.25s ease, stroke 0.25s ease, box-shadow 0.25s ease !important;
+    }
+  }
+</style>

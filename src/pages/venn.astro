@@ -1,0 +1,270 @@
+---
+import Base from '../layouts/Base.astro';
+import VennPlugin from '../components/VennPlugin.astro';
+import { url } from '../lib/content';
+
+const version = '0.18';
+
+const sections = [
+  {
+    title: 'Double',
+    body: 'Time sets how late the copy arrives, from 1 to 100 ms. Around 5–35 ms the two merge into one thicker sound; past 40 ms you hear a distinct second hit. Wobble slowly drifts the delay so the copy sounds like a second take, not a clone. Width spreads the copy between left and right, and at 0% it stays mono-safe.',
+  },
+  {
+    title: 'Saturation',
+    body: 'Drive pushes the copy through a soft-clipping curve, from gentle warmth to heavy grit. It runs at 8× oversampling to keep digital harshness out, and the level stays roughly steady as you turn it up.',
+  },
+  {
+    title: 'Tone',
+    body: 'Low Cut and High Cut shape the copy only, so the original is never touched. The Pre/Post switch puts them before the saturation, to shape what gets distorted, or after it, to shape the distorted sound. The two modules swap places to match.',
+  },
+  {
+    title: 'Output',
+    body: 'Double sets the level of the copy, and all the way down is Off. Output is the overall volume, from −48 to +12 dB.',
+  },
+];
+
+// Settings the demo can jump to. These move the controls on this page; the plugin itself has no presets.
+const tryThese = [
+  { label: 'Thicken a vocal', values: { time: 22, wobble: 25, width: 50, drive: 25, lowCut: 150, highCut: 9000, double: -3, gain: 0 }, eqPre: false },
+  { label: 'Slapback', values: { time: 75, wobble: 0, width: 30, drive: 10, lowCut: 200, highCut: 6000, double: -6, gain: 0 }, eqPre: false },
+  { label: 'Heavy grit, tidy low end', values: { time: 12, wobble: 15, width: 60, drive: 80, lowCut: 300, highCut: 4000, double: -9, gain: 0 }, eqPre: true },
+  { label: 'Defaults', values: { time: 18, wobble: 20, width: 50, drive: 25, lowCut: 120, highCut: 9000, double: -3, gain: 0 }, eqPre: false },
+];
+---
+
+<Base
+  title="Venn"
+  description="Venn is a doubler plugin (AU and VST3). It adds a delayed, saturated, EQ'd copy of your sound underneath the original."
+>
+  <div class="venn-page">
+    <header class="hero">
+      <p class="kicker">Audio plugin · AU &amp; VST3</p>
+      <h1>Venn</h1>
+      <p class="lead">
+        A doubler. It adds a delayed, saturated, EQ’d copy of your sound underneath the original, so one take sounds like two.
+      </p>
+      <p class="small">A personal project, not available to download yet.</p>
+    </header>
+
+    <section id="try" class="block" aria-labelledby="try-title">
+      <h2 class="kicker" id="try-title">Try it</h2>
+      <VennPlugin version={`v${version}`} />
+      <div class="presets" role="group" aria-label="Try a setting">
+        <span class="kicker">Try a setting</span>
+        {
+          tryThese.map((p) => (
+            <button type="button" class="chip" data-preset={JSON.stringify({ values: p.values, eqPre: p.eqPre })}>
+              {p.label}
+            </button>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="does-title">
+      <h2 class="kicker" id="does-title">What it does</h2>
+      <p class="intro">
+        The original sound passes straight through. A copy goes down a second path: delayed, distorted, tone-shaped,
+        and blended back in underneath.
+      </p>
+      <div class="features">
+        {
+          sections.map((s) => (
+            <div class="feature">
+              <h3 class="kicker">{s.title}</h3>
+              <p>{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="demo-title">
+      <h2 class="kicker" id="demo-title">In Logic Pro</h2>
+      <figure class="demo" data-demo>
+        <video
+          src={url('venn/venn-demo.mp4')}
+          poster={url('venn/venn-demo-poster.jpg')}
+          width="1440"
+          height="874"
+          playsinline
+          preload="none"
+          aria-label="Screen recording of Venn running inside Logic Pro on a guitar track, with its controls being adjusted while the track plays"
+        ></video>
+        <button type="button" class="play" aria-label="Play video">
+          <svg aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"></path></svg>
+        </button>
+      </figure>
+    </section>
+
+    <footer class="credits">
+      <p>
+        Built with <a href="https://juce.com">JUCE</a>. Interface icons from{' '}
+        <a href="https://phosphoricons.com">Phosphor</a> (MIT).
+      </p>
+    </footer>
+  </div>
+</Base>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    // The recording starts from a play button over its poster. Once it's playing, the native controls
+    // take over; when it ends, the poster and play button come back.
+    const demo = document.querySelector<HTMLElement>('[data-demo]');
+    const video = demo?.querySelector('video');
+    const playButton = demo?.querySelector<HTMLButtonElement>('.play');
+    if (demo && video && playButton) {
+      playButton.addEventListener('click', () => {
+        video.controls = true;
+        demo.dataset.playing = '';
+        video.play().catch(() => {});
+        video.focus();
+      });
+      video.addEventListener('ended', () => {
+        video.controls = false;
+        delete demo.dataset.playing;
+        video.load(); // back to the poster
+        playButton.focus();
+      });
+    }
+
+    // Preset chips set the demo's controls.
+    const plugin = document.querySelector<HTMLElement>('[data-venn-ui]');
+
+    document.querySelectorAll<HTMLButtonElement>('[data-preset]').forEach((button) =>
+      button.addEventListener('click', () => {
+        plugin?.dispatchEvent(new CustomEvent('venn:preset', { detail: JSON.parse(button.dataset.preset!) }));
+      }),
+    );
+  });
+</script>
+
+<style is:global>
+  /* The whole page takes the plugin's palette: tinted neutrals, with the highest-contrast
+     neutral as the only accent. light-dark() follows the page's color-scheme, so the
+     plugin's theme switch (or the sidebar's, or the OS) re-themes everything at once. */
+  :root:has(.venn-page) {
+    --v-bg: light-dark(#e5e6db, #12130e);
+    --v-panel: light-dark(#f1f3e8, #1b1b15);
+    --v-hairline: light-dark(rgb(0 0 0 / 0.07), rgb(255 255 255 / 0.06));
+    --v-track: light-dark(#d4d5c8, #2b2c24);
+    --v-cut: light-dark(#5b74a6, #8fa3c7);
+    --v-text: light-dark(#1d1d17, #f2f3eb);
+    --v-muted: light-dark(#65675a, #8c8e81);
+    --v-cap: light-dark(#fffffb, #25261f);
+    --v-cap-border: light-dark(#d7d8cc, #34352d);
+    --v-well: light-dark(rgb(0 0 0 / 0.05), rgb(0 0 0 / 0.3));
+    --v-well-active: light-dark(#fff, rgb(255 255 255 / 0.1));
+
+    /* Re-skin the site chrome (sidebar, nav, background) with the same palette. */
+    --bg: var(--v-bg);
+    --text-primary: var(--v-text);
+    --text-secondary: light-dark(rgb(29 29 23 / 0.78), rgb(242 243 235 / 0.78));
+    --text-tertiary: var(--v-muted);
+    --line: var(--v-track);
+    --pill: var(--v-text);
+    --pill-fg: var(--v-panel);
+  }
+
+  .venn-page {
+    --font-heading: var(--font-body);
+    max-width: 52rem;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3.5rem, 8vw, 6rem);
+
+    /* Plugin-style small caps label, used for every section title. */
+    .kicker {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--v-muted);
+    }
+
+    .small { margin: 0; font-size: 0.8125rem; color: var(--v-muted); }
+    /* Hero --------------------------------------------------------------- */
+
+    .hero { display: flex; flex-direction: column; align-items: flex-start; gap: 1.25rem; padding-top: 1.5rem; }
+    .hero h1 {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: clamp(1.25rem, 3.5vw, 2.25rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      /* The tracking leaves a gap after the last letter; pull it back so the word lines up. */
+      margin-right: -0.18em;
+    }
+    .lead { margin: 0; max-width: 34rem; font-size: clamp(1.0625rem, 2vw, 1.25rem); line-height: 1.5; color: var(--text-primary); }
+
+    /* Sections ----------------------------------------------------------- */
+
+    .block { display: flex; flex-direction: column; gap: 1.25rem; }
+    .block > .kicker { padding-bottom: 0.75rem; border-bottom: 1px solid var(--v-track); }
+    .intro { margin: 0; max-width: 40rem; }
+
+    .presets { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.5rem; }
+    .presets .kicker { margin-right: 0.5rem; }
+    .chip {
+      font: inherit;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--v-muted);
+      background: var(--v-well);
+      border: 1px solid var(--v-hairline);
+      border-radius: 8px;
+      padding: 0.35rem 0.75rem;
+      cursor: pointer;
+      transition: color 0.15s, background-color 0.15s;
+    }
+    .chip:focus-visible { outline: 1px solid var(--v-text); outline-offset: 2px; }
+    .chip:hover { color: var(--text-primary); background: var(--v-well-active); }
+
+    .demo { position: relative; margin: 0; }
+    .demo video {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #000;
+      border: 1px solid var(--v-hairline);
+      border-radius: 14px;
+    }
+    /* Play button over the poster: the plugin's inverted-pill look. */
+    .play {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      display: grid;
+      place-items: center;
+      width: 5rem;
+      height: 5rem;
+      padding: 0;
+      color: var(--v-panel);
+      background: var(--v-text);
+      border: 0;
+      border-radius: 50%;
+      box-shadow: 0 4px 24px rgb(0 0 0 / 0.25);
+      cursor: pointer;
+      transition: transform 0.15s ease, background-color 0.15s;
+    }
+    .play svg { width: 1.75rem; height: 1.75rem; margin-left: 0.2rem; /* optical centring of the triangle */ }
+    .play:hover { transform: scale(1.06); }
+    .play:focus-visible { outline: 1px solid var(--v-text); outline-offset: 4px; }
+    .demo[data-playing] .play { display: none; }
+
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 2.5rem 3rem; }
+    .feature { display: flex; flex-direction: column; gap: 0.6rem; }
+    .feature p { margin: 0; }
+
+    .credits { padding-top: 1.5rem; border-top: 1px solid var(--v-track); }
+    .credits p { margin: 0; font-size: 0.8125rem; color: var(--v-muted); }
+    .credits a { text-underline-offset: 0.2em; }
+  }
+</style>
