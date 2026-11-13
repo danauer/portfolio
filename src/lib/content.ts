@@ -23,6 +23,15 @@ export async function getProjects(discipline?: Discipline) {
   return projects.sort(byRecency);
 }
 
+export async function getExperiments() {
+  const items = await getCollection('experiments', (e) => isVisible(e.data.status));
+  return items.sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
+}
+
+/** Experiments link to an existing page rather than having one of their own: a site path like "/venn/" or a full URL. */
+export const experimentHref = (e: CollectionEntry<'experiments'>) =>
+  /^[a-z][a-z0-9+.-]*:/i.test(e.data.link) ? e.data.link : url(e.data.link);
+
 export async function getPhotoGroups() {
   const groups = await getCollection('photoGroups', (g) => isVisible(g.data.status));
   return groups.sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));

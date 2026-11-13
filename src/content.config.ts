@@ -42,6 +42,20 @@ const projects = defineCollection({
     }),
 });
 
+const experiments = defineCollection({
+  loader: yaml('experiments'),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      status,
+      link: z.string().min(1),
+      summary: text(),
+      cover: image().nullish(),
+      coverAlt: text(),
+      date: date(),
+    }),
+});
+
 const organizations = defineCollection({
   loader: yaml('organizations'),
   schema: ({ image }) =>
@@ -144,6 +158,7 @@ const site = defineCollection({
 
 export const collections = {
   projects,
+  experiments,
   organizations,
   positions,
   people,

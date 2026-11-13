@@ -40,7 +40,7 @@ export default config({
   ui: {
     brand: { name: 'Portfolio' },
     navigation: {
-      Work: ['projects'],
+      Work: ['projects', 'experiments'],
       Photography: ['photos', 'photoGroups'],
       Career: ['positions', 'organizations'],
       Reference: ['people', 'tags'],
@@ -119,6 +119,41 @@ export default config({
           label: 'Case study',
           options: { image: projectImageDir },
         }),
+      },
+    }),
+
+    experiments: collection({
+      label: 'Experiments',
+      slugField: 'title',
+      path: 'src/content/experiments/*',
+      format: 'yaml',
+      columns: ['title', 'status', 'date'],
+      schema: {
+        title: fields.slug({ name: { label: 'Title' } }),
+        status: fields.select({
+          label: 'Status',
+          description: 'Drafts are visible in local dev only — never on the published site.',
+          options: [
+            { label: 'Draft', value: 'draft' },
+            { label: 'Published', value: 'published' },
+          ],
+          defaultValue: 'draft',
+        }),
+        link: fields.text({
+          label: 'Link',
+          description:
+            'Where the card goes. A page already on this site, e.g. "/venn/", or a full URL. Experiments have no page of their own here.',
+          validation: { isRequired: true },
+        }),
+        summary: fields.text({ label: 'Summary', description: 'One or two sentences shown on the card.', multiline: true }),
+        cover: fields.image({
+          label: 'Cover image',
+          description: '16:9 works best.',
+          directory: 'src/assets/images/experiments',
+          publicPath: '../../assets/images/experiments/',
+        }),
+        coverAlt: fields.text({ label: 'Cover image alt text' }),
+        date: fields.date({ label: 'Date', description: 'Used for sorting (newest first) and the year shown on the card.' }),
       },
     }),
 

@@ -31,6 +31,10 @@ const options = [
 </div>
 
 <script>
+  // The theme can also change from elsewhere on a page (the Venn demo has its own switch),
+  // so keep the buttons in step with the attribute rather than only with clicks.
+  let observer: MutationObserver | undefined;
+
   // Re-run on every client-side navigation, since the sidebar is re-rendered with each page.
   document.addEventListener('astro:page-load', () => {
     const buttons = document.querySelectorAll<HTMLButtonElement>('[data-theme-option]');
@@ -38,6 +42,9 @@ const options = [
       const current = document.documentElement.dataset.theme ?? 'auto';
       buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.themeOption === current)));
     };
+    observer?.disconnect();
+    observer = new MutationObserver(sync);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     buttons.forEach((button) =>
       button.addEventListener('click', () => {
         const choice = button.dataset.themeOption!;

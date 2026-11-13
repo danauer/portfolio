@@ -5,7 +5,7 @@ import '@fontsource-variable/inter';
 import '../styles/global.css';
 import ThemeToggle from '../components/ThemeToggle.astro';
 import pixelPattern from '../assets/patterns/pixel-pattern.svg';
-import { getSettings, url } from '../lib/content';
+import { experimentHref, getExperiments, getSettings, url } from '../lib/content';
 
 interface Props {
   title?: string;
@@ -21,6 +21,7 @@ const nav = [
     links: [
       ['ux', 'UX'],
       ['visual', 'Visual'],
+      ['experiments', 'Experiments'],
       // Hidden for now: ['art', 'Art'], ['photography', 'Photography'],
     ],
   },
@@ -33,6 +34,10 @@ const nav = [
   },
 ];
 const current = Astro.url.pathname;
+// Experiments link to pages that live elsewhere on the site (e.g. /venn/), so those pages count as part of Experiments.
+const experimentPaths = (await getExperiments()).map(experimentHref).filter((href) => href.startsWith('/'));
+const isCurrent = (path: string) =>
+  current.startsWith(url(path)) || (path === 'experiments' && experimentPaths.some((p) => current.replace(/\/$/, '') === p.replace(/\/$/, '')));
 ---
 
 <html lang="en">
@@ -72,7 +77,7 @@ const current = Astro.url.pathname;
                 <div class="nav-group">
                   <span class="nav-label">{group.label}</span>
                   {group.links.map(([path, label]) => (
-                    <a href={url(path)} aria-current={current.startsWith(url(path)) ? 'page' : undefined}>
+                    <a href={url(path)} aria-current={isCurrent(path) ? 'page' : undefined}>
                       {label}
                     </a>
                   ))}
