@@ -1,0 +1,215 @@
+---
+import Base from '../../../layouts/Base.astro';
+import XboxHeader from '../../../components/games/XboxHeader.astro';
+import Tooltip from '../../../components/steam/Tooltip.astro';
+import Panel from '../../../components/steam/Panel.astro';
+import BarList from '../../../components/steam/BarList.astro';
+import SegmentedBar from '../../../components/steam/SegmentedBar.astro';
+import Columns from '../../../components/steam/Columns.astro';
+import { analyzeXbox, snapshot } from '../../../lib/xbox';
+import { date, hours, num, pct } from '../../../lib/format';
+import '../../../styles/steam.css';
+
+const a = analyzeXbox();
+const t = a.totals;
+const top1 = a.top[0];
+const top5Share = a.concentration.filter((c) => c.key === 'first' || c.key === 'next4').reduce((n, c) => n + c.minutes, 0) / (t.totalMinutes || 1);
+const peak = [...a.lastPlayedByYear].sort((x, y) => y.count - x.count)[0];
+const day = (unix: number | null) => (unix ? date(unix) : '—');
+const passShare = a.gamePass.minutes / (t.totalMinutes || 1);
+---
+
+<Base title="Xbox · Under the hood" description="Playtime and achievements from my Xbox library.">
+  <div class="steam source-xbox">
+    <XboxHeader />
+
+    <dl class="stats">
+      <div class="stat hero">
+        <dt>hours played across {num(t.played)} games</dt>
+        <dd>{num(t.totalMinutes / 60)}</dd>
+        <span class="hint">{num(t.untracked)} more game{t.untracked === 1 ? '' : 's'} in your history report no play time, so this is a floor</span>
+      </div>
+      <div class="stat">
+        <dt>Gamerscore</dt>
+        <dd>{num(t.gamerscore)}</dd>
+        <span class="hint">Across every game on the account, PC included</span>
+      </div>
+      <div class="stat">
+        <dt>Achievements</dt>
+        <dd>{num(t.achievements)}</dd>
+        <span class="hint">In the {num(t.games)} games counted here</span>
+      </div>
+      <div class="stat">
+        <dt>Perfect games</dt>
+        <dd>{num(t.perfect)}</dd>
+        <span class="hint">Every gamerscore point earned</span>
+      </div>
+    </dl>
+
+    <h2>Where the time goes</h2>
+    <p class="section-note">
+      {top1 && <>{top1.name} alone accounts for {pct(top1.share)} of tracked playtime, and the top five for {pct(top5Share)}.</>}
+      {' '}Xbox's play time is Microsoft's own approximation, and games that don't report it are left out of these hours.
+    </p>
+    <div class="panels">
+      <Panel title="Most played" note="Total hours, all time">
+        <BarList
+          rows={a.top.map((g) => ({
+            label: g.name,
+            value: g.minutes,
+            display: hours(g.minutes),
+            detail: [`${pct(g.share, 1)} of tracked playtime`, g.rating && `${g.rating.avg.toFixed(1)} / 5 in the store`].filter(Boolean).join(' · '),
+            href: g.href ?? undefined,
+            image: g.image,
+          }))}
+        />
+        <table slot="table">
+          <thead><tr><th>Game</th><th class="n">Hours</th><th class="n">Share</th><th>Last played</th></tr></thead>
+          <tbody>
+            {a.top.map((g) => (
+              <tr><td>{g.name}</td><td class="n">{num(g.minutes / 60)}</td><td class="n">{pct(g.share, 1)}</td><td>{day(g.lastPlayed)}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </Panel>
+
+      <div class="panel-stack" style="display: flex; flex-direction: column; gap: var(--gap);">
+        <Panel title="How concentrated it is" note={`Share of ${num(t.totalMinutes / 60)} hours`}>
+          <SegmentedBar label="Share of playtime" parts={a.concentration.map((c) => ({ label: c.label, value: c.minutes, display: hours(c.minutes) }))} />
+          <table slot="table">
+            <thead><tr><th>Group</th><th class="n">Hours</th><th class="n">Share</th></tr></thead>
+            <tbody>{a.concentration.map((c) => <tr><td>{c.label}</td><td class="n">{num(c.minutes / 60)}</td><td class="n">{pct(c.minutes / t.totalMinutes, 1)}</td></tr>)}</tbody>
+          </table>
+        </Panel>
+
+        {a.gamePass.games > 0 && (
+          <Panel title="Game Pass" note="Hours in games that are in the Game Pass catalog today">
+            <SegmentedBar
+              label="Playtime in Game Pass games"
+              parts={[
+                { label: 'In Game Pass', value: a.gamePass.minutes, display: hours(a.gamePass.minutes) },
+                { label: 'Not in Game Pass', value: t.totalMinutes - a.gamePass.minutes, display: hours(t.totalMinutes - a.gamePass.minutes) },
+              ].filter((p) => p.value > 0)}
+            />
+            <table slot="table">
+              <thead><tr><th>Group</th><th class="n">Hours</th><th class="n">Share</th></tr></thead>
+              <tbody>
+                <tr><td>In Game Pass ({a.gamePass.games} games)</td><td class="n">{num(a.gamePass.minutes / 60)}</td><td class="n">{pct(passShare, 1)}</td></tr>
+                <tr><td>Not in Game Pass</td><td class="n">{num((t.totalMinutes - a.gamePass.minutes) / 60)}</td><td class="n">{pct(1 - passShare, 1)}</td></tr>
+              </tbody>
+            </table>
+          </Panel>
+        )}
+
+        <Panel title="Played most recently" note="Latest session per game">
+          <ul class="game-list">
+            {a.recent.slice(0, 5).map((g) => (
+              <li>
+                {g.image ? <img src={g.image} alt="" loading="lazy" /> : <span />}
+                <span class="title">{g.name}<span class="meta-line">{hours(g.minutes)} in total</span></span>
+                <span class="figure">{day(g.lastPlayed)}</span>
+              </li>
+            ))}
+          </ul>
+        </Panel>
+      </div>
+    </div>
+
+    {a.genres.length > 0 && (
+      <>
+        <h2>What you play</h2>
+        <p class="section-note">
+          Hours by each game's main genre in the Xbox store. The store's genres are broad, so "Action &amp; adventure" covers a lot; this is the same
+          data the Game Pass picks are matched on.
+        </p>
+        <div class="panels">
+          <Panel title="Hours by genre" note="Games the store has genre data for">
+            <BarList rows={a.genres.slice(0, 8).map((g) => ({ label: g.genre, value: g.minutes, display: hours(g.minutes), detail: `${g.games} game${g.games === 1 ? '' : 's'}` }))} />
+            <table slot="table">
+              <thead><tr><th>Genre</th><th class="n">Games</th><th class="n">Hours</th></tr></thead>
+              <tbody>{a.genres.map((g) => <tr><td>{g.genre}</td><td class="n">{g.games}</td><td class="n">{num(g.minutes / 60)}</td></tr>)}</tbody>
+            </table>
+          </Panel>
+        </div>
+      </>
+    )}
+
+    <h2>Over the years</h2>
+    <p class="section-note">
+      Xbox only records when a game was last launched, not when it was first, so this shows when games went quiet.
+      {peak && <> More games were last opened in {peak.year} than in any other year ({peak.count}).</>}
+    </p>
+    <div class="panels">
+      <Panel title="Games last played per year" note="Includes games with no play time on record">
+        <Columns columns={a.lastPlayedByYear.map((y) => ({ label: String(y.year), value: y.count, display: `${y.count} game${y.count === 1 ? '' : 's'}` }))} every={Math.max(1, Math.ceil(a.lastPlayedByYear.length / 6))} />
+        <table slot="table">
+          <thead><tr><th>Year</th><th class="n">Games</th></tr></thead>
+          <tbody>{a.lastPlayedByYear.map((y) => <tr><td>{y.year}</td><td class="n">{y.count}</td></tr>)}</tbody>
+        </table>
+      </Panel>
+    </div>
+
+    <h2>Achievements</h2>
+    <p class="section-note">
+      Progress is the share of a game's gamerscore you've earned. Xbox's achievement counts are unreliable for some games, so gamerscore is the more trustworthy measure.
+    </p>
+    <div class="panels">
+      <Panel title="Completion in your most-played games">
+        <ul class="game-list">
+          {a.completion.map((g) => (
+            <li>
+              {g.image ? <img src={g.image} alt="" loading="lazy" /> : <span />}
+              <span class="title">
+                {g.name}
+                <span class="meter" data-tip-value={`${g.progress}% of gamerscore`} data-tip-label={g.name}><span style={`--w: ${g.progress}%`} /></span>
+              </span>
+              <span class="figure">{g.progress}%{g.perfect && <small>Perfect</small>}</span>
+            </li>
+          ))}
+        </ul>
+      </Panel>
+
+      {a.closest.length > 0 && (
+        <Panel title="Closest to perfect" note="Games with gamerscore left to earn">
+          <ul class="game-list">
+            {a.closest.map((g) => (
+              <li>
+                {g.image ? <img src={g.image} alt="" loading="lazy" /> : <span />}
+                <span class="title">
+                  {g.name}
+                  <span class="meter" data-tip-value={`${g.progress}% of gamerscore`} data-tip-label={g.name}><span style={`--w: ${g.progress}%`} /></span>
+                </span>
+                <span class="figure">{g.progress}%<small>{num(g.totalGamerscore - g.gamerscore)} to go</small></span>
+              </li>
+            ))}
+          </ul>
+        </Panel>
+      )}
+
+      {a.perfect.length > 0 && (
+        <Panel title="Perfect games" note="Most recently played first">
+          <ul class="game-list">
+            {a.perfect.map((g) => (
+              <li>
+                {g.image ? <img src={g.image} alt="" loading="lazy" /> : <span />}
+                <span class="title">{g.name}<span class="meta-line">{num(g.totalGamerscore)} gamerscore</span></span>
+                <span class="figure">{day(g.lastPlayed)}</span>
+              </li>
+            ))}
+          </ul>
+        </Panel>
+      )}
+    </div>
+
+    <p class="source">
+      Data from Xbox Live via OpenXBL, captured {date(new Date(snapshot.generatedAt).getTime() / 1000)}. Play time is Xbox's own approximate MinutesPlayed stat, and
+      {' '}{num(t.untracked)} of the {num(t.games)} games counted here report none. {num(t.excluded)} PC-only titles, betas and launchers in the history are left out; Steam already covers the PC games.
+      Genres, ratings and prices come from Microsoft's public store catalog.
+    </p>
+  </div>
+  <Tooltip />
+</Base>
+
+<style>
+  .source { margin-top: 3.5rem; font-size: 0.8rem; color: var(--text-tertiary); max-width: 42rem; }
+</style>

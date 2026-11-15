@@ -1,0 +1,193 @@
+---
+import Base from '../../../layouts/Base.astro';
+import HoodNav from '../../../components/games/HoodNav.astro';
+import Tooltip from '../../../components/steam/Tooltip.astro';
+import Panel from '../../../components/steam/Panel.astro';
+import BarList from '../../../components/steam/BarList.astro';
+import SegmentedBar from '../../../components/steam/SegmentedBar.astro';
+import Columns from '../../../components/steam/Columns.astro';
+import { analyzeAll, sourceLabel, sources } from '../../../lib/games';
+import { snapshot as steamSnapshot } from '../../../lib/steam';
+import { snapshot as psnSnapshot } from '../../../lib/psn';
+import { snapshot as xboxSnapshot } from '../../../lib/xbox';
+import { date, hours, num, pct } from '../../../lib/format';
+import { url } from '../../../lib/content';
+import '../../../styles/steam.css';
+
+const a = analyzeAll();
+const t = a.totals;
+const top1 = a.top[0];
+const sinceYear = t.since ? new Date(t.since * 1000).getUTCFullYear() : null;
+const latestSync = Math.max(...[steamSnapshot, psnSnapshot, xboxSnapshot].map((s) => new Date(s.generatedAt).getTime())) / 1000;
+const steamGamesPlayed = a.steam.totals.played;
+const psnGamesPlayed = a.psn.totals.played;
+const xboxGamesPlayed = a.xbox.totals.played;
+const lastYearsPeak = [...a.lastPlayedByYear].sort((x, y) => y.count - x.count)[0];
+const day = (unix: number | null) => (unix ? date(unix) : '—');
+const multiBlurb = `${t.multi} game${t.multi === 1 ? '' : 's'} on more than one platform ${t.multi === 1 ? 'is' : 'are'} counted once.`;
+---
+
+<Base title="Under the hood · Games" description="Playtime, trophies and library stats across my Steam, PlayStation and Xbox libraries.">
+  <div class="games">
+    <div class="steam-head">
+      <HoodNav current="all" />
+      <div class="who">
+        <div>
+          <h1>Under the hood</h1>
+          <p class="sub">
+            {['Everything behind the recommendations, Steam, PlayStation and Xbox together', sinceYear && `Playing since ${sinceYear}`, `Updated ${date(latestSync)}`].filter(Boolean).join(' · ')}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <dl class="stats">
+      <div class="stat hero">
+        <dt>hours played across {num(t.played)} games</dt>
+        <dd>{num(t.totalMinutes / 60)}</dd>
+        <span class="hint">{num(t.steamMinutes / 60)} h on Steam, {num(t.psnMinutes / 60)} h on PlayStation and {num(t.xboxMinutes / 60)} h on Xbox. {t.multi > 0 && multiBlurb}</span>
+      </div>
+      <div class="stat">
+        <dt>Games owned</dt>
+        <dd>{num(t.games)}</dd>
+        <span class="hint">{num(a.steam.totals.games)} on Steam, {num(a.psn.totals.games)} on PlayStation, {num(a.xbox.totals.games)} on Xbox</span>
+      </div>
+      <div class="stat">
+        <dt>Achievements and trophies</dt>
+        <dd>{num(t.achievements)}</dd>
+        <span class="hint">{[t.steamAchievements && `${num(a.steam.totals.achUnlocked)} Steam`, `${num(a.psn.trophies.total)} PlayStation`, `${num(a.xbox.totals.achievements)} Xbox`].filter(Boolean).join(', ')}</span>
+      </div>
+      <div class="stat">
+        <dt>Perfect games and platinums</dt>
+        <dd>{num(t.perfect)}</dd>
+        <span class="hint">{[t.steamAchievements && `${num(a.steam.totals.perfect.length)} Steam`, `${num(a.psn.trophies.earned.platinum)} PlayStation`, `${num(a.xbox.totals.perfect)} Xbox`].filter(Boolean).join(', ')}</span>
+      </div>
+    </dl>
+
+    <div class="platform-cards">
+      <a class="platform-card" href={url('games/under-the-hood/steam')}>
+        {steamSnapshot.profile.avatar ? <img class="avatar" src={steamSnapshot.profile.avatar} alt="" width="48" height="48" /> : <span class="avatar" aria-hidden="true" />}
+        <div>
+          <strong>Steam</strong>
+          <span>{num(steamGamesPlayed)} games played · {num(a.steam.totals.totalMinutes / 60)} h</span>
+        </div>
+        <span class="go" aria-hidden="true">→</span>
+      </a>
+      <a class="platform-card" href={url('games/under-the-hood/psn')}>
+        {psnSnapshot.profile.avatar ? <img class="avatar" src={psnSnapshot.profile.avatar} alt="" width="48" height="48" /> : <span class="avatar" aria-hidden="true" />}
+        <div>
+          <strong>PlayStation</strong>
+          <span>{num(psnGamesPlayed)} games played · {num(a.psn.totals.totalMinutes / 60)} h</span>
+        </div>
+        <span class="go" aria-hidden="true">→</span>
+      </a>
+      <a class="platform-card" href={url('games/under-the-hood/xbox')}>
+        {xboxSnapshot.profile.avatar ? <img class="avatar" src={xboxSnapshot.profile.avatar} alt="" width="48" height="48" /> : <span class="avatar" aria-hidden="true" />}
+        <div>
+          <strong>Xbox</strong>
+          <span>{num(xboxGamesPlayed)} games played · {num(a.xbox.totals.totalMinutes / 60)} h</span>
+        </div>
+        <span class="go" aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <h2>Where the time goes</h2>
+    <p class="section-note">
+      {top1 && <>{top1.name} alone accounts for {pct(top1.share)} of all playtime, and the top five for {pct(a.top5Share)}.</>}
+    </p>
+    <div class="panels">
+      <Panel title="Most played" note="Total hours across all platforms">
+        <ul class="legend">
+          <li><span class="swatch" data-slot="steam" />Steam</li>
+          <li><span class="swatch" data-slot="psn" />PlayStation</li>
+          <li><span class="swatch" data-slot="xbox" />Xbox</li>
+        </ul>
+        <BarList
+          rows={a.top.map((g) => ({
+            label: g.name,
+            value: g.minutes,
+            display: hours(g.minutes),
+            detail: [g.steam && g.steam.minutes > 0 && `Steam ${hours(g.steam.minutes)}`, g.psn && g.psn.minutes > 0 && `PlayStation ${hours(g.psn.minutes)}`, g.xbox && g.xbox.minutes > 0 && `Xbox ${hours(g.xbox.minutes)}`].filter(Boolean).join(' · '),
+            href: g.href || undefined,
+            image: g.image,
+            parts: [
+              { value: g.steam?.minutes ?? 0, slot: 'steam' },
+              { value: g.psn?.minutes ?? 0, slot: 'psn' },
+              { value: g.xbox?.minutes ?? 0, slot: 'xbox' },
+            ],
+          }))}
+        />
+        <table slot="table">
+          <thead><tr><th>Game</th><th class="n">Steam</th><th class="n">PlayStation</th><th class="n">Xbox</th><th class="n">Total</th><th>Last played</th></tr></thead>
+          <tbody>
+            {a.top.map((g) => (
+              <tr><td>{g.name}</td><td class="n">{g.steam ? num(g.steam.minutes / 60) : '—'}</td><td class="n">{g.psn ? num(g.psn.minutes / 60) : '—'}</td><td class="n">{g.xbox?.minutes ? num(g.xbox.minutes / 60) : '—'}</td><td class="n">{num(g.minutes / 60)}</td><td>{day(g.lastPlayed)}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </Panel>
+
+      <div class="panel-stack" style="display: flex; flex-direction: column; gap: var(--gap);">
+        <Panel title="By platform" note={`Share of ${num(t.totalMinutes / 60)} hours`}>
+          <SegmentedBar label="Playtime by platform" parts={a.platforms.map((p) => ({ label: p.label, value: p.minutes, display: hours(p.minutes), slot: p.key }))} />
+          <table slot="table">
+            <thead><tr><th>Platform</th><th class="n">Hours</th><th class="n">Share</th></tr></thead>
+            <tbody>{a.platforms.map((p) => <tr><td>{p.label}</td><td class="n">{num(p.minutes / 60)}</td><td class="n">{pct(p.minutes / t.totalMinutes, 1)}</td></tr>)}</tbody>
+          </table>
+        </Panel>
+
+        <Panel title="Played most recently" note="Latest session per game, any platform">
+          <ul class="game-list">
+            {a.recent.slice(0, 6).map((g) => (
+              <li>
+                {g.image ? <img src={g.image} alt="" loading="lazy" /> : <span />}
+                <span class="title">{g.name}<span class="meta-line">{g.lastSource ? sourceLabel[g.lastSource] : ''} · {hours(g.minutes)} in total</span></span>
+                <span class="figure">{day(g.lastPlayed)}</span>
+              </li>
+            ))}
+          </ul>
+        </Panel>
+      </div>
+    </div>
+
+    <h2>Over the years</h2>
+    <p class="section-note">
+      When each game was last played, across all three libraries.
+      {lastYearsPeak && <> More games were last opened in {lastYearsPeak.year} than in any other year ({lastYearsPeak.count}).</>}
+    </p>
+    <div class="panels">
+      <Panel title="Games last played per year">
+        <Columns columns={a.lastPlayedByYear.map((y) => ({ label: String(y.year), value: y.count, display: `${y.count} game${y.count === 1 ? '' : 's'}` }))} every={Math.max(1, Math.ceil(a.lastPlayedByYear.length / 6))} />
+        <table slot="table">
+          <thead><tr><th>Year</th><th class="n">Games</th></tr></thead>
+          <tbody>{a.lastPlayedByYear.map((y) => <tr><td>{y.year}</td><td class="n">{y.count}</td></tr>)}</tbody>
+        </table>
+      </Panel>
+
+      {a.multi.length > 0 && (
+        <Panel title="On more than one platform" note="Games you own in more than one library, and where you actually played them">
+          <ul class="game-list">
+            {a.multi.map((g) => (
+              <li>
+                {g.image ? <img src={g.image} alt="" loading="lazy" /> : <span />}
+                <span class="title">{g.name}<span class="meta-line">{sources.filter((k) => g[k]).map((k) => `${sourceLabel[k]} ${hours(g[k]!.minutes)}`).join(' · ')}</span></span>
+                <span class="figure">{hours(g.minutes)}</span>
+              </li>
+            ))}
+          </ul>
+        </Panel>
+      )}
+    </div>
+
+    <p class="source">
+      Steam data from the Steam Web API; PlayStation data from unofficial PSN endpoints; Xbox data from OpenXBL. Games are matched across platforms by title, so a
+      renamed remaster can show up twice. Xbox play time is Microsoft's own approximate figure and {num(a.xbox.totals.untracked)} of the {num(a.xbox.totals.games)} Xbox games report none, so Xbox hours are
+      a floor. PC-only titles in the Xbox history are left out, since Steam already has those. Steam captured {date(new Date(steamSnapshot.generatedAt).getTime() / 1000)}, PlayStation {date(new Date(psnSnapshot.generatedAt).getTime() / 1000)}, Xbox {date(new Date(xboxSnapshot.generatedAt).getTime() / 1000)}.
+    </p>
+  </div>
+  <Tooltip />
+</Base>
+
+<style>
+  .source { margin-top: 3.5rem; font-size: 0.8rem; color: var(--text-tertiary); max-width: 42rem; }
+</style>

@@ -1,0 +1,33 @@
+---
+// Year × month grid on a single-hue sequential ramp (5 steps, plus empty).
+interface Props {
+  rows: { year: number; months: number[] }[];
+  max: number;
+  unit: string;
+}
+const { rows, max, unit } = Astro.props;
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+// Square-root scale so one huge month doesn't wash every other month out.
+const step = (v: number) => (v === 0 ? 0 : Math.min(5, Math.max(1, Math.ceil(5 * Math.sqrt(v / (max || 1))))));
+const bounds = [1, 2, 3, 4, 5].map((s) => Math.ceil(max * (s / 5) ** 2));
+---
+
+<div class="heatmap">
+  <span />
+  {months.map((m) => <span class="hm-month" aria-hidden="true">{m.slice(0, 1)}</span>)}
+  {
+    rows.map((r) => (
+      <>
+        <span class="hm-year">{r.year}</span>
+        {r.months.map((v, m) => (
+          <span class="hm-cell" data-step={step(v)} data-tip-value={`${v} ${unit}`} data-tip-label={`${months[m]} ${r.year}`} />
+        ))}
+      </>
+    ))
+  }
+</div>
+<div class="hm-scale" aria-hidden="true">
+  <span>Fewer</span>
+  {[0, 1, 2, 3, 4, 5].map((s) => <span class="hm-cell" data-step={s} />)}
+  <span>More (up to {bounds[4]} {unit} a month)</span>
+</div>

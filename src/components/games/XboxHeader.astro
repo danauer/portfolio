@@ -1,0 +1,22 @@
+---
+import HoodNav from './HoodNav.astro';
+import { snapshot } from '../../lib/xbox';
+import { date, num } from '../../lib/format';
+
+const { profile, generatedAt } = snapshot;
+---
+
+<div class="steam-head">
+  <HoodNav current="xbox" />
+  <div class="who">
+    {profile.avatar ? <img class="avatar" src={profile.avatar} alt="" width="64" height="64" /> : <span class="avatar" aria-hidden="true" />}
+    <div>
+      <h1>
+        {profile.gamertag ? <a href={`https://www.xbox.com/play/user/${encodeURIComponent(profile.gamertag)}`} rel="noopener">{profile.gamertag}</a> : 'Me'} on Xbox
+      </h1>
+      <p class="sub">
+        {[`${num(profile.gamerscore)} gamerscore`, `Updated ${date(new Date(generatedAt).getTime() / 1000)}`].join(' · ')}
+      </p>
+    </div>
+  </div>
+</div>

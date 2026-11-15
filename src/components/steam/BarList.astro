@@ -1,0 +1,41 @@
+---
+// Ranked horizontal bars, one series. Value sits at the bar's tip.
+export interface BarRow {
+  label: string;
+  value: number;
+  display: string;
+  detail?: string;
+  href?: string;
+  image?: string | null;
+  /** Splits the bar into colored segments (slot = palette step) that add up to `value`. */
+  parts?: { value: number; slot: number | string }[];
+}
+interface Props {
+  rows: BarRow[];
+  max?: number;
+}
+const { rows, max = Math.max(...rows.map((r) => r.value), 1) } = Astro.props;
+---
+
+<ol class="bar-list">
+  {
+    rows.map((r) => (
+      <li>
+        <span class="bar-label">
+          {r.image && <img src={r.image} alt="" width="46" height="17" loading="lazy" />}
+          {r.href ? <a href={r.href}>{r.label}</a> : r.label}
+        </span>
+        <span class="bar-track" data-tip-value={r.display} data-tip-label={r.detail ? `${r.label} · ${r.detail}` : r.label}>
+          {r.parts ? (
+            <span class="bar stacked" style={`--w: ${(100 * r.value) / max}%`}>
+              {r.parts.filter((p) => p.value > 0).map((p) => <span data-slot={p.slot} style={`flex-grow: ${p.value}`} />)}
+            </span>
+          ) : (
+            <span class="bar" style={`--w: ${(100 * r.value) / max}%`} />
+          )}
+          <span class="bar-value">{r.display}</span>
+        </span>
+      </li>
+    ))
+  }
+</ol>

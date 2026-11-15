@@ -1,0 +1,46 @@
+<div class="viz-tooltip" role="tooltip" hidden>
+  <strong></strong>
+  <span></span>
+</div>
+
+<script>
+  // One shared tooltip for every mark that carries data-tip-value / data-tip-label.
+  // Text goes in via textContent: names come from the Steam API.
+  document.addEventListener('astro:page-load', () => {
+    const tip = document.querySelector<HTMLElement>('.viz-tooltip');
+    if (!tip) return;
+    const [value, label] = [tip.querySelector('strong')!, tip.querySelector('span')!];
+    let active: HTMLElement | null = null;
+
+    const show = (el: HTMLElement, x: number, y: number) => {
+      if (active && active !== el) active.removeAttribute('data-hover');
+      active = el;
+      el.setAttribute('data-hover', '');
+      value.textContent = el.dataset.tipValue ?? '';
+      label.textContent = el.dataset.tipLabel ?? '';
+      tip.hidden = false;
+      const { width, height } = tip.getBoundingClientRect();
+      const left = Math.min(window.innerWidth - width - 8, Math.max(8, x - width / 2));
+      const top = y - height - 12 < 8 ? y + 16 : y - height - 12;
+      tip.style.transform = `translate(${left}px, ${top}px)`;
+    };
+    const hide = () => {
+      active?.removeAttribute('data-hover');
+      active = null;
+      tip.hidden = true;
+    };
+
+    document.addEventListener('pointermove', (e) => {
+      const el = (e.target as Element).closest<HTMLElement>('[data-tip-value]');
+      if (el) show(el, e.clientX, e.clientY);
+      else if (active) hide();
+    });
+    document.addEventListener('focusin', (e) => {
+      const el = (e.target as Element).closest<HTMLElement>('[data-tip-value]');
+      if (!el) return hide();
+      const r = el.getBoundingClientRect();
+      show(el, r.left + r.width / 2, r.top);
+    });
+    document.addEventListener('scroll', hide, { passive: true });
+  });
+</script>

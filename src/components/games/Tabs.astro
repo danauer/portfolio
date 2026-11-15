@@ -1,0 +1,90 @@
+---
+// Tabs for the /games page: one tab per platform (plus "All"), one named slot per tab key.
+// Every panel is rendered into the page; the script only toggles which one is visible, so
+// without JavaScript all of them show one after another.
+import { num } from '../../lib/format';
+
+interface Props {
+  /** Unique on the page; prefixes the element ids. */
+  id: string;
+  /** Names the tab list for screen readers. */
+  label: string;
+  tabs: { key: string; label: string; count?: number; /** Platform color dot: steam | psn | xbox. */ source?: string }[];
+}
+const { id, label, tabs } = Astro.props;
+const panels = await Promise.all(tabs.map(async (t) => [t.key, await Astro.slots.render(t.key)] as const));
+---
+
+<div class="tab-set" data-tabs>
+  <div class="tab-list" role="tablist" aria-label={label}>
+    {
+      tabs.map((t, i) => (
+        <button
+          type="button"
+          role="tab"
+          id={`${id}-tab-${t.key}`}
+          aria-controls={`${id}-panel-${t.key}`}
+          aria-selected={i === 0 ? 'true' : 'false'}
+          tabindex={i === 0 ? 0 : -1}
+        >
+          {t.source && <span class="swatch dot" data-slot={t.source} aria-hidden="true" />}
+          {t.label}
+          {t.count != null && <span class="count">{num(t.count)}</span>}
+        </button>
+      ))
+    }
+  </div>
+  {
+    panels.map(([key, html], i) => (
+      <div class="tab-panel" role="tabpanel" id={`${id}-panel-${key}`} aria-labelledby={`${id}-tab-${key}`} hidden={i !== 0} set:html={html} />
+    ))
+  }
+</div>
+<noscript><style>[data-tabs] [role='tabpanel'][hidden] { display: block; }</style></noscript>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((root) => {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>(':scope > [role="tablist"] > [role="tab"]')];
+    const panels = [...root.querySelectorAll<HTMLElement>(':scope > [role="tabpanel"]')];
+    const select = (index: number, focus = false) => {
+      tabs.forEach((tab, i) => {
+        tab.setAttribute('aria-selected', String(i === index));
+        tab.tabIndex = i === index ? 0 : -1;
+        panels[i].hidden = i !== index;
+      });
+      if (focus) tabs[index].focus();
+    };
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => select(i));
+      tab.addEventListener('keydown', (e) => {
+        const next = { ArrowRight: (i + 1) % tabs.length, ArrowLeft: (i - 1 + tabs.length) % tabs.length, Home: 0, End: tabs.length - 1 }[e.key];
+        if (next == null) return;
+        e.preventDefault();
+        select(next, true);
+      });
+    });
+  });
+</script>
+
+<style>
+  .tab-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 0.5rem; }
+  .tab-list button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: none;
+    font: inherit;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+  }
+  .tab-list button:hover { border-color: color-mix(in srgb, var(--pill) 50%, transparent); color: var(--text-primary); }
+  .tab-list button[aria-selected='true'] { color: var(--text-primary); border-color: var(--pill); background: color-mix(in srgb, var(--pill) 10%, transparent); }
+  .tab-list button:focus-visible { outline: 2px solid var(--pill); outline-offset: 2px; }
+  .count { font-size: 0.75rem; color: var(--text-tertiary); }
+  /* The tab list already sits above the first group, so it doesn't need its own top margin. */
+  .tab-panel :global(.group:first-child) { margin-top: 1rem; }
+</style>

@@ -1,0 +1,24 @@
+---
+// "Under the hood" tabs: the combined view and each platform, plus the way back to the recommendations.
+import { url } from '../../lib/content';
+
+interface Props {
+  current: 'all' | 'steam' | 'psn' | 'xbox';
+}
+const { current } = Astro.props;
+const tabs = [
+  ['all', 'games/under-the-hood', 'All'],
+  ['steam', 'games/under-the-hood/steam', 'Steam'],
+  ['psn', 'games/under-the-hood/psn', 'PlayStation'],
+  ['xbox', 'games/under-the-hood/xbox', 'Xbox'],
+] as const;
+---
+
+<div class="hood-nav">
+  <a class="back" href={url('games')}>← What to play</a>
+  <nav class="platform-nav" aria-label="Under the hood">
+    {tabs.map(([key, path, label]) => (
+      <a href={url(path)} aria-current={key === current ? 'page' : undefined}>{label}</a>
+    ))}
+  </nav>
+</div>

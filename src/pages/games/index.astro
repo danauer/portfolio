@@ -1,0 +1,213 @@
+---
+import Base from '../../layouts/Base.astro';
+import Panel from '../../components/steam/Panel.astro';
+import PickGrid from '../../components/games/PickGrid.astro';
+import Tabs from '../../components/games/Tabs.astro';
+import { backlog, newGames, withBanners } from '../../lib/recs';
+import { analyze, capsule, snapshot as steamSnapshot, storeUrl } from '../../lib/steam';
+import { snapshot as psnSnapshot, store as psnStore } from '../../lib/psn';
+import { snapshot as xboxSnapshot, store as xboxStore } from '../../lib/xbox';
+import { compact, date, hours, money, num, pct } from '../../lib/format';
+import { url } from '../../lib/content';
+import '../../styles/steam.css';
+
+const owned = backlog();
+const hero = await withBanners(owned.hero);
+const fresh = newGames();
+const steam = analyze();
+const { picks } = steamSnapshot;
+const steamMax = Math.max(...picks.profileTags.map((t) => t.weight), 1);
+const psnMax = Math.max(...psnStore.profile.map((t) => t.weight), 1);
+const xboxMax = Math.max(...xboxStore.profile.map((t) => t.weight), 1);
+const latestSync = Math.max(...[steamSnapshot.generatedAt, psnSnapshot.generatedAt, psnStore.generatedAt, xboxSnapshot.generatedAt, xboxStore.generatedAt].map((d) => new Date(d).getTime())) / 1000;
+---
+
+<Base title="What to play" description="Games I already own and haven't played, plus what's worth buying next on Steam and PlayStation, and what to try on Xbox Game Pass.">
+  <div class="games">
+    <div class="steam-head">
+      <div class="who">
+        <div>
+          <h1>What to play</h1>
+          <p class="sub">Steam, PlayStation and Xbox · Updated {date(latestSync)} · <a href={url('games/under-the-hood')}>Under the hood →</a></p>
+        </div>
+      </div>
+      <nav class="group-nav" aria-label="On this page">
+        <a href="#start">Start here</a>
+        <a href="#library">Never played</a>
+        <a href="#resume">Pick up where you left off</a>
+        <a href="#new">New games</a>
+        <a href="#value">Value</a>
+      </nav>
+    </div>
+
+    <section id="start">
+      <h2>Start with one of these</h2>
+      <p class="section-note">
+        Three games you own and haven't put any time into, from whichever platform ranks best for you right now. Anything you've launched on Steam, PlayStation or Xbox is left out.
+      </p>
+      <PickGrid variant="feature" groups={[{ id: 'start-picks', title: '', blurb: '', items: hero }]} matchHint="How closely it matches what you play. Compared within its own platform." />
+    </section>
+
+    <section id="library">
+      <h2>More you've never played</h2>
+      <p class="section-note">
+        {num(owned.counts.total)} games you own have never been launched: {num(owned.counts.steam)} on Steam and {num(owned.counts.psn)} on PlayStation. Xbox doesn't list games you own but haven't opened,
+        so it isn't here. A game owned on more than one platform counts once.
+      </p>
+      <Tabs id="library-tabs" label="Unplayed games by platform" tabs={owned.tabs.map((t) => ({ key: t.key, label: t.label, count: t.count, source: t.key === 'all' ? undefined : t.key }))}>
+        {owned.tabs.map((t) => (
+          <Fragment slot={t.key}>
+            <PickGrid groups={t.groups} matchHint="How closely it matches what you play. Compared within its own platform." />
+          </Fragment>
+        ))}
+      </Tabs>
+    </section>
+
+    <section id="resume">
+      <h2>Pick up where you left off</h2>
+      <p class="section-note">
+        {num(owned.resume.counts.total)} games you own have between a minute and five hours on the clock, counting every platform together: {num(owned.resume.counts.steam)} on Steam,{' '}
+        {num(owned.resume.counts.psn)} on PlayStation and {num(owned.resume.counts.xbox)} on Xbox. Past five hours a game counts as played and isn't suggested.
+      </p>
+      <Tabs id="resume-tabs" label="Started games by platform" tabs={owned.resume.tabs.map((t) => ({ key: t.key, label: t.label, count: t.count, source: t.key === 'all' ? undefined : t.key }))}>
+        {owned.resume.tabs.map((t) => (
+          <Fragment slot={t.key}>
+            <PickGrid groups={t.groups} matchHint="How closely it matches what you play. Compared within its own platform." />
+          </Fragment>
+        ))}
+      </Tabs>
+    </section>
+
+    <section id="new">
+      <h2>New games</h2>
+      <p class="section-note">
+        Games you don't own that fit what you play. Each store is matched on its own data, so the quality of the match differs: Steam has user tags and reviews, PlayStation has genres and sales rank,
+        and Xbox has broad genres and user ratings, limited to Game Pass.
+      </p>
+      <Tabs
+        id="new-tabs"
+        label="New games by store"
+        tabs={[
+          { key: 'all', label: 'All' },
+          { key: 'steam', label: 'Steam', source: 'steam' },
+          { key: 'psn', label: 'PlayStation', source: 'psn' },
+          { key: 'xbox', label: 'Xbox Game Pass', source: 'xbox' },
+        ]}
+      >
+        <Fragment slot="all">
+          <PickGrid groups={fresh.all} matchHint="How closely it matches your play history. Compared within its own store." />
+        </Fragment>
+        <Fragment slot="steam">
+          <p class="section-note">
+            Popular Steam games you don't own. Built from the Steam user tags of every game you've played for at least an hour, weighted by playtime and discounted
+            for tags that are everywhere (so “Singleplayer” counts for less than “Roguelike Deckbuilder”). {num(picks.candidates)} games were scored, then blended with review confidence and popularity.
+          </p>
+          <ul class="taste-tags" aria-label="Your strongest Steam tags">
+            {picks.profileTags.map((t) => <li style={`--w: ${(100 * t.weight) / steamMax}%`}><span>{t.tag}</span></li>)}
+          </ul>
+          <PickGrid groups={fresh.steam} matchHint="How closely its tags match your play history" />
+        </Fragment>
+        <Fragment slot="psn">
+          <p class="section-note">
+            Best-selling PlayStation Store games you don't own. The store has no review scores or user tags, so these are matched on genre alone: the genres of the games you've
+            played, weighted by hours, against {num(psnStore.candidates)} full games in the store's current best sellers, then ranked by how well they sell. Expect a coarser fit than Steam's.
+          </p>
+          <ul class="taste-tags" aria-label="Your strongest PlayStation genres">
+            {psnStore.profile.map((t) => <li style={`--w: ${(100 * t.weight) / psnMax}%`} data-source="psn"><span>{t.genre}</span></li>)}
+          </ul>
+          <PickGrid groups={fresh.psn} matchHint="How closely its genres match your play history" />
+        </Fragment>
+        <Fragment slot="xbox">
+          <p class="section-note">
+            Game Pass games you haven't played, from the {num(xboxStore.catalog)}-game console catalog. Microsoft no longer publishes best-seller or sale lists, so Game Pass is the only
+            pool, and these only make sense while you're subscribed. The store's genres are broad (about 15), so matching is coarse, like PlayStation's; the store's user ratings
+            break ties. {num(xboxStore.candidates)} games were scored.
+          </p>
+          <ul class="taste-tags" aria-label="Your strongest Xbox genres">
+            {xboxStore.profile.map((t) => <li style={`--w: ${(100 * t.weight) / xboxMax}%`} data-source="xbox"><span>{t.genre}</span></li>)}
+          </ul>
+          <PickGrid groups={fresh.xbox} matchHint="How closely its genres match your Xbox play history" />
+        </Fragment>
+      </Tabs>
+    </section>
+
+    <section id="value">
+      <h2>Value</h2>
+      <p class="section-note">Steam only: PlayStation purchase prices aren't available. Priced at today's full US list price, not what was actually paid, so treat these as rough.</p>
+      <div class="panels">
+        <Panel title="Best value per hour" note="Paid games with at least 2 hours">
+          <ul class="game-list">
+            {steam.bestValue.map((g) => (
+              <li>
+                <img src={capsule(g.appid)} alt="" loading="lazy" />
+                <span class="title"><a href={storeUrl(g.appid)}>{g.name}</a><span class="meta-line">{money(g.priceCents, 2)} · {hours(g.minutes)}</span></span>
+                <span class="figure">{money(g.perHour, 2)}<small>per hour</small></span>
+              </li>
+            ))}
+          </ul>
+        </Panel>
+        <Panel title="Unplayed gems already in your library" note="Barely touched, ranked by Steam review confidence">
+          <ul class="game-list">
+            {steam.backlogGems.map((g) => (
+              <li>
+                <img src={capsule(g.appid)} alt="" loading="lazy" />
+                <span class="title"><a href={storeUrl(g.appid)}>{g.name}</a><span class="meta-line">{g.minutes ? `${hours(g.minutes)} played` : 'Never launched'} · {compact(g.reviews!.positive + g.reviews!.negative)} reviews</span></span>
+                <span class="figure">{pct(g.reviewPct)}<small>positive</small></span>
+              </li>
+            ))}
+          </ul>
+        </Panel>
+        {steam.untouched.length > 0 && (
+          <Panel title="Priciest untouched" note="Paid games with under 30 minutes played">
+            <ul class="game-list">
+              {steam.untouched.map((g) => (
+                <li>
+                  <img src={capsule(g.appid)} alt="" loading="lazy" />
+                  <span class="title"><a href={storeUrl(g.appid)}>{g.name}</a><span class="meta-line">{g.minutes ? hours(g.minutes) : 'Never launched'}</span></span>
+                  <span class="figure">{money(g.priceCents, 2)}</span>
+                </li>
+              ))}
+            </ul>
+          </Panel>
+        )}
+      </div>
+    </section>
+
+    <p class="source">
+      Steam data from the Steam Web API, the Steam store and SteamSpy. PlayStation data from unofficial PSN endpoints and the public PlayStation Store. Xbox play history from OpenXBL; Xbox genres, ratings and prices from Microsoft's public store catalog. Prices are US store prices at capture time
+      (Steam {date(new Date(steamSnapshot.generatedAt).getTime() / 1000)}, PlayStation {date(new Date(psnStore.generatedAt).getTime() / 1000)}, Xbox {date(new Date(xboxStore.generatedAt).getTime() / 1000)}). PS Plus claims are only playable while subscribed.
+    </p>
+  </div>
+</Base>
+
+<style>
+  .group-nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; font-size: 0.9rem; }
+  .group-nav a { text-decoration: none; color: var(--text-secondary); }
+  .group-nav a:hover { color: var(--text-primary); text-decoration: underline; text-underline-offset: 0.2em; }
+  .sub a { color: var(--text-secondary); }
+  section { scroll-margin-top: 1.5rem; }
+  .taste-tags { list-style: none; margin: 0 0 0.5rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  /* Each chip carries a short meter showing the tag's weight in the profile. */
+  .taste-tags li {
+    position: relative;
+    padding: 0.35rem 0.75rem 0.5rem;
+    border-radius: 0.375rem;
+    background: var(--panel);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    overflow: hidden;
+  }
+  .taste-tags li::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: var(--w);
+    background: var(--brand-steam);
+    border-radius: 0 3px 3px 0;
+  }
+  .taste-tags li[data-source='psn']::after { background: var(--brand-psn); }
+  .taste-tags li[data-source='xbox']::after { background: var(--brand-xbox); }
+  .source { margin-top: 3.5rem; font-size: 0.8rem; color: var(--text-tertiary); max-width: 42rem; }
+</style>
