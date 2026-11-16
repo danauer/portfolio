@@ -114,6 +114,22 @@ const lastPlayedPeak = [...a.lastPlayedYears].sort((x, y) => y[1] - x[1])[0];
       </div>
     </div>
 
+    <h2>Value</h2>
+    <p class="section-note">Priced at today's full US list price, not what was actually paid, so treat these as rough.</p>
+    <div class="panels" style="grid-template-columns: minmax(0, 32rem);">
+      <Panel title="Best value per hour" note="Paid games with at least 2 hours">
+        <ul class="game-list">
+          {a.bestValue.map((g) => (
+            <li>
+              <img src={g.header || capsule(g.appid)} alt="" loading="lazy" />
+              <span class="title"><a href={storeUrl(g.appid)}>{g.name}</a><span class="meta-line">{money(g.priceCents, 2)} · {hours(g.minutes)}</span></span>
+              <span class="figure">{money(g.perHour, 2)}<small>per hour</small></span>
+            </li>
+          ))}
+        </ul>
+      </Panel>
+    </div>
+
     <h2>Taste</h2>
     <p class="section-note">
       Steam user tags across the library, comparing what you own with what you actually play.{' '}

@@ -3,5 +3,5 @@ status: published
 link: /games/
 summary: Game recommendations built from my Steam, PlayStation and Xbox libraries. What to play from what I already own, where to pick back up, and what's worth getting next.
 cover: ../../assets/images/experiments/games/cover.jpg
-coverAlt: Three compact game recommendations, for Raft, Portal Knights and Killing Floor. Each shows a match score, the platform, and the games I've played that it resembles with my hours in them. Below them, the start of a row of more suggestions.
+coverAlt: Three game recommendation cards, for Raft, Portal Knights and Killing Floor. Each has the game's artwork with a match score and platform, then the games I've played that it resembles, with my hours in them.
 date: 2026-11-15

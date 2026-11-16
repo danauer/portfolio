@@ -3,7 +3,7 @@
 // picks; the pills in the corner show which platform(s) a game is on. Three layouts:
 //  - "grid": the usual card grid
 //  - "carousel": the same cards in a swipeable row, four across. The arrows live in CarouselSection, next to its title.
-//  - "feature": compact horizontal rows for the few picks that lead the page
+//  - "feature": three larger cards in a row for the few picks that lead the page, each saying which games you've played it's like
 import type { CardGroup } from '../../lib/recs';
 import { hours } from '../../lib/format';
 
@@ -40,27 +40,31 @@ const sourceLabel = { steam: 'Steam', psn: 'PlayStation', xbox: 'Xbox' } as cons
                       data-fallback={p.image ?? undefined}
                     />
                   )}
+                  {p.match != null && <span class="feature-match" title={matchHint}>{p.match}% match</span>}
+                  <span class="feature-sources">
+                    {p.sources.map((s) => <span class="pick-source" data-source={s}>{sourceLabel[s]}</span>)}
+                  </span>
                 </span>
                 <span class="feature-body">
-                  <span class="feature-top">
-                    {p.match != null && <span class="feature-match" title={matchHint}>{p.match}% match</span>}
-                    {p.sources.map((s) => <span class="pick-source" data-source={s}>{sourceLabel[s]}</span>)}
-                    {p.left && <span class:list={['feature-left', { dim: p.left.dim }]}>{p.left.text}</span>}
-                  </span>
                   <span class="feature-title">{p.name}</span>
+                  {p.left && <span class:list={['feature-left', { dim: p.left.dim }]}>{p.left.text}</span>}
                   {p.related && p.related.length > 0 ? (
                     <span class="feature-related">
                       <span class="feature-related-label">Because you played</span>
                       {p.related.slice(0, 2).map((r) => (
-                        <span class="feature-related-item" title={r.shared.length ? `Both: ${r.shared.join(', ')}` : undefined}>
-                          {r.name} <span class="feature-related-hours">{hours(r.minutes)}</span>
+                        <span class="feature-related-item">
+                          <span class="feature-related-name">
+                            {r.name}
+                            <span class="feature-related-hours">{hours(r.minutes)}</span>
+                          </span>
+                          {r.shared.length > 0 && <span class="feature-related-shared">Both: {r.shared.join(', ')}</span>}
                         </span>
                       ))}
                     </span>
                   ) : (
                     p.chips.length > 0 && (
-                      <span class="feature-related">
-                        {p.chips.slice(0, 3).map((c) => <span class="feature-related-item">{c.text}</span>)}
+                      <span class="feature-chips">
+                        {p.chips.slice(0, 3).map((c) => <span class="feature-chip">{c.text}</span>)}
                       </span>
                     )
                   )}
@@ -174,30 +178,35 @@ const sourceLabel = { steam: 'Steam', psn: 'PlayStation', xbox: 'Xbox' } as cons
   @media (max-width: 70rem) { .carousel { --cols: 3; } }
   @media (max-width: 52rem) { .carousel { --cols: 2; } }
   @media (max-width: 34rem) { .carousel { --cols: 1.4; } }
-  /* Feature rows: a picture on the left, the details on the right. Short on purpose; three of them sit above everything else. */
-  .feature-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+  /* Feature cards: three across, a wide picture on top and the details beneath, including which of your games each one is like. */
+  .feature-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
   .feature { border-radius: 0.6rem; overflow: hidden; background: var(--panel); }
-  .feature-link { display: grid; grid-template-columns: 14rem minmax(0, 1fr); align-items: stretch; color: inherit; text-decoration: none; }
+  .feature-link { display: flex; flex-direction: column; height: 100%; color: inherit; text-decoration: none; }
   .feature-link:focus-visible { outline: 2px solid var(--pill); outline-offset: 2px; border-radius: 0.6rem; }
-  .feature-art-wrap { position: relative; display: block; aspect-ratio: 16 / 9; background: color-mix(in srgb, var(--fg) 8%, transparent); overflow: hidden; }
+  .feature-art-wrap { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; background: color-mix(in srgb, var(--fg) 8%, transparent); }
   .feature-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease, filter 0.2s; }
   .feature-link:hover .feature-art, .feature-link:focus-visible .feature-art { transform: scale(1.04); filter: brightness(1.06); }
-  .feature-body { display: flex; flex-direction: column; justify-content: center; gap: 0.4rem; min-width: 0; padding: 0.75rem 1.1rem; }
-  .feature-top { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.4rem; }
-  .feature-match { padding: 0.12rem 0.45rem; border-radius: 0.25rem; background: var(--pill); color: var(--pill-fg); font-size: 0.75rem; font-weight: 600; }
-  .feature-top .pick-source { padding: 0.12rem 0.45rem; }
-  .feature-left { margin-left: 0.2rem; font-size: 0.82rem; color: var(--text-secondary); }
-  .feature-left.dim { color: var(--text-tertiary); }
-  .feature-title { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 600; line-height: 1.15; color: var(--text-primary); }
+  .feature-match { position: absolute; top: 0.6rem; left: 0.6rem; padding: 0.15rem 0.5rem; border-radius: 0.25rem; background: var(--pill); color: var(--pill-fg); font-size: 0.8rem; font-weight: 600; }
+  .feature-sources { position: absolute; top: 0.6rem; right: 0.6rem; display: flex; gap: 0.25rem; }
+  .feature-sources .pick-source { padding: 0.15rem 0.5rem; font-size: 0.75rem; }
+  .feature-body { display: flex; flex-direction: column; gap: 0.45rem; padding: 0.9rem 1rem 1.1rem; }
+  .feature-title { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; line-height: 1.15; color: var(--text-primary); }
   .feature-link:hover .feature-title, .feature-link:focus-visible .feature-title { text-decoration: underline; text-underline-offset: 0.2em; }
-  /* "Because you played": which of your games it's like, with your hours. The tags you share are in each one's tooltip. */
-  .feature-related { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.15rem 0.9rem; font-size: 0.85rem; color: var(--text-primary); }
+  .feature-left { font-size: 0.85rem; color: var(--text-secondary); }
+  .feature-left.dim { color: var(--text-tertiary); }
+  /* "Because you played": the games of yours it's like, with your hours and what they have in common. */
+  .feature-related { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.3rem; padding-top: 0.7rem; border-top: 1px solid var(--line); }
   .feature-related-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); }
-  .feature-related-item { font-weight: 600; }
-  .feature-related-hours { font-weight: 400; color: var(--text-tertiary); }
-  @media (max-width: 40rem) {
-    .feature-link { grid-template-columns: 1fr; }
-    .feature-body { padding: 0.9rem 1rem 1rem; }
+  .feature-related-item { display: flex; flex-direction: column; gap: 0.05rem; }
+  .feature-related-name { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; font-size: 0.9rem; font-weight: 600; line-height: 1.25; color: var(--text-primary); }
+  .feature-related-hours { flex: none; font-size: 0.78rem; font-weight: 400; color: var(--text-tertiary); }
+  .feature-related-shared { font-size: 0.78rem; color: var(--text-tertiary); }
+  .feature-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .feature-chip { padding: 0.1rem 0.5rem; border-radius: 999px; border: 1px solid var(--line); font-size: 0.78rem; color: var(--text-tertiary); }
+  /* Three cards don't fit side by side on a narrow screen; they become a swipeable row instead of a long stack. */
+  @media (max-width: 52rem) {
+    .feature-list { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 0.75rem; padding-bottom: 0.5rem; scrollbar-width: thin; }
+    .feature { flex: 0 0 min(78%, 20rem); scroll-snap-align: start; }
   }
   @media (prefers-reduced-motion: reduce) {
     .feature-art { transition: none; }

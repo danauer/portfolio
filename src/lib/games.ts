@@ -128,6 +128,10 @@ export function analyzeAll() {
       xboxMinutes,
       games: entries.length,
       played: played.length,
+      /** Never launched on any platform. Games in the Xbox history are left out: Xbox launched them but can't say for how long. */
+      unplayed: entries.filter((e) => e.minutes === 0 && !e.xbox).length,
+      unplayedSteam: steam.totals.unplayed,
+      unplayedPsn: psn.totals.unplayed,
       multi: entries.filter((e) => platformCount(e) > 1).length,
       achievements: steam.totals.achUnlocked + psn.trophies.total + xbox.totals.achievements,
       steamAchievements: steam.totals.achTotal > 0,
