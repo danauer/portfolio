@@ -32,19 +32,20 @@ const latestSync = Math.max(...[steamSnapshot.generatedAt, psnSnapshot.generated
 <Base title="What to play" description="Games I already own and haven't played, plus what's worth buying next on Steam and PlayStation, and what to try on Xbox Game Pass.">
   <div class="games">
     <div class="steam-head">
-      <div class="who">
-        <div>
+      <div>
+        <div class="title-row">
           <h1>What to play</h1>
-          <p class="sub">Steam, PlayStation and Xbox · Updated {date(latestSync)} · <a href={url('games/under-the-hood')}>Under the hood →</a></p>
+          <a class="pill-link" href={url('games/under-the-hood')}>Under the hood →</a>
         </div>
+        <p class="sub">Steam, PlayStation and Xbox · Updated {date(latestSync)}</p>
       </div>
       <nav class="group-nav" aria-label="On this page">
-        <a href="#start">Start here</a>
-        <a href="#backlog">Backlog</a>
-        <a href="#library">Never played</a>
-        <a href="#resume">Pick up where you left off</a>
-        <a href="#new">New games</a>
-        {discounted && <a href="#sale">On sale</a>}
+        <a class="pill-link" href="#start">Start here</a>
+        <a class="pill-link" href="#backlog">Backlog</a>
+        <a class="pill-link" href="#library">Never played</a>
+        <a class="pill-link" href="#resume">Pick up where you left off</a>
+        <a class="pill-link" href="#new">New games</a>
+        {discounted && <a class="pill-link" href="#sale">On sale</a>}
       </nav>
     </div>
 
@@ -126,10 +127,27 @@ const latestSync = Math.max(...[steamSnapshot.generatedAt, psnSnapshot.generated
 </Base>
 
 <style>
-  .group-nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; font-size: 0.9rem; }
-  .group-nav a { text-decoration: none; color: var(--text-secondary); }
-  .group-nav a:hover { color: var(--text-primary); text-decoration: underline; text-underline-offset: 0.2em; }
-  .sub a { color: var(--text-secondary); }
+  /* The title and its "Under the hood" button share a line, the button pushed fully to the right. */
+  .title-row { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem 1rem; }
+  .title-row h1 { margin: 0; }
+  .sub { margin: 0.25rem 0 0; color: var(--text-tertiary); font-size: 0.9rem; }
+  .group-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  /* Pill buttons: a very faint fill in place of a border, a touch stronger on hover. */
+  .pill-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.95rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--fg) 6%, transparent);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.15s, color 0.15s;
+  }
+  .pill-link:hover, .pill-link:focus-visible { background: color-mix(in srgb, var(--fg) 11%, transparent); color: var(--text-primary); }
+  .pill-link:focus-visible { outline: 2px solid var(--pill); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { .pill-link { transition: none; } }
   section { scroll-margin-top: 1.5rem; }
   /* The big number takes the first slot; the two lists share the rest. Their thumbnails are smaller so titles have room. */
   .backlog { display: grid; grid-template-columns: minmax(11rem, 0.7fr) minmax(0, 1fr) minmax(0, 1fr); gap: var(--gap); }
