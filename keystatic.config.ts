@@ -139,6 +139,7 @@ export default config({
           ],
           defaultValue: 'draft',
         }),
+        featured: fields.checkbox({ label: 'Feature on home page' }),
         link: fields.text({
           label: 'Link',
           description:

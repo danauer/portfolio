@@ -48,6 +48,7 @@ const experiments = defineCollection({
     z.object({
       title: z.string(),
       status,
+      featured: z.boolean().default(false),
       link: z.string().min(1),
       summary: text(),
       cover: image().nullish(),
