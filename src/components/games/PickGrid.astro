@@ -1,6 +1,9 @@
 ---
-// Titled groups of recommendation cards. One card shape serves the owned-backlog picks and both
-// stores' picks; the pills in the corner show which platform(s) a game is on.
+// Titled groups of recommendation cards. One card shape serves the owned-backlog picks and every store's
+// picks; the pills in the corner show which platform(s) a game is on. Three layouts:
+//  - "grid": the usual card grid
+//  - "carousel": the same cards in a swipeable row, four across, with arrows and an optional "see all" link
+//  - "feature": compact horizontal rows for the few picks that lead the page
 import type { CardGroup } from '../../lib/recs';
 import { hours } from '../../lib/format';
 
@@ -8,10 +11,13 @@ interface Props {
   groups: CardGroup[];
   /** Shown on the match badge's tooltip. */
   matchHint?: string;
-  /** "feature" is three tall poster cards in a row (for the few picks that lead the page); "grid" is the usual card grid. */
-  variant?: 'grid' | 'feature';
+  variant?: 'grid' | 'carousel' | 'feature';
+  /** A link shown under a carousel, e.g. to the page that lists everything. */
+  cta?: { href: string; label: string };
+  /** Names a carousel for screen readers. */
+  label?: string;
 }
-const { groups, matchHint = 'How closely it matches what you play', variant = 'grid' } = Astro.props;
+const { groups, matchHint = 'How closely it matches what you play', variant = 'grid', cta, label } = Astro.props;
 const sourceLabel = { steam: 'Steam', psn: 'PlayStation', xbox: 'Xbox' } as const;
 ---
 
@@ -19,48 +25,44 @@ const sourceLabel = { steam: 'Steam', psn: 'PlayStation', xbox: 'Xbox' } as cons
   groups.map((group) => (
     <section class="group" id={group.id}>
       {group.title && <h3 class="group-title">{group.title}</h3>}
-      {group.blurb && <p class="section-note">{group.blurb}</p>}
       {variant === 'feature' && (
         <ul class="feature-list">
           {group.items.map((p, i) => (
             <li class="feature">
               <a href={p.href} rel="noopener" class="feature-link">
-                {(p.poster ?? p.banner ?? p.image) && (
-                  <img
-                    class:list={['feature-art', { landscape: !p.poster }]}
-                    src={p.poster ?? p.banner ?? p.image ?? ''}
-                    alt=""
-                    width={p.poster ? 600 : 1920}
-                    height={p.poster ? 900 : 1080}
-                    loading={i === 0 ? 'eager' : 'lazy'}
-                    data-fallback={(p.poster ? p.banner ?? p.image : p.image) ?? undefined}
-                  />
-                )}
-                <span class="feature-shade" aria-hidden="true" />
+                <span class="feature-art-wrap">
+                  {(p.banner ?? p.image) && (
+                    <img
+                      class="feature-art"
+                      src={p.banner ?? p.image ?? ''}
+                      alt=""
+                      width="616"
+                      height="353"
+                      loading={i === 0 ? 'eager' : 'lazy'}
+                      data-fallback={p.image ?? undefined}
+                    />
+                  )}
+                </span>
                 <span class="feature-body">
-                  <span class="feature-badges">
+                  <span class="feature-top">
                     {p.match != null && <span class="feature-match" title={matchHint}>{p.match}% match</span>}
                     {p.sources.map((s) => <span class="pick-source" data-source={s}>{sourceLabel[s]}</span>)}
+                    {p.left && <span class:list={['feature-left', { dim: p.left.dim }]}>{p.left.text}</span>}
                   </span>
                   <span class="feature-title">{p.name}</span>
-                  {p.left && <span class:list={['feature-left', { dim: p.left.dim }]}>{p.left.text}</span>}
                   {p.related && p.related.length > 0 ? (
                     <span class="feature-related">
                       <span class="feature-related-label">Because you played</span>
                       {p.related.slice(0, 2).map((r) => (
-                        <span class="feature-related-item">
-                          <span class="feature-related-name">
-                            {r.name}
-                            <span class="feature-related-hours">{hours(r.minutes)}</span>
-                          </span>
-                          {r.shared.length > 0 && <span class="feature-related-shared">Both: {r.shared.join(', ')}</span>}
+                        <span class="feature-related-item" title={r.shared.length ? `Both: ${r.shared.join(', ')}` : undefined}>
+                          {r.name} <span class="feature-related-hours">{hours(r.minutes)}</span>
                         </span>
                       ))}
                     </span>
                   ) : (
                     p.chips.length > 0 && (
-                      <span class="feature-chips">
-                        {p.chips.slice(0, 3).map((c) => <span class:list={['feature-chip', { shared: c.shared }]}>{c.text}</span>)}
+                      <span class="feature-related">
+                        {p.chips.slice(0, 3).map((c) => <span class="feature-related-item">{c.text}</span>)}
                       </span>
                     )
                   )}
@@ -71,47 +73,68 @@ const sourceLabel = { steam: 'Steam', psn: 'PlayStation', xbox: 'Xbox' } as cons
         </ul>
       )}
       {variant !== 'feature' && (
-      <ul class="pick-grid">
-        {group.items.map((p) => (
-          <li class="pick">
-            <a href={p.href} rel="noopener" class="pick-link">
-              {p.image ? <img src={p.image} alt="" width="460" height="215" loading="lazy" /> : <span class="pick-blank" />}
-              {p.match != null ? (
-                <span class="pick-match" title={matchHint}>{p.match}% match</span>
-              ) : (
-                <span class="pick-match unknown" title="Too new to match yet">Not enough data</span>
-              )}
-              <span class="pick-sources">
-                {p.sources.map((s) => <span class="pick-source" data-source={s}>{sourceLabel[s]}</span>)}
-              </span>
-              <h4>{p.name}</h4>
-            </a>
-            <p class="pick-meta">
-              {p.left ? <span class:list={[{ dim: p.left.dim }]}>{p.left.text}</span> : <span />}
-              {p.priceText && (
-                <span>
-                  {p.fullPriceText && <s class="dim">{p.fullPriceText}</s>} {p.priceText}
-                  {(p.discount ?? 0) > 0 && <span class="sale">−{p.discount}%</span>}
-                </span>
-              )}
-            </p>
-            {p.because && p.because.length > 0 && <p class="because">Because you played {p.because.join(' and ')}</p>}
-            {p.chips.length > 0 && (
-              <ul class="chips">
-                {p.chips.map((c) => <li class:list={[{ shared: c.shared }]}>{c.text}</li>)}
-              </ul>
-            )}
-            {p.foot && <p class="pick-foot dim">{p.foot}</p>}
-          </li>
-        ))}
-      </ul>
+        <div
+          class:list={[{ carousel: variant === 'carousel' }]}
+          data-carousel={variant === 'carousel' ? '' : undefined}
+          role={variant === 'carousel' ? 'group' : undefined}
+          aria-roledescription={variant === 'carousel' ? 'carousel' : undefined}
+          aria-label={variant === 'carousel' ? label : undefined}
+        >
+          <ul class:list={['pick-grid', { 'pick-track': variant === 'carousel' }]}>
+            {group.items.map((p) => (
+              <li class="pick">
+                <a href={p.href} rel="noopener" class="pick-link">
+                  {p.image ? <img src={p.image} alt="" width="460" height="215" loading="lazy" /> : <span class="pick-blank" />}
+                  {p.match != null ? (
+                    <span class="pick-match" title={matchHint}>{p.match}% match</span>
+                  ) : (
+                    <span class="pick-match unknown" title="Too new to match yet">Not enough data</span>
+                  )}
+                  <span class="pick-sources">
+                    {p.sources.map((s) => <span class="pick-source" data-source={s}>{sourceLabel[s]}</span>)}
+                  </span>
+                  <h4>{p.name}</h4>
+                </a>
+                <p class="pick-meta">
+                  {p.left ? <span class:list={[{ dim: p.left.dim }]}>{p.left.text}</span> : <span />}
+                  {p.priceText && (
+                    <span>
+                      {p.fullPriceText && <s class="dim">{p.fullPriceText}</s>} {p.priceText}
+                      {(p.discount ?? 0) > 0 && <span class="sale">−{p.discount}%</span>}
+                    </span>
+                  )}
+                </p>
+                {p.because && p.because.length > 0 && <p class="because">Because you played {p.because.join(' and ')}</p>}
+                {p.chips.length > 0 && (
+                  <ul class="chips">
+                    {p.chips.map((c) => <li class:list={[{ shared: c.shared }]}>{c.text}</li>)}
+                  </ul>
+                )}
+                {p.foot && <p class="pick-foot dim">{p.foot}</p>}
+              </li>
+            ))}
+          </ul>
+          {variant === 'carousel' && (
+            <>
+              <button type="button" class="carousel-btn prev" data-dir="-1" aria-label="Previous games" hidden>
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </button>
+              <button type="button" class="carousel-btn next" data-dir="1" aria-label="Next games" hidden>
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </button>
+            </>
+          )}
+        </div>
+      )}
+      {variant === 'carousel' && cta && (
+        <p class="see-all-row"><a class="see-all" href={cta.href}>{cta.label} <span aria-hidden="true">→</span></a></p>
       )}
     </section>
   ))
 }
 
 <script>
-  // If a feature banner fails to load, fall back to the card's regular image. The error can fire before this runs, so check for that too.
+  // If a feature image fails to load, fall back to the card's regular image. The error can fire before this runs, so check for that too.
   document.querySelectorAll<HTMLImageElement>('img.feature-art[data-fallback]').forEach((img) => {
     const fallback = img.dataset.fallback!;
     const swap = () => {
@@ -120,11 +143,37 @@ const sourceLabel = { steam: 'Steam', psn: 'PlayStation', xbox: 'Xbox' } as cons
     img.addEventListener('error', swap, { once: true });
     if (img.complete && img.naturalWidth === 0) swap();
   });
+
+  // Carousels scroll and snap on their own (swipe, trackpad, keyboard); the arrows are a bonus, so they stay hidden without JavaScript.
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
+    const track = root.querySelector<HTMLElement>('.pick-track');
+    const prev = root.querySelector<HTMLButtonElement>('.carousel-btn.prev');
+    const next = root.querySelector<HTMLButtonElement>('.carousel-btn.next');
+    if (!track || !prev || !next) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      const scrollable = max > 2;
+      prev.hidden = next.hidden = !scrollable;
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= max - 2;
+    };
+    [prev, next].forEach((button) =>
+      button.addEventListener('click', () => {
+        const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+        track.scrollBy({ left: Number(button.dataset.dir) * (track.clientWidth + gap), behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+      }),
+    );
+    track.addEventListener('scroll', update, { passive: true });
+    // Also runs when a hidden tab panel becomes visible, or the window changes size.
+    new ResizeObserver(update).observe(track);
+    update();
+  });
 </script>
 
 <style>
   .group { scroll-margin-top: 1.5rem; margin-top: 2rem; }
-  .group-title { margin: 0 0 0.25rem; font-size: 1.05rem; }
+  .group-title { margin: 0 0 0.75rem; font-size: 1.05rem; }
   .pick-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); gap: var(--gap); }
   .pick { display: flex; flex-direction: column; gap: 0.5rem; }
   .pick-link { position: relative; display: block; text-decoration: none; }
@@ -158,49 +207,81 @@ const sourceLabel = { steam: 'Steam', psn: 'PlayStation', xbox: 'Xbox' } as cons
   .chips li.shared { border-color: color-mix(in srgb, var(--viz-1) 50%, transparent); color: var(--text-primary); }
   .pick-foot { font-size: 0.8rem !important; }
 
-  /* Feature cards: tall posters in a row, details laid over a shaded bottom edge. Text is always light because it sits on artwork, not on the page. */
-  .feature-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
-  .feature { border-radius: 0.75rem; overflow: hidden; background: #111; }
-  .feature-link { position: relative; display: block; aspect-ratio: 2 / 3; color: #fff; text-decoration: none; isolation: isolate; }
-  .feature-art { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.6s ease; }
-  /* Games without portrait art use their wide art, cropped to the middle where the subject usually is. */
-  .feature-art.landscape { object-position: 50% 40%; }
-  .feature-link:hover .feature-art, .feature-link:focus-visible .feature-art { transform: scale(1.03); }
-  .feature-link:focus-visible { outline: 3px solid var(--pill); outline-offset: -3px; border-radius: 0.75rem; }
-  /* Darkest at the bottom where the text is, clear above so the art reads. Posters often have their own logo in the lower half, so it's dense enough to quiet that. */
-  .feature-shade {
+
+  /* Carousel: cards in a row that snaps four at a time (fewer on narrower screens). */
+  .carousel { position: relative; container-type: inline-size; --cols: 4; }
+  .pick-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+  .pick-track::-webkit-scrollbar { display: none; }
+  .pick-track > .pick { flex: 0 0 calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols)); min-width: 0; scroll-snap-align: start; }
+  @media (max-width: 70rem) { .carousel { --cols: 3; } }
+  @media (max-width: 52rem) { .carousel { --cols: 2; } }
+  @media (max-width: 34rem) { .carousel { --cols: 1.4; } }
+  /* Arrows sit over the artwork, level with the middle of the images (art is 460:215, so its centre is 0.2337 of a card's width down). */
+  .carousel-btn {
     position: absolute;
-    inset: 0;
-    z-index: -1;
-    background:
-      linear-gradient(0deg, rgb(0 0 0 / 0.95) 0%, rgb(0 0 0 / 0.9) 38%, rgb(0 0 0 / 0.55) 54%, rgb(0 0 0 / 0.12) 68%, rgb(0 0 0 / 0) 78%),
-      linear-gradient(180deg, rgb(0 0 0 / 0.35) 0%, rgb(0 0 0 / 0) 22%);
+    z-index: 2;
+    top: calc((100cqw - (var(--cols) - 1) * var(--gap)) / var(--cols) * 0.2337 - 1.1rem);
+    display: grid;
+    place-items: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.92);
+    color: #111;
+    box-shadow: 0 1px 6px rgb(0 0 0 / 0.35);
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.15s;
   }
-  .feature-body { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 0.5rem; padding: 1.1rem 1.15rem 1.2rem; }
-  .feature-badges { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: auto; }
-  .feature-match { padding: 0.2rem 0.55rem; border-radius: 0.25rem; background: var(--pill); color: var(--pill-fg); font-size: 0.8rem; font-weight: 600; }
-  .feature-badges .pick-source { padding: 0.2rem 0.55rem; font-size: 0.75rem; }
-  .feature-title { font-family: var(--font-heading); font-size: clamp(1.4rem, 2.6vw, 1.85rem); font-weight: 600; line-height: 1.1; text-shadow: 0 2px 12px rgb(0 0 0 / 0.5); }
-  .feature-link:hover .feature-title, .feature-link:focus-visible .feature-title { text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 2px; }
-  .feature-left { font-size: 0.88rem; font-weight: 500; }
-  .feature-left.dim { opacity: 0.75; }
-  /* What it's like: the played games it resembles, with hours, and what they have in common. */
-  .feature-related { display: flex; flex-direction: column; gap: 0.4rem; width: 100%; margin-top: 0.35rem; padding-top: 0.7rem; border-top: 1px solid rgb(255 255 255 / 0.28); }
-  .feature-related-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgb(255 255 255 / 0.7); }
-  .feature-related-item { display: flex; flex-direction: column; gap: 0.05rem; }
-  .feature-related-name { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; font-size: 0.92rem; font-weight: 600; line-height: 1.25; }
-  .feature-related-hours { flex: none; font-size: 0.78rem; font-weight: 500; color: rgb(255 255 255 / 0.7); }
-  .feature-related-shared { font-size: 0.78rem; color: rgb(255 255 255 / 0.72); }
-  .feature-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-  .feature-chip { padding: 0.1rem 0.55rem; border-radius: 999px; border: 1px solid rgb(255 255 255 / 0.35); font-size: 0.78rem; color: rgb(255 255 255 / 0.85); background: rgb(0 0 0 / 0.25); }
-  .feature-chip.shared { border-color: rgb(255 255 255 / 0.85); color: #fff; }
-  /* Three tall cards don't fit side by side on a phone; they become a swipeable row instead of a very long stack. */
-  @media (max-width: 52rem) {
-    .feature-list { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 0.75rem; padding-bottom: 0.5rem; scrollbar-width: thin; }
-    .feature { flex: 0 0 min(78%, 20rem); scroll-snap-align: start; }
+  .carousel-btn[hidden] { display: none; }
+  .carousel-btn.prev { left: 0.5rem; }
+  .carousel-btn.next { right: 0.5rem; }
+  .carousel-btn:hover:not(:disabled) { transform: scale(1.08); }
+  .carousel-btn:focus-visible { outline: 2px solid var(--pill); outline-offset: 2px; }
+  .carousel-btn:disabled { opacity: 0; pointer-events: none; }
+  .see-all-row { margin: 0.9rem 0 0; display: flex; justify-content: flex-end; }
+  .see-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.95rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+  .see-all:hover, .see-all:focus-visible { border-color: var(--pill); background: color-mix(in srgb, var(--pill) 10%, transparent); }
+
+  /* Feature rows: a picture on the left, the details on the right. Short on purpose; three of them sit above everything else. */
+  .feature-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+  .feature { border-radius: 0.6rem; overflow: hidden; background: var(--panel); }
+  .feature-link { display: grid; grid-template-columns: 14rem minmax(0, 1fr); align-items: stretch; color: inherit; text-decoration: none; }
+  .feature-link:focus-visible { outline: 2px solid var(--pill); outline-offset: 2px; border-radius: 0.6rem; }
+  .feature-art-wrap { position: relative; display: block; aspect-ratio: 16 / 9; background: color-mix(in srgb, var(--fg) 8%, transparent); overflow: hidden; }
+  .feature-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease, filter 0.2s; }
+  .feature-link:hover .feature-art, .feature-link:focus-visible .feature-art { transform: scale(1.04); filter: brightness(1.06); }
+  .feature-body { display: flex; flex-direction: column; justify-content: center; gap: 0.4rem; min-width: 0; padding: 0.75rem 1.1rem; }
+  .feature-top { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.4rem; }
+  .feature-match { padding: 0.12rem 0.45rem; border-radius: 0.25rem; background: var(--pill); color: var(--pill-fg); font-size: 0.75rem; font-weight: 600; }
+  .feature-top .pick-source { padding: 0.12rem 0.45rem; }
+  .feature-left { margin-left: 0.2rem; font-size: 0.82rem; color: var(--text-secondary); }
+  .feature-left.dim { color: var(--text-tertiary); }
+  .feature-title { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 600; line-height: 1.15; color: var(--text-primary); }
+  .feature-link:hover .feature-title, .feature-link:focus-visible .feature-title { text-decoration: underline; text-underline-offset: 0.2em; }
+  /* "Because you played": which of your games it's like, with your hours. The tags you share are in each one's tooltip. */
+  .feature-related { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.15rem 0.9rem; font-size: 0.85rem; color: var(--text-primary); }
+  .feature-related-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); }
+  .feature-related-item { font-weight: 600; }
+  .feature-related-hours { font-weight: 400; color: var(--text-tertiary); }
+  @media (max-width: 40rem) {
+    .feature-link { grid-template-columns: 1fr; }
+    .feature-body { padding: 0.9rem 1rem 1rem; }
   }
   @media (prefers-reduced-motion: reduce) {
     .feature-art { transition: none; }
     .feature-link:hover .feature-art { transform: none; }
+    .carousel-btn { transition: none; }
   }
 </style>

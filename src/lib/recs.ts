@@ -26,12 +26,9 @@ export interface Card {
   because?: string[];
   chips: Chip[];
   foot?: string;
-  /** Large artwork to try for the big "feature" cards, best first. Resolved to `banner` / `poster` at build time by `withBanners`. */
+  /** Larger artwork to try for the top-picks cards, best first. Resolved to `banner` at build time by `withBanners`. */
   heroArt?: string[];
-  /** Portrait (2:3) artwork to try first, where a store has any. */
-  posterArt?: string[];
   banner?: string | null;
-  poster?: string | null;
   /** Games you've played that this one is most like, with what they share. */
   related?: Related[];
 }
@@ -166,19 +163,14 @@ function interleave(list: Candidate[]) {
   return [...list].sort((a, b) => rank.get(a)! - rank.get(b)! || b.score - a.score);
 }
 
-/** An "All" tab (best of each platform) plus one tab per platform that has anything, 12 cards each. */
-function tabsFor(prefix: string, ranked: Candidate[], rest: Candidate[], blurbs: Record<'all' | Source, string>, skip = new Set<string>()) {
+/** An "All" tab (best of each platform) plus one tab per platform that has anything. Each tab lists every card, best first. */
+function tabsFor(ranked: Candidate[], rest: Candidate[], skip = new Set<string>()) {
   const on = (source: Source) => rest.filter((c) => c.sources.includes(source)).sort((a, b) => b.score - a.score);
   const count = (source: Source) => ranked.filter((c) => c.sources.includes(source)).length;
-  const tab = (key: 'all' | Source, label: string, list: Candidate[], n: number) => ({
-    key,
-    label,
-    count: n,
-    groups: [{ id: `${prefix}-${key}`, title: '', blurb: blurbs[key], items: take(list, 12, skip).map(strip) }] satisfies CardGroup[],
-  });
+  const tab = (key: 'all' | Source, label: string, list: Candidate[], n: number) => ({ key, label, count: n, items: take(list, Infinity, skip).map(strip) });
   return {
     tabs: [tab('all', 'All', rest, ranked.length), tab('steam', 'Steam', on('steam'), count('steam')), tab('psn', 'PlayStation', on('psn'), count('psn')), tab('xbox', 'Xbox', on('xbox'), count('xbox'))].filter(
-      (t) => t.key === 'all' || t.groups[0].items.length > 0,
+      (t) => t.key === 'all' || t.items.length > 0,
     ),
     counts: { steam: count('steam'), psn: count('psn'), xbox: count('xbox'), total: ranked.length },
   };
@@ -255,10 +247,8 @@ export function backlog() {
         ...shared.map((text) => ({ text, shared: true })),
         ...g.tags.filter((t) => !shared.includes(t.name) && !META_TAGS.has(t.name)).slice(0, Math.max(0, 4 - shared.length)).map((t) => ({ text: t.name })),
       ],
-      // library_hero is a 1920x620 panorama most games have; older ones only have the 616x353 capsule.
-      heroArt: [`https://cdn.akamai.steamstatic.com/steam/apps/${g.appid}/library_hero.jpg`, `https://cdn.akamai.steamstatic.com/steam/apps/${g.appid}/capsule_616x353.jpg`],
-      // 600x900 is the 2:3 poster; the unsuffixed one is only 300x450.
-      posterArt: [`https://cdn.akamai.steamstatic.com/steam/apps/${g.appid}/library_600x900_2x.jpg`, `https://cdn.akamai.steamstatic.com/steam/apps/${g.appid}/library_600x900.jpg`],
+      // The 616x353 capsule is 16:9 and suits a small landscape tile; library_hero is a 1920x620 panorama for games without one.
+      heroArt: [`https://cdn.akamai.steamstatic.com/steam/apps/${g.appid}/capsule_616x353.jpg`, `https://cdn.akamai.steamstatic.com/steam/apps/${g.appid}/library_hero.jpg`],
       related: pickRelated(
         playedSteam.map(({ game, vec }) => ({
           name: game.name,
@@ -296,7 +286,7 @@ export function backlog() {
       left: g.membership === 'PS_PLUS' ? { text: 'PS Plus claim', dim: false } : { text: 'Purchased', dim: false },
       chips: genres.map((text) => ({ text })),
       // Catalog art is 1920x1080 and resizes on request; the fallback icons (icon0.png) are square and too small.
-      heroArt: g.image && g.image.includes('/cdn/') ? [`${g.image}${g.image.includes('?') ? '&' : '?'}w=1280`] : [],
+      heroArt: g.image && g.image.includes('/cdn/') ? [`${g.image}${g.image.includes('?') ? '&' : '?'}w=640`] : [],
       related: pickRelated(
         playedPsn.map((x) => ({ name: x.name, minutes: x.minutes, sim: genreSimilarity(genres, x.genres), shared: genres.filter((y) => x.genres.includes(y)).slice(0, 2) })),
         g.name,
@@ -356,24 +346,8 @@ export function backlog() {
   const hero = take(strong.length >= 3 ? strong : withArt.length >= 3 ? withArt : unplayed, 3);
   const heroSeries = new Set(hero.map((c) => `f:${franchise(c.name)}`));
 
-  const unplayedTabs = tabsFor(
-    'library',
-    unplayed,
-    unplayed.filter((c) => !hero.some((h) => h.key === c.key)),
-    {
-      all: 'The best of each library side by side. Each platform is ranked on its own, by how well a game fits what you actually play and, on Steam, how well it was received. A game on more than one platform shows once.',
-      steam: 'Steam games you’ve never launched, ranked by tag fit and review confidence.',
-      psn: 'Purchases and PS Plus claims you haven’t launched, matched on genre. PS Plus claims are only playable while you’re subscribed.',
-      xbox: '',
-    },
-    heroSeries,
-  );
-  const startedTabs = tabsFor('resume', started, started, {
-    all: 'Games with a minute to five hours on the clock, counting every platform together. Ranked the same way: fit with what you play, plus reviews or ratings where the store has them.',
-    steam: 'Steam games with up to five hours played, ranked by tag fit and review confidence.',
-    psn: 'PlayStation games you’ve launched but not stuck with (up to five hours), matched on genre.',
-    xbox: 'Xbox games with up to five hours on record, matched on genre and the store’s user ratings. Xbox play time is approximate, and games that report none aren’t included.',
-  });
+  const unplayedTabs = tabsFor(unplayed, unplayed.filter((c) => !hero.some((h) => h.key === c.key)), heroSeries);
+  const startedTabs = tabsFor(started, started);
 
   return { hero: hero.map(strip), ...unplayedTabs, resume: startedTabs };
 }
@@ -394,7 +368,7 @@ export async function withBanners(cards: Card[]): Promise<Card[]> {
     }
     return null;
   };
-  return Promise.all(cards.map(async (card) => ({ ...card, banner: await firstThatExists(card.heroArt), poster: await firstThatExists(card.posterArt) })));
+  return Promise.all(cards.map(async (card) => ({ ...card, banner: await firstThatExists(card.heroArt) })));
 }
 
 // Store picks -------------------------------------------------------------------
@@ -479,51 +453,74 @@ export function xboxStoreGroups(): CardGroup[] {
 
 // New games --------------------------------------------------------------------
 
-/**
- * Games you don't own, as tabs: every store's picks together, then each store's own groups (built by the sync scripts).
- * "All" interleaves the stores' best matches (best of each first, since match scores are only comparable within a store)
- * and adds what's on sale across the stores that have sales. A game sold on several stores shows once.
- */
-export function newGames() {
-  const steam = steamStoreGroups();
-  const psn = psnStoreGroups();
-  const xbox = xboxStoreGroups();
-  const best = (groups: CardGroup[]) => groups.find((g) => g.id.endsWith('-best'))?.items ?? [];
+export interface StoreTab {
+  key: 'all' | Source;
+  label: string;
+  /** Every pick, best first, so the first dozen make a carousel. */
+  items: Card[];
+  /** The same picks grouped the way the store's own sync ranked them, for the full page. */
+  groups: CardGroup[];
+}
 
-  // Round-robin: Steam #1, PlayStation #1, Xbox #1, Steam #2, ...
-  const lists = [best(steam), best(psn), best(xbox)];
-  const interleaved: Card[] = [];
-  for (let i = 0; i < Math.max(...lists.map((l) => l.length)); i++) for (const l of lists) if (l[i]) interleaved.push(l[i]);
+/** Round-robin across lists: first of each, then second of each, and so on. */
+function roundRobin<T>(lists: T[][]): T[] {
+  const out: T[] = [];
+  for (let i = 0; i < Math.max(0, ...lists.map((l) => l.length)); i++) for (const l of lists) if (l[i]) out.push(l[i]);
+  return out;
+}
+
+/**
+ * Games you don't own, as tabs: every store's picks together, then each store's own (built by the sync scripts).
+ * "All" takes turns between the stores (best of each first), since match scores are only comparable within one store,
+ * and shows a game sold in several once.
+ */
+export function newGames(): StoreTab[] {
+  const stores = { steam: steamStoreGroups(), psn: psnStoreGroups(), xbox: xboxStoreGroups() };
+  const labels = { steam: 'Steam', psn: 'PlayStation', xbox: 'Xbox Game Pass' } as const;
+  const flat = (groups: CardGroup[]) => {
+    const seen = new Set<string>();
+    return groups.flatMap((g) => g.items).filter((c) => !seen.has(c.key) && !!seen.add(c.key));
+  };
 
   const merged = new Map<string, Card>();
-  for (const c of interleaved) {
+  for (const c of roundRobin(SOURCES.map((s) => flat(stores[s])))) {
     const k = normalizeTitle(c.name);
     const prev = merged.get(k);
     merged.set(k, prev ? { ...prev, sources: SOURCES.filter((s) => prev.sources.includes(s) || c.sources.includes(s)) } : c);
   }
-  const used = new Set<string>();
-  const distinct = (cards: Card[], n: number) => {
-    const out: Card[] = [];
-    for (const c of cards) {
-      const f = franchise(c.name);
-      if (out.length === n || used.has(f)) continue;
-      out.push(c);
-      used.add(f);
-    }
-    return out;
-  };
-  const top = distinct([...merged.values()], 15);
+  const seenSeries = new Set<string>();
+  const all = [...merged.values()].filter((c) => {
+    const f = franchise(c.name);
+    return !seenSeries.has(f) && !!seenSeries.add(f);
+  });
 
-  // Sales: Steam and PlayStation only (Game Pass has no price).
-  const sale = new Map<string, Card>();
-  for (const c of [...steam, ...psn].flatMap((g) => g.items).filter((c) => (c.discount ?? 0) >= 25 && (c.match ?? 0) >= 40).sort((a, b) => (b.match ?? 0) - (a.match ?? 0)))
-    if (!sale.has(normalizeTitle(c.name))) sale.set(normalizeTitle(c.name), c);
-  used.clear();
-  const onSale = distinct([...sale.values()], 8);
-
-  const all: CardGroup[] = [
-    { id: 'new-all-best', title: '', blurb: 'The closest fits from each store, side by side. Match scores are only comparable within one store, so the stores take turns; a game sold on more than one shows once.', items: top },
-    ...(onSale.length >= 3 ? [{ id: 'new-all-sale', title: 'On sale now', blurb: 'Discounted at least 25% on Steam or PlayStation, ranked by fit.', items: onSale }] : []),
+  return [
+    { key: 'all', label: 'All', items: all, groups: [{ id: 'new-all', title: '', blurb: '', items: all }] },
+    ...SOURCES.map((s) => ({ key: s, label: labels[s], items: flat(stores[s]), groups: stores[s] })),
   ];
-  return { all, steam, psn, xbox };
+}
+
+/**
+ * What's discounted at least 20% on the stores that have sales (Steam and PlayStation; Game Pass has no price), ranked by
+ * fit. The pool is whatever the sync scripts kept as picks, not every sale in the store. A tab only appears for a store
+ * with at least two of them.
+ */
+export function onSale() {
+  const pool = [...steamStoreGroups(), ...psnStoreGroups()]
+    .flatMap((g) => g.items)
+    .filter((c) => (c.discount ?? 0) >= 20)
+    .sort((a, b) => (b.match ?? 0) - (a.match ?? 0) || (b.discount ?? 0) - (a.discount ?? 0));
+  const byTitle = new Map<string, Card>();
+  for (const c of pool) {
+    const k = normalizeTitle(c.name);
+    const prev = byTitle.get(k);
+    byTitle.set(k, prev ? { ...prev, sources: SOURCES.filter((s) => prev.sources.includes(s) || c.sources.includes(s)) } : c);
+  }
+  const items = [...byTitle.values()];
+  const on = (source: Source) => items.filter((c) => c.sources.includes(source));
+  return [
+    { key: 'all' as const, label: 'All', items },
+    { key: 'steam' as const, label: 'Steam', items: on('steam') },
+    { key: 'psn' as const, label: 'PlayStation', items: on('psn') },
+  ].filter((t) => (t.key === 'all' ? t.items.length > 0 : t.items.length >= 2));
 }

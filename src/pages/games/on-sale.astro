@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import CollectionHeader from '../../components/games/CollectionHeader.astro';
+import PickGrid from '../../components/games/PickGrid.astro';
+import Tabs from '../../components/games/Tabs.astro';
+import { onSale } from '../../lib/recs';
+import '../../styles/steam.css';
+
+// Everything discounted at least 20% among the stores' picks, best fit first. The tab in the URL hash (#psn) opens that tab.
+const tabs = onSale();
+---
+
+<Base title="On sale now · Games" description="Games on sale on Steam and PlayStation that fit what I play.">
+  <div class="games">
+    <CollectionHeader title="On sale now" />
+    {
+      tabs.length ? (
+        <Tabs id="sale-all" label="Sales by store" syncHash tabs={tabs.map((t) => ({ key: t.key, label: t.label, count: t.items.length, source: t.key === 'all' ? undefined : t.key }))}>
+          {tabs.map((t) => (
+            <Fragment slot={t.key}>
+              <PickGrid groups={[{ id: `sale-${t.key}`, title: '', blurb: '', items: t.items }]} matchHint="How closely it matches your play history. Compared within its own store." />
+            </Fragment>
+          ))}
+        </Tabs>
+      ) : (
+        <p class="muted">Nothing worth flagging is on sale right now.</p>
+      )
+    }
+  </div>
+</Base>

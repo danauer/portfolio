@@ -1,0 +1,18 @@
+---
+// Heading for a page that lists one whole collection from /games: a way back, then the title.
+import { url } from '../../lib/content';
+
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<div class="steam-head">
+  <div class="hood-nav">
+    <a class="back" href={url('games')}>← What to play</a>
+  </div>
+  <div class="who">
+    <h1>{title}</h1>
+  </div>
+</div>

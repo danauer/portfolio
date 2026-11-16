@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import CollectionHeader from '../../components/games/CollectionHeader.astro';
+import PickGrid from '../../components/games/PickGrid.astro';
+import TasteTags from '../../components/games/TasteTags.astro';
+import Tabs from '../../components/games/Tabs.astro';
+import { newGames } from '../../lib/recs';
+import { snapshot as steamSnapshot } from '../../lib/steam';
+import { store as psnStore } from '../../lib/psn';
+import { store as xboxStore } from '../../lib/xbox';
+import '../../styles/steam.css';
+
+// Every pick each store's sync kept, grouped the way it ranked them. The tab in the URL hash (#psn) opens that tab.
+const tabs = newGames();
+const taste = {
+  steam: { label: 'Your strongest Steam tags', items: steamSnapshot.picks.profileTags.map((t) => ({ label: t.tag, weight: t.weight })) },
+  psn: { label: 'Your strongest PlayStation genres', items: psnStore.profile.map((t) => ({ label: t.genre, weight: t.weight })) },
+  xbox: { label: 'Your strongest Xbox genres', items: xboxStore.profile.map((t) => ({ label: t.genre, weight: t.weight })) },
+} as const;
+---
+
+<Base title="New games · Games" description="Games I don't own yet that fit what I play, from Steam, PlayStation and Xbox Game Pass.">
+  <div class="games">
+    <CollectionHeader title="New games" />
+    <Tabs id="new-all" label="New games by store" syncHash tabs={tabs.map((t) => ({ key: t.key, label: t.label, count: t.items.length, source: t.key === 'all' ? undefined : t.key }))}>
+      {
+        tabs.map((t) => (
+          <Fragment slot={t.key}>
+            {t.key !== 'all' && <TasteTags items={taste[t.key].items} source={t.key} label={taste[t.key].label} />}
+            <PickGrid groups={t.groups} matchHint="How closely it matches your play history. Compared within its own store." />
+          </Fragment>
+        ))
+      }
+    </Tabs>
+  </div>
+</Base>

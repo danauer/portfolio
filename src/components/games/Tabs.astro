@@ -10,12 +10,14 @@ interface Props {
   /** Names the tab list for screen readers. */
   label: string;
   tabs: { key: string; label: string; count?: number; /** Platform color dot: steam | psn | xbox. */ source?: string }[];
+  /** Open on the tab named in the URL hash (/page/#steam) and keep the hash in step as tabs change, so a tab can be linked to. */
+  syncHash?: boolean;
 }
-const { id, label, tabs } = Astro.props;
+const { id, label, tabs, syncHash = false } = Astro.props;
 const panels = await Promise.all(tabs.map(async (t) => [t.key, await Astro.slots.render(t.key)] as const));
 ---
 
-<div class="tab-set" data-tabs>
+<div class="tab-set" data-tabs data-sync-hash={syncHash ? '' : undefined}>
   <div class="tab-list" role="tablist" aria-label={label}>
     {
       tabs.map((t, i) => (
@@ -23,6 +25,7 @@ const panels = await Promise.all(tabs.map(async (t) => [t.key, await Astro.slots
           type="button"
           role="tab"
           id={`${id}-tab-${t.key}`}
+          data-key={t.key}
           aria-controls={`${id}-panel-${t.key}`}
           aria-selected={i === 0 ? 'true' : 'false'}
           tabindex={i === 0 ? 0 : -1}
@@ -46,6 +49,7 @@ const panels = await Promise.all(tabs.map(async (t) => [t.key, await Astro.slots
   document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((root) => {
     const tabs = [...root.querySelectorAll<HTMLButtonElement>(':scope > [role="tablist"] > [role="tab"]')];
     const panels = [...root.querySelectorAll<HTMLElement>(':scope > [role="tabpanel"]')];
+    const syncHash = root.hasAttribute('data-sync-hash');
     const select = (index: number, focus = false) => {
       tabs.forEach((tab, i) => {
         tab.setAttribute('aria-selected', String(i === index));
@@ -53,7 +57,12 @@ const panels = await Promise.all(tabs.map(async (t) => [t.key, await Astro.slots
         panels[i].hidden = i !== index;
       });
       if (focus) tabs[index].focus();
+      if (syncHash) history.replaceState(null, '', `#${tabs[index].dataset.key}`);
     };
+    if (syncHash) {
+      const wanted = tabs.findIndex((tab) => tab.dataset.key === location.hash.slice(1));
+      if (wanted > 0) select(wanted);
+    }
     tabs.forEach((tab, i) => {
       tab.addEventListener('click', () => select(i));
       tab.addEventListener('keydown', (e) => {
