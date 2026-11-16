@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import CollectionHeader from '../../components/games/CollectionHeader.astro';
+import PickGrid from '../../components/games/PickGrid.astro';
+import Tabs from '../../components/games/Tabs.astro';
+import { backlog } from '../../lib/recs';
+import '../../styles/steam.css';
+
+// Games I own and have never launched on any platform, minus the three picked to start with. The tab in the URL hash (#steam) opens that tab.
+const { tabs } = backlog();
+---
+
+<Base title="Never played · Games" description="Games I own and have never launched, ranked by how well they fit what I play.">
+  <div class="games">
+    <CollectionHeader title="More you've never played" />
+    <Tabs id="library-all" label="Unplayed games by platform" syncHash tabs={tabs.map((t) => ({ key: t.key, label: t.label, count: t.items.length, source: t.key === 'all' ? undefined : t.key }))}>
+      {
+        tabs.map((t) => (
+          <Fragment slot={t.key}>
+            <PickGrid groups={[{ id: `library-${t.key}`, title: '', blurb: '', items: t.items }]} matchHint="How closely it matches what you play. Compared within its own platform." />
+          </Fragment>
+        ))
+      }
+    </Tabs>
+  </div>
+</Base>

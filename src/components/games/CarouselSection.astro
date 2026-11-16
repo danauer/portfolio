@@ -1,0 +1,77 @@
+---
+// A titled row of recommendation cards, four across, that scrolls sideways. The title line carries everything about it:
+// a "See all" link as plain text beside the title, and previous / next carets at the right end.
+import PickGrid from './PickGrid.astro';
+import type { Card } from '../../lib/recs';
+import { num } from '../../lib/format';
+
+interface Props {
+  id: string;
+  title: string;
+  items: Card[];
+  /** Where the full list lives, and how many it holds. */
+  seeAll?: { href: string; count: number };
+  matchHint?: string;
+}
+const { id, title, items, seeAll, matchHint } = Astro.props;
+---
+
+<section class="carousel-section" id={id} data-carousel-section>
+  <div class="section-head">
+    <h2>{title}</h2>
+    {seeAll && <a class="see-all-link" href={seeAll.href}>See all {num(seeAll.count)} <span aria-hidden="true">→</span></a>}
+    <div class="carousel-controls">
+      <button type="button" class="caret prev" data-dir="-1" aria-label={`Previous: ${title}`} hidden>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </button>
+      <button type="button" class="caret next" data-dir="1" aria-label={`Next: ${title}`} hidden>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </button>
+    </div>
+  </div>
+  <PickGrid variant="carousel" label={title} matchHint={matchHint} groups={[{ id: `${id}-row`, title: '', blurb: '', items }]} />
+</section>
+
+<script>
+  // The row scrolls and snaps on its own (swipe, trackpad, keyboard); the carets are a bonus, so they stay hidden without JavaScript
+  // and when everything fits.
+  document.querySelectorAll<HTMLElement>('[data-carousel-section]').forEach((root) => {
+    const track = root.querySelector<HTMLElement>('.pick-track');
+    const prev = root.querySelector<HTMLButtonElement>('.caret.prev');
+    const next = root.querySelector<HTMLButtonElement>('.caret.next');
+    if (!track || !prev || !next) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      prev.hidden = next.hidden = max <= 2;
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= max - 2;
+    };
+    [prev, next].forEach((button) =>
+      button.addEventListener('click', () => {
+        const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+        track.scrollBy({ left: Number(button.dataset.dir) * (track.clientWidth + gap), behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+      }),
+    );
+    track.addEventListener('scroll', update, { passive: true });
+    new ResizeObserver(update).observe(track);
+    update();
+  });
+</script>
+
+<style>
+  .carousel-section { scroll-margin-top: 1.5rem; }
+  /* Beats the page's generous heading margin: the space above the section belongs to the row, not the heading. */
+  .section-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 1.1rem; margin: 3.5rem 0 0.9rem; }
+  .section-head h2 { margin: 0; }
+  .see-all-link { font-size: 0.9rem; color: var(--text-secondary); text-decoration: none; white-space: nowrap; }
+  .see-all-link:hover, .see-all-link:focus-visible { color: var(--text-primary); text-decoration: underline; text-underline-offset: 0.2em; }
+  .carousel-controls { display: flex; gap: 0.1rem; margin-left: auto; align-self: center; }
+  /* Plain carets, no button chrome. 2rem square keeps them easy to hit. */
+  .caret { display: grid; place-items: center; width: 2rem; height: 2rem; padding: 0; border: 0; border-radius: 0.25rem; background: none; color: var(--text-secondary); cursor: pointer; }
+  .caret[hidden] { display: none; }
+  .caret:hover:not(:disabled) { color: var(--text-primary); }
+  .caret:focus-visible { outline: 2px solid var(--pill); outline-offset: 1px; }
+  .caret:disabled { opacity: 0.3; cursor: default; }
+  .carousel-section :global(.group) { margin-top: 0; }
+</style>

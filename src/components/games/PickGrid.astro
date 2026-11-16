@@ -2,7 +2,7 @@
 // Titled groups of recommendation cards. One card shape serves the owned-backlog picks and every store's
 // picks; the pills in the corner show which platform(s) a game is on. Three layouts:
 //  - "grid": the usual card grid
-//  - "carousel": the same cards in a swipeable row, four across, with arrows and an optional "see all" link
+//  - "carousel": the same cards in a swipeable row, four across. The arrows live in CarouselSection, next to its title.
 //  - "feature": compact horizontal rows for the few picks that lead the page
 import type { CardGroup } from '../../lib/recs';
 import { hours } from '../../lib/format';
@@ -12,12 +12,10 @@ interface Props {
   /** Shown on the match badge's tooltip. */
   matchHint?: string;
   variant?: 'grid' | 'carousel' | 'feature';
-  /** A link shown under a carousel, e.g. to the page that lists everything. */
-  cta?: { href: string; label: string };
   /** Names a carousel for screen readers. */
   label?: string;
 }
-const { groups, matchHint = 'How closely it matches what you play', variant = 'grid', cta, label } = Astro.props;
+const { groups, matchHint = 'How closely it matches what you play', variant = 'grid', label } = Astro.props;
 const sourceLabel = { steam: 'Steam', psn: 'PlayStation', xbox: 'Xbox' } as const;
 ---
 
@@ -75,7 +73,6 @@ const sourceLabel = { steam: 'Steam', psn: 'PlayStation', xbox: 'Xbox' } as cons
       {variant !== 'feature' && (
         <div
           class:list={[{ carousel: variant === 'carousel' }]}
-          data-carousel={variant === 'carousel' ? '' : undefined}
           role={variant === 'carousel' ? 'group' : undefined}
           aria-roledescription={variant === 'carousel' ? 'carousel' : undefined}
           aria-label={variant === 'carousel' ? label : undefined}
@@ -114,20 +111,7 @@ const sourceLabel = { steam: 'Steam', psn: 'PlayStation', xbox: 'Xbox' } as cons
               </li>
             ))}
           </ul>
-          {variant === 'carousel' && (
-            <>
-              <button type="button" class="carousel-btn prev" data-dir="-1" aria-label="Previous games" hidden>
-                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
-              </button>
-              <button type="button" class="carousel-btn next" data-dir="1" aria-label="Next games" hidden>
-                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
-              </button>
-            </>
-          )}
         </div>
-      )}
-      {variant === 'carousel' && cta && (
-        <p class="see-all-row"><a class="see-all" href={cta.href}>{cta.label} <span aria-hidden="true">→</span></a></p>
       )}
     </section>
   ))
@@ -142,32 +126,6 @@ const sourceLabel = { steam: 'Steam', psn: 'PlayStation', xbox: 'Xbox' } as cons
     };
     img.addEventListener('error', swap, { once: true });
     if (img.complete && img.naturalWidth === 0) swap();
-  });
-
-  // Carousels scroll and snap on their own (swipe, trackpad, keyboard); the arrows are a bonus, so they stay hidden without JavaScript.
-  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
-    const track = root.querySelector<HTMLElement>('.pick-track');
-    const prev = root.querySelector<HTMLButtonElement>('.carousel-btn.prev');
-    const next = root.querySelector<HTMLButtonElement>('.carousel-btn.next');
-    if (!track || !prev || !next) return;
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => {
-      const max = track.scrollWidth - track.clientWidth;
-      const scrollable = max > 2;
-      prev.hidden = next.hidden = !scrollable;
-      prev.disabled = track.scrollLeft <= 2;
-      next.disabled = track.scrollLeft >= max - 2;
-    };
-    [prev, next].forEach((button) =>
-      button.addEventListener('click', () => {
-        const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
-        track.scrollBy({ left: Number(button.dataset.dir) * (track.clientWidth + gap), behavior: reduceMotion.matches ? 'auto' : 'smooth' });
-      }),
-    );
-    track.addEventListener('scroll', update, { passive: true });
-    // Also runs when a hidden tab panel becomes visible, or the window changes size.
-    new ResizeObserver(update).observe(track);
-    update();
   });
 </script>
 
@@ -208,52 +166,14 @@ const sourceLabel = { steam: 'Steam', psn: 'PlayStation', xbox: 'Xbox' } as cons
   .pick-foot { font-size: 0.8rem !important; }
 
 
-  /* Carousel: cards in a row that snaps four at a time (fewer on narrower screens). */
-  .carousel { position: relative; container-type: inline-size; --cols: 4; }
+  /* Carousel: cards in a row that snaps four at a time (fewer on narrower screens). It scrolls and snaps on its own (swipe, trackpad, keyboard). */
+  .carousel { --cols: 4; }
   .pick-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
   .pick-track::-webkit-scrollbar { display: none; }
   .pick-track > .pick { flex: 0 0 calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols)); min-width: 0; scroll-snap-align: start; }
   @media (max-width: 70rem) { .carousel { --cols: 3; } }
   @media (max-width: 52rem) { .carousel { --cols: 2; } }
   @media (max-width: 34rem) { .carousel { --cols: 1.4; } }
-  /* Arrows sit over the artwork, level with the middle of the images (art is 460:215, so its centre is 0.2337 of a card's width down). */
-  .carousel-btn {
-    position: absolute;
-    z-index: 2;
-    top: calc((100cqw - (var(--cols) - 1) * var(--gap)) / var(--cols) * 0.2337 - 1.1rem);
-    display: grid;
-    place-items: center;
-    width: 2.2rem;
-    height: 2.2rem;
-    padding: 0;
-    border: 0;
-    border-radius: 50%;
-    background: rgb(255 255 255 / 0.92);
-    color: #111;
-    box-shadow: 0 1px 6px rgb(0 0 0 / 0.35);
-    cursor: pointer;
-    transition: opacity 0.15s, transform 0.15s;
-  }
-  .carousel-btn[hidden] { display: none; }
-  .carousel-btn.prev { left: 0.5rem; }
-  .carousel-btn.next { right: 0.5rem; }
-  .carousel-btn:hover:not(:disabled) { transform: scale(1.08); }
-  .carousel-btn:focus-visible { outline: 2px solid var(--pill); outline-offset: 2px; }
-  .carousel-btn:disabled { opacity: 0; pointer-events: none; }
-  .see-all-row { margin: 0.9rem 0 0; display: flex; justify-content: flex-end; }
-  .see-all {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.4rem 0.95rem;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    font-size: 0.9rem;
-    color: var(--text-primary);
-    text-decoration: none;
-  }
-  .see-all:hover, .see-all:focus-visible { border-color: var(--pill); background: color-mix(in srgb, var(--pill) 10%, transparent); }
-
   /* Feature rows: a picture on the left, the details on the right. Short on purpose; three of them sit above everything else. */
   .feature-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; }
   .feature { border-radius: 0.6rem; overflow: hidden; background: var(--panel); }
@@ -282,6 +202,5 @@ const sourceLabel = { steam: 'Steam', psn: 'PlayStation', xbox: 'Xbox' } as cons
   @media (prefers-reduced-motion: reduce) {
     .feature-art { transition: none; }
     .feature-link:hover .feature-art { transform: none; }
-    .carousel-btn { transition: none; }
   }
 </style>

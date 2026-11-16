@@ -2,12 +2,12 @@
 import Base from '../../layouts/Base.astro';
 import Panel from '../../components/steam/Panel.astro';
 import PickGrid from '../../components/games/PickGrid.astro';
-import Tabs from '../../components/games/Tabs.astro';
+import CarouselSection from '../../components/games/CarouselSection.astro';
 import { backlog, newGames, onSale, withBanners } from '../../lib/recs';
 import { analyze, capsule, snapshot as steamSnapshot, storeUrl } from '../../lib/steam';
 import { snapshot as psnSnapshot, store as psnStore } from '../../lib/psn';
 import { snapshot as xboxSnapshot, store as xboxStore } from '../../lib/xbox';
-import { compact, date, hours, money, num, pct } from '../../lib/format';
+import { compact, date, hours, money, pct } from '../../lib/format';
 import { url } from '../../lib/content';
 import '../../styles/steam.css';
 
@@ -17,9 +17,12 @@ const fresh = newGames();
 const sale = onSale();
 const steam = analyze();
 const hint = 'How closely it matches what you play. Compared within its own platform.';
-const CAROUSEL = 12; // cards per carousel; the dedicated pages list everything
-// "See all 91 Steam games": each tab's link goes to the same tab on the full page.
-const seeAll = (path: string, key: string, count: number, noun: string) => ({ href: `${url(path)}#${key}`, label: `See all ${num(count)} ${noun}` });
+const CAROUSEL = 12; // cards per carousel; the dedicated pages list everything, with a tab per platform
+// Each carousel shows the "All" list; the platform tabs live on the full pages.
+const unplayed = owned.tabs.find((t) => t.key === 'all')!;
+const started = owned.resume.tabs.find((t) => t.key === 'all')!;
+const newest = fresh.find((t) => t.key === 'all')!;
+const discounted = sale.find((t) => t.key === 'all');
 const latestSync = Math.max(...[steamSnapshot.generatedAt, psnSnapshot.generatedAt, psnStore.generatedAt, xboxSnapshot.generatedAt, xboxStore.generatedAt].map((d) => new Date(d).getTime())) / 1000;
 ---
 
@@ -37,7 +40,7 @@ const latestSync = Math.max(...[steamSnapshot.generatedAt, psnSnapshot.generated
         <a href="#library">Never played</a>
         <a href="#resume">Pick up where you left off</a>
         <a href="#new">New games</a>
-        {sale.length > 0 && <a href="#sale">On sale</a>}
+        {discounted && <a href="#sale">On sale</a>}
         <a href="#value">Value</a>
       </nav>
     </div>
@@ -47,69 +50,29 @@ const latestSync = Math.max(...[steamSnapshot.generatedAt, psnSnapshot.generated
       <PickGrid variant="feature" groups={[{ id: 'start-picks', title: '', blurb: '', items: hero }]} matchHint={hint} />
     </section>
 
-    <section id="library">
-      <h2>More you've never played</h2>
-      <Tabs id="library-tabs" label="Unplayed games by platform" tabs={owned.tabs.map((t) => ({ key: t.key, label: t.label, count: t.count, source: t.key === 'all' ? undefined : t.key }))}>
-        {owned.tabs.map((t) => (
-          <Fragment slot={t.key}>
-            <PickGrid groups={[{ id: `library-${t.key}`, title: '', blurb: '', items: t.items.slice(0, CAROUSEL) }]} matchHint={hint} />
-          </Fragment>
-        ))}
-      </Tabs>
-    </section>
+    <CarouselSection id="library" title="More you've never played" items={unplayed.items.slice(0, CAROUSEL)} seeAll={{ href: url('games/never-played'), count: unplayed.items.length }} matchHint={hint} />
 
-    <section id="resume">
-      <h2>Pick up where you left off</h2>
-      <Tabs id="resume-tabs" label="Started games by platform" tabs={owned.resume.tabs.map((t) => ({ key: t.key, label: t.label, source: t.key === 'all' ? undefined : t.key }))}>
-        {owned.resume.tabs.map((t) => (
-          <Fragment slot={t.key}>
-            <PickGrid
-              variant="carousel"
-              label={`Pick up where you left off: ${t.label}`}
-              groups={[{ id: `resume-${t.key}`, title: '', blurb: '', items: t.items.slice(0, CAROUSEL) }]}
-              cta={seeAll('games/pick-up', t.key, t.items.length, t.key === 'all' ? 'games' : `${t.label} games`)}
-              matchHint={hint}
-            />
-          </Fragment>
-        ))}
-      </Tabs>
-    </section>
+    <CarouselSection id="resume" title="Pick up where you left off" items={started.items.slice(0, CAROUSEL)} seeAll={{ href: url('games/pick-up'), count: started.items.length }} matchHint={hint} />
 
-    <section id="new">
-      <h2>New games</h2>
-      <Tabs id="new-tabs" label="New games by store" tabs={fresh.map((t) => ({ key: t.key, label: t.label, source: t.key === 'all' ? undefined : t.key }))}>
-        {fresh.map((t) => (
-          <Fragment slot={t.key}>
-            <PickGrid
-              variant="carousel"
-              label={`New games: ${t.label}`}
-              groups={[{ id: `new-${t.key}`, title: '', blurb: '', items: t.items.slice(0, CAROUSEL) }]}
-              cta={seeAll('games/new', t.key, t.items.length, t.key === 'all' ? 'new games' : `${t.label} picks`)}
-              matchHint="How closely it matches your play history. Compared within its own store."
-            />
-          </Fragment>
-        ))}
-      </Tabs>
-    </section>
+    <CarouselSection
+      id="new"
+      title="New games"
+      items={newest.items.slice(0, CAROUSEL)}
+      seeAll={{ href: url('games/new'), count: newest.items.length }}
+      matchHint="How closely it matches your play history. Compared within its own store."
+    />
 
-    {sale.length > 0 && (
-      <section id="sale">
-        <h2>On sale now</h2>
-        <Tabs id="sale-tabs" label="Sales by store" tabs={sale.map((t) => ({ key: t.key, label: t.label, source: t.key === 'all' ? undefined : t.key }))}>
-          {sale.map((t) => (
-            <Fragment slot={t.key}>
-              <PickGrid
-                variant="carousel"
-                label={`On sale: ${t.label}`}
-                groups={[{ id: `sale-${t.key}`, title: '', blurb: '', items: t.items.slice(0, CAROUSEL) }]}
-                cta={seeAll('games/on-sale', t.key, t.items.length, t.key === 'all' ? 'deals' : `${t.label} deals`)}
-                matchHint="How closely it matches your play history. Compared within its own store."
-              />
-            </Fragment>
-          ))}
-        </Tabs>
-      </section>
-    )}
+    {
+      discounted && (
+        <CarouselSection
+          id="sale"
+          title="On sale now"
+          items={discounted.items.slice(0, CAROUSEL)}
+          seeAll={{ href: url('games/on-sale'), count: discounted.items.length }}
+          matchHint="How closely it matches your play history. Compared within its own store."
+        />
+      )
+    }
 
     <section id="value">
       <h2>Value</h2>
