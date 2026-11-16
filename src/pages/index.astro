@@ -1,12 +1,16 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import { getProjects, getSettings, projectUrl } from '../lib/content';
+import { getExperiments, getProjects, getSettings, experimentHref, projectUrl } from '../lib/content';
 import pixelPattern from '../assets/patterns/pixel-pattern.svg';
 
 const settings = await getSettings();
-// The showcase is all about the imagery, so only featured projects with a cover make it in.
-const featured = (await getProjects()).filter((p) => p.data.featured && p.data.cover);
+// The showcase is all about the imagery, so only featured projects and experiments with a cover make it in.
+// Projects come first, then experiments.
+const featured = [
+  ...(await getProjects()).map((p) => ({ data: p.data, href: projectUrl(p) })),
+  ...(await getExperiments()).map((e) => ({ data: e.data, href: experimentHref(e) })),
+].filter((item) => item.data.featured && item.data.cover);
 ---
 
 <Base description={settings?.headline}>
@@ -18,7 +22,7 @@ const featured = (await getProjects()).filter((p) => p.data.featured && p.data.c
           <ul class="slides">
             {featured.map((project, i) => (
               <li class="slide" data-active={i === 0 ? '' : undefined} aria-roledescription="slide" aria-label={`${i + 1} of ${featured.length}`}>
-                <a href={projectUrl(project)} aria-label={project.data.title}>
+                <a href={project.href} aria-label={project.data.title}>
                   <Image src={project.data.cover!} alt={project.data.coverAlt ?? ''} width={1800} height={1000} loading="eager" />
                 </a>
               </li>

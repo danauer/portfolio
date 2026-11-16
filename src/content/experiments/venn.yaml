@@ -1,5 +1,6 @@
 title: Venn
 status: published
+featured: true
 link: /venn/
 summary: A doubler plugin for Logic and other DAWs. It adds a delayed, saturated, EQ’d copy of the sound underneath the original.
 cover: ../../assets/images/experiments/venn/cover.jpg
