@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # Conductor workspace scratch
 .context/
+
+# Steam sync metadata cache
+.cache/

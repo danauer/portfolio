@@ -1,0 +1,200 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PsnHeader from '../../../components/games/PsnHeader.astro';
+import Tooltip from '../../../components/steam/Tooltip.astro';
+import Panel from '../../../components/steam/Panel.astro';
+import BarList from '../../../components/steam/BarList.astro';
+import SegmentedBar from '../../../components/steam/SegmentedBar.astro';
+import Columns from '../../../components/steam/Columns.astro';
+import { analyzePsn, snapshot, storeUrl } from '../../../lib/psn';
+import { date, hours, num, pct } from '../../../lib/format';
+import '../../../styles/steam.css';
+
+const a = analyzePsn();
+const t = a.totals;
+const tr = a.trophies;
+const top1 = a.top[0];
+const top5Share = a.concentration.filter((c) => c.key === 'first' || c.key === 'next4').reduce((n, c) => n + c.minutes, 0) / (t.totalMinutes || 1);
+const busiestStart = [...a.startedByYear].sort((x, y) => y.count - x.count)[0];
+const sinceYear = a.startedByYear[0]?.year;
+const day = (unix: number | null) => (unix ? date(unix) : '—');
+const iso = (s: string) => date(new Date(s).getTime() / 1000);
+const gameHref = (g: { conceptId: number | null }) => (g.conceptId != null ? storeUrl(g.conceptId) : undefined);
+---
+
+<Base title="PlayStation · Under the hood" description="Playtime and trophies from my PlayStation library.">
+  <div class="steam source-psn">
+    <PsnHeader />
+
+    <dl class="stats">
+      <div class="stat hero">
+        <dt>hours played across {num(t.played)} games</dt>
+        <dd>{num(t.totalMinutes / 60)}</dd>
+        {t.avgPerDay != null && <span class="hint">About {Math.round(t.avgPerDay)} minutes a day since {sinceYear}</span>}
+      </div>
+      <div class="stat">
+        <dt>Trophy level</dt>
+        <dd>{tr.level}</dd>
+        <span class="hint">{tr.progress}% to the next level</span>
+      </div>
+      <div class="stat">
+        <dt>Trophies earned</dt>
+        <dd>{num(tr.total)}</dd>
+        <span class="hint">{num(tr.earned.gold)} gold · {num(tr.earned.silver)} silver · {num(tr.earned.bronze)} bronze</span>
+      </div>
+      <div class="stat">
+        <dt>Platinums</dt>
+        <dd>{num(tr.earned.platinum)}</dd>
+        <span class="hint">Every trophy in {tr.earned.platinum === 1 ? 'a game' : `${tr.earned.platinum} games`}</span>
+      </div>
+      <div class="stat">
+        <dt>Trophy lists started</dt>
+        <dd>{num(tr.sets)}</dd>
+      </div>
+    </dl>
+
+    <h2>Where the time goes</h2>
+    <p class="section-note">
+      {top1 && <>{top1.name} alone accounts for {pct(top1.share)} of all playtime, and the top five for {pct(top5Share)}.</>}
+      {' '}PS4 and PS5 versions of the same game are counted together.
+    </p>
+    <div class="panels">
+      <Panel title="Most played" note="Total hours, all time">
+        <BarList
+          rows={a.top.map((g) => ({
+            label: g.name,
+            value: g.minutes,
+            display: hours(g.minutes),
+            detail: `${pct(g.share, 1)} of all playtime`,
+            href: gameHref(g),
+            image: g.image,
+          }))}
+        />
+        <table slot="table">
+          <thead><tr><th>Game</th><th class="n">Hours</th><th class="n">Share</th><th class="n">Sessions</th><th>Last played</th></tr></thead>
+          <tbody>
+            {a.top.map((g) => (
+              <tr><td>{g.name}</td><td class="n">{num(g.minutes / 60)}</td><td class="n">{pct(g.share, 1)}</td><td class="n">{num(g.playCount)}</td><td>{day(g.lastPlayed)}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </Panel>
+
+      <div class="panel-stack" style="display: flex; flex-direction: column; gap: var(--gap);">
+        <Panel title="How concentrated it is" note={`Share of ${num(t.totalMinutes / 60)} hours`}>
+          <SegmentedBar label="Share of playtime" parts={a.concentration.map((c) => ({ label: c.label, value: c.minutes, display: hours(c.minutes) }))} />
+          <table slot="table">
+            <thead><tr><th>Group</th><th class="n">Hours</th><th class="n">Share</th></tr></thead>
+            <tbody>{a.concentration.map((c) => <tr><td>{c.label}</td><td class="n">{num(c.minutes / 60)}</td><td class="n">{pct(c.minutes / t.totalMinutes, 1)}</td></tr>)}</tbody>
+          </table>
+        </Panel>
+
+        {a.generations.length > 1 && (
+          <Panel title="PS4 vs. PS5" note="Hours on each console generation">
+            <SegmentedBar label="Playtime by console" parts={a.generations.map((g) => ({ label: g.generation, value: g.minutes, display: hours(g.minutes) }))} />
+            <table slot="table">
+              <thead><tr><th>Console</th><th class="n">Hours</th></tr></thead>
+              <tbody>{a.generations.map((g) => <tr><td>{g.generation}</td><td class="n">{num(g.minutes / 60)}</td></tr>)}</tbody>
+            </table>
+          </Panel>
+        )}
+
+        <Panel title="Played most recently" note="Latest session per game">
+          <ul class="game-list">
+            {a.recent.slice(0, 5).map((g) => (
+              <li>
+                {g.image ? <img src={g.image} alt="" loading="lazy" /> : <span />}
+                <span class="title">{g.name}<span class="meta-line">{hours(g.minutes)} in total</span></span>
+                <span class="figure">{day(g.lastPlayed)}</span>
+              </li>
+            ))}
+          </ul>
+        </Panel>
+      </div>
+    </div>
+
+    <h2>Over the years</h2>
+    <p class="section-note">
+      PlayStation records when each game was first and last launched, so you can see when games arrived and when they went quiet.
+      {busiestStart && <> {busiestStart.year} was the year you started the most games ({busiestStart.count}).</>}
+    </p>
+    <div class="panels">
+      <Panel title="Games started per year" note="Year each game was first launched">
+        <Columns columns={a.startedByYear.map((y) => ({ label: String(y.year), value: y.count, display: `${y.count} game${y.count === 1 ? '' : 's'} · ${hours(y.minutes)} so far` }))} every={Math.max(1, Math.ceil(a.startedByYear.length / 6))} />
+        <table slot="table">
+          <thead><tr><th>Year</th><th class="n">Games</th><th class="n">Hours in those games</th></tr></thead>
+          <tbody>{a.startedByYear.map((y) => <tr><td>{y.year}</td><td class="n">{y.count}</td><td class="n">{num(y.minutes / 60)}</td></tr>)}</tbody>
+        </table>
+      </Panel>
+      <Panel title="Games last played per year" note="Year each game was last launched">
+        <Columns columns={a.lastPlayedByYear.map((y) => ({ label: String(y.year), value: y.count, display: `${y.count} game${y.count === 1 ? '' : 's'}` }))} every={Math.max(1, Math.ceil(a.lastPlayedByYear.length / 6))} />
+        <table slot="table">
+          <thead><tr><th>Year</th><th class="n">Games</th></tr></thead>
+          <tbody>{a.lastPlayedByYear.map((y) => <tr><td>{y.year}</td><td class="n">{y.count}</td></tr>)}</tbody>
+        </table>
+      </Panel>
+    </div>
+
+    <h2>Trophies</h2>
+    <p class="section-note">
+      Trophy lists are matched to games by title, so a few remasters and renamed games are missing from the completion list.
+    </p>
+    <div class="panels">
+      <Panel title="Completion in your most-played games">
+        <ul class="game-list">
+          {a.completion.map((g) => (
+            <li>
+              {g.image ? <img src={g.image} alt="" loading="lazy" /> : <span />}
+              <span class="title">
+                {g.name}
+                <span class="meter" data-tip-value={`${g.trophy!.progress}% of trophies`} data-tip-label={g.name}><span style={`--w: ${g.trophy!.progress}%`} /></span>
+              </span>
+              <span class="figure">{g.trophy!.progress}%{g.trophy!.earned.platinum > 0 && <small>Platinum</small>}</span>
+            </li>
+          ))}
+        </ul>
+      </Panel>
+
+      {a.closest.length > 0 && (
+        <Panel title="Closest to a platinum" note="Games with a platinum you haven't earned yet">
+          <ul class="game-list">
+            {a.closest.map((c) => (
+              <li>
+                <img src={c.icon} alt="" loading="lazy" />
+                <span class="title">
+                  {c.name}
+                  <span class="meter" data-tip-value={`${c.progress}% of trophies`} data-tip-label={c.name}><span style={`--w: ${c.progress}%`} /></span>
+                </span>
+                <span class="figure">{c.progress}%<small>last earned {iso(c.lastEarned)}</small></span>
+              </li>
+            ))}
+          </ul>
+        </Panel>
+      )}
+
+      {a.platinums.length > 0 && (
+        <Panel title="Platinums earned" note="Most recent first">
+          <ul class="game-list">
+            {a.platinums.map((c) => (
+              <li>
+                <img src={c.icon} alt="" loading="lazy" />
+                <span class="title">{c.name}<span class="meta-line">{c.platform.replaceAll(',', ' / ')}</span></span>
+                <span class="figure">{iso(c.lastEarned)}</span>
+              </li>
+            ))}
+          </ul>
+        </Panel>
+      )}
+    </div>
+
+    <p class="source">
+      Data from the PlayStation Network, captured {date(new Date(snapshot.generatedAt).getTime() / 1000)}. Sony has no public API, so this comes from
+      unofficial endpoints and only covers games played on this account.
+    </p>
+  </div>
+  <Tooltip />
+</Base>
+
+<style>
+  .source { margin-top: 3.5rem; font-size: 0.8rem; color: var(--text-tertiary); max-width: 42rem; }
+</style>

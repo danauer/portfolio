@@ -1,0 +1,35 @@
+---
+import { snapshot, date, num } from '../../lib/steam';
+import HoodNav from '../games/HoodNav.astro';
+
+const { profile, demo, generatedAt } = snapshot;
+const since = profile.createdAt ? new Date(profile.createdAt * 1000).getUTCFullYear() : null;
+---
+
+<div class="steam-head">
+  <HoodNav current="steam" />
+  {demo && (
+    <p class="demo-note" role="note">
+      <strong>Sample data.</strong> This library is made up from real popular games so the page can be reviewed.
+      Run <code>npm run steam:sync</code> with a Steam ID to replace it.
+    </p>
+  )}
+  <div class="who">
+    {profile.avatar ? <img class="avatar" src={profile.avatar} alt="" width="64" height="64" /> : <span class="avatar" aria-hidden="true" />}
+    <div>
+      <h1>
+        <a href={profile.profileUrl} rel="noopener">{profile.name}</a> on Steam
+      </h1>
+      <p class="sub">
+        {[
+          since && `Member since ${since}`,
+          profile.level != null && `Level ${profile.level}`,
+          profile.badges != null && `${num(profile.badges)} badges`,
+          `Updated ${date(new Date(generatedAt).getTime() / 1000)}`,
+        ]
+          .filter(Boolean)
+          .join(' · ')}
+      </p>
+    </div>
+  </div>
+</div>

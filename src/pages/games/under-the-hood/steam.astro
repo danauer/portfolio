@@ -1,0 +1,258 @@
+---
+import Base from '../../../layouts/Base.astro';
+import SteamHeader from '../../../components/steam/SteamHeader.astro';
+import Tooltip from '../../../components/steam/Tooltip.astro';
+import Panel from '../../../components/steam/Panel.astro';
+import BarList from '../../../components/steam/BarList.astro';
+import SegmentedBar from '../../../components/steam/SegmentedBar.astro';
+import Columns from '../../../components/steam/Columns.astro';
+import Heatmap from '../../../components/steam/Heatmap.astro';
+import { analyze, capsule, date, hours, money, num, pct, storeUrl, snapshot } from '../../../lib/steam';
+import '../../../styles/steam.css';
+
+const a = analyze();
+const t = a.totals;
+const top1 = a.top[0];
+const top5Share = a.concentration.filter((c) => c.key === 'first' || c.key === 'next4').reduce((n, c) => n + c.minutes, 0) / (t.totalMinutes || 1);
+const tagMax = Math.max(...a.tags.flatMap((x) => [x.hoursShare, x.libraryShare]), 0.01);
+const tagScale = Math.ceil(tagMax * 10) / 10;
+const busiestYear = [...a.releaseYears].sort((x, y) => y.minutes - x.minutes)[0];
+const sweetSpot = a.tags.reduce((best, x) => (x.hoursShare - x.libraryShare > best.hoursShare - best.libraryShare ? x : best), a.tags[0]);
+const lastPlayedPeak = [...a.lastPlayedYears].sort((x, y) => y[1] - x[1])[0];
+---
+
+<Base title="Steam · Under the hood" description="Playtime, taste and achievements from my Steam library.">
+  <div class="steam source-steam">
+    <SteamHeader />
+
+    <dl class="stats">
+      <div class="stat hero">
+        <dt>hours played across {num(t.played)} games</dt>
+        <dd>{num(t.totalMinutes / 60)}</dd>
+        {t.avgPerDay != null && <span class="hint">About {Math.round(t.avgPerDay)} minutes a day since joining Steam</span>}
+      </div>
+      <div class="stat">
+        <dt>Games owned</dt>
+        <dd>{num(t.games)}</dd>
+      </div>
+      <div class="stat">
+        <dt>Never launched</dt>
+        <dd>{num(t.unplayed)}</dd>
+        <span class="hint">{pct(t.unplayed / (t.games || 1))} of the library</span>
+      </div>
+      <div class="stat">
+        <dt>Library value today</dt>
+        <dd>{money(t.libraryValue)}</dd>
+        <span class="hint">{money(t.costPerHour, 2)} per hour played</span>
+      </div>
+      {t.achTotal > 0 && (
+        <>
+          <div class="stat">
+            <dt>Achievements</dt>
+            <dd>{num(t.achUnlocked)}</dd>
+            <span class="hint">{pct(t.achUnlocked / t.achTotal)} of {num(t.achTotal)} available</span>
+          </div>
+          <div class="stat">
+            <dt>Perfect games</dt>
+            <dd>{num(t.perfect.length)}</dd>
+            <span class="hint">Every achievement unlocked</span>
+          </div>
+        </>
+      )}
+    </dl>
+
+    <h2>Where the time goes</h2>
+    <p class="section-note">
+      {top1 && <>{top1.name} alone accounts for {pct(top1.share)} of all playtime, and the top five for {pct(top5Share)}.</>}
+    </p>
+    <div class="panels">
+      <Panel title="Most played" note="Total hours, all time">
+        <BarList
+          rows={a.top.map((g) => ({
+            label: g.name,
+            value: g.minutes,
+            display: hours(g.minutes),
+            detail: `${pct(g.share, 1)} of all playtime`,
+            href: storeUrl(g.appid),
+            image: capsule(g.appid),
+          }))}
+        />
+        <table slot="table">
+          <thead><tr><th>Game</th><th class="n">Hours</th><th class="n">Share</th><th>Last played</th></tr></thead>
+          <tbody>
+            {a.top.map((g) => (
+              <tr><td>{g.name}</td><td class="n">{num(g.minutes / 60)}</td><td class="n">{pct(g.share, 1)}</td><td>{g.lastPlayed ? date(g.lastPlayed) : '—'}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </Panel>
+
+      <div class="panel-stack" style="display: flex; flex-direction: column; gap: var(--gap);">
+        <Panel title="How concentrated it is" note={`Share of ${num(t.totalMinutes / 60)} hours`}>
+          <SegmentedBar label="Share of playtime" parts={a.concentration.map((c) => ({ label: c.label, value: c.minutes, display: hours(c.minutes) }))} />
+          <table slot="table">
+            <thead><tr><th>Group</th><th class="n">Hours</th><th class="n">Share</th></tr></thead>
+            <tbody>{a.concentration.map((c) => <tr><td>{c.label}</td><td class="n">{num(c.minutes / 60)}</td><td class="n">{pct(c.minutes / t.totalMinutes, 1)}</td></tr>)}</tbody>
+          </table>
+        </Panel>
+
+        {a.platforms.length > 1 && (
+          <Panel title="Where it's played" note={`${hours(a.platforms.reduce((n, p) => n + p.minutes, 0))} with platform data. Steam only started recording platforms in recent years`}>
+            <SegmentedBar label="Playtime by platform" parts={a.platforms.map((p) => ({ label: p.label, value: p.minutes, display: hours(p.minutes) }))} />
+            <table slot="table">
+              <thead><tr><th>Platform</th><th class="n">Hours</th></tr></thead>
+              <tbody>{a.platforms.map((p) => <tr><td>{p.label}</td><td class="n">{num(p.minutes / 60)}</td></tr>)}</tbody>
+            </table>
+          </Panel>
+        )}
+
+        <Panel title="Last two weeks" note={a.recent.length ? `${hours(a.recent.reduce((n, g) => n + g.minutes2w, 0))} across ${a.recent.length} game${a.recent.length === 1 ? '' : 's'}` : 'Nothing played recently'}>
+          {a.recent.length > 0 && (
+            <BarList rows={a.recent.slice(0, 6).map((g) => ({ label: g.name, value: g.minutes2w, display: hours(g.minutes2w), href: storeUrl(g.appid) }))} />
+          )}
+        </Panel>
+      </div>
+    </div>
+
+    <h2>Value</h2>
+    <p class="section-note">Priced at today's full US list price, not what was actually paid, so treat these as rough.</p>
+    <div class="panels" style="grid-template-columns: minmax(0, 32rem);">
+      <Panel title="Best value per hour" note="Paid games with at least 2 hours">
+        <ul class="game-list">
+          {a.bestValue.map((g) => (
+            <li>
+              <img src={g.header || capsule(g.appid)} alt="" loading="lazy" />
+              <span class="title"><a href={storeUrl(g.appid)}>{g.name}</a><span class="meta-line">{money(g.priceCents, 2)} · {hours(g.minutes)}</span></span>
+              <span class="figure">{money(g.perHour, 2)}<small>per hour</small></span>
+            </li>
+          ))}
+        </ul>
+      </Panel>
+    </div>
+
+    <h2>Taste</h2>
+    <p class="section-note">
+      Steam user tags across the library, comparing what you own with what you actually play.{' '}
+      {sweetSpot && sweetSpot.hoursShare > sweetSpot.libraryShare && <>{sweetSpot.name} games punch furthest above their weight: {pct(sweetSpot.libraryShare)} of the library, {pct(sweetSpot.hoursShare)} of the hours.</>}
+    </p>
+    <div class="panels">
+      <Panel title="What you buy vs. what you play" note="Share of games carrying each tag, and share of hours spent in them">
+        <ul class="legend">
+          <li><span class="swatch dot" style="background: var(--viz-1)" />Share of hours</li>
+          <li><span class="swatch dot" style="background: var(--viz-2)" />Share of library</li>
+        </ul>
+        <ul class="dumbbell">
+          {a.tags.map((x) => {
+            const h = (100 * x.hoursShare) / tagScale, l = (100 * x.libraryShare) / tagScale;
+            return (
+              <li>
+                <span class="name">{x.name}</span>
+                <span class="db-track" data-tip-value={`${pct(x.hoursShare)} of hours · ${pct(x.libraryShare)} of library`} data-tip-label={`${x.name} (${x.count} games)`}>
+                  <span class="db-link" style={`left: ${Math.min(h, l)}%; width: ${Math.abs(h - l)}%`} />
+                  <span class="db-dot library" style={`left: ${l}%`} />
+                  <span class="db-dot hours" style={`left: ${h}%`} />
+                </span>
+              </li>
+            );
+          })}
+          <li>
+            <span />
+            <span class="db-axis" aria-hidden="true"><span>0%</span><span>{pct(tagScale / 2)}</span><span>{pct(tagScale)}</span></span>
+          </li>
+        </ul>
+        <table slot="table">
+          <thead><tr><th>Tag</th><th class="n">Hours</th><th class="n">Library</th><th class="n">Games</th></tr></thead>
+          <tbody>{a.tags.map((x) => <tr><td>{x.name}</td><td class="n">{pct(x.hoursShare, 1)}</td><td class="n">{pct(x.libraryShare, 1)}</td><td class="n">{x.count}</td></tr>)}</tbody>
+        </table>
+      </Panel>
+
+      <Panel title="Hours by release year" note={busiestYear ? `Games from ${busiestYear.year} got the most time` : undefined}>
+        <Columns columns={a.releaseYears.map((y) => ({ label: String(y.year), value: y.minutes / 60, display: `${hours(y.minutes)} · ${y.count} game${y.count === 1 ? '' : 's'}` }))} every={Math.max(1, Math.ceil(a.releaseYears.length / 6))} unit=" h" />
+        <table slot="table">
+          <thead><tr><th>Release year</th><th class="n">Games</th><th class="n">Hours</th></tr></thead>
+          <tbody>{a.releaseYears.filter((y) => y.count).map((y) => <tr><td>{y.year}</td><td class="n">{y.count}</td><td class="n">{num(y.minutes / 60)}</td></tr>)}</tbody>
+        </table>
+      </Panel>
+
+      <Panel title="You vs. the typical player" note="Your hours compared with the median owner's, in your most-played games">
+        <ul class="game-list">
+          {a.vsCrowd.map((g) => (
+            <li>
+              <img src={capsule(g.appid)} alt="" loading="lazy" />
+              <span class="title">
+                <a href={storeUrl(g.appid)}>{g.name}</a>
+                <span class="meta-line">You {hours(g.minutes)} · median {hours(g.medianMinutes!)}</span>
+              </span>
+              <span class="figure">{g.ratio >= 10 ? Math.round(g.ratio) : g.ratio.toFixed(1)}×</span>
+            </li>
+          ))}
+        </ul>
+      </Panel>
+    </div>
+
+    {a.activity.length > 0 && (
+      <>
+        <h2>Activity over time</h2>
+        <p class="section-note">
+          Steam doesn't share a play log, but achievements carry timestamps. Unlocks per month are a decent proxy for when you were playing.{' '}
+          {lastPlayedPeak && <> More of your played games were last opened in {lastPlayedPeak[0]} than in any other year.</>}
+        </p>
+        <div class="panels">
+          <Panel title="Achievement unlocks by month" wide>
+            <Heatmap rows={a.activity} max={a.activityMax} unit="unlocks" />
+            <table slot="table">
+              <thead><tr><th>Year</th>{['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map((m) => <th class="n">{m}</th>)}</tr></thead>
+              <tbody>{a.activity.map((r) => <tr><td>{r.year}</td>{r.months.map((v) => <td class="n">{v || ''}</td>)}</tr>)}</tbody>
+            </table>
+          </Panel>
+        </div>
+      </>
+    )}
+
+    {(a.completion.length > 0 || a.rarest.length > 0) && (
+      <>
+        <h2>Achievements</h2>
+        <div class="panels">
+          <Panel title="Completion in your most-played games">
+            <ul class="game-list">
+              {a.completion.map((g) => (
+                <li>
+                  <img src={capsule(g.appid)} alt="" loading="lazy" />
+                  <span class="title">
+                    {g.name}
+                    <span class="meter" data-tip-value={`${g.achievements!.unlocked} of ${g.achievements!.total}`} data-tip-label={g.name}><span style={`--w: ${g.ratio * 100}%`} /></span>
+                  </span>
+                  <span class="figure">{pct(g.ratio)}<small>{g.achievements!.unlocked}/{g.achievements!.total}</small></span>
+                </li>
+              ))}
+            </ul>
+          </Panel>
+          <Panel title="Rarest unlocks" note="Share of all owners who have each one">
+            <ul class="game-list">
+              {a.rarest.map((r) => (
+                <li>
+                  <img src={capsule(r.appid)} alt="" loading="lazy" />
+                  <span class="title">
+                    {r.name}
+                    <span class="meta-line">{r.game}{r.unlockedAt ? ` · ${date(r.unlockedAt)}` : ''}</span>
+                  </span>
+                  <span class="figure">{r.percent < 10 ? r.percent.toFixed(1) : Math.round(r.percent)}%</span>
+                </li>
+              ))}
+            </ul>
+          </Panel>
+        </div>
+      </>
+    )}
+
+    <p class="source">
+      Data from the Steam Web API, the Steam store and SteamSpy, captured {date(new Date(snapshot.generatedAt).getTime() / 1000)}. Tags are Steam
+      user tags; median playtimes are SteamSpy estimates.
+    </p>
+  </div>
+  <Tooltip />
+</Base>
+
+<style>
+  .source { margin-top: 3.5rem; font-size: 0.8rem; color: var(--text-tertiary); max-width: 42rem; }
+</style>

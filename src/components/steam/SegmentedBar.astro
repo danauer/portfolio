@@ -1,0 +1,44 @@
+---
+// One whole split into parts (tall segmented bar). Share prints inside a block
+// only when the block is wide enough; the legend names the parts in order.
+interface Part {
+  label: string;
+  value: number;
+  display: string;
+  /** Palette step (1–4) or a platform key; defaults to the part's position. */
+  slot?: number | string;
+}
+interface Props {
+  parts: Part[];
+  label: string;
+}
+const { parts, label } = Astro.props;
+const total = parts.reduce((n, p) => n + p.value, 0) || 1;
+const share = (p: Part) => p.value / total;
+---
+
+<div class="segmented" role="img" aria-label={`${label}: ${parts.map((p) => `${p.label} ${Math.round(share(p) * 100)}%`).join(', ')}`}>
+  {
+    parts.map((p, i) => (
+      <span
+        class="segment"
+        data-slot={p.slot ?? i + 1}
+        style={`flex-grow: ${p.value}`}
+        data-tip-value={`${Math.round(share(p) * 100)}% · ${p.display}`}
+        data-tip-label={p.label}
+      >
+        {share(p) >= 0.09 && <span class="segment-label">{Math.round(share(p) * 100)}%</span>}
+      </span>
+    ))
+  }
+</div>
+<ul class="legend">
+  {
+    parts.map((p, i) => (
+      <li>
+        <span class="swatch" data-slot={p.slot ?? i + 1} />
+        {p.label}
+      </li>
+    ))
+  }
+</ul>

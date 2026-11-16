@@ -1,0 +1,2758 @@
+{
+ "generatedAt": "2026-11-14T19:14:44.027Z",
+ "catalog": 8760,
+ "profile": [
+  {
+   "genre": "Action",
+   "weight": 311
+  },
+  {
+   "genre": "RPG",
+   "weight": 198
+  },
+  {
+   "genre": "Third-person shooter",
+   "weight": 160.2
+  },
+  {
+   "genre": "First-person shooter",
+   "weight": 142.8
+  },
+  {
+   "genre": "Fantasy",
+   "weight": 132.2
+  },
+  {
+   "genre": "Shooter",
+   "weight": 126.1
+  },
+  {
+   "genre": "Adventure",
+   "weight": 110.8
+  },
+  {
+   "genre": "Combat",
+   "weight": 57.4
+  },
+  {
+   "genre": "Unique",
+   "weight": 52.9
+  },
+  {
+   "genre": "Racing",
+   "weight": 39.5
+  }
+ ],
+ "candidates": 7506,
+ "groups": [
+  {
+   "id": "best",
+   "title": "Best matches",
+   "blurb": "The closest fit to the genres you actually spend time in, weighted toward what is selling well.",
+   "items": [
+    {
+     "id": "UP1001-CUSA10455_00-BORDERLANDSHD001",
+     "name": "Borderlands: Game of the Year Edition",
+     "image": "https://image.api.playstation.com/cdn/UP1001/CUSA10455_00/Jh9FGEyhpYvi3BCx9HCVWATBxIw8fS0U.jpg",
+     "platforms": [
+      "PS4"
+     ],
+     "priceCents": 2999,
+     "fullPriceCents": 2999,
+     "discount": 0,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "RPG",
+      "Shooter",
+      "First-person shooter"
+     ],
+     "sharedGenres": [
+      "Action",
+      "RPG",
+      "First-person shooter"
+     ],
+     "because": [
+      "Destiny 2",
+      "DEATH STRANDING 2: ON THE BEACH"
+     ],
+     "match": 94,
+     "rank": 48
+    },
+    {
+     "id": "UP0082-PPSA35901_00-KHHD1525RMX00000",
+     "name": "KINGDOM HEARTS -HD 1.5+2.5 ReMIX-",
+     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202604/3008/939dfe84ba48f9d729eca1745c93c7b095dda6a2060e30dd.png",
+     "platforms": [
+      "PS5",
+      "PS4"
+     ],
+     "priceCents": 2399,
+     "fullPriceCents": 3999,
+     "discount": 40,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "RPG",
+      "Fantasy"
+     ],
+     "sharedGenres": [
+      "Action",
+      "RPG",
+      "Fantasy"
+     ],
+     "because": [
+      "ELDEN RING",
+      "Persona 5"
+     ],
+     "match": 90,
+     "rank": 13
+    },
+    {
+     "id": "UP0700-CUSA03388_00-DARKSOULS3000000",
+     "name": "DARK SOULS III",
+     "image": "https://image.api.playstation.com/cdn/UP0700/CUSA03388_00/yZAswaCjMOV3bOase0iDGtt7rxrkeSH9.jpg",
+     "platforms": [
+      "PS4"
+     ],
+     "priceCents": 2999,
+     "fullPriceCents": 5999,
+     "discount": 50,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "Adventure",
+      "RPG"
+     ],
+     "sharedGenres": [
+      "Action",
+      "RPG",
+      "Adventure"
+     ],
+     "because": [
+      "The Last of Us Part II",
+      "DEATH STRANDING 2: ON THE BEACH"
+     ],
+     "match": 87,
+     "rank": 7
+    },
+    {
+     "id": "UP0082-CUSA12031_00-KINGDOMHEARTSX30",
+     "name": "KINGDOM HEARTS III",
+     "image": "https://image.api.playstation.com/cdn/UP0082/CUSA12031_00/2cDLg6Rr5WDa2lvYmli45ytrd9it9zrv.png",
+     "platforms": [
+      "PS4"
+     ],
+     "priceCents": 3999,
+     "fullPriceCents": 3999,
+     "discount": 0,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "RPG",
+      "Fantasy"
+     ],
+     "sharedGenres": [
+      "Action",
+      "RPG",
+      "Fantasy"
+     ],
+     "because": [
+      "ELDEN RING",
+      "Persona 5"
+     ],
+     "match": 90,
+     "rank": 36
+    },
+    {
+     "id": "UP6798-CUSA27997_00-3979602401675957",
+     "name": "Baldur's Gate: Dark Alliance",
+     "image": "https://image.api.playstation.com/vulcan/img/rnd/202105/0718/Gvq2Bu0kU0ThjIuGkvsw0QkG.png",
+     "platforms": [
+      "PS4"
+     ],
+     "priceCents": 2879,
+     "fullPriceCents": 3599,
+     "discount": 20,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "RPG"
+     ],
+     "sharedGenres": [
+      "Action",
+      "RPG"
+     ],
+     "because": [
+      "DEATH STRANDING 2: ON THE BEACH",
+      "DEATH STRANDING"
+     ],
+     "match": 87,
+     "rank": 21
+    },
+    {
+     "id": "JP6347-PPSA35790_00-0987547802872025",
+     "name": "Solo Leveling: ARISE OVERDRIVE",
+     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202604/2202/1da123169d3324ebc636ffc6fd43f1b0560c552a700c9982.png",
+     "platforms": [
+      "PS5"
+     ],
+     "priceCents": 3999,
+     "fullPriceCents": 3999,
+     "discount": 0,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "RPG"
+     ],
+     "sharedGenres": [
+      "Action",
+      "RPG"
+     ],
+     "because": [
+      "DEATH STRANDING 2: ON THE BEACH",
+      "DEATH STRANDING"
+     ],
+     "match": 87,
+     "rank": 41
+    },
+    {
+     "id": "UP0700-CUSA14156_00-NINOKUNIWOTWW000",
+     "name": "Ni no Kuni: Wrath of the White Witch Remastered",
+     "image": "https://image.api.playstation.com/vulcan/img/cfn/11307MFLl1WFSHSn_0kcAKJlD9r2bgHsvIudRBg2A2DMMgoo2Q36_Bw_VGdQeRF5-ZJoxkmTetbK0XGkfqQURCDCcpEX-2oF.jpg",
+     "platforms": [
+      "PS4"
+     ],
+     "priceCents": 699,
+     "fullPriceCents": 4999,
+     "discount": 86,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "Adventure",
+      "RPG",
+      "Fantasy"
+     ],
+     "sharedGenres": [
+      "Action",
+      "RPG",
+      "Fantasy"
+     ],
+     "because": [
+      "ELDEN RING",
+      "Persona 5"
+     ],
+     "match": 91,
+     "rank": 85
+    },
+    {
+     "id": "JP0101-PPSA35399_00-CVBCAPP000000000",
+     "name": "Castlevania: Belmont's Curse",
+     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202605/2108/465024d4aee5ed0415e27c14e8777561e2aad4edd1880836.png",
+     "platforms": [
+      "PS5"
+     ],
+     "priceCents": 2999,
+     "fullPriceCents": 2999,
+     "discount": 0,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "RPG"
+     ],
+     "sharedGenres": [
+      "Action",
+      "RPG"
+     ],
+     "because": [
+      "DEATH STRANDING 2: ON THE BEACH",
+      "DEATH STRANDING"
+     ],
+     "match": 87,
+     "rank": 52
+    },
+    {
+     "id": "JP0700-PPSA22969_00-SWORDARTONLINEV0",
+     "name": "Echoes of Aincrad",
+     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202602/1808/16bce1240f0a9ef7803949007e574fea4866d4b7d360ce3f.png",
+     "platforms": [
+      "PS5"
+     ],
+     "priceCents": 4899,
+     "fullPriceCents": 6999,
+     "discount": 30,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "RPG"
+     ],
+     "sharedGenres": [
+      "Action",
+      "RPG"
+     ],
+     "because": [
+      "DEATH STRANDING 2: ON THE BEACH",
+      "DEATH STRANDING"
+     ],
+     "match": 87,
+     "rank": 67
+    },
+    {
+     "id": "EP1833-PPSA02391_00-DUNEAWAKENING000",
+     "name": "Dune: Awakening",
+     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202605/1512/5da5d1652f34ad8af5ff93db75500d0cd36fbedf5dcfbb47.jpg",
+     "platforms": [
+      "PS5"
+     ],
+     "priceCents": 4999,
+     "fullPriceCents": 4999,
+     "discount": 0,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "Adventure",
+      "RPG",
+      "Third-person shooter",
+      "Fantasy"
+     ],
+     "sharedGenres": [
+      "Action",
+      "RPG",
+      "Third-person shooter"
+     ],
+     "because": [
+      "ELDEN RING",
+      "Persona 5"
+     ],
+     "match": 98,
+     "rank": 178
+    },
+    {
+     "id": "UP4389-CUSA14899_00-DAH1REMAKEUS0000",
+     "name": "Destroy All Humans!",
+     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202006/1809/wY18brLfl3x2YFmUcgOoYq6T.png",
+     "platforms": [
+      "PS4"
+     ],
+     "priceCents": 1399,
+     "fullPriceCents": 3999,
+     "discount": 65,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "Third-person shooter",
+      "Shooter"
+     ],
+     "sharedGenres": [
+      "Action",
+      "Third-person shooter",
+      "Shooter"
+     ],
+     "because": [
+      "Destiny 2",
+      "Returnal"
+     ],
+     "match": 81,
+     "rank": 35
+    },
+    {
+     "id": "UP5844-PPSA37266_00-RUBIKS000000SIEA",
+     "name": "The Wolf Among Us Remastered",
+     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202605/2713/9b6e61a7522cc88098310588a38e2954a3d10be6fcf44eee.png",
+     "platforms": [
+      "PS5",
+      "PS4"
+     ],
+     "priceCents": 2499,
+     "fullPriceCents": 2499,
+     "discount": 0,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Adventure",
+      "RPG",
+      "Action"
+     ],
+     "sharedGenres": [
+      "Action",
+      "RPG",
+      "Adventure"
+     ],
+     "because": [
+      "The Last of Us Part II",
+      "DEATH STRANDING 2: ON THE BEACH"
+     ],
+     "match": 87,
+     "rank": 88
+    }
+   ]
+  },
+  {
+   "id": "now",
+   "title": "Best sellers right now",
+   "blurb": "The PlayStation Store’s current top sellers, ranked by fit.",
+   "items": [
+    {
+     "id": "EP4137-PPSA32539_00-0013250200429445",
+     "name": "Enshrouded",
+     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202609/1010/1c559f44d5d16523f4dd45f9e17686c3575114842c242e53.jpg",
+     "platforms": [
+      "PS5"
+     ],
+     "priceCents": 3999,
+     "fullPriceCents": 3999,
+     "discount": 0,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "Adventure",
+      "Fantasy"
+     ],
+     "sharedGenres": [
+      "Action",
+      "Fantasy",
+      "Adventure"
+     ],
+     "because": [
+      "The Last of Us Part II",
+      "ELDEN RING NIGHTREIGN"
+     ],
+     "match": 78,
+     "rank": 12
+    },
+    {
+     "id": "UP1032-PPSA22721_00-LORWARINNORTH325",
+     "name": "The Lord of the Rings: War in the North - Legacy Edition",
+     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202607/2020/e4b65e101fea3442a20f9b3d61b162231e7b2a773380a6f5.png",
+     "platforms": [
+      "PS5"
+     ],
+     "priceCents": 1999,
+     "fullPriceCents": 1999,
+     "discount": 0,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "RPG",
+      "Fantasy"
+     ],
+     "sharedGenres": [
+      "Action",
+      "RPG",
+      "Fantasy"
+     ],
+     "because": [
+      "ELDEN RING",
+      "Persona 5"
+     ],
+     "match": 90,
+     "rank": 129
+    },
+    {
+     "id": "EP5778-PPSA33563_00-WARHAMSURV000001",
+     "name": "Warhammer Survivors",
+     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202601/1916/9b153ba554c2375f4ba62bd67963e3778e70ff3a8a944f9d.png",
+     "platforms": [
+      "PS5"
+     ],
+     "priceCents": 799,
+     "fullPriceCents": 799,
+     "discount": 0,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "RPG"
+     ],
+     "sharedGenres": [
+      "Action",
+      "RPG"
+     ],
+     "because": [
+      "DEATH STRANDING 2: ON THE BEACH",
+      "DEATH STRANDING"
+     ],
+     "match": 87,
+     "rank": 108
+    },
+    {
+     "id": "UP9000-PPSA19249_00-LAUFEY0000000000",
+     "name": "God of War Laufey",
+     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202609/1800/8a8dda6861c67918a6ae808617ba3c1ce8d0e7298992e531.png",
+     "platforms": [
+      "PS5"
+     ],
+     "priceCents": 6999,
+     "fullPriceCents": 6999,
+     "discount": 0,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "Fantasy"
+     ],
+     "sharedGenres": [
+      "Action",
+      "Fantasy"
+     ],
+     "because": [
+      "ELDEN RING NIGHTREIGN",
+      "DEATH STRANDING 2: ON THE BEACH"
+     ],
+     "match": 76,
+     "rank": 16
+    },
+    {
+     "id": "UP4108-CUSA03804_00-AT1NAHDDGAME0000",
+     "name": "Attack on Titan",
+     "image": "https://image.api.playstation.com/cdn/UP4108/CUSA03804_00/5bfL75Dxgs23EPEVYbgIvhtIc5CP7g98.jpg",
+     "platforms": [
+      "PS4"
+     ],
+     "priceCents": 3999,
+     "fullPriceCents": 3999,
+     "discount": 0,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "Fantasy"
+     ],
+     "sharedGenres": [
+      "Action",
+      "Fantasy"
+     ],
+     "because": [
+      "ELDEN RING NIGHTREIGN",
+      "DEATH STRANDING 2: ON THE BEACH"
+     ],
+     "match": 76,
+     "rank": 16
+    },
+    {
+     "id": "UP0177-CUSA16113_00-BAYONETTAPS4GAME",
+     "name": "Bayonetta",
+     "image": "https://image.api.playstation.com/vulcan/img/cfn/113076a0pyYTMl2832NorZjQTpvMGUb563pNcDI5vQGckpiAy-m5YkQF5d4x8T8v0r-xZeJNBSQbSeT_XmDanipFupYoMVag.jpg",
+     "platforms": [
+      "PS4"
+     ],
+     "priceCents": 624,
+     "fullPriceCents": 2499,
+     "discount": 75,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "Shooter",
+      "Third-person shooter"
+     ],
+     "sharedGenres": [
+      "Action",
+      "Third-person shooter",
+      "Shooter"
+     ],
+     "because": [
+      "Destiny 2",
+      "Returnal"
+     ],
+     "match": 81,
+     "rank": 66
+    },
+    {
+     "id": "EP4837-PPSA28824_00-0VALHEIMBASEGAME",
+     "name": "Valheim",
+     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202608/1907/993a814494d3a141b093eb04bae73163c7ccae76ca98a207.png",
+     "platforms": [
+      "PS5"
+     ],
+     "priceCents": 2399,
+     "fullPriceCents": 2999,
+     "discount": 20,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "Fantasy"
+     ],
+     "sharedGenres": [
+      "Action",
+      "Fantasy"
+     ],
+     "because": [
+      "ELDEN RING NIGHTREIGN",
+      "DEATH STRANDING 2: ON THE BEACH"
+     ],
+     "match": 76,
+     "rank": 19
+    },
+    {
+     "id": "EP6170-PPSA39157_00-DERELIKTGAMEVPS5",
+     "name": "DERELIKT",
+     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202609/2513/0193bee0f21eafb1e45e6074134973f5a139bd126cd65cfe.png",
+     "platforms": [
+      "PS5"
+     ],
+     "priceCents": 1999,
+     "fullPriceCents": 1999,
+     "discount": 0,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action"
+     ],
+     "sharedGenres": [
+      "Action"
+     ],
+     "because": [
+      "DEATH STRANDING 2: ON THE BEACH",
+      "DEATH STRANDING"
+     ],
+     "match": 75,
+     "rank": 14
+    }
+   ]
+  },
+  {
+   "id": "sale",
+   "title": "On sale now",
+   "blurb": "Currently discounted, ranked by fit.",
+   "items": [
+    {
+     "id": "UP2293-CUSA11587_00-SLIMERANCHER0001",
+     "name": "Slime Rancher",
+     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0223/DEjodIamX6T4ORHERUIjB1zx.png",
+     "platforms": [
+      "PS4"
+     ],
+     "priceCents": 499,
+     "fullPriceCents": 1999,
+     "discount": 75,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "Adventure",
+      "Shooter",
+      "First-person shooter"
+     ],
+     "sharedGenres": [
+      "Action",
+      "First-person shooter",
+      "Shooter"
+     ],
+     "because": [
+      "Destiny 2",
+      "Journey To The Savage Planet: Employee Of The Month"
+     ],
+     "match": 84,
+     "rank": 91
+    },
+    {
+     "id": "EP1470-PPSA28311_00-ABSOLUMDOTEMUPS5",
+     "name": "Absolum",
+     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202510/1316/bd22b653fe762a9ac1114397e0b9a94176371c768b3092ea.png",
+     "platforms": [
+      "PS5",
+      "PS4"
+     ],
+     "priceCents": 1499,
+     "fullPriceCents": 2499,
+     "discount": 40,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "Adventure",
+      "Fantasy"
+     ],
+     "sharedGenres": [
+      "Action",
+      "Fantasy",
+      "Adventure"
+     ],
+     "because": [
+      "The Last of Us Part II",
+      "ELDEN RING NIGHTREIGN"
+     ],
+     "match": 78,
+     "rank": 38
+    },
+    {
+     "id": "UP1004-CUSA03513_00-SLUS202300000001",
+     "name": "Max Payne",
+     "image": "https://image.api.playstation.com/cdn/UP1004/CUSA03513_00/lrHNhklky2FFYSfvCDjUtRH5AphkmwYk.png",
+     "platforms": [
+      "PS4"
+     ],
+     "priceCents": 899,
+     "fullPriceCents": 1499,
+     "discount": 40,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action"
+     ],
+     "sharedGenres": [
+      "Action"
+     ],
+     "because": [
+      "DEATH STRANDING 2: ON THE BEACH",
+      "DEATH STRANDING"
+     ],
+     "match": 75,
+     "rank": 19
+    },
+    {
+     "id": "UP9000-PPSA08329_00-GOWRAGNAROK00000",
+     "name": "God of War Ragnarök",
+     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202503/2016/a82f57bddecb4a0baf03f42834dffd3991a682570a519718.png",
+     "platforms": [
+      "PS5",
+      "PS4"
+     ],
+     "priceCents": 2939,
+     "fullPriceCents": 6999,
+     "discount": 58,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "Fantasy"
+     ],
+     "sharedGenres": [
+      "Action",
+      "Fantasy"
+     ],
+     "because": [
+      "ELDEN RING NIGHTREIGN",
+      "DEATH STRANDING 2: ON THE BEACH"
+     ],
+     "match": 76,
+     "rank": 40
+    },
+    {
+     "id": "EP4638-PPSA33862_00-0355584296320741",
+     "name": "Voidtrain",
+     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202601/2719/afb4c162d7173a01e412f70aa5fc5dafe4e431f0a831d2d8.png",
+     "platforms": [
+      "PS5"
+     ],
+     "priceCents": 2249,
+     "fullPriceCents": 2999,
+     "discount": 25,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "Adventure",
+      "RPG",
+      "First-person shooter"
+     ],
+     "sharedGenres": [
+      "Action",
+      "RPG",
+      "First-person shooter"
+     ],
+     "because": [
+      "Journey To The Savage Planet: Employee Of The Month",
+      "The Last of Us Part II"
+     ],
+     "match": 92,
+     "rank": 188
+    },
+    {
+     "id": "UP1004-CUSA03507_00-SLUS212690000001",
+     "name": "Bully",
+     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202408/0802/ec072c1cd3b72838476a53056a923771bc16d08c43d68d3c.png",
+     "platforms": [
+      "PS4"
+     ],
+     "priceCents": 899,
+     "fullPriceCents": 1499,
+     "discount": 40,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "Adventure"
+     ],
+     "sharedGenres": [
+      "Action",
+      "Adventure"
+     ],
+     "because": [
+      "The Last of Us Part II",
+      "DEATH STRANDING 2: ON THE BEACH"
+     ],
+     "match": 72,
+     "rank": 12
+    },
+    {
+     "id": "UB1599-PPSA29343_00-AIBOUSIEA0000000",
+     "name": "Beast of Reincarnation",
+     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202603/2622/90ec8c84dd460708d922d6693ef8c61b3b0443db0b636b23.png",
+     "platforms": [
+      "PS5"
+     ],
+     "priceCents": 4499,
+     "fullPriceCents": 5999,
+     "discount": 25,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "Fantasy"
+     ],
+     "sharedGenres": [
+      "Action",
+      "Fantasy"
+     ],
+     "because": [
+      "ELDEN RING NIGHTREIGN",
+      "DEATH STRANDING 2: ON THE BEACH"
+     ],
+     "match": 76,
+     "rank": 47
+    },
+    {
+     "id": "UP0082-CUSA05235_00-BUILDERS00000000",
+     "name": "DRAGON QUEST BUILDERS",
+     "image": "https://image.api.playstation.com/cdn/UP0082/CUSA05235_00/LSwuGxOVAquEDP4mchCShtzyWREH2fRR.png",
+     "platforms": [
+      "PS4"
+     ],
+     "priceCents": 2999,
+     "fullPriceCents": 5999,
+     "discount": 50,
+     "isFree": false,
+     "plusOnly": false,
+     "genres": [
+      "Action",
+      "Adventure",
+      "RPG"
+     ],
+     "sharedGenres": [
+      "Action",
+      "RPG",
+      "Adventure"
+     ],
+     "because": [
+      "The Last of Us Part II",
+      "DEATH STRANDING 2: ON THE BEACH"
+     ],
+     "match": 87,
+     "rank": 145
+    }
+   ]
+  }
+ ],
+ "owned": {
+  "PPSA16358_00": {
+   "match": 81,
+   "genres": [
+    "Action",
+    "Shooter",
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202408/0713/7241d0f616b8ba356db9508ab8db63b7a7ad50cedcb4a64e.jpg"
+  },
+  "PPSA24662_00": {
+   "match": 10,
+   "genres": [
+    "Racing"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202505/1521/a350d5a46818ea3f37ca4d2a57a95f25df87ebd197eacebc.png"
+  },
+  "PPSA34547_00": {
+   "match": 60,
+   "genres": [
+    "Action",
+    "Combat"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202605/2212/ab81682653f91df36c13d773210fc68d8eb2f0d1f00aad23.png"
+  },
+  "PPSA07632_00": {
+   "match": 49,
+   "genres": [
+    "Shooter",
+    "Third-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202509/2318/56a1375534b11bba4f1d733c915f492c753ac995d3c044ab.png"
+  },
+  "PPSA30803_00": {
+   "match": 75,
+   "genres": [
+    "Action"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202512/1205/b947bedbd3447acba7c7ef4db05adb98b26eddec937bd384.png"
+  },
+  "CUSA18065_00": {
+   "match": 13,
+   "genres": [
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202103/1023/eMYJwDHLjFf1O1SOiN8AZViF.png"
+  },
+  "PPSA02456_00": {
+   "match": 13,
+   "genres": [
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202103/1023/eMYJwDHLjFf1O1SOiN8AZViF.png"
+  },
+  "CUSA36341_00": {
+   "match": 1,
+   "genres": [
+    "Platformer"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202212/0919/BBZZOwHs3cY5SzDT72ESnIC2.png"
+  },
+  "PPSA09864_00": {
+   "match": 1,
+   "genres": [
+    "Platformer"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202212/0919/BBZZOwHs3cY5SzDT72ESnIC2.png"
+  },
+  "PPSA08427_00": {
+   "match": 40,
+   "genres": [
+    "Shooter",
+    "First-person shooter",
+    "Horror"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202609/1119/3fb0e928a19676961e1e2f4b5e06daef1ff6459b13d86046.png"
+  },
+  "PPSA07141_00": {
+   "match": 49,
+   "genres": [
+    "Shooter",
+    "Third-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202409/1019/77439f3dc556e7ac3c153f9b711c8b9a6299040585bbf9e8.png"
+  },
+  "CUSA45934_00": {
+   "match": 2,
+   "genres": [
+    "Horror",
+    "Stealth"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202312/0812/b82fa173dc4219ce828b7fc98cba0571b1db5ba719fc618b.png"
+  },
+  "PPSA05003_00": {
+   "match": 2,
+   "genres": [
+    "Horror",
+    "Stealth"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202312/0812/b82fa173dc4219ce828b7fc98cba0571b1db5ba719fc618b.png"
+  },
+  "CUSA34963_00": {
+   "match": 27,
+   "genres": [
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202308/0320/fed12c02b88caaa381a86621f27bf86eb167b50ebcf70866.png"
+  },
+  "PPSA08765_00": {
+   "match": 27,
+   "genres": [
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202308/0320/fed12c02b88caaa381a86621f27bf86eb167b50ebcf70866.png"
+  },
+  "CUSA46679_00": {
+   "match": 19,
+   "genres": [
+    "Adventure",
+    "Simulation"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202211/1410/mKpVYWwa9EA2eMzkqjvg1Nd4.png"
+  },
+  "PPSA04159_00": {
+   "match": 19,
+   "genres": [
+    "Adventure",
+    "Simulation"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202211/1410/mKpVYWwa9EA2eMzkqjvg1Nd4.png"
+  },
+  "PPSA02571_00": {
+   "match": 3,
+   "genres": [
+    "Horror"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202305/2420/0273d27b39938da5474bdb8c1c7daa285824f5c86e8fcacd.png"
+  },
+  "PPSA09259_00": {
+   "match": 14,
+   "genres": [
+    "Combat"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202505/1909/560f9f5c2a7dbe7d019d4d833a2bdffcae099c16cf91c5d9.png"
+  },
+  "PPSA16215_00": {
+   "match": 27,
+   "genres": [
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202310/1114/96484b1e065162c2c85f0c6424135c53fd383f46541e94f5.png"
+  },
+  "CUSA36828_00": {
+   "match": 27,
+   "genres": [
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202507/1712/6c5aedb1b345a74638700030cb33b5aec89d715db5ccae5d.png"
+  },
+  "PPSA10249_00": {
+   "match": 27,
+   "genres": [
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202507/1712/6c5aedb1b345a74638700030cb33b5aec89d715db5ccae5d.png"
+  },
+  "CUSA27145_00": {
+   "match": 1,
+   "genres": [
+    "Platformer"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202106/2819/D7JlrHRLNbCzIHRhHECOUuXG.png"
+  },
+  "CUSA15510_00": {
+   "match": 70,
+   "genres": [
+    "Adventure",
+    "RPG",
+    "Shooter",
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202301/0312/4XM83rvhbW4tmjjXNWZLPSjM.png"
+  },
+  "CUSA36847_00": {
+   "match": 87,
+   "genres": [
+    "Action",
+    "RPG"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202309/1405/b49a4e9b29a350556f196a3cf370f6d60d039f8332a08ed3.png"
+  },
+  "PPSA10261_00": {
+   "match": 87,
+   "genres": [
+    "Action",
+    "RPG"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202309/1405/b49a4e9b29a350556f196a3cf370f6d60d039f8332a08ed3.png"
+  },
+  "PPSA02015_00": {
+   "match": 75,
+   "genres": [
+    "Action"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202503/0316/d4c1fece1f324c6d8290c68381ed482c52abf656f7bf3599.png"
+  },
+  "CUSA23760_00": {
+   "match": 1,
+   "genres": [
+    "Platformer"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202102/0414/ziXh17v5FMHV0uHXdMRjlUle.png"
+  },
+  "PPSA03446_00": {
+   "match": 1,
+   "genres": [
+    "Platformer"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202102/0414/ziXh17v5FMHV0uHXdMRjlUle.png"
+  },
+  "CUSA50615_00": {
+   "match": 76,
+   "genres": [
+    "Action",
+    "Fantasy"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202501/2901/847facf1048189d5bf1a5b0655b24955c5d10907a6c37bb6.png"
+  },
+  "PPSA25380_00": {
+   "match": 76,
+   "genres": [
+    "Action",
+    "Fantasy"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202501/2901/847facf1048189d5bf1a5b0655b24955c5d10907a6c37bb6.png"
+  },
+  "CUSA47498_00": {
+   "match": 0,
+   "genres": [
+    "Strategy"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202401/2218/264f0147c65a158115e4665bb8c1e051695803c52f268ba1.png"
+  },
+  "PPSA21401_00": {
+   "match": 0,
+   "genres": [
+    "Strategy"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202401/2218/264f0147c65a158115e4665bb8c1e051695803c52f268ba1.png"
+  },
+  "CUSA09977_00": {
+   "match": 48,
+   "genres": [
+    "RPG"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0700/CUSA09977_00/OxZGXRS9wBFxu2ZhDb1HnAUNz8kXpIBq.jpg"
+  },
+  "PPSA05060_00": {
+   "match": 35,
+   "genres": [
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202308/3108/9cb768be905fab6a66c8b881e9a023869ade3081f0e57aa3.png"
+  },
+  "CUSA35220_00": {
+   "match": 2,
+   "genres": [
+    "Horror",
+    "Stealth"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202308/1515/7ff61eb5aeacbe25127fdece3198b99728239ed1eb7c93cb.png"
+  },
+  "PPSA05317_00": {
+   "match": 2,
+   "genres": [
+    "Horror",
+    "Stealth"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202308/1515/7ff61eb5aeacbe25127fdece3198b99728239ed1eb7c93cb.png"
+  },
+  "PPSA24028_00": {
+   "match": 42,
+   "genres": [
+    "Adventure",
+    "Fantasy"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202412/0323/f0b36016c879e36847065270e113a3579e55ab785e630a7a.png"
+  },
+  "CUSA42390_00": {
+   "match": 53,
+   "genres": [
+    "Adventure",
+    "Shooter",
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202307/1416/c9eb000a99327cb9984912b5d676f0b9d3c0ee47ad894b5c.png"
+  },
+  "PPSA15388_00": {
+   "match": 53,
+   "genres": [
+    "Adventure",
+    "Shooter",
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202307/1416/c9eb000a99327cb9984912b5d676f0b9d3c0ee47ad894b5c.png"
+  },
+  "CUSA32075_00": {
+   "match": 77,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202208/0217/YLP8ABGdUCeCjavACfIvSP7m.png"
+  },
+  "PPSA06399_00": {
+   "match": 77,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202208/0217/YLP8ABGdUCeCjavACfIvSP7m.png"
+  },
+  "PPSA14410_00": {
+   "match": 81,
+   "genres": [
+    "Action",
+    "Shooter",
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202609/2219/2950941ef2619a79009047310a1cfa46d94d024167431f95.png"
+  },
+  "PPSA03982_00": {
+   "match": 90,
+   "genres": [
+    "Action",
+    "RPG",
+    "Fantasy"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0922/TqqW6mNFAKEFU1T9Ue7I9wUq.png"
+  },
+  "CUSA45554_00": {
+   "match": 76,
+   "genres": [
+    "Action",
+    "Fantasy"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202501/0915/68c923f9e08c7fefec2e0c78b55fa5b40181b302f651ac86.png"
+  },
+  "PPSA19048_00": {
+   "match": 76,
+   "genres": [
+    "Action",
+    "Fantasy"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202501/0915/68c923f9e08c7fefec2e0c78b55fa5b40181b302f651ac86.png"
+  },
+  "PPSA21564_00": {
+   "match": 75,
+   "genres": [
+    "Action"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202406/0500/b6e09e3d30e86833cd6a83b55e46ac99d2f7626315faf65f.png"
+  },
+  "CUSA30423_00": {
+   "match": 41,
+   "genres": [
+    "Adventure",
+    "Fantasy",
+    "Combat"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202109/2601/8Fx5QRBdN7iPGlFMNTP10fYs.png"
+  },
+  "PPSA05303_00": {
+   "match": 41,
+   "genres": [
+    "Adventure",
+    "Fantasy",
+    "Combat"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202109/2601/8Fx5QRBdN7iPGlFMNTP10fYs.png"
+  },
+  "CUSA07823_00": {
+   "match": 75,
+   "genres": [
+    "Action",
+    "Shooter",
+    "First-person shooter",
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202010/2322/cTZOljXldZ7XWAbRdnAkCtM8.png"
+  },
+  "PPSA01462_00": {
+   "match": 75,
+   "genres": [
+    "Action",
+    "Shooter",
+    "First-person shooter",
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202010/2322/cTZOljXldZ7XWAbRdnAkCtM8.png"
+  },
+  "PPSA11193_00": {
+   "match": 6,
+   "genres": [
+    "Sports"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202310/2612/c848bcea2e9e7da986171edfcbd7894e2ee2a7b398ad0880.png"
+  },
+  "CUSA27792_00": {
+   "match": null,
+   "genres": [],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202107/0115/2rOPob9lF9bVWmL7EhwGLRyp.png"
+  },
+  "PPSA03595_00": {
+   "match": null,
+   "genres": [],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202107/0115/2rOPob9lF9bVWmL7EhwGLRyp.png"
+  },
+  "CUSA10518_00": {
+   "match": 60,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Horror"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0240/CUSA10518_00/mZyFRHxRBYbJdhcKdJElCz7GnOMGFWDA.png"
+  },
+  "CUSA20207_00": {
+   "match": 19,
+   "genres": [
+    "Adventure",
+    "Puzzle"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202009/2421/mZFAleA8WrzKR39ZRpHNU7Nm.png"
+  },
+  "CUSA42226_00": {
+   "match": 0,
+   "genres": [
+    "Puzzle"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202307/1714/9bb4fc2f47c886362821ed03ada757a4e498eee8f353b755.png"
+  },
+  "PPSA10965_00": {
+   "match": 10,
+   "genres": [
+    "Racing"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202312/0710/900d5418e9e49972583a4f3d8c7ba2f234c11e2a4de8adb2.png"
+  },
+  "CUSA04841_00": {
+   "match": 65,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202608/1015/757692dd98deec0eb3b10e8820600faa5e79467574c227c2.png"
+  },
+  "PPSA02110_00": {
+   "match": 65,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202608/1015/757692dd98deec0eb3b10e8820600faa5e79467574c227c2.png"
+  },
+  "CUSA33400_00": {
+   "match": 47,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Horror",
+    "Stealth"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202312/0613/095411f12a8dc6ec1043f7feb2c44391dc48f06ddc31db01.png"
+  },
+  "PPSA07425_00": {
+   "match": 47,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Horror",
+    "Stealth"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202312/0613/095411f12a8dc6ec1043f7feb2c44391dc48f06ddc31db01.png"
+  },
+  "CUSA30202_00": {
+   "match": 75,
+   "genres": [
+    "Action"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202201/1716/GjKNa6S5Y1kQ2PXlrzitZOj0.png"
+  },
+  "PPSA05132_00": {
+   "match": 75,
+   "genres": [
+    "Action"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202201/1716/GjKNa6S5Y1kQ2PXlrzitZOj0.png"
+  },
+  "CUSA05042_00": {
+   "match": 60,
+   "genres": [
+    "Shooter",
+    "First-person shooter",
+    "Third-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202605/2700/772a28241f8ba007aa157d74498243525c248f4a875dfa42.png"
+  },
+  "PPSA02409_00": {
+   "match": 60,
+   "genres": [
+    "Shooter",
+    "First-person shooter",
+    "Third-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202605/2700/772a28241f8ba007aa157d74498243525c248f4a875dfa42.png"
+  },
+  "CUSA24898_00": {
+   "match": 20,
+   "genres": [
+    "Adventure",
+    "Platformer"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202206/0300/p0rol28kU4hnxFCXREjDs5qb.png"
+  },
+  "PPSA02100_00": {
+   "match": 20,
+   "genres": [
+    "Adventure",
+    "Platformer"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202206/0300/p0rol28kU4hnxFCXREjDs5qb.png"
+  },
+  "CUSA27007_00": {
+   "match": 39,
+   "genres": [
+    "Third-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202503/1417/b2e88f8cd4b656e3005a1f72c129bf1d05813ec7cb4cdf36.png"
+  },
+  "PPSA04020_00": {
+   "match": 39,
+   "genres": [
+    "Third-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202503/1417/b2e88f8cd4b656e3005a1f72c129bf1d05813ec7cb4cdf36.png"
+  },
+  "CUSA13933_00": {
+   "match": 21,
+   "genres": [
+    "Adventure",
+    "Horror"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202209/0918/nEQXgzt6IygkKL98MQawK15Y.png"
+  },
+  "CUSA19035_00": {
+   "match": 54,
+   "genres": [
+    "Action",
+    "Platformer"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202102/2418/8wbcfCJQLqqdN0u1eh4vZ1Tu.png"
+  },
+  "PPSA02432_00": {
+   "match": 54,
+   "genres": [
+    "Action",
+    "Platformer"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202102/2418/8wbcfCJQLqqdN0u1eh4vZ1Tu.png"
+  },
+  "PPSA01337_00": {
+   "match": 27,
+   "genres": [
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2800/HdJa36S14QvsIBWcdMxRITY1.png"
+  },
+  "PPSA01736_00": {
+   "match": 0,
+   "genres": [
+    "Strategy"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0810/uMTBM5YFjZaQo8Mqh26t6TUp.png"
+  },
+  "CUSA30035_00": {
+   "match": 35,
+   "genres": [
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202110/2902/YfeB0brxC9DrWp4k44PLTkCK.png"
+  },
+  "CUSA28863_00": {
+   "match": 57,
+   "genres": [
+    "RPG",
+    "Fantasy"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202110/2000/ZmqYfcMqlAbRB1s0XClGgwBc.png"
+  },
+  "PPSA04610_00": {
+   "match": 57,
+   "genres": [
+    "RPG",
+    "Fantasy"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202110/2000/ZmqYfcMqlAbRB1s0XClGgwBc.png"
+  },
+  "CUSA16596_00": {
+   "match": 13,
+   "genres": [
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202012/0812/XNCVHQC82IvhX5Gu112FS4gX.png"
+  },
+  "PPSA03974_00": {
+   "match": 13,
+   "genres": [
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202202/1015/blUvStfX95h8t5S4aO3pwebk.png"
+  },
+  "CUSA16195_00": {
+   "match": 13,
+   "genres": [
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202010/2811/hXxL5yYfkbMBHDYDFlixHUky.png"
+  },
+  "PPSA01552_00": {
+   "match": 13,
+   "genres": [
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202010/2811/hXxL5yYfkbMBHDYDFlixHUky.png"
+  },
+  "CUSA26860_00": {
+   "match": 81,
+   "genres": [
+    "Action",
+    "Shooter",
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202111/2310/03Y3bFq2J1lKCDLkwXleOFEt.png"
+  },
+  "PPSA02967_00": {
+   "match": 81,
+   "genres": [
+    "Action",
+    "Shooter",
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202111/2310/03Y3bFq2J1lKCDLkwXleOFEt.png"
+  },
+  "CUSA19640_00": {
+   "match": 60,
+   "genres": [
+    "Action",
+    "Combat"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202011/1015/rFy1hQZKi5aXld7K62Vy4YvM.png"
+  },
+  "PPSA02422_00": {
+   "match": 46,
+   "genres": [
+    "Shooter",
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202506/2317/e21bc8f369a1edeea998a51be7f4e078ca6f7694050fb23b.png"
+  },
+  "CUSA14275_00": {
+   "match": 46,
+   "genres": [
+    "Shooter",
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202011/2021/UoWk3wsa1ZrpSj5zWmYzwru5.png"
+  },
+  "PPSA01695_00": {
+   "match": 46,
+   "genres": [
+    "Shooter",
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202011/2021/UoWk3wsa1ZrpSj5zWmYzwru5.png"
+  },
+  "CUSA24652_00": {
+   "match": 75,
+   "genres": [
+    "Action"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202109/2709/wjVIStfNFLs6rYbTe6IKDAqx.png"
+  },
+  "PPSA01924_00": {
+   "match": 75,
+   "genres": [
+    "Action"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202109/2709/wjVIStfNFLs6rYbTe6IKDAqx.png"
+  },
+  "PPSA01969_00": {
+   "match": 75,
+   "genres": [
+    "Action"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202106/2214/oP26q4BVa6RJk2CnJllYms2q.jpg"
+  },
+  "CUSA15400_00": {
+   "match": 35,
+   "genres": [
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202010/2821/3RJmRM2k8jGNfA1bp0JViP6Y.png"
+  },
+  "PPSA01529_00": {
+   "match": 0,
+   "genres": [
+    "Simulation"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202303/1413/444145d15b099532c9c49f6ab78cba6a38963f5641ab9620.png"
+  },
+  "PPSA01302_00": {
+   "match": 35,
+   "genres": [
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202108/2622/QEn3bQvQ4ROF8tGyE3pp6cOp.png"
+  },
+  "CUSA10863_00": {
+   "match": 31,
+   "genres": [
+    "Shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202008/3107/xDxrJaYx0HfTT5KQELM1MeR8.png"
+  },
+  "CUSA18331_00": {
+   "match": 13,
+   "genres": [
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202006/2617/vTFdM8FkYYxXvUfLzOmjY3zt.png"
+  },
+  "PPSA02225_00": {
+   "match": 13,
+   "genres": [
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202108/2722/GnxwbKpSziGlxdOoDOaqFKIY.png"
+  },
+  "PPSA03243_00": {
+   "match": 19,
+   "genres": [
+    "Adventure",
+    "Puzzle"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202103/1614/NvfBNN4KfEmKtbNGgcroMvPp.png"
+  },
+  "CUSA19500_00": {
+   "match": 13,
+   "genres": [
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202101/2517/uPF5PSCML4uAxIKPNQ4OBZTN.png"
+  },
+  "PPSA01284_00": {
+   "match": 49,
+   "genres": [
+    "Shooter",
+    "Third-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202011/1621/X2Qex2nMaLxX6M1z4jyeHcwD.png"
+  },
+  "CUSA02429_00": {
+   "match": 46,
+   "genres": [
+    "Shooter",
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0006/CUSA02429_00/3mDOoluodQ03cnF3cdIKlFTgGS8nE9Yl.jpg"
+  },
+  "CUSA00359_00": {
+   "match": 21,
+   "genres": [
+    "Adventure",
+    "Horror"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202010/2818/8Z5VS0PBc0hb7xt7yauIL82O.png"
+  },
+  "CUSA08966_00": {
+   "match": 60,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Horror"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202011/1118/LYG4Er1FjLGDLbkhm5nBxx4U.png"
+  },
+  "CUSA07713_00": {
+   "match": 75,
+   "genres": [
+    "Action"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0102/CUSA07713_00/2WWXLsN6upPzh2Y8uEC9tYqJg0PYUgQt.jpg"
+  },
+  "CUSA02557_00": {
+   "match": 48,
+   "genres": [
+    "RPG"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202511/1013/2696111d8f21464e9995ae9bea9c2254d973be465030ed75.png"
+  },
+  "CUSA00967_00": {
+   "match": 0,
+   "genres": [
+    "Fighting"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP1018/CUSA00967_00/5qUomx38PSHOJ5Krej4YQYkPmfqSonCW.png"
+  },
+  "CUSA07402_00": {
+   "match": 60,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Platformer"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0002/CUSA07402_00/j95OOcXv9EX4QOublRTfoOZtywFwkI6w.jpg"
+  },
+  "PPSA01590_00": {
+   "match": 1,
+   "genres": [
+    "Platformer"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202111/1114/DlI5O10QIjXRHcMfMLZqu9ht.png"
+  },
+  "CUSA04179_00": {
+   "match": 35,
+   "genres": [
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP9000/CUSA04179_00/y75BOmC4ukOs7UsWig4wFzwXBSdvOxQV.jpg"
+  },
+  "PPSA01831_00": {
+   "match": 0,
+   "genres": [
+    "Puzzle"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202010/2700/mfMVaRsT4kqbe2DLE8uD4xjD.png"
+  },
+  "CUSA24933_00": {
+   "match": 10,
+   "genres": [
+    "Puzzle",
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202008/3107/ntqTBALwjEsC7HwID63HGjrh.png"
+  },
+  "PPSA01949_00": {
+   "match": 75,
+   "genres": [
+    "Action"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202008/2111/oLL2VV76OGQRJck02nG8JaXy.png"
+  },
+  "PPSA01861_00": {
+   "match": 48,
+   "genres": [
+    "RPG"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/cfn/11307COCaLujMpDYZGMbwNvbN1dm5Btl4bkuZWMpYXW61trgearL4-cjHCf-xh-jMqN9NfoiUILRuV6npnLF55QlaqUejQ2J.png"
+  },
+  "CUSA14211_00": {
+   "match": 48,
+   "genres": [
+    "RPG"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202106/1516/HX4UWh4FAuJsgPVUMF9OCCQ7.png"
+  },
+  "CUSA23467_00": {
+   "match": 0,
+   "genres": [
+    "Strategy"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202010/2323/X7LZs0SiwPs2CSx48GumKewP.png"
+  },
+  "PPSA01527_00": {
+   "match": 0,
+   "genres": [
+    "Strategy"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202010/2323/X7LZs0SiwPs2CSx48GumKewP.png"
+  },
+  "CUSA16867_00": {
+   "match": 23,
+   "genres": [
+    "Adventure",
+    "Puzzle",
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/cfn/11307HatSBLFbBR1P0px2x-jbGSrqUloeTOfvNgk2-f6E364InMfJ8BPilGtFTz0xruSGvsBLXnxu9_Au_Ipdxtu3lIITouS.png"
+  },
+  "CUSA17722_00": {
+   "match": 60,
+   "genres": [
+    "Action",
+    "Combat"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202008/1420/QmDbRbOdncasHjipz2S7FgJe.png"
+  },
+  "PPSA01411_00": {
+   "match": 60,
+   "genres": [
+    "Action",
+    "Combat"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202008/1420/QmDbRbOdncasHjipz2S7FgJe.png"
+  },
+  "PPSA01467_00": {
+   "match": 60,
+   "genres": [
+    "Action",
+    "Combat"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202009/3021/zY84vuDYAaowA6F8V9ooZiCl.png"
+  },
+  "CUSA14836_00": {
+   "match": 59,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Puzzle"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP2611/CUSA14836_00/vwBWM2cSByMTN05ob5pbtbVTdx8W7mW1.jpg"
+  },
+  "CUSA18522_00": {
+   "match": 48,
+   "genres": [
+    "RPG"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202011/0302/01quIFlCq8SsABef4U70Tnks.jpg"
+  },
+  "PPSA01491_00": {
+   "match": 48,
+   "genres": [
+    "RPG"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202011/0302/01quIFlCq8SsABef4U70Tnks.jpg"
+  },
+  "PPSA01342_00": {
+   "match": 75,
+   "genres": [
+    "Action"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202011/1717/aQudhGjRwf4yCMUV6HktwmAC.png"
+  },
+  "PPSA01502_00": {
+   "match": 27,
+   "genres": [
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202008/1905/kKxyFzWhYE7roILnszR9ZGgn.png"
+  },
+  "CUSA04408_00": {
+   "match": 87,
+   "genres": [
+    "Action",
+    "Adventure",
+    "RPG"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP1018/CUSA04408_00/v5anCCAULcC6z29hdd9XMWiq3X5h2Pcy.jpg"
+  },
+  "CUSA15080_00": {
+   "match": 13,
+   "genres": [
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202009/2410/qvrjDIz4cK95QAfC3g3Rqtcr.png"
+  },
+  "CUSA14081_00": {
+   "match": 35,
+   "genres": [
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202602/0504/de4e74b5db4cf9e4f42a15882ca201ea492accc0640d8087.jpg"
+  },
+  "CUSA11456_00": {
+   "match": 13,
+   "genres": [
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202108/2722/GnxwbKpSziGlxdOoDOaqFKIY.png"
+  },
+  "CUSA11655_00": {
+   "match": 27,
+   "genres": [
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/cfn/11307CCQbozhp5cSZJH6DH5qWd6eGE_tLPtK735t2jSjj9NA9ZnPGe_nGL7ShRBpve-CygdZ5Gvvs_cVjSuxcu9-drcsIT2I.jpg"
+  },
+  "CUSA07820_00": {
+   "match": 72,
+   "genres": [
+    "Action",
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202010/2618/5c1dtDljgLbrTf7V9SYFc4D0.png"
+  },
+  "CUSA05770_00": {
+   "match": 84,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Shooter",
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0006/CUSA05770_00/yVTWkDNOkzegAlX3OJr73ZpGTkS9oB1v.jpg"
+  },
+  "CUSA05610_00": {
+   "match": 44,
+   "genres": [
+    "Action",
+    "Stealth"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0101/CUSA05610_00/WpKAgh3WKQINKnxLSjkCyWe3BhSgxz4A.jpg"
+  },
+  "CUSA03962_00": {
+   "match": 79,
+   "genres": [
+    "Action",
+    "Adventure",
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202206/0207/V6IViuKogBMRtajqjnYrcj0e.png"
+  },
+  "CUSA17416_00": {
+   "match": 48,
+   "genres": [
+    "RPG"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202209/0708/tft3BkgzxrmNe92jsZbMQy9S.png"
+  },
+  "CUSA03041_00": {
+   "match": 72,
+   "genres": [
+    "Action",
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202011/1718/KueUvaOs2KveeJu7COUPGatu.jpg"
+  },
+  "CUSA11598_00": {
+   "match": 0,
+   "genres": [
+    "Simulation",
+    "Simulator"
+   ],
+   "image": "https://image.api.playstation.com/cdn/EP4133/CUSA11593_00/g65yUawrEx0O5GKU9km1RGWKTTKGp0gt.png"
+  },
+  "CUSA06548_00": {
+   "match": 0,
+   "genres": [
+    "Simulation",
+    "Simulator"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202302/1408/df3b8fd32c457baaa03c0c818143ae498356cc3bb52d668c.png"
+  },
+  "CUSA13879_00": {
+   "match": 1,
+   "genres": [
+    "Platformer"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0700/CUSA13879_00/YkbIpa3bamuSpBOUyxVyE92eG1A3v7Z6.jpg"
+  },
+  "CUSA00920_00": {
+   "match": 40,
+   "genres": [
+    "Action",
+    "Fighting",
+    "Arcade"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP2143/CUSA00920_00/q5V9KJLb3qdFN2M2w6425R56yt15AoOd.png"
+  },
+  "CUSA07640_00": {
+   "match": 47,
+   "genres": [
+    "Action",
+    "Fighting"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP2143/CUSA07640_00/3TKavOs51Ohh1RjOAvoa33AQh9e2Wa8R.jpg"
+  },
+  "CUSA00368_00": {
+   "match": 75,
+   "genres": [
+    "Action"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202104/3018/KPwn9hc7kubewj3VQoXsjfN8.png"
+  },
+  "CUSA00486_00": {
+   "match": 53,
+   "genres": [
+    "Action",
+    "Arcade"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP3643/CUSA00486_00/T1mmY3q3rilwXOL7WddwzgEChcdIJaAz.png"
+  },
+  "CUSA02572_00": {
+   "match": 27,
+   "genres": [
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP4040/CUSA02572_00/sPuUdNJ0inzoLMPXEsr7F3zXZoKLBCZB.jpg"
+  },
+  "CUSA12819_00": {
+   "match": 9,
+   "genres": [
+    "Simulation",
+    "Racing",
+    "Sports"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/cfn/11307pzxG4JW9p2YiGfNiTyqZtKvp1cbOxg5D9JcnSQvBlak0oFbYZqaRHhF3VFs9vpJinyR-kBHLhoTB34ov6kAULY17aGM.png"
+  },
+  "CUSA07211_00": {
+   "match": 48,
+   "genres": [
+    "RPG"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0082/CUSA07211_00/vNSwtmjVvoF3dtF9ajgbMAktcoIN9Rpw.png"
+  },
+  "CUSA14168_00": {
+   "match": 72,
+   "genres": [
+    "Action",
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202206/0206/WmriZBRlSeXWEEDLJOWW7MdW.png"
+  },
+  "CUSA13338_00": {
+   "match": 35,
+   "genres": [
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0116/HkglGOeruGKqeju4ki9g0rXL.png"
+  },
+  "CUSA16287_00": {
+   "match": 46,
+   "genres": [
+    "Shooter",
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202009/2405/4ilUFaTyRVuvTeFvKwdgWoG7.png"
+  },
+  "CUSA09193_00": {
+   "match": 60,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Horror"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202206/0204/uDFoGvnMTTCLVmTwjj0njGWC.png"
+  },
+  "CUSA08034_00": {
+   "match": 72,
+   "genres": [
+    "Action",
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202010/2823/PrHhn64rGQoXEI2ZCxqeRFhM.png"
+  },
+  "CUSA09831_00": {
+   "match": 35,
+   "genres": [
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP9000/CUSA09831_00/QAjL9DblQijhjEv9hElX3YWR696i6K0A.jpg"
+  },
+  "CUSA02768_00": {
+   "match": 59,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Simulation"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP4415/CUSA02768_00/4E2BQXbe6ArXunsKvcyziEaT0pOryWIb.png"
+  },
+  "CUSA02320_00": {
+   "match": 72,
+   "genres": [
+    "Action",
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202011/1101/pU4jqPrzsCsM782XkWn8zXti.png"
+  },
+  "CUSA13434_00": {
+   "match": 75,
+   "genres": [
+    "Action"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0101/CUSA13434_00/pDpTfEI9XZw40gWCXGRQa3VA2gutIvXv.jpg"
+  },
+  "CUSA06809_00": {
+   "match": 60,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Platformer"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0102/CUSA06809_00/NXQ4SWiJBYWoNLqE77bBjc7JuhbYwDl9.jpg"
+  },
+  "CUSA09929_00": {
+   "match": 41,
+   "genres": [
+    "Adventure",
+    "Fantasy",
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202208/1623/qkXDZO3zq1mZanNHkRxUoo7a.png"
+  },
+  "CUSA16285_00": {
+   "match": 87,
+   "genres": [
+    "Action",
+    "RPG"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/cfn/11307mjZ42sTTSBa_50mf9sBjbNuIB0mKxIPPBerZRv3kLmU5S_xBIiOC3eay5gIQnMR1HzvzP0b7EBOJA3op_gwznM7Fvp4.png"
+  },
+  "CUSA13041_00": {
+   "match": 42,
+   "genres": [
+    "RPG",
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/cfn/11307Fal1ku4vUJlo5Tn9oztw6sJY2BPeNQLTwSoBRXAVJtIVcRBEB_NNMBNIXDfDqv90RVB24HyR7ejEY-EjhKm_Pch38P2.png"
+  },
+  "CUSA09938_00": {
+   "match": 10,
+   "genres": [
+    "Racing"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP1981/CUSA09938_00/rXi4M5ioJbN0Lz4cD8xTj8zHdE8LNeu0.jpg"
+  },
+  "CUSA09487_00": {
+   "match": 39,
+   "genres": [
+    "Third-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP2898/CUSA09487_00/m2wnpndaYlec394xKsGFaAcyHP07FvNY.jpg"
+  },
+  "CUSA06623_00": {
+   "match": 39,
+   "genres": [
+    "Action",
+    "Horror",
+    "Stealth"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP2113/CUSA06623_00/I5b5Cv2unQRaeihHbDTWCXCALRh9xHae.jpg"
+  },
+  "CUSA11227_00": {
+   "match": 72,
+   "genres": [
+    "Action",
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP9000/CUSA11227_00/TsBiG7lx0ICmwmH8kBKLMEvac3oRzWRp.png"
+  },
+  "CUSA02085_00": {
+   "match": 46,
+   "genres": [
+    "Shooter",
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202009/3000/RT6aARYXrw8zsLj4GVRmO05Q.png"
+  },
+  "CUSA13084_00": {
+   "match": 81,
+   "genres": [
+    "Action",
+    "Shooter",
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0605/Y1uyrvjxVunYUEAHCwf3K0FW.png"
+  },
+  "CUSA11540_00": {
+   "match": 27,
+   "genres": [
+    "First-person shooter",
+    "Horror"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/cfn/11307eqKzNJEWaKTenXlZO6dxErltG2ncdjSGOtyUAbiplCA7XVXR_UUeprVlVZV8bujnb-aMx3zhbd3SseSxyEiWosGkNeJ.jpg"
+  },
+  "CUSA07000_00": {
+   "match": 48,
+   "genres": [
+    "RPG"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/cfn/11307U_km2tQzkiaGlioBPdas0SKjavX4bxK4yl5eUHiFKO4QmBTQgcbgU7DhAdo2cZmcvslFWonJ2mtQhaUbTrhiQk6_Jb8.jpg"
+  },
+  "CUSA00552_00": {
+   "match": 72,
+   "genres": [
+    "Action",
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202010/2716/BBqU20XqwVuBXS3F3mvaSiLE.png"
+  },
+  "CUSA00133_00": {
+   "match": 72,
+   "genres": [
+    "Action",
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP1018/CUSA00133_00/F2fKC8IzIn3JDDVNR1W6seYqFCwJMRtl.jpg"
+  },
+  "CUSA08880_00": {
+   "match": 87,
+   "genres": [
+    "Action",
+    "RPG"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP4389/CUSA08880_00/kx9spVte3GaijZHXsM9i4mEFGrvFOZ3w.jpg"
+  },
+  "CUSA03980_00": {
+   "match": 75,
+   "genres": [
+    "Action",
+    "Shooter"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202610/2622/28f7d31ca2a0991aa8e7744966992bbe3115ca63cdf23d4a.png"
+  },
+  "CUSA11461_00": {
+   "match": 75,
+   "genres": [
+    "Action"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202008/2111/oLL2VV76OGQRJck02nG8JaXy.png"
+  },
+  "CUSA10483_00": {
+   "match": 60,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Platformer"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0006/CUSA10483_00/Iae6I5msmM2mDIhlaOUqeoCN9nlcwef6.jpg"
+  },
+  "CUSA02299_00": {
+   "match": 60,
+   "genres": [
+    "Action",
+    "Combat"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202009/3021/zY84vuDYAaowA6F8V9ooZiCl.png"
+  },
+  "CUSA03627_00": {
+   "match": 72,
+   "genres": [
+    "Action",
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202010/2817/AYiHoXyL8sWOtbzCooNVQRgO.png"
+  },
+  "CUSA04220_00": {
+   "match": 39,
+   "genres": [
+    "Third-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP4363/CUSA04220_00/BRNZPzDh66gPiUFF8PQ8Mc0T2I0BT8hM.jpg"
+  },
+  "CUSA07671_00": {
+   "match": 10,
+   "genres": [
+    "Racing"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202010/2822/c9RyTJAxKpCR5O0xWJPYK6Of.png"
+  },
+  "CUSA07023_00": {
+   "match": 60,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Platformer"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0177/CUSA07023_00/h4XXV2bCzF4EYbGiOSL5wXeDh9QDG3wv.jpg"
+  },
+  "CUSA04126_00": {
+   "match": 0,
+   "genres": [
+    "Puzzle"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0082/CUSA04126_00/FyKVrTZdA3j3GbygQWWEjucZCy1E7E8p.jpg"
+  },
+  "CUSA06460_00": {
+   "match": 0,
+   "genres": [
+    "Strategy"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0082/CUSA06460_00/aDwSl3Vjx0Pwnsxk53rcIEQuG9miGbzA.jpg"
+  },
+  "CUSA09072_00": {
+   "match": 0,
+   "genres": [
+    "Fighting"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202402/2206/0e8ea74c2cfef33f2f32b1fecd63617283e344747e450484.png"
+  },
+  "CUSA06216_00": {
+   "match": 6,
+   "genres": [
+    "Sports"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP1482/CUSA06216_00/sHqQlGy2QhJgsbz98uxwTAkoWxnc0DBJ.jpg"
+  },
+  "CUSA08580_00": {
+   "match": 60,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Platformer"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP1665/CUSA08580_00/ACHoFe2GPYzlyWtFHaxnTxKvVnruOsDr.jpg"
+  },
+  "CUSA05092_00": {
+   "match": 28,
+   "genres": [
+    "Adventure",
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP4395/CUSA05092_00/dKaAmdaIJZK4nByIdqXnla96mzrthvOH.jpg"
+  },
+  "CUSA06886_00": {
+   "match": 21,
+   "genres": [
+    "Adventure",
+    "Horror"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP2470/CUSA06886_00/ELjVKGwipuNkJlbxhrjEIJlaAdDuSCKm.png"
+  },
+  "CUSA05724_00": {
+   "match": 75,
+   "genres": [
+    "Action"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP4064/CUSA05724_00/vtkeQWZCCxZfUaPZjnyqSBNPXaT95rh0.jpg"
+  },
+  "CUSA10608_00": {
+   "match": 78,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Fantasy"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202410/1607/825ac7f316e18b0464fa62f50c3ac3f7400ff2278b586cb2.png"
+  },
+  "CUSA03522_00": {
+   "match": 46,
+   "genres": [
+    "Shooter",
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0002/CUSA03522_00/dZKT5X7Q3pd8RJwyL1PxIy5yxoW8qnKy.jpg"
+  },
+  "CUSA00498_00": {
+   "match": 23,
+   "genres": [
+    "Adventure",
+    "Puzzle",
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP2124/CUSA00498_00/yHYnnTnFcTunTmiO7VMzcgQi8U44ZRTZ.png"
+  },
+  "CUSA09627_00": {
+   "match": 0,
+   "genres": [
+    "Strategy"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP4221/CUSA09627_00/7mo4dpIQb8A63wve9EmEPOfbJ8VxJrX4.jpg"
+  },
+  "CUSA05489_00": {
+   "match": 6,
+   "genres": [
+    "Sports"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0001/CUSA05489_00/rDnhrMo4OPqzI7h3P4yqUgqycbUh8pg9.jpg"
+  },
+  "CUSA06266_00": {
+   "match": 91,
+   "genres": [
+    "Action",
+    "Adventure",
+    "RPG",
+    "Fantasy"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP4040/CUSA06266_00/ONJ3Igzuc0mYn13Dsaz4GjNf1YzkIf8B.jpg"
+  },
+  "CUSA03333_00": {
+   "match": 15,
+   "genres": [
+    "Adventure",
+    "Horror",
+    "Stealth"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP1192/CUSA03333_00/FOYX4KFQqpy8NZ2i5FVaN5zwH0mkTJyu.png"
+  },
+  "CUSA07143_00": {
+   "match": 46,
+   "genres": [
+    "Shooter",
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0292/CUSA07143_00/YHJ8YwcsWNHKreuFtUH0gVTc1SX4ziLk.jpg"
+  },
+  "CUSA06169_00": {
+   "match": 13,
+   "genres": [
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0436/CUSA06169_00/6Fh1qLyHTF83cOCNUYxpjc9VGNdUjEov.jpg"
+  },
+  "CUSA00590_00": {
+   "match": 0,
+   "genres": [
+    "Puzzle"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202012/0914/5NkVpIBjql3HbLcRwGiiBRlS.png"
+  },
+  "CUSA00748_00": {
+   "match": 1,
+   "genres": [
+    "Platformer"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP4489/CUSA00748_00/mUEXEkwmofCGv7A8SsM1bt4VG1PvTAV3.png"
+  },
+  "CUSA01623_00": {
+   "match": 72,
+   "genres": [
+    "Action",
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202010/2814/GxpwypMELmShismUYU2qWHO8.png"
+  },
+  "CUSA05018_00": {
+   "match": 3,
+   "genres": [
+    "Horror"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP9000/CUSA05018_00/XIYV4bTf16MaRHUmdeI8PvJSvnYDBDCf.jpg"
+  },
+  "CUSA01874_00": {
+   "match": 24,
+   "genres": [
+    "Platformer",
+    "Fantasy"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP2070/CUSA01874_00/8jDXreQ3Hr9NmpXKINW5RPG7ZJ5fpuwH.png"
+  },
+  "CUSA06282_00": {
+   "match": 46,
+   "genres": [
+    "Action",
+    "Fighting",
+    "Combat"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP3643/CUSA06282_00/P7TWzO8VNEfnERrisgNOOWP3YOD8Hsn0.jpg"
+  },
+  "CUSA02533_00": {
+   "match": 27,
+   "genres": [
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202011/0518/O9dUeSEzfKYMsO1jQviOQVF4.png"
+  },
+  "CUSA00107_00": {
+   "match": 72,
+   "genres": [
+    "Action",
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0082/CUSA00107_00/jT7kkwSWEinafnaYWMZoReRr4LlmYmym.png"
+  },
+  "CUSA00304_00": {
+   "match": 10,
+   "genres": [
+    "Racing"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0001/CUSA00304_00/uiVXwsoOP05By7jR6cq7JGHhhL2F77Fr.JPG"
+  },
+  "CUSA04552_00": {
+   "match": 0,
+   "genres": [
+    "Strategy",
+    "Simulation"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP1001/CUSA04552_00/nLVvhvn3FOM3TgabWfFo4PS4EVIDY55C.jpg"
+  },
+  "CUSA08344_00": {
+   "match": 72,
+   "genres": [
+    "Action",
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202010/2119/prlOfEAEs7oNLS5u4gUALN7P.png"
+  },
+  "CUSA05794_00": {
+   "match": 87,
+   "genres": [
+    "Action",
+    "RPG"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0082/CUSA05794_00/SZ938YOraaoMlmTqdRAyu9PqIPGorbhq.png"
+  },
+  "CUSA07408_00": {
+   "match": 75,
+   "genres": [
+    "Action"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202010/2217/5gDpzRQrhlcegaPf8wW1QIuf.png"
+  },
+  "CUSA10237_00": {
+   "match": 48,
+   "genres": [
+    "RPG"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202009/3000/f03gF2KAW1bTCYbOl0LiV1fB.png"
+  },
+  "CUSA10443_00": {
+   "match": 53,
+   "genres": [
+    "Adventure",
+    "RPG"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP3643/CUSA10443_00/Mv4uKVLWFgHJLS7OijrKy0h2nh3ZgktP.jpg"
+  },
+  "CUSA05877_00": {
+   "match": 57,
+   "genres": [
+    "RPG",
+    "Fantasy"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP2611/CUSA05877_00/BLzUaQ9aQNu2PWvBaQxPiduUdoc5N7wB.jpg"
+  },
+  "CUSA00069_00": {
+   "match": 60,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Platformer"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/cfn/11307H2-lxShzscLE5-1szdrlvUZOmdUIzohPFw8wkf4LHJgX3f2ABBX6u5nRIWajK0WsRcOwlNSsm2EDst2M6jdalYY_XUw.jpg"
+  },
+  "CUSA00495_00": {
+   "match": 72,
+   "genres": [
+    "Action",
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202011/0522/xrOIgthXzGo9c338f9VS946G.png"
+  },
+  "CUSA05187_00": {
+   "match": 0,
+   "genres": [
+    "Arcade"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP2158/CUSA05187_00/SMhJhLrxvT7RhZqBgI0zLk1MrPK5oVA3.jpg"
+  },
+  "CUSA00103_00": {
+   "match": 72,
+   "genres": [
+    "Action",
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP1018/CUSA00103_00/uX4Mc1HXpyGoXxu3QpumZFlDKqAxVp9V.png"
+  },
+  "CUSA03008_00": {
+   "match": 10,
+   "genres": [
+    "Racing"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0001/CUSA03008_00/5uLohRrevGJ9I1138ub7nFv79PuIGv23.png"
+  },
+  "CUSA03781_00": {
+   "match": 24,
+   "genres": [
+    "Adventure",
+    "Horror",
+    "Unique"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0312/CUSA03781_00/zjS2Gs4dVAYmUkQKsxSJe4UO5qYGLnOP.jpg"
+  },
+  "CUSA03168_00": {
+   "match": 0,
+   "genres": [
+    "Puzzle",
+    "Arcade"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP4082/CUSA03168_00/vJJ23s7RdCSYLZk72xqXPSkzXicsk6W5.png"
+  },
+  "CUSA00900_00": {
+   "match": 87,
+   "genres": [
+    "Action",
+    "RPG"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202010/2614/DbHk1vfm0crso6MJZevAqfLA.png"
+  },
+  "CUSA04027_00": {
+   "match": 84,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Shooter",
+    "First-person shooter"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0006/CUSA04027_00/hqcgrjNYe3E5UDtIPMuKrkoWGk9CgZ3W.jpg"
+  },
+  "CUSA05796_00": {
+   "match": 32,
+   "genres": [
+    "Fantasy"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP2346/CUSA05796_00/bajdmNUGO2s0aCfKsjgFhJFQo1CFgy07.jpg"
+  },
+  "CUSA01799_00": {
+   "match": 53,
+   "genres": [
+    "Adventure",
+    "RPG"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0082/CUSA01799_00/PwR11ZQWjCYHoL8pOr2AFn0cIotBGwOQ.jpg"
+  },
+  "CUSA03868_00": {
+   "match": 3,
+   "genres": [
+    "Horror"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP2187/CUSA03868_00/bzR7Hqz6qY0MBT0BFZHhflv7AEpSNFwb.jpg"
+  },
+  "CUSA02420_00": {
+   "match": 63,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Fighting",
+    "Fantasy"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202408/2910/d76bfde9ec2f43eb7679555e88500890db30f03dbec5108e.png"
+  },
+  "CUSA03406_00": {
+   "match": 1,
+   "genres": [
+    "Platformer"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP4487/CUSA03406_00/W8FAFcWylbuDAUw7NqrUGuVAlclQa3D5.jpg"
+  },
+  "CUSA01140_00": {
+   "match": 44,
+   "genres": [
+    "Action",
+    "Stealth"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0101/CUSA01140_00/qwmyUClCqRK1ZIZT3SzPwlDW5UWB4aLs.png"
+  },
+  "CUSA05882_00": {
+   "match": 47,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Horror",
+    "Stealth"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP1192/CUSA05882_00/fRYo9pczSKor6SFOOvyV7RqrypAS5XDa.jpg"
+  },
+  "CUSA05091_00": {
+   "match": 16,
+   "genres": [
+    "Adventure",
+    "Platformer",
+    "Puzzle"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP4395/CUSA05091_00/1097LSmhR3D3ZSTyUv2RJdxII0ywD2qQ.png"
+  },
+  "CUSA07511_00": {
+   "match": 28,
+   "genres": [
+    "Adventure",
+    "Combat"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP3064/CUSA07511_00/JnPagSCTHDJtouWWdPFngs5R2CwllbMt.jpg"
+  },
+  "CUSA00223_00": {
+   "match": 72,
+   "genres": [
+    "Action",
+    "Adventure"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/img/rnd/202010/2821/Gin3wTu4qFXr2mZK8LCmevoq.png"
+  },
+  "CUSA00794_00": {
+   "match": 19,
+   "genres": [
+    "Adventure",
+    "Puzzle"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0082/CUSA00794_00/cweYRejCAyPqbEO04x7vOfiS0ntsxSBT.png"
+  },
+  "CUSA00079_00": {
+   "match": 47,
+   "genres": [
+    "Action",
+    "Fighting"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP1018/CUSA00079_00/sHHrkGc5ImNq1yfh9yRyEbyUD7runrmF.png"
+  },
+  "CUSA01163_00": {
+   "match": 11,
+   "genres": [
+    "Racing",
+    "Sports"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202609/1706/10c67919ea125ac5b8d972275edcc1733a0cbb7141dd2edd.png"
+  },
+  "CUSA01664_00": {
+   "match": 52,
+   "genres": [
+    "Action",
+    "Adventure",
+    "Platformer",
+    "Puzzle"
+   ],
+   "image": "https://image.api.playstation.com/vulcan/ap/rnd/202512/0515/1050cb1ee0173b04260c11c201b0ad9830275b2c439566b2.png"
+  },
+  "CUSA00313_00": {
+   "match": 0,
+   "genres": [
+    "Fighting"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP2117/CUSA00313_00/Yt8hYhjIei2JKs9FSMhcSOXEBvrpJXRP.png"
+  },
+  "CUSA00315_00": {
+   "match": 16,
+   "genres": [
+    "Adventure",
+    "Platformer",
+    "Puzzle"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP4395/CUSA00315_00/irvdG1iNppzqaLdwaaPEqB4l4h57qPwE.png"
+  },
+  "CUSA00629_00": {
+   "match": 0,
+   "genres": [
+    "Fighting"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP4488/CUSA00629_00/1hrq9GzRzQq8urUu2picls8WibHjfoyK.png"
+  },
+  "CUSA01237_00": {
+   "match": null,
+   "genres": [],
+   "image": "https://image.api.playstation.com/cdn/UP4525/CUSA01237_00/Fr4HwYKKcFresvxj7fp70CtvSKuAtiV7.png"
+  },
+  "CUSA00575_00": {
+   "match": 75,
+   "genres": [
+    "Action"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP9000/CUSA00575_00/ckxb96CizzzMlK4MQ9RCRSzinkHx3QfW.png"
+  },
+  "CUSA00466_00": {
+   "match": 1,
+   "genres": [
+    "Platformer"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP2120/CUSA00466_00/pvAvAEN4XrOr5tNSnmZJnmk6fXVxk2rH.png"
+  },
+  "CUSA00700_00": {
+   "match": 0,
+   "genres": [
+    "Fighting"
+   ],
+   "image": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA00700_00/2/i_15a7f43cbea841296c643f4a881946423bbf5e67e8146fb072c2b455dc8295d9/i/pic0.png"
+  },
+  "CUSA01068_00": {
+   "match": 55,
+   "genres": [
+    "Action",
+    "Horror"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP0102/CUSA01068_00/YoyizWHNKCpBZuyGPDRolU9a4sg7YZVc.png"
+  },
+  "CUSA00458_00": {
+   "match": 0,
+   "genres": [
+    "Stealth"
+   ],
+   "image": "https://image.api.playstation.com/cdn/UP9000/CUSA00458_00/xCXHnKAEbG0dfLyBZj8sefJS3bEoUFEA.png"
+  }
+ }
+}

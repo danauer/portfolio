@@ -1,0 +1,1567 @@
+{
+ "generatedAt": "2026-11-14T19:42:05.308Z",
+ "catalog": 630,
+ "profile": [
+  {
+   "genre": "Action & adventure",
+   "weight": 115
+  },
+  {
+   "genre": "Shooter",
+   "weight": 100.9
+  },
+  {
+   "genre": "Role playing",
+   "weight": 87.5
+  },
+  {
+   "genre": "Puzzle & trivia",
+   "weight": 47
+  },
+  {
+   "genre": "Simulation",
+   "weight": 40.5
+  },
+  {
+   "genre": "Racing & flying",
+   "weight": 38
+  },
+  {
+   "genre": "Strategy",
+   "weight": 20.7
+  },
+  {
+   "genre": "Family & kids",
+   "weight": 17.2
+  }
+ ],
+ "candidates": 357,
+ "groups": [
+  {
+   "id": "best",
+   "title": "Best matches",
+   "blurb": "The closest fit to the genres you actually spend time on, nudged toward games players rate highly.",
+   "items": [
+    {
+     "id": "9N5PKH0KW2L1",
+     "name": "Minishoot' Adventures",
+     "image": "https://store-images.s-microsoft.com/image/apps.47495.14034134777008506.7f93c2af-ec4e-4905-a864-90af002fd3aa.bc4b4c67-4ab0-4270-ac57-3d033ff15cc5?w=460&q=80",
+     "msrpCents": 1599,
+     "rating": {
+      "avg": 4.6,
+      "count": 2037
+     },
+     "release": "2026-03-03T15:00:00.0000000Z",
+     "genres": [
+      "Action & adventure",
+      "Shooter",
+      "Racing & flying",
+      "Role playing"
+     ],
+     "sharedGenres": [
+      "Action & adventure",
+      "Shooter",
+      "Role playing"
+     ],
+     "because": [
+      "Destiny",
+      "Palworld"
+     ],
+     "match": 99
+    },
+    {
+     "id": "9NF5S7MLM8XT",
+     "name": "Little Kitty, Big City",
+     "image": "https://store-images.s-microsoft.com/image/apps.10498.13605545843678606.ba639605-7305-422e-9637-2411fb07e5f6.322157cd-084f-4752-82aa-85d0c0784528?w=460&q=80",
+     "msrpCents": 2499,
+     "rating": {
+      "avg": 4.7,
+      "count": 9011
+     },
+     "release": "2024-05-09T16:00:00.0000000Z",
+     "genres": [
+      "Action & adventure",
+      "Family & kids",
+      "Simulation"
+     ],
+     "sharedGenres": [
+      "Action & adventure",
+      "Simulation",
+      "Family & kids"
+     ],
+     "because": [
+      "Unpacking",
+      "Disney Dreamlight Valley"
+     ],
+     "match": 85
+    },
+    {
+     "id": "C5DZFZ6NC5SQ",
+     "name": "Brütal Legend",
+     "image": "https://store-images.s-microsoft.com/image/apps.18941.67187313298816901.62c70448-0dd4-4a12-b42b-cdc666dbd510.1f3f496f-5ea0-4724-98a9-69aa6aa6dcc0?w=460&q=80",
+     "msrpCents": 1499,
+     "rating": {
+      "avg": 4.7,
+      "count": 2897
+     },
+     "release": "2009-12-15T00:00:00.0000000Z",
+     "genres": [
+      "Action & adventure",
+      "Strategy",
+      "Simulation"
+     ],
+     "sharedGenres": [
+      "Action & adventure",
+      "Simulation",
+      "Strategy"
+     ],
+     "because": [
+      "Outer Wilds",
+      "Disney Dreamlight Valley"
+     ],
+     "match": 88
+    },
+    {
+     "id": "9PPBNCXP0096",
+     "name": "Resonance: A Plague Tale Legacy",
+     "image": "https://store-images.s-microsoft.com/image/apps.39294.14332070469741251.b219f2ed-9161-4e36-815d-0a90a76aae89.a69aff95-48f7-4ef9-977f-95aea9a74b66?w=460&q=80",
+     "msrpCents": 5999,
+     "rating": {
+      "avg": 4.5,
+      "count": 10329
+     },
+     "release": "2026-08-27T16:00:00.0000000Z",
+     "genres": [
+      "Action & adventure",
+      "Role playing",
+      "Puzzle & trivia"
+     ],
+     "sharedGenres": [
+      "Action & adventure",
+      "Role playing",
+      "Puzzle & trivia"
+     ],
+     "because": [
+      "Blue Prince",
+      "Palworld"
+     ],
+     "match": 93
+    },
+    {
+     "id": "9NZQPT0MWTD0",
+     "name": "Asphalt Legends",
+     "image": "https://store-images.s-microsoft.com/image/apps.53163.14471421918435459.ac5aea21-4fb1-43bd-a948-1b649d60da47.12da6cf7-9517-498c-b687-2558f266d9ca?w=460&q=80",
+     "msrpCents": 0,
+     "rating": {
+      "avg": 4.7,
+      "count": 1158550
+     },
+     "release": "2018-07-18T13:16:11.8451051Z",
+     "genres": [
+      "Racing & flying",
+      "Simulation",
+      "Sports"
+     ],
+     "sharedGenres": [
+      "Simulation",
+      "Racing & flying"
+     ],
+     "because": [
+      "Outer Wilds",
+      "Forza Horizon 5"
+     ],
+     "match": 68
+    },
+    {
+     "id": "BX1DTCBD1HXJ",
+     "name": "War Thunder",
+     "image": "https://store-images.s-microsoft.com/image/apps.15726.63381296256995371.63fd92c7-ca2f-4730-a89d-ce2b9c6e5a2b.e6af7dbb-a869-47ed-b468-99ca8f2b748f?w=460&q=80",
+     "msrpCents": 0,
+     "rating": {
+      "avg": 4.5,
+      "count": 1308917
+     },
+     "release": "2018-10-23T00:00:00.0000000Z",
+     "genres": [
+      "Action & adventure",
+      "Shooter",
+      "Simulation"
+     ],
+     "sharedGenres": [
+      "Action & adventure",
+      "Shooter",
+      "Simulation"
+     ],
+     "because": [
+      "Destiny",
+      "DOOM: The Dark Ages"
+     ],
+     "match": 76
+    },
+    {
+     "id": "9NS86BQ33SPX",
+     "name": "Wobbly Life",
+     "image": "https://store-images.s-microsoft.com/image/apps.15760.14372274785244461.706c2fec-9d0d-41b1-843a-98970af758ca.5820780b-ef8c-4bc5-b16a-c3f2b94ab51d?w=460&q=80",
+     "msrpCents": 2499,
+     "rating": {
+      "avg": 4.4,
+      "count": 7458
+     },
+     "release": "2021-07-16T00:00:00.0000000Z",
+     "genres": [
+      "Action & adventure",
+      "Family & kids",
+      "Role playing",
+      "Simulation"
+     ],
+     "sharedGenres": [
+      "Action & adventure",
+      "Role playing",
+      "Simulation"
+     ],
+     "because": [
+      "Palworld",
+      "Clair Obscur: Expedition 33"
+     ],
+     "match": 98
+    },
+    {
+     "id": "BR1D9CR82ZM8",
+     "name": "Plants vs. Zombies",
+     "image": "https://store-images.s-microsoft.com/image/apps.4851.68871528329885281.e03a829d-faa0-4a31-a5d8-785bb8b52288.f024a10d-396d-4f40-b63c-899ef8a8cb04?w=460&q=80",
+     "msrpCents": 499,
+     "rating": {
+      "avg": 4.6,
+      "count": 5848
+     },
+     "release": "2010-07-27T00:00:00.0000000Z",
+     "genres": [
+      "Action & adventure",
+      "Strategy",
+      "Simulation"
+     ],
+     "sharedGenres": [
+      "Action & adventure",
+      "Simulation",
+      "Strategy"
+     ],
+     "because": [
+      "Outer Wilds",
+      "Disney Dreamlight Valley"
+     ],
+     "match": 88
+    },
+    {
+     "id": "9PF432CVQBXT",
+     "name": "Enlisted",
+     "image": "https://store-images.s-microsoft.com/image/apps.20102.14212477956808574.da26f75d-69b4-4507-87ab-5c4d257304d3.bbf1804b-4973-4d4a-a866-d5ef656b6d0a?w=460&q=80",
+     "msrpCents": 0,
+     "rating": {
+      "avg": 4.6,
+      "count": 107550
+     },
+     "release": "2021-10-07T15:10:33.3403659Z",
+     "genres": [
+      "Action & adventure",
+      "Shooter",
+      "Simulation"
+     ],
+     "sharedGenres": [
+      "Action & adventure",
+      "Shooter",
+      "Simulation"
+     ],
+     "because": [
+      "Destiny",
+      "DOOM: The Dark Ages"
+     ],
+     "match": 76
+    },
+    {
+     "id": "9N51NR4GX891",
+     "name": "Shelldiver",
+     "image": "https://store-images.s-microsoft.com/image/apps.59813.13976576036437000.15d2217e-0f3f-430d-bd96-a7159bbf5985.ad45259c-69ba-4670-a289-c2efcce781be?w=460&q=80",
+     "msrpCents": 499,
+     "rating": {
+      "avg": 4.7,
+      "count": 2859
+     },
+     "release": "2026-09-01T13:00:00.0000000Z",
+     "genres": [
+      "Shooter",
+      "Action & adventure",
+      "Family & kids",
+      "Platformer"
+     ],
+     "sharedGenres": [
+      "Action & adventure",
+      "Shooter",
+      "Simulation"
+     ],
+     "because": [
+      "Destiny",
+      "Unpacking"
+     ],
+     "match": 82
+    },
+    {
+     "id": "C0X15TR4NP0B",
+     "name": "Valiant Hearts: The Great War",
+     "image": "https://store-images.s-microsoft.com/image/apps.4369.65058618232281657.63467f0d-c2fd-437f-a555-f7600b31c66b.401e9537-0984-4879-aeb4-1a23cdbe2ec0?w=460&q=80",
+     "msrpCents": 1499,
+     "rating": {
+      "avg": 4.6,
+      "count": 15787
+     },
+     "release": "2014-06-25T00:00:00.0000000Z",
+     "genres": [
+      "Action & adventure",
+      "Puzzle & trivia"
+     ],
+     "sharedGenres": [
+      "Action & adventure",
+      "Puzzle & trivia"
+     ],
+     "because": [
+      "Blue Prince",
+      "Carto"
+     ],
+     "match": 80
+    },
+    {
+     "id": "BX3JNK07Z6QK",
+     "name": "Fallout: New Vegas",
+     "image": "https://store-images.s-microsoft.com/image/apps.48990.63413868670389858.a909f79f-bf9a-495a-9565-6895806c3525.64c38aa8-fafc-4198-a7ec-629b5054e84e?w=460&q=80",
+     "msrpCents": 999,
+     "rating": {
+      "avg": 4.7,
+      "count": 19270
+     },
+     "release": "2010-10-19T00:00:00.0000000Z",
+     "genres": [
+      "Action & adventure",
+      "Role playing",
+      "Shooter"
+     ],
+     "sharedGenres": [
+      "Action & adventure",
+      "Shooter",
+      "Role playing"
+     ],
+     "because": [
+      "Destiny",
+      "Palworld"
+     ],
+     "match": 73
+    }
+   ]
+  },
+  {
+   "id": "rated",
+   "title": "Highest rated",
+   "blurb": "The best-reviewed games in the Game Pass catalog that fit your taste, from the Xbox store’s user ratings.",
+   "items": [
+    {
+     "id": "C4GH8N6ZXG5L",
+     "name": "Cities: Skylines",
+     "image": "https://store-images.s-microsoft.com/image/apps.59972.66617542682682743.811213f2-2c45-4145-973d-fe3e3774b196.2eb7da78-667d-41a9-b63f-f3f7a8d077c7?w=460&q=80",
+     "msrpCents": 3999,
+     "rating": {
+      "avg": 4.7,
+      "count": 146400
+     },
+     "release": "2017-04-21T00:00:00.0000000Z",
+     "genres": [
+      "Simulation"
+     ],
+     "sharedGenres": [
+      "Simulation"
+     ],
+     "because": [
+      "Disney Dreamlight Valley",
+      "Outer Wilds"
+     ],
+     "match": 53
+    },
+    {
+     "id": "9N6Z8DQXSQWH",
+     "name": "Disneyland Adventures",
+     "image": "https://store-images.s-microsoft.com/image/apps.28105.14005003576279990.0c6a268a-9564-428a-a950-b65b0bea07a2.067c0051-b06c-4b3d-8cdb-26d1fd4c275b?w=460&q=80",
+     "msrpCents": 1999,
+     "rating": {
+      "avg": 4.7,
+      "count": 51850
+     },
+     "release": "2017-10-31T00:00:00.0000000Z",
+     "genres": [
+      "Family & kids"
+     ],
+     "sharedGenres": [
+      "Family & kids"
+     ],
+     "because": [
+      "Unpacking",
+      "Carto"
+     ],
+     "match": 60
+    },
+    {
+     "id": "9P3PL76N0KWZ",
+     "name": "Rush: A DisneyPixar Adventure",
+     "image": "https://store-images.s-microsoft.com/image/apps.65520.14538559069860396.17bb7f72-641c-43fd-b6d7-d9080eed863d.335840d5-48b1-4c57-a5c5-038efe572d04?w=460&q=80",
+     "msrpCents": 1999,
+     "rating": {
+      "avg": 4.6,
+      "count": 90769
+     },
+     "release": "2017-10-31T04:00:00.0000000Z",
+     "genres": [
+      "Family & kids"
+     ],
+     "sharedGenres": [
+      "Family & kids"
+     ],
+     "because": [
+      "Unpacking",
+      "Carto"
+     ],
+     "match": 60
+    },
+    {
+     "id": "9PKWHT7G60WQ",
+     "name": "Mass Effect Legendary Edition",
+     "image": "https://store-images.s-microsoft.com/image/apps.32577.14254372351363255.ac3906d1-13b6-4af0-a00a-e10c8a92007b.f74e6e13-69bd-49f0-a873-2f8346a30ead?w=460&q=80",
+     "msrpCents": 5999,
+     "rating": {
+      "avg": 4.6,
+      "count": 12985
+     },
+     "release": "2021-05-14T04:00:00.0000000Z",
+     "genres": [
+      "Action & adventure",
+      "Classics",
+      "Role playing",
+      "Shooter"
+     ],
+     "sharedGenres": [
+      "Action & adventure",
+      "Shooter",
+      "Role playing"
+     ],
+     "because": [
+      "Destiny",
+      "Palworld"
+     ],
+     "match": 75
+    },
+    {
+     "id": "9NLB6V0GNC9P",
+     "name": "Dead Space",
+     "image": "https://store-images.s-microsoft.com/image/apps.36570.13710698285394664.b69d40fa-3b9c-47c8-b252-b52cae59523c.7def3caf-e399-4eac-af61-3b7722913de9?w=460&q=80",
+     "msrpCents": 6999,
+     "rating": {
+      "avg": 4.6,
+      "count": 11354
+     },
+     "release": "2023-01-27T16:00:00.0000000Z",
+     "genres": [
+      "Action & adventure",
+      "Role playing",
+      "Shooter"
+     ],
+     "sharedGenres": [
+      "Action & adventure",
+      "Shooter",
+      "Role playing"
+     ],
+     "because": [
+      "Destiny",
+      "Palworld"
+     ],
+     "match": 73
+    },
+    {
+     "id": "9PJ06TZX4NMH",
+     "name": "Zoo Tycoon: Ultimate Animal Collection",
+     "image": "https://store-images.s-microsoft.com/image/apps.62256.14226270511206590.471ff2d9-c815-4969-917b-04a7eb451770.36b036c3-2740-4bd6-99f1-23b613cd230b?w=460&q=80",
+     "msrpCents": 1999,
+     "rating": {
+      "avg": 4.5,
+      "count": 28429
+     },
+     "release": "2017-10-31T04:00:00.0000000Z",
+     "genres": [
+      "Family & kids"
+     ],
+     "sharedGenres": [
+      "Family & kids"
+     ],
+     "because": [
+      "Unpacking",
+      "Carto"
+     ],
+     "match": 60
+    },
+    {
+     "id": "9MT5NJ5W7B8Z",
+     "name": "Hogwarts Legacy",
+     "image": "https://store-images.s-microsoft.com/image/apps.8560.13814785456466922.4e78e496-4e8c-4f2c-93df-55ea1fa48e05.5866932e-1b13-41b8-974d-d9c49175f488?w=460&q=80",
+     "msrpCents": 6999,
+     "rating": {
+      "avg": 4.5,
+      "count": 18888
+     },
+     "release": "2023-02-10T05:00:00.0000000Z",
+     "genres": [
+      "Action & adventure",
+      "Role playing"
+     ],
+     "sharedGenres": [
+      "Action & adventure",
+      "Role playing"
+     ],
+     "because": [
+      "Palworld",
+      "Clair Obscur: Expedition 33"
+     ],
+     "match": 55
+    },
+    {
+     "id": "BV6BRSLFJW3W",
+     "name": "FAR CRY PRIMAL",
+     "image": "https://store-images.s-microsoft.com/image/apps.40324.14079505688681780.9ec50825-311f-45ea-ad4f-9e9011ea0aaa.8efa213b-01a1-479c-8ecd-8fdad63ae7b5?w=460&q=80",
+     "msrpCents": 2999,
+     "rating": {
+      "avg": 4.5,
+      "count": 14102
+     },
+     "release": "2016-02-23T00:00:00.0000000Z",
+     "genres": [
+      "Action & adventure",
+      "Shooter"
+     ],
+     "sharedGenres": [
+      "Action & adventure",
+      "Shooter"
+     ],
+     "because": [
+      "Destiny",
+      "DOOM: The Dark Ages"
+     ],
+     "match": 55
+    }
+   ]
+  },
+  {
+   "id": "new",
+   "title": "New to Game Pass",
+   "blurb": "Released in the last year, ranked by fit.",
+   "items": [
+    {
+     "id": "9PK0DZ68LGC0",
+     "name": "Shape of Dreams",
+     "image": "https://store-images.s-microsoft.com/image/apps.12467.14272457971400341.9e426def-5803-4abc-8dd4-76b9f9ab9f3d.3417b0df-f83b-4596-82f1-e753b237c7a6?w=460&q=80",
+     "msrpCents": 2499,
+     "rating": {
+      "avg": 4.2,
+      "count": 842
+     },
+     "release": "2026-09-17T11:00:00.0000000Z",
+     "genres": [
+      "Action & adventure",
+      "Strategy",
+      "Role playing"
+     ],
+     "sharedGenres": [
+      "Action & adventure",
+      "Role playing",
+      "Strategy"
+     ],
+     "because": [
+      "Palworld",
+      "Clair Obscur: Expedition 33"
+     ],
+     "match": 85
+    },
+    {
+     "id": "9NVV0M74W05C",
+     "name": "inKONBINI: One Store. Many Stories",
+     "image": "https://store-images.s-microsoft.com/image/apps.25819.14457562359158030.5e16d94e-ba1b-4212-969b-21b5f41f5ec2.67352483-0cae-4902-8b69-5a0e363fd683?w=460&q=80",
+     "msrpCents": 2499,
+     "rating": {
+      "avg": 4.2,
+      "count": 912
+     },
+     "release": "2026-04-30T00:00:00.0000000Z",
+     "genres": [
+      "Simulation",
+      "Family & kids"
+     ],
+     "sharedGenres": [
+      "Simulation",
+      "Family & kids"
+     ],
+     "because": [
+      "Unpacking",
+      "Disney Dreamlight Valley"
+     ],
+     "match": 80
+    },
+    {
+     "id": "9NXVPTB0FXSZ",
+     "name": "Drop Duchy - Complete Edition",
+     "image": "https://store-images.s-microsoft.com/image/apps.33128.14488445922975122.1488f171-486a-4fe8-a1a2-81caa1fce1ef.e34a987a-d5c1-4b61-a5bc-9862d3f09cf0?w=460&q=80",
+     "msrpCents": 2299,
+     "rating": {
+      "avg": 3.9,
+      "count": 834
+     },
+     "release": "2026-01-28T16:00:00.0000000Z",
+     "genres": [
+      "Strategy",
+      "Card & board",
+      "Puzzle & trivia",
+      "Family & kids"
+     ],
+     "sharedGenres": [
+      "Puzzle & trivia",
+      "Strategy",
+      "Family & kids"
+     ],
+     "because": [
+      "Blue Prince",
+      "Unpacking"
+     ],
+     "match": 93
+    },
+    {
+     "id": "9PDC8J1BSV8B",
+     "name": "Easy Delivery Co.",
+     "image": "https://store-images.s-microsoft.com/image/apps.32692.14156976155849797.4080179d-9c03-44a9-8dea-d7e0c551a9c9.c6196cf5-bea9-439d-a8cd-282129484257?w=460&q=80",
+     "msrpCents": 1299,
+     "rating": {
+      "avg": 3.9,
+      "count": 1412
+     },
+     "release": "2026-03-26T00:00:00.0000000Z",
+     "genres": [
+      "Racing & flying",
+      "Action & adventure",
+      "Simulation"
+     ],
+     "sharedGenres": [
+      "Action & adventure",
+      "Simulation",
+      "Racing & flying"
+     ],
+     "because": [
+      "Outer Wilds",
+      "Forza Horizon 5"
+     ],
+     "match": 91
+    },
+    {
+     "id": "9P7S9F02293J",
+     "name": "Dodo Duckie",
+     "image": "https://store-images.s-microsoft.com/image/apps.56599.14101741972261561.9e10f950-0892-454b-9313-97bca79aa676.f6d2ceb9-00c2-45f3-8508-b55f7e62be5a?w=460&q=80",
+     "msrpCents": 1199,
+     "rating": {
+      "avg": 4,
+      "count": 421
+     },
+     "release": "2026-07-23T17:00:00.0000000Z",
+     "genres": [
+      "Action & adventure",
+      "Platformer",
+      "Family & kids",
+      "Puzzle & trivia"
+     ],
+     "sharedGenres": [
+      "Action & adventure",
+      "Puzzle & trivia",
+      "Family & kids"
+     ],
+     "because": [
+      "Blue Prince",
+      "Carto"
+     ],
+     "match": 85
+    },
+    {
+     "id": "9NGLST31DG26",
+     "name": "A Game About Digging A Hole",
+     "image": "https://store-images.s-microsoft.com/image/apps.53246.13643221603035245.ddde7541-3c1c-43b1-8b36-964427f91e73.117e0b3f-3f9b-42c1-af93-941770647d68?w=460&q=80",
+     "msrpCents": 499,
+     "rating": {
+      "avg": 3.9,
+      "count": 3304
+     },
+     "release": "2025-12-09T14:00:00.0000000Z",
+     "genres": [
+      "Simulation",
+      "Family & kids"
+     ],
+     "sharedGenres": [
+      "Simulation",
+      "Family & kids"
+     ],
+     "because": [
+      "Unpacking",
+      "Disney Dreamlight Valley"
+     ],
+     "match": 80
+    },
+    {
+     "id": "9PF697TG7PP7",
+     "name": "Call of the Elder Gods",
+     "image": "https://store-images.s-microsoft.com/image/apps.44552.14206254537148158.e93ed201-c1eb-4f42-89ea-0d9ad5b233de.f1b66766-3855-46bc-9ff7-72e88d9a7e6f?w=460&q=80",
+     "msrpCents": 2499,
+     "rating": {
+      "avg": 4,
+      "count": 639
+     },
+     "release": "2026-05-12T16:00:00.0000000Z",
+     "genres": [
+      "Puzzle & trivia",
+      "Action & adventure"
+     ],
+     "sharedGenres": [
+      "Action & adventure",
+      "Puzzle & trivia"
+     ],
+     "because": [
+      "Blue Prince",
+      "Carto"
+     ],
+     "match": 80
+    },
+    {
+     "id": "9NWWL1CBWFCG",
+     "name": "Thronefall",
+     "image": "https://store-images.s-microsoft.com/image/apps.47116.14441309410256211.99377474-23f3-49c1-b8b5-99ac2efbc206.b2125385-2f7f-49e9-b0df-052f8af509ec?w=460&q=80",
+     "msrpCents": 1299,
+     "rating": {
+      "avg": 4.4,
+      "count": 341
+     },
+     "release": "2026-11-11T14:00:00.0000000Z",
+     "genres": [
+      "Strategy"
+     ],
+     "sharedGenres": [
+      "Strategy"
+     ],
+     "because": [
+      "Outer Wilds"
+     ],
+     "match": 64
+    }
+   ]
+  }
+ ],
+ "owned": {
+  "58472989": {
+   "genres": [
+    "Fighting"
+   ],
+   "rating": {
+    "avg": 4.2,
+    "count": 12378
+   },
+   "release": "2016-01-27T13:54:04.4664998Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.6529.13510798886190122.78bc5ab2-a442-46db-98f1-bbbf1d0f087e.278f2daf-d0af-4919-8de5-55b90c6c221b?w=460&q=80",
+   "productId": "9NBLGGH1Z149"
+  },
+  "70112963": {
+   "genres": [
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 3.4,
+    "count": 4857
+   },
+   "release": "2015-11-16T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.15159.69019489075777328.76d71961-e725-4f6e-829a-5850d4770b21.a2ce10e2-c336-4d19-b5b4-ab3116e6ed9c?w=460&q=80",
+   "productId": "BQ9C40MT0WWK"
+  },
+  "122252941": {
+   "genres": [
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 4.4,
+    "count": 1235
+   },
+   "release": "2019-01-11T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.45242.71622610518356768.6e94aa2b-b39a-44c8-93bf-f12cd705f5f8.3e0cb1b4-57ff-4fb6-919d-46a395424f0b?w=460&q=80",
+   "productId": "BWN8KD5FHPGR"
+  },
+  "144389848": {
+   "genres": [
+    "Action & adventure",
+    "Shooter"
+   ],
+   "rating": {
+    "avg": 4.1,
+    "count": 9213
+   },
+   "release": "2021-10-12T17:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.17712.14134992626562533.488a0dea-3d31-463e-ad2e-6ba61492e19e.485090c7-2202-4bc7-9890-6031cf87ce07?w=460&q=80",
+   "productId": "9P9WJ5FW0GTD"
+  },
+  "162448742": {
+   "genres": [
+    "Action & adventure",
+    "Racing & flying",
+    "Simulation",
+    "Strategy"
+   ],
+   "rating": {
+    "avg": 4.6,
+    "count": 8614
+   },
+   "release": "2019-05-29T12:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.22579.67120997535715720.38c3e502-0019-4560-826e-634bbaf5cb4b.d08b8fa2-f53a-46ef-a7b9-486040abe414?w=460&q=80",
+   "productId": "C596FKDKMQN7"
+  },
+  "247546985": {
+   "genres": [
+    "Shooter"
+   ],
+   "rating": {
+    "avg": 4,
+    "count": 77656
+   },
+   "release": "2014-09-09T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.337.65506807380982023.0e494b93-8e27-4f0d-aa29-8b32bb48a45b.a80c6f7e-6102-476d-a4a8-5d58baafd069?w=460&q=80",
+   "productId": "C2JQRC2C49B0"
+  },
+  "255219908": {
+   "genres": [
+    "Action & adventure",
+    "Platformer",
+    "Shooter"
+   ],
+   "rating": {
+    "avg": 3.2,
+    "count": 5500
+   },
+   "release": "2014-05-14T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.16633.69513894373098429.1122d76e-a258-4379-8450-aa6e3befebc6.854a2231-a116-4abf-8eaa-50cf1b910bf9?w=460&q=80",
+   "productId": "BS33QFX5JWN6"
+  },
+  "333628240": {
+   "genres": [
+    "Action & adventure",
+    "Shooter"
+   ],
+   "rating": {
+    "avg": 3.3,
+    "count": 7186
+   },
+   "release": "2016-04-05T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.5263.13510798886714035.08632c07-fe3d-4104-8c72-396827524258.ea4b6672-b3b6-4c08-9466-18cd53e50fc7?w=460&q=80",
+   "productId": "9NBLGGH6H0RV"
+  },
+  "369299403": {
+   "genres": [
+    "Action & adventure",
+    "Platformer"
+   ],
+   "rating": {
+    "avg": 2.7,
+    "count": 6393
+   },
+   "release": "2014-10-31T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.45143.64326966355703730.ffbdbd82-3634-435b-9d29-e2911e881a72.e307425e-ad10-4077-802a-68cd052de57b?w=460&q=80",
+   "productId": "C0LGZMBCCD6T"
+  },
+  "374621264": {
+   "genres": [
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 4.7,
+    "count": 20752
+   },
+   "release": "2019-01-25T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.45242.71571739681700792.c61fa2d7-3d69-4edf-8e51-accc41d47823.8a16b21a-96c4-474e-8fd4-629b9bc622ad?w=460&q=80",
+   "productId": "BWMH951M3G3P"
+  },
+  "556718860": {
+   "genres": [
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 4.4,
+    "count": 54009
+   },
+   "release": "2013-11-22T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.44102.69748098540497451.a03a4b64-603b-49b8-8644-4924ac7f3076.7c62c3e9-26da-46e8-a9f3-8cb7feb7d584?w=460&q=80",
+   "productId": "BRKMHZX1RCF2"
+  },
+  "568182861": {
+   "genres": [
+    "Action & adventure",
+    "Family & kids"
+   ],
+   "rating": {
+    "avg": 3.9,
+    "count": 22014
+   },
+   "release": "2019-02-06T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.54149.13510798887933723.57e43f19-4066-429e-b1a2-caea56e427b4.dcf4a36f-b6bf-4cbd-809f-f4dfd75f32b9?w=460&q=80",
+   "productId": "9NBLGGH43KZB"
+  },
+  "682562723": {
+   "genres": [
+    "Action & adventure",
+    "Shooter",
+    "Multi-player Online Battle Arena"
+   ],
+   "rating": {
+    "avg": 3.6,
+    "count": 19167
+   },
+   "release": "2013-12-23T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.39086.70634858521726340.aed5ca97-d1dc-4d71-ae1f-b3f94bf8b727.195fa473-3f52-4e68-9ec8-050cc33e4eb4?w=460&q=80",
+   "productId": "BV0K9LMLQ9W5"
+  },
+  "717702870": {
+   "genres": [
+    "Action & adventure",
+    "Role playing",
+    "Shooter"
+   ],
+   "rating": {
+    "avg": 2.9,
+    "count": 19345
+   },
+   "release": "2021-04-01T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.21345.64676761359365869.a946f759-7330-4022-9d38-e22a4fc906c9.c3688d9a-86ef-47e8-a1ea-ab2af58d6c55?w=460&q=80",
+   "productId": "C083G6BGJ334"
+  },
+  "836165876": {
+   "genres": [
+    "Action & adventure",
+    "Role playing",
+    "Shooter"
+   ],
+   "rating": {
+    "avg": 3.3,
+    "count": 13567
+   },
+   "release": "2021-07-29T17:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.36256.65332188737297236.e956bc32-e423-4920-b547-86181e7ed68d.eaa95a80-a4c4-4c13-92c8-ff26e9da1314?w=460&q=80",
+   "productId": "C27QL5JBKQ8M"
+  },
+  "860666361": {
+   "genres": [
+    "Shooter"
+   ],
+   "rating": {
+    "avg": 4.5,
+    "count": 29889
+   },
+   "release": "2014-02-25T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.355.70921300667420253.8c8a7ac7-d0bd-46fb-a144-4c5ea316247c.ca1b5fa7-17a6-4df0-90d8-883fee1d88f5?w=460&q=80",
+   "productId": "BTJ0T8C04ZBV"
+  },
+  "939455454": {
+   "genres": [
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 4.5,
+    "count": 8812
+   },
+   "release": "2016-08-30T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.53379.65720361252122895.6705784f-9e29-4778-8df4-707828cc2c63.ee9966d3-c938-465e-8dc1-70b97441a8f8?w=460&q=80",
+   "productId": "C1XHZ605DZPG"
+  },
+  "945174237": {
+   "genres": [
+    "Action & adventure",
+    "Shooter"
+   ],
+   "rating": {
+    "avg": 4.2,
+    "count": 1372
+   },
+   "release": "2014-11-26T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.50336.70507094414096366.11bd2814-d7fa-404b-a5bf-f9c6265469e3.0a4e4fd2-73bc-4742-ab34-3c45b4d1a684?w=460&q=80",
+   "productId": "BTQJB5M7KH4F"
+  },
+  "951560105": {
+   "genres": [
+    "Action & adventure",
+    "Shooter"
+   ],
+   "rating": {
+    "avg": 4.1,
+    "count": 6659
+   },
+   "release": "2019-08-27T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.32013.64090029807136264.88ddb0db-cfad-423c-bb52-c5b649930fb1.26ba6d14-3c7a-4d96-b3ba-7df17ae976c8?w=460&q=80",
+   "productId": "BZ6W9LRPC26W"
+  },
+  "964706972": {
+   "genres": [
+    "Action & adventure",
+    "Role playing",
+    "Simulation"
+   ],
+   "rating": {
+    "avg": 4,
+    "count": 36200
+   },
+   "release": "2018-07-24T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.43892.68818099466568894.c45f3219-f40b-416f-b0ee-34cb9652410f.b196776d-cfc0-42d6-aec4-1254993e3f08?w=460&q=80",
+   "productId": "BQVQTL3PCH05"
+  },
+  "969381141": {
+   "genres": [
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 4.7,
+    "count": 18439
+   },
+   "release": "2019-05-14T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.49740.68306748966338141.e6f96fac-aa67-4f59-9043-10654607aa79.4bb59d7f-53c0-43d1-9ef2-20f2de8e893a?w=460&q=80",
+   "productId": "BQ2NNLQPS8RS"
+  },
+  "1019936697": {
+   "genres": [
+    "Action & adventure",
+    "Platformer",
+    "Sports"
+   ],
+   "rating": {
+    "avg": 4.1,
+    "count": 34
+   },
+   "release": "2016-02-17T00:55:53.8468408Z",
+   "image": null,
+   "productId": "9NBLGGH1NM14"
+  },
+  "1144039928": {
+   "genres": [
+    "Shooter"
+   ],
+   "rating": {
+    "avg": 3.6,
+    "count": 12893
+   },
+   "release": "9998-12-30T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.92.14011015795942652.ca67db1b-d21e-47e9-bbb4-5ece2ce3f774.fd956221-fd20-4e4d-836b-38bac642b269?w=460&q=80",
+   "productId": "9N6VPDLQDVT5"
+  },
+  "1278031123": {
+   "genres": [
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 4.7,
+    "count": 15625
+   },
+   "release": "2015-01-20T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.13782.67692664087020494.db738e63-b6d5-4872-854d-74452f0cf9a7.c61aff57-f740-4a7e-8f44-8d2192b94e8e?w=460&q=80",
+   "productId": "BNZQJ2FBTDM7"
+  },
+  "1292135256": {
+   "genres": [
+    "Shooter"
+   ],
+   "rating": {
+    "avg": 4.3,
+    "count": 44386
+   },
+   "release": "2014-03-11T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.3494.68465370828881560.b2efcf70-9772-4200-a381-cd43cf16f0b2.86e4679c-ad9e-4c0b-a718-e8b60eb38b40?w=460&q=80",
+   "productId": "BPB9XVH92Z7T"
+  },
+  "1469186547": {
+   "genres": [
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 4.2,
+    "count": 6458
+   },
+   "release": "2016-01-19T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.26889.63104648801353472.1f16b78b-617c-4a28-a573-670db7c75a11.ef3548f0-bf07-4d63-ae2e-ca5303504f55?w=460&q=80",
+   "productId": "BXHG2GX28L23"
+  },
+  "1579532320": {
+   "genres": [
+    "Action & adventure",
+    "Shooter"
+   ],
+   "rating": {
+    "avg": 4.5,
+    "count": 32973
+   },
+   "release": "2014-10-28T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.45968.69444514893807971.ab5f1b93-5a0c-4e23-9a17-465a62377bd1.abb1691a-43c4-4079-b18e-ea3c3901e5ec?w=460&q=80",
+   "productId": "BRZHFR5XBLQS"
+  },
+  "1611895213": {
+   "genres": [
+    "Simulation",
+    "Action & adventure",
+    "Role playing"
+   ],
+   "rating": {
+    "avg": 3.9,
+    "count": 9519
+   },
+   "release": "2022-09-06T13:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.22218.14365104417622257.a416f4b3-90d8-4dd6-b445-c3e51f46f9d2.f5ced13b-1cda-4a9a-93da-544cc91fcffe?w=460&q=80",
+   "productId": "9NSF0BGH8D86"
+  },
+  "1624350228": {
+   "genres": [
+    "Action & adventure",
+    "Role playing"
+   ],
+   "rating": {
+    "avg": 3.8,
+    "count": 9215
+   },
+   "release": "2014-10-07T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.39993.68783502403174492.47390c2c-991c-47aa-892f-c6ae90a18d59.8faa76ef-5df7-4018-8347-98972a86ca06?w=460&q=80",
+   "productId": "BQT545NLSR23"
+  },
+  "1629043783": {
+   "genres": [
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 4.2,
+    "count": 1366
+   },
+   "release": "2019-09-05T13:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.47482.13744198789091182.d176867c-ff91-4e0a-b1f7-00b2797de9c7.fab94637-3aac-4bc7-82e9-08729189a510?w=460&q=80",
+   "productId": "9NN69HFJ8SX1"
+  },
+  "1649675719": {
+   "genres": [
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 4.2,
+    "count": 22737
+   },
+   "release": "2013-12-20T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.65444.64425461392281454.b81d3e25-8f5f-401f-a039-405a2a89519b.68005566-4883-4d6d-8db8-4154a519e8de?w=460&q=80",
+   "productId": "C0SFCF4PBRSZ"
+  },
+  "1673787135": {
+   "genres": [
+    "Action & adventure",
+    "Family & kids",
+    "Puzzle & trivia",
+    "Simulation"
+   ],
+   "rating": {
+    "avg": 4.4,
+    "count": 1573
+   },
+   "release": "2021-04-15T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.41857.14369454977035291.312a1827-6832-45f4-885d-562c4148d669.8e4df73e-c375-4a55-b537-67e781d518ba?w=460&q=80",
+   "productId": "9NS66QNVR00N"
+  },
+  "1702713376": {
+   "genres": [
+    "Action & adventure",
+    "Puzzle & trivia"
+   ],
+   "rating": {
+    "avg": 3.5,
+    "count": 1638
+   },
+   "release": "2021-03-12T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.45291.14234812946294583.6fe215de-c10e-458f-8160-56e83061ef77.a73679cf-0a50-4192-89ad-bc17b845b580?w=460&q=80",
+   "productId": "9PHK9D8CLQCG"
+  },
+  "1717113201": {
+   "genres": [
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 3.7,
+    "count": 118951
+   },
+   "release": "2018-03-20T04:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.25532.14554784103656548.069efce3-9249-4074-a169-183b727043f8.c6e2146d-d417-4be0-bb6c-926f7cc67376?w=460&q=80",
+   "productId": "9P2N57MC619K"
+  },
+  "1739375565": {
+   "genres": [
+    "Action & adventure",
+    "Role playing"
+   ],
+   "rating": {
+    "avg": 4,
+    "count": 11423
+   },
+   "release": "2020-05-26T08:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.15805.14045794648370014.2229d39b-90c3-496e-8fac-9987450ca4d8.5af45927-45d1-4c93-9d60-26f6ca857701?w=460&q=80",
+   "productId": "9N8NJ74FZTG9"
+  },
+  "1756421327": {
+   "genres": [
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 4.6,
+    "count": 9457
+   },
+   "release": "2022-06-16T13:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.12667.14375592271313618.8101bdfc-97e9-473f-8ca0-07fc83b1846b.84baa4ab-83cb-4dfa-b83c-baa8e9ee8bba?w=460&q=80",
+   "productId": "9NS3673HVH41"
+  },
+  "1759805434": {
+   "genres": [
+    "Action & adventure",
+    "Platformer"
+   ],
+   "rating": {
+    "avg": 4.2,
+    "count": 1111
+   },
+   "release": "2021-03-30T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.24531.13511334762102279.20d0136b-3bfe-4ba4-b8a6-c63db0ef5500.3142fbd9-78f3-4665-98e1-f3812cc90d2d?w=460&q=80",
+   "productId": "9NBL782WBHK6"
+  },
+  "1769971395": {
+   "genres": [
+    "Role playing",
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 4.7,
+    "count": 45898
+   },
+   "release": "2025-04-24T07:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.34497.14322280443288156.36e7f1cd-07a6-4e2a-a35d-485380706ab1.e8f404c0-ee13-41c4-962d-b4d73f73f3cf?w=460&q=80",
+   "productId": "9PPT8K6GQHRZ"
+  },
+  "1788708666": {
+   "genres": [
+    "Action & adventure",
+    "Family & kids",
+    "Puzzle & trivia"
+   ],
+   "rating": {
+    "avg": 4.4,
+    "count": 571
+   },
+   "release": "2020-10-27T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.50645.13618730929685273.f357318e-62a9-42cd-9f85-6dbecd80dd13.e3c216a9-20c0-4e1f-bf2b-d7d8946904ad?w=460&q=80",
+   "productId": "9NJ2XXPJVDRD"
+  },
+  "1790216132": {
+   "genres": [
+    "Action & adventure",
+    "Role playing"
+   ],
+   "rating": {
+    "avg": 4.6,
+    "count": 13006
+   },
+   "release": "2021-08-13T04:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.23383.14093828725404571.e8c4fd85-da7e-4c33-9a85-c97c9f3eeb38.d4808fda-8607-464f-91cf-a9228cda620e?w=460&q=80",
+   "productId": "9P8DL6W0JBB8"
+  },
+  "1794566092": {
+   "genres": [
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 4,
+    "count": 614511
+   },
+   "release": "2021-11-02T16:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.43152.14247769038588514.3ce72ba0-ff44-4b91-b1ca-eef499b58987.a75b6a42-9c31-452f-b8ec-e955d3ab3d00?w=460&q=80",
+   "productId": "9PGW18NPBZV5"
+  },
+  "1797327516": {
+   "genres": [
+    "Action & adventure",
+    "Role playing"
+   ],
+   "rating": {
+    "avg": 3.9,
+    "count": 58242
+   },
+   "release": "2024-01-19T08:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.54359.13654268679289325.ececb946-5639-4e77-b347-9d188d4e7e02.58b7fb42-a33a-48ea-a6c9-c990b4653b2f?w=460&q=80",
+   "productId": "9NKV34XDW014"
+  },
+  "1797613403": {
+   "genres": [
+    "Action & adventure",
+    "Shooter"
+   ],
+   "rating": {
+    "avg": 3,
+    "count": 1214
+   },
+   "release": "2021-10-19T16:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.40817.13564737612475991.b8ee2cbb-c69a-47d9-b4ee-7d6c7fb9fb80.c9052279-3e10-4398-af70-41596e224a48?w=460&q=80",
+   "productId": "9NCFNFTSBM96"
+  },
+  "1848191014": {
+   "genres": [
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 4.3,
+    "count": 9124
+   },
+   "release": "2022-03-16T17:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.34105.13702044937897358.8701ab78-da18-4c36-8c1e-3d4e6dfd60c9.86f47a6b-716e-40fa-aa62-61bf6f6e102c?w=460&q=80",
+   "productId": "9NLRT31Z4RWM"
+  },
+  "1857914892": {
+   "genres": [
+    "Action & adventure",
+    "Role playing",
+    "Simulation"
+   ],
+   "rating": {
+    "avg": 3.9,
+    "count": 2784
+   },
+   "release": "2021-08-11T17:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.38804.14034099625755791.53e68a85-57b5-431a-abf6-767b84f7d313.548b0299-54b3-40eb-860b-5868b4cc653d?w=460&q=80",
+   "productId": "9N5PHZ0D92LD"
+  },
+  "1880727250": {
+   "genres": [
+    "Family & kids",
+    "Puzzle & trivia",
+    "Simulation"
+   ],
+   "rating": {
+    "avg": 4.5,
+    "count": 10050
+   },
+   "release": "2021-11-02T07:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.13051.13636460453065260.ecf51b77-0a2c-413e-97f7-3aacd9282ab3.dd5a85c1-2cf9-4128-850a-e931036fb1b6?w=460&q=80",
+   "productId": "9NH5HN11FG4M"
+  },
+  "1902585111": {
+   "genres": [
+    "Shooter"
+   ],
+   "rating": {
+    "avg": 4.3,
+    "count": 18891
+   },
+   "release": "2025-05-15T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.52074.14239344665439398.f72b7e9e-0a95-4e76-b1e3-8989c4d70e2e.ef342e0d-743f-4ccd-91b3-8135d4737a48?w=460&q=80",
+   "productId": "9PH9X0760B0T"
+  },
+  "1923160643": {
+   "genres": [
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 4.4,
+    "count": 38359
+   },
+   "release": "2013-11-22T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.3896.70960382205507979.a7f66126-5c51-4bb9-9189-dd778315823e.cde278f8-9c6c-4e4b-a9a1-61101a7500c6?w=460&q=80",
+   "productId": "BVJ6FHN3SMJJ"
+  },
+  "1924130173": {
+   "genres": [
+    "Action & adventure",
+    "Role playing"
+   ],
+   "rating": {
+    "avg": 4.5,
+    "count": 3155
+   },
+   "release": "2020-12-03T14:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.16703.14474015592034459.e2e750cd-a461-4824-ad07-a9b8c0e9bdfb.df19b81b-c896-491d-932a-3acd6851c9c5?w=460&q=80",
+   "productId": "9NZL91Q08XRV"
+  },
+  "1936146608": {
+   "genres": [
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 3.6,
+    "count": 14313
+   },
+   "release": "2022-10-14T10:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.16661.13699799412731780.1afb5b8c-d3cf-40b3-aa5e-f5e01adefd6c.71e32c0e-4c10-4a4b-a813-3478373b1769?w=460&q=80",
+   "productId": "9NM3TNRPQXLR"
+  },
+  "1938834516": {
+   "genres": [
+    "Action & adventure",
+    "Role playing"
+   ],
+   "rating": {
+    "avg": 3.8,
+    "count": 101768
+   },
+   "release": "2018-05-22T04:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.45572.14425140369408817.14846606-f5bc-4fb1-b355-26ef6a25e847.ca79acfc-0a9a-4e61-a626-d7623bb12248?w=460&q=80",
+   "productId": "9NT4X7P8B9NB"
+  },
+  "1958071699": {
+   "genres": [
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 3.9,
+    "count": 11673
+   },
+   "release": "2014-07-02T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.10659.70614617482392087.1331b0ab-59f9-438a-8801-8d64124093d2.5f447078-e4a4-425d-886f-0a948e87b17c?w=460&q=80",
+   "productId": "BTX10NSL9P28"
+  },
+  "1959842755": {
+   "genres": [
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 4.5,
+    "count": 4505
+   },
+   "release": "2021-07-20T13:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.50661.13605204887272793.456e749a-524b-4372-bb98-1e7f5fac0947.7d789bd8-b026-4a71-90a6-8907f81bec8f?w=460&q=80",
+   "productId": "9NDZ7NXFF622"
+  },
+  "1989956835": {
+   "genres": [
+    "Shooter"
+   ],
+   "rating": {
+    "avg": 3.8,
+    "count": 15066
+   },
+   "release": "2015-02-10T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.17334.66672728066194630.fb74d0f7-c971-4af4-b272-83f62a450d37.a891dbe8-bb2b-4cb7-a019-dc07dd937095?w=460&q=80",
+   "productId": "C4HHJM5JSSJ1"
+  },
+  "2030093255": {
+   "genres": [
+    "Racing & flying"
+   ],
+   "rating": {
+    "avg": 3.7,
+    "count": 99813
+   },
+   "release": "2021-11-09T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.33953.13734397844529069.202e3fc9-37d6-4853-a58b-fabe504b71e8.f2095594-0eab-4b96-92fd-f01b9cf9346f?w=460&q=80",
+   "productId": "9NNX1VVR3KNQ"
+  },
+  "2043223846": {
+   "genres": [
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 4.5,
+    "count": 411
+   },
+   "release": "2021-06-11T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.34105.14439826571538724.db784f27-f333-409f-adf8-bf67fdf7f66e.b20acf62-0b37-49d8-827a-a843455c191b?w=460&q=80",
+   "productId": "9NWRG57T4WF1"
+  },
+  "2046562785": {
+   "genres": [
+    "Role playing"
+   ],
+   "rating": {
+    "avg": 3.8,
+    "count": 15578
+   },
+   "release": "2025-02-18T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.53943.13624715126573049.35e3abd5-bd41-4efb-bc2a-0bfbdd50b02a.3088ab72-d216-469d-95b4-0e4dc0b8cd32?w=460&q=80",
+   "productId": "9NHRDQVFPQ34"
+  },
+  "2067126551": {
+   "genres": [
+    "Racing & flying"
+   ],
+   "rating": {
+    "avg": 4.3,
+    "count": 56146
+   },
+   "release": "2013-11-22T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.29426.69190199968728292.ade7ab99-7609-4a47-a158-a97c35a6bbc2.4dc8b835-3749-4f34-b104-fa1f6dd0391a?w=460&q=80",
+   "productId": "BQLK685TM311"
+  },
+  "2079794073": {
+   "genres": [
+    "Role playing"
+   ],
+   "rating": {
+    "avg": 3.3,
+    "count": 84242
+   },
+   "release": "2023-09-06T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.52870.13567343664224659.1eb6fdf9-8a0b-4344-a135-ab17dfa3c609.20ed1644-2c01-4d5a-b636-3d54ac941a1f?w=460&q=80",
+   "productId": "9NCJSXWZTP88"
+  },
+  "2097321401": {
+   "genres": [
+    "Action & adventure",
+    "Puzzle & trivia"
+   ],
+   "rating": {
+    "avg": 3.8,
+    "count": 3440
+   },
+   "release": "2025-04-10T14:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.20804.14199207619921587.94d12fa7-4aa4-478f-a501-05a046496ce3.d146e613-3ba1-4bdc-a1ec-310de2f17752?w=460&q=80",
+   "productId": "9PFRTPRQ569Q"
+  },
+  "2117782696": {
+   "genres": [
+    "Action & adventure",
+    "Role playing",
+    "Simulation"
+   ],
+   "rating": {
+    "avg": 3.9,
+    "count": 162
+   },
+   "release": "2021-06-11T04:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.25972.13969253581652140.949226f2-9d95-4726-9641-1bd79a7a45c7.6080ba2c-6535-41df-bb9e-282c73cd5fe1?w=460&q=80",
+   "productId": "9N56FV5CNZ3F"
+  },
+  "2125557798": {
+   "genres": [
+    "Action & adventure"
+   ],
+   "rating": {
+    "avg": 4.6,
+    "count": 14839
+   },
+   "release": "2024-06-18T09:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.57404.14049385901429569.1b471d6f-67fc-4289-a4a1-f821ac6594e6.8a91c869-c63f-4ad8-a1e6-285ad81d64ca?w=460&q=80",
+   "productId": "9N88DFRX8WCJ"
+  },
+  "2139970300": {
+   "genres": [
+    "Family & kids",
+    "Role playing"
+   ],
+   "rating": {
+    "avg": 2.6,
+    "count": 2311
+   },
+   "release": "2021-10-26T00:00:00.0000000Z",
+   "image": "https://store-images.s-microsoft.com/image/apps.49625.14100376622407307.0a254901-c335-4f1a-b7e5-91a59e56a4d1.3ad2252f-1850-4b93-9da1-92c6de1fc864?w=460&q=80",
+   "productId": "9P7VCSGBP9KL"
+  }
+ }
+}

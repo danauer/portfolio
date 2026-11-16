@@ -34,10 +34,17 @@ const nav = [
   },
 ];
 const current = Astro.url.pathname;
-// Experiments link to pages that live elsewhere on the site (e.g. /venn/), so those pages count as part of Experiments.
+// Experiments link to pages that live elsewhere on the site (e.g. /venn/, /games/), so those pages, and any pages
+// beneath them (/games/under-the-hood/steam), count as part of Experiments.
 const experimentPaths = (await getExperiments()).map(experimentHref).filter((href) => href.startsWith('/'));
-const isCurrent = (path: string) =>
-  current.startsWith(url(path)) || (path === 'experiments' && experimentPaths.some((p) => current.replace(/\/$/, '') === p.replace(/\/$/, '')));
+const isExperimentPage = () => {
+  const here = current.replace(/\/$/, '');
+  return experimentPaths.some((p) => {
+    const base = p.replace(/\/$/, '');
+    return base !== '' && (here === base || here.startsWith(`${base}/`));
+  });
+};
+const isCurrent = (path: string) => current.startsWith(url(path)) || (path === 'experiments' && isExperimentPage());
 ---
 
 <html lang="en">

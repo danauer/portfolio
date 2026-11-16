@@ -1,0 +1,233 @@
+/* Shared by the /games, /steam and /psn pages. Chart colors come from a validated categorical palette
+   (checked for color-blind separation against this site's #fff / #111 surfaces); the
+   light and dark steps are selected separately, not flipped. */
+.steam, .games {
+  --viz-1: light-dark(#2a78d6, #3987e5); /* blue */
+  --viz-2: light-dark(#eb6834, #d95926); /* orange */
+  --viz-3: light-dark(#1baf7a, #199e70); /* aqua */
+  --viz-4: light-dark(#eda100, #c98500); /* yellow */
+  --viz-on-4: light-dark(#0b0b0b, #ffffff);
+  --seq-0: light-dark(#f0efec, #222221);
+  --seq-1: light-dark(#cde2fb, #104281);
+  --seq-2: light-dark(#9ec5f4, #1c5cab);
+  --seq-3: light-dark(#6da7ec, #2a78d6);
+  --seq-4: light-dark(#3987e5, #5598e7);
+  --seq-5: light-dark(#1c5cab, #9ec5f4);
+  --track: light-dark(#cde2fb, #104281);
+  --grid: light-dark(#e1e0d9, #2c2c2a);
+  --baseline: light-dark(#c3c2b7, #383835);
+  --muted: #898781;
+  --panel: color-mix(in srgb, var(--fg) 3%, transparent);
+  --good: light-dark(#006300, #0ca30c);
+  /* Platform brand colors. Steam's navy / pale blue flips with the theme so it stays visible on both
+     surfaces; PlayStation blue works on both. They differ in lightness (3.0:1 light, 2.5:1 dark), so
+     they stay distinguishable even where the hues look alike. */
+  --brand-steam: light-dark(#1b2838, #66c0f4);
+  --on-brand-steam: light-dark(#ffffff, #0b0b0b);
+  --brand-psn: #0070d1;
+  --on-brand-psn: #ffffff;
+  --brand-xbox: light-dark(#107c10, #52b043);
+  --on-brand-xbox: light-dark(#ffffff, #0b0b0b);
+  --series: var(--viz-1);
+}
+/* Single-series charts on a platform's own page use that platform's color. */
+.source-steam { --series: var(--brand-steam); }
+.source-psn { --series: var(--brand-psn); }
+.source-xbox { --series: var(--brand-xbox); }
+/* The overview mixes both platforms, so its single-series charts stay neutral instead of implying one. */
+.games { --series: light-dark(#8a8982, #7d7b75); }
+
+/* Header -------------------------------------------------------------------- */
+.steam-head { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2.5rem; }
+.demo-note {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border-left: 2px solid var(--pill);
+  background: color-mix(in srgb, var(--pill) 10%, transparent);
+  font-size: 0.9rem;
+}
+.demo-note code { font-size: 0.85em; }
+.who { display: flex; align-items: center; gap: 1rem; }
+.avatar { width: 4rem; height: 4rem; flex: none; border-radius: 0.25rem; background: var(--panel); }
+.who h1 { margin: 0; }
+.who h1 a { text-decoration: none; }
+.who h1 a:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+.who .sub { margin: 0.25rem 0 0; color: var(--text-tertiary); font-size: 0.9rem; }
+.tabs { display: flex; gap: 1.5rem; border-bottom: 1px solid var(--line); }
+.tabs a {
+  padding-bottom: 0.6rem;
+  margin-bottom: -1px;
+  font-family: var(--font-heading);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.tabs a:hover { border-color: color-mix(in srgb, var(--pill) 50%, transparent); }
+.tabs a[aria-current] { color: var(--text-primary); border-color: var(--pill); }
+
+/* Platform switcher ---------------------------------------------------------- */
+.platform-nav { display: flex; gap: 0.5rem; }
+.platform-nav a {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: var(--text-secondary);
+}
+.platform-nav a:hover { border-color: color-mix(in srgb, var(--pill) 50%, transparent); }
+.platform-nav a[aria-current] { color: var(--text-primary); border-color: var(--pill); background: color-mix(in srgb, var(--pill) 10%, transparent); }
+
+/* Platform cards (overview) --------------------------------------------------- */
+.platform-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--gap); margin-top: 2rem; }
+.platform-card { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; background: var(--panel); border-radius: 0.5rem; text-decoration: none; color: inherit; }
+.platform-card:hover { background: color-mix(in srgb, var(--fg) 6%, transparent); }
+.platform-card .avatar { width: 3rem; height: 3rem; }
+.platform-card strong { display: block; font-family: var(--font-heading); color: var(--text-primary); }
+.platform-card span { font-size: 0.85rem; color: var(--text-tertiary); }
+.platform-card .go { margin-left: auto; color: var(--text-secondary); }
+
+/* Layout -------------------------------------------------------------------- */
+.steam h2, .games h2 { font-size: 1.25rem; margin: 3.5rem 0 0.25rem; }
+.steam .section-note, .games .section-note { margin: 0 0 1.25rem; color: var(--text-tertiary); max-width: 42rem; }
+.panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: var(--gap); }
+.panel { display: flex; flex-direction: column; gap: 1rem; min-width: 0; padding: 1.25rem; background: var(--panel); border-radius: 0.5rem; }
+.panel.wide { grid-column: 1 / -1; }
+.panel header h3 { margin: 0; font-size: 1rem; }
+.panel .note { margin: 0.2rem 0 0; font-size: 0.85rem; color: var(--text-tertiary); }
+
+/* Stat tiles ---------------------------------------------------------------- */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: var(--gap); margin: 0; }
+.stat { display: flex; flex-direction: column; gap: 0.15rem; padding-block: 0.25rem; }
+.stat dt { font-size: 0.85rem; order: 1; }
+.stat dd { margin: 0; font-size: 1.75rem; font-weight: 600; line-height: 1.15; color: var(--text-primary); letter-spacing: -0.01em; }
+.stat .hint { order: 2; font-size: 0.8rem; color: var(--text-tertiary); }
+.stat.hero dd { font-size: clamp(3rem, 7vw, 4.5rem); letter-spacing: -0.03em; }
+.stat.hero { grid-column: 1 / -1; }
+
+/* Bars ---------------------------------------------------------------------- */
+.bar-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(8rem, 15rem) 1fr; gap: 0.4rem 1rem; align-items: center; }
+.bar-list li { display: contents; }
+.bar-label { display: flex; align-items: center; gap: 0.5rem; min-width: 0; font-size: 0.9rem; color: var(--text-primary); }
+.bar-label a { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-decoration: none; }
+.bar-label a:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+.bar-label img { flex: none; width: 46px; height: 17px; object-fit: cover; border-radius: 2px; }
+.bar-track { display: flex; align-items: center; gap: 0.5rem; min-height: 24px; border-left: 1px solid var(--baseline); }
+.bar { height: 14px; width: var(--w); min-width: 2px; background: var(--series); border-radius: 0 4px 4px 0; transition: filter 0.15s; }
+.bar-value { font-size: 0.8rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+[data-hover] > .bar, [data-hover] > .col, .segment[data-hover], .hm-cell[data-hover] { filter: brightness(1.12); }
+
+/* Stacked bar: one segment per platform, same palette slots as SegmentedBar */
+.bar.stacked { display: flex; gap: 1px; overflow: hidden; background: none; }
+.bar.stacked > span { min-width: 1px; }
+
+/* Meters (achievement completion) */
+.meter { height: 8px; border-radius: 4px; background: color-mix(in srgb, var(--series) 22%, transparent); overflow: hidden; }
+.meter > span { display: block; height: 100%; width: var(--w); background: var(--series); border-radius: 4px; }
+
+/* Segmented bar ------------------------------------------------------------- */
+.segmented { display: flex; gap: 2px; height: 28px; }
+.segment { position: relative; min-width: 2px; border-radius: 4px; display: flex; align-items: center; padding-inline: 0.5rem; color: #fff; font-size: 0.8rem; font-weight: 600; }
+[data-slot='1'] { background: var(--viz-1); }
+[data-slot='2'] { background: var(--viz-2); }
+[data-slot='3'] { background: var(--viz-3); }
+[data-slot='4'] { background: var(--viz-4); color: var(--viz-on-4); }
+[data-slot='steam'] { background: var(--brand-steam); color: var(--on-brand-steam); }
+[data-slot='psn'] { background: var(--brand-psn); color: var(--on-brand-psn); }
+[data-slot='xbox'] { background: var(--brand-xbox); color: var(--on-brand-xbox); }
+.legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem 1.25rem; font-size: 0.85rem; }
+.legend li { display: flex; align-items: center; gap: 0.4rem; }
+.swatch { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+.swatch.dot { border-radius: 50%; }
+
+/* Columns ------------------------------------------------------------------- */
+.columns { display: grid; grid-template-columns: auto 1fr; grid-template-rows: 11rem auto; column-gap: 0.5rem; }
+.y-axis { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; font-size: 0.75rem; color: var(--muted); font-variant-numeric: tabular-nums; margin-block: -0.5em; }
+.plot { position: relative; border-bottom: 1px solid var(--baseline); }
+.gridline { position: absolute; left: 0; right: 0; height: 1px; background: var(--grid); }
+.cols { position: absolute; inset: 0; list-style: none; margin: 0; padding: 0; display: flex; align-items: flex-end; gap: 2px; }
+.cols li { flex: 1; height: 100%; display: flex; align-items: flex-end; justify-content: center; }
+.col { width: 100%; max-width: 24px; height: var(--h); background: var(--series); border-radius: 4px 4px 0 0; }
+.x-axis { grid-column: 2; list-style: none; margin: 0.35rem 0 0; padding: 0; display: flex; gap: 2px; font-size: 0.75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.x-axis li { flex: 1; text-align: center; white-space: nowrap; overflow: visible; width: 0; }
+
+/* Heatmap ------------------------------------------------------------------- */
+.heatmap { display: grid; grid-template-columns: auto repeat(12, minmax(0, 1fr)); max-width: 40rem; gap: 2px; font-size: 0.75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.hm-month { text-align: center; }
+.hm-year { padding-right: 0.5rem; line-height: 1; align-self: center; }
+.hm-cell { height: 1.25rem; border-radius: 2px; background: var(--seq-0); }
+.hm-cell[data-step='1'] { background: var(--seq-1); }
+.hm-cell[data-step='2'] { background: var(--seq-2); }
+.hm-cell[data-step='3'] { background: var(--seq-3); }
+.hm-cell[data-step='4'] { background: var(--seq-4); }
+.hm-cell[data-step='5'] { background: var(--seq-5); }
+.hm-scale { display: flex; align-items: center; gap: 2px; font-size: 0.75rem; color: var(--muted); }
+.hm-scale .hm-cell { width: 12px; height: 12px; flex: none; }
+.hm-scale span:first-child { margin-right: 0.4rem; }
+.hm-scale span:last-child { margin-left: 0.4rem; }
+
+/* Dumbbell (taste) ------------------------------------------------------------ */
+.dumbbell { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(7rem, 11rem) 1fr; gap: 0.15rem 1rem; align-items: center; }
+.dumbbell li { display: contents; }
+.dumbbell .name { font-size: 0.9rem; color: var(--text-primary); }
+.db-track { position: relative; height: 24px; }
+.db-track::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--grid); }
+.db-link { position: absolute; top: calc(50% - 1px); height: 2px; background: var(--baseline); }
+.db-dot { position: absolute; top: 50%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; box-shadow: 0 0 0 2px var(--bg); }
+.db-dot.hours { background: var(--viz-1); }
+.db-dot.library { background: var(--viz-2); }
+.db-axis { grid-column: 2; display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted); border-top: 1px solid var(--baseline); padding-top: 0.25rem; }
+
+/* Lists of games ------------------------------------------------------------ */
+.game-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+.game-list li { display: grid; grid-template-columns: 92px 1fr auto; gap: 0.75rem; align-items: center; }
+.game-list img { width: 92px; height: 34px; object-fit: cover; border-radius: 2px; background: var(--grid); }
+.game-list .title { color: var(--text-primary); font-size: 0.9rem; line-height: 1.3; }
+.game-list .title a { text-decoration: none; }
+.game-list .title a:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+.game-list .meta-line { display: block; font-size: 0.8rem; color: var(--text-tertiary); }
+.game-list .figure { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); text-align: right; white-space: nowrap; }
+.game-list .figure small { display: block; font-weight: 400; font-size: 0.75rem; color: var(--text-tertiary); }
+.game-list .meter { margin-top: 0.35rem; }
+
+/* Table view ---------------------------------------------------------------- */
+.table-view summary { cursor: pointer; font-size: 0.8rem; color: var(--text-tertiary); width: max-content; }
+.table-view summary:hover { color: var(--text-primary); }
+.table-scroll { overflow-x: auto; max-height: 20rem; margin-top: 0.5rem; }
+.table-view table { border-collapse: collapse; width: 100%; font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+.table-view th, .table-view td { text-align: left; padding: 0.3rem 0.75rem 0.3rem 0; border-bottom: 1px solid var(--line); }
+.table-view th { font-weight: 600; color: var(--text-primary); position: sticky; top: 0; background: var(--bg); }
+.table-view td.n, .table-view th.n { text-align: right; }
+
+/* Tooltip ------------------------------------------------------------------- */
+.viz-tooltip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  max-width: 16rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.375rem;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.12);
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+.viz-tooltip[hidden] { display: none; }
+.viz-tooltip strong { color: var(--text-primary); font-variant-numeric: tabular-nums; }
+.viz-tooltip span { color: var(--text-secondary); }
+
+@media (max-width: 767px) {
+  .bar-list { grid-template-columns: minmax(6rem, 9rem) 1fr; }
+  .bar-label img { display: none; }
+  .game-list li { grid-template-columns: 64px 1fr auto; }
+  .game-list img { width: 64px; height: 24px; }
+}
+
+/* Under the hood: back link + tabs ----------------------------------------------- */
+.hood-nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 1.5rem; }
+.hood-nav .back { font-size: 0.9rem; color: var(--text-secondary); text-decoration: none; }
+.hood-nav .back:hover { color: var(--text-primary); text-decoration: underline; text-underline-offset: 0.2em; }

@@ -1,0 +1,28 @@
+---
+import HoodNav from './HoodNav.astro';
+import { snapshot } from '../../lib/psn';
+import { date } from '../../lib/format';
+
+const { profile, generatedAt } = snapshot;
+---
+
+<div class="steam-head">
+  <HoodNav current="psn" />
+  <div class="who">
+    {profile.avatar ? <img class="avatar" src={profile.avatar} alt="" width="64" height="64" /> : <span class="avatar" aria-hidden="true" />}
+    <div>
+      <h1>
+        {profile.onlineId ? <a href={`https://my.playstation.com/profile/${profile.onlineId}`} rel="noopener">{profile.onlineId}</a> : 'Me'} on PlayStation
+      </h1>
+      <p class="sub">
+        {[
+          `Trophy level ${profile.trophyLevel}`,
+          profile.isPlus && 'PlayStation Plus',
+          `Updated ${date(new Date(generatedAt).getTime() / 1000)}`,
+        ]
+          .filter(Boolean)
+          .join(' · ')}
+      </p>
+    </div>
+  </div>
+</div>

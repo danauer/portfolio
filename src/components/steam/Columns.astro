@@ -1,0 +1,45 @@
+---
+// Vertical columns over a shared baseline, one series. Hover a column for its value;
+// the x-axis labels every `every`th column.
+interface Column {
+  label: string;
+  value: number;
+  display: string;
+}
+interface Props {
+  columns: Column[];
+  every?: number;
+  unit?: string;
+}
+const { columns, every = 5, unit = '' } = Astro.props;
+const max = Math.max(...columns.map((c) => c.value), 1);
+// Round the top tick up to a clean number.
+const magnitude = 10 ** Math.floor(Math.log10(max));
+const top = Math.ceil(max / magnitude) * magnitude;
+const ticks = [0, top / 2, top];
+// Label every `every`th column, plus the last one unless it would crowd the previous label.
+const last = columns.length - 1;
+const showLabel = (i: number) => i % every === 0 || (i === last && last % every > every / 2);
+const fmt = (n: number) => (n >= 10000 ? `${Math.round(n / 1000)}K` : new Intl.NumberFormat('en-US').format(n));
+---
+
+<div class="columns">
+  <div class="y-axis" aria-hidden="true">
+    {ticks.toReversed().map((t) => <span>{fmt(t)}{t === top ? unit : ''}</span>)}
+  </div>
+  <div class="plot">
+    {ticks.map((t) => <span class="gridline" style={`bottom: ${(100 * t) / top}%`} />)}
+    <ol class="cols">
+      {
+        columns.map((c) => (
+          <li data-tip-value={c.display} data-tip-label={c.label}>
+            <span class="col" style={`--h: ${(100 * c.value) / top}%`} />
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+  <ol class="x-axis" aria-hidden="true">
+    {columns.map((c, i) => <li>{showLabel(i) ? c.label : ''}</li>)}
+  </ol>
+</div>

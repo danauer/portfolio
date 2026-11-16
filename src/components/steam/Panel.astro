@@ -1,0 +1,30 @@
+---
+// A titled chart card. Anything passed in the `table` slot becomes the chart's
+// table view, tucked behind a disclosure so every value is readable without hover.
+interface Props {
+  title: string;
+  note?: string;
+  wide?: boolean;
+  id?: string;
+}
+const { title, note, wide = false, id } = Astro.props;
+const hasTable = Astro.slots.has('table');
+---
+
+<section class:list={['panel', { wide }]} id={id}>
+  <header>
+    <h3>{title}</h3>
+    {note && <p class="note">{note}</p>}
+  </header>
+  <slot />
+  {
+    hasTable && (
+      <details class="table-view">
+        <summary>Show as table</summary>
+        <div class="table-scroll">
+          <slot name="table" />
+        </div>
+      </details>
+    )
+  }
+</section>

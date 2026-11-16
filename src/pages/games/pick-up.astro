@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import CollectionHeader from '../../components/games/CollectionHeader.astro';
+import PickGrid from '../../components/games/PickGrid.astro';
+import Tabs from '../../components/games/Tabs.astro';
+import { backlog } from '../../lib/recs';
+import '../../styles/steam.css';
+
+// Games with a minute to five hours played, counting every platform together. The tab in the URL hash (#steam) opens that tab.
+const { tabs } = backlog().resume;
+---
+
+<Base title="Pick up where you left off · Games" description="Games I own and started but never got far in, ranked by how well they fit what I play.">
+  <div class="games">
+    <CollectionHeader title="Pick up where you left off" />
+    <Tabs id="resume-all" label="Started games by platform" syncHash tabs={tabs.map((t) => ({ key: t.key, label: t.label, count: t.items.length, source: t.key === 'all' ? undefined : t.key }))}>
+      {
+        tabs.map((t) => (
+          <Fragment slot={t.key}>
+            <PickGrid groups={[{ id: `resume-${t.key}`, title: '', blurb: '', items: t.items }]} matchHint="How closely it matches what you play. Compared within its own platform." />
+          </Fragment>
+        ))
+      }
+    </Tabs>
+  </div>
+</Base>

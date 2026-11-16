@@ -1,0 +1,165 @@
+---
+import Base from '../../layouts/Base.astro';
+import Panel from '../../components/steam/Panel.astro';
+import PickGrid from '../../components/games/PickGrid.astro';
+import CarouselSection from '../../components/games/CarouselSection.astro';
+import { backlog, newGames, onSale, withBanners } from '../../lib/recs';
+import { analyzeAll } from '../../lib/games';
+import { analyze, capsule, snapshot as steamSnapshot, storeUrl } from '../../lib/steam';
+import { snapshot as psnSnapshot, store as psnStore } from '../../lib/psn';
+import { snapshot as xboxSnapshot, store as xboxStore } from '../../lib/xbox';
+import { compact, date, hours, money, num, pct } from '../../lib/format';
+import { url } from '../../lib/content';
+import '../../styles/steam.css';
+
+const owned = backlog();
+const hero = await withBanners(owned.hero);
+const fresh = newGames();
+const sale = onSale();
+const steam = analyze();
+const totals = analyzeAll().totals;
+const SHORT_LIST = 5; // rows in each backlog panel
+const hint = 'How closely it matches what you play. Compared within its own platform.';
+const CAROUSEL = 12; // cards per carousel; the dedicated pages list everything, with a tab per platform
+// Each carousel shows the "All" list; the platform tabs live on the full pages.
+const unplayed = owned.tabs.find((t) => t.key === 'all')!;
+const started = owned.resume.tabs.find((t) => t.key === 'all')!;
+const newest = fresh.find((t) => t.key === 'all')!;
+const discounted = sale.find((t) => t.key === 'all');
+const latestSync = Math.max(...[steamSnapshot.generatedAt, psnSnapshot.generatedAt, psnStore.generatedAt, xboxSnapshot.generatedAt, xboxStore.generatedAt].map((d) => new Date(d).getTime())) / 1000;
+---
+
+<Base title="What to play" description="Games I already own and haven't played, plus what's worth buying next on Steam and PlayStation, and what to try on Xbox Game Pass.">
+  <div class="games">
+    <div class="steam-head">
+      <div>
+        <div class="title-row">
+          <h1>What to play</h1>
+          <a class="pill-link" href={url('games/under-the-hood')}>Under the hood →</a>
+        </div>
+        <p class="sub">Steam, PlayStation and Xbox · Updated {date(latestSync)}</p>
+      </div>
+      <nav class="group-nav" aria-label="On this page">
+        <a class="pill-link" href="#start">Start here</a>
+        <a class="pill-link" href="#backlog">Backlog</a>
+        <a class="pill-link" href="#library">Never played</a>
+        <a class="pill-link" href="#resume">Pick up where you left off</a>
+        <a class="pill-link" href="#new">New games</a>
+        {discounted && <a class="pill-link" href="#sale">On sale</a>}
+      </nav>
+    </div>
+
+    <section id="start">
+      <h2>Start with one of these</h2>
+      <PickGrid variant="feature" groups={[{ id: 'start-picks', title: '', blurb: '', items: hero }]} matchHint={hint} />
+    </section>
+
+    <section id="backlog">
+      <h2>Your backlog</h2>
+      <div class="backlog">
+        <div class="panel metric">
+          <dl class="stats">
+            <div class="stat hero">
+              <dt>games you own and have never launched</dt>
+              <dd>{num(totals.unplayed)}</dd>
+              <span class="hint">{num(totals.unplayedSteam)} on Steam, {num(totals.unplayedPsn)} on PlayStation. A game on both counts once.</span>
+            </div>
+          </dl>
+        </div>
+        <Panel title="Unplayed gems already in your library" note="Barely touched, ranked by Steam review confidence">
+          <ul class="game-list">
+            {steam.backlogGems.slice(0, SHORT_LIST).map((g) => (
+              <li>
+                <img src={g.header || capsule(g.appid)} alt="" loading="lazy" />
+                <span class="title"><a href={storeUrl(g.appid)}>{g.name}</a><span class="meta-line">{g.minutes ? `${hours(g.minutes)} played` : 'Never launched'} · {compact(g.reviews!.positive + g.reviews!.negative)} reviews</span></span>
+                <span class="figure">{pct(g.reviewPct)}<small>positive</small></span>
+              </li>
+            ))}
+          </ul>
+        </Panel>
+        {steam.untouched.length > 0 && (
+          <Panel title="Priciest untouched" note="Paid games with under 30 minutes played">
+            <ul class="game-list">
+              {steam.untouched.slice(0, SHORT_LIST).map((g) => (
+                <li>
+                  <img src={g.header || capsule(g.appid)} alt="" loading="lazy" />
+                  <span class="title"><a href={storeUrl(g.appid)}>{g.name}</a><span class="meta-line">{g.minutes ? hours(g.minutes) : 'Never launched'}</span></span>
+                  <span class="figure">{money(g.priceCents, 2)}</span>
+                </li>
+              ))}
+            </ul>
+          </Panel>
+        )}
+      </div>
+    </section>
+
+    <CarouselSection id="library" title="More you've never played" items={unplayed.items.slice(0, CAROUSEL)} seeAll={{ href: url('games/never-played'), count: unplayed.items.length }} matchHint={hint} />
+
+    <CarouselSection id="resume" title="Pick up where you left off" items={started.items.slice(0, CAROUSEL)} seeAll={{ href: url('games/pick-up'), count: started.items.length }} matchHint={hint} />
+
+    <CarouselSection
+      id="new"
+      title="New games"
+      items={newest.items.slice(0, CAROUSEL)}
+      seeAll={{ href: url('games/new'), count: newest.items.length }}
+      matchHint="How closely it matches your play history. Compared within its own store."
+    />
+
+    {
+      discounted && (
+        <CarouselSection
+          id="sale"
+          title="On sale now"
+          items={discounted.items.slice(0, CAROUSEL)}
+          seeAll={{ href: url('games/on-sale'), count: discounted.items.length }}
+          matchHint="How closely it matches your play history. Compared within its own store."
+        />
+      )
+    }
+
+
+    <p class="source">
+      Steam data from the Steam Web API, the Steam store and SteamSpy. PlayStation data from unofficial PSN endpoints and the public PlayStation Store. Xbox play history from OpenXBL; Xbox genres, ratings and prices from Microsoft's public store catalog.
+      Prices are US store prices at capture time (Steam {date(new Date(steamSnapshot.generatedAt).getTime() / 1000)}, PlayStation {date(new Date(psnStore.generatedAt).getTime() / 1000)}, Xbox {date(new Date(xboxStore.generatedAt).getTime() / 1000)}).
+      Match scores are only comparable within one platform. Xbox can't list games I own but haven't opened, and its play time is approximate. PS Plus claims and Game Pass games are only playable while subscribed. The backlog lists use Steam list prices, not what I paid.
+    </p>
+  </div>
+</Base>
+
+<style>
+  /* The title and its "Under the hood" button share a line, the button pushed fully to the right. */
+  .title-row { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem 1rem; }
+  .title-row h1 { margin: 0; }
+  .sub { margin: 0.25rem 0 0; color: var(--text-tertiary); font-size: 0.9rem; }
+  .group-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  /* Pill buttons: a very faint fill in place of a border, a touch stronger on hover. */
+  .pill-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.95rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--fg) 6%, transparent);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.15s, color 0.15s;
+  }
+  .pill-link:hover, .pill-link:focus-visible { background: color-mix(in srgb, var(--fg) 11%, transparent); color: var(--text-primary); }
+  .pill-link:focus-visible { outline: 2px solid var(--pill); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { .pill-link { transition: none; } }
+  section { scroll-margin-top: 1.5rem; }
+  /* The big number takes the first slot; the two lists share the rest. Their thumbnails are smaller so titles have room. */
+  .backlog { display: grid; grid-template-columns: minmax(11rem, 0.7fr) minmax(0, 1fr) minmax(0, 1fr); gap: var(--gap); }
+  .metric { justify-content: center; }
+  .backlog :global(.game-list li) { grid-template-columns: 64px 1fr auto; }
+  .backlog :global(.game-list img) { width: 64px; height: 24px; }
+  @media (max-width: 60rem) {
+    .backlog { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .metric { grid-column: 1 / -1; }
+  }
+  @media (max-width: 40rem) {
+    .backlog { grid-template-columns: 1fr; }
+  }
+  .source { margin-top: 3.5rem; font-size: 0.8rem; color: var(--text-tertiary); max-width: 42rem; }
+</style>

@@ -1,0 +1,1162 @@
+{
+ "generatedAt": "2026-11-14T19:42:03.761Z",
+ "profile": {
+  "gamertag": "danauer",
+  "gamerscore": 7377,
+  "avatar": "https://images-eds-ssl.xboxlive.com/image?url=wHwbXKif8cus8csoZ03RWwcxuUQ9WVT6xh5XaeeZD01lYI1.K4gGf7cqlZ1YM_tmf66x4vU6qbVIlsNoPEdzXP8jEgeMH9M3HKgZ9FG92n.zFbWhRm35wpBCZaoxG32lwEE54UoFGBHKzZ8dgQ1GX6ZUVpXMRc56RAT8_6DkJinYo2jKJAhXppyhcDnDaJ.L&format=png"
+ },
+ "games": [
+  {
+   "titleId": "247546985",
+   "name": "Destiny",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.9427.65506807380982023.0e494b93-8e27-4f0d-aa29-8b32bb48a45b.36af2922-8c20-4ecc-8055-d0fe060dbd32",
+   "minutes": 67646,
+   "lastPlayed": "2017-09-10T06:18:10.07009Z",
+   "achievements": 39,
+   "gamerscore": 900,
+   "totalGamerscore": 1500,
+   "gamePass": false
+  },
+  {
+   "titleId": "1797327516",
+   "name": "Palworld",
+   "devices": [
+    "PC",
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.45491.13654268679289325.ececb946-5639-4e77-b347-9d188d4e7e02.d4615c02-237f-4ec6-8ec6-a84aaeed586f",
+   "minutes": 4890,
+   "lastPlayed": "2024-03-14T20:29:17.4830159Z",
+   "achievements": 5,
+   "gamerscore": 500,
+   "totalGamerscore": 2820,
+   "gamePass": true
+  },
+  {
+   "titleId": "144389848",
+   "name": "Destiny 2",
+   "devices": [
+    "PC"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.27210.14134992626562533.488a0dea-3d31-463e-ad2e-6ba61492e19e.7173abb2-c768-4ee1-8112-5a92940d412d",
+   "minutes": 4765,
+   "lastPlayed": "2024-01-29T02:04:48.4051852Z",
+   "achievements": 15,
+   "gamerscore": 740,
+   "totalGamerscore": 1240,
+   "gamePass": false
+  },
+  {
+   "titleId": "1717113201",
+   "name": "Sea of Thieves: 2026 Edition",
+   "devices": [
+    "PC",
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.43409.14554784103656548.069efce3-9249-4074-a169-183b727043f8.4edb3e0e-7c73-4abf-8964-4b9dfbd49bf8",
+   "minutes": 3714,
+   "lastPlayed": "2024-01-26T02:23:59.0998472Z",
+   "achievements": 27,
+   "gamerscore": 275,
+   "totalGamerscore": 6310,
+   "gamePass": true
+  },
+  {
+   "titleId": "2047319603",
+   "name": "Minecraft for Nintendo Switch",
+   "devices": [
+    "Nintendo Switch"
+   ],
+   "image": "https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBAInhxUS6pI0HjtmvshPyKwFngHI16IYfbNBXEXjpAKD6HhTiToHacnV9gs4GWxn3QoMzOgdv0PBo5zuxFbRdFDlYtoGdvW9d.2q.7es9OhA--",
+   "minutes": 3643,
+   "lastPlayed": "2026-02-21T20:07:57.534689Z",
+   "achievements": 23,
+   "gamerscore": 370,
+   "totalGamerscore": 2980,
+   "gamePass": false
+  },
+  {
+   "titleId": "1769971395",
+   "name": "Clair Obscur: Expedition 33",
+   "devices": [
+    "PC",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.13628.14322280443288156.27788484-2760-47f7-be0d-dd693682e016.04a10e3c-848f-424d-a431-2846f34b1a6b",
+   "minutes": 3341,
+   "lastPlayed": "2025-10-01T02:58:42.9901239Z",
+   "achievements": 35,
+   "gamerscore": 530,
+   "totalGamerscore": 1000,
+   "gamePass": false
+  },
+  {
+   "titleId": "2097321401",
+   "name": "Blue Prince",
+   "devices": [
+    "PC",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.11666.14199207619921587.94d12fa7-4aa4-478f-a501-05a046496ce3.ddcc15b3-645f-43ee-9625-dc6c475abde4",
+   "minutes": 2458,
+   "lastPlayed": "2025-05-12T18:50:11.3990644Z",
+   "achievements": 2,
+   "gamerscore": 120,
+   "totalGamerscore": 1000,
+   "gamePass": true
+  },
+  {
+   "titleId": "162448742",
+   "name": "Outer Wilds",
+   "devices": [
+    "PC",
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.38686.67120997535715720.38c3e502-0019-4560-826e-634bbaf5cb4b.26a27298-66b5-489a-83dc-b1741a12905f",
+   "minutes": 2164,
+   "lastPlayed": "2022-12-25T21:10:14.7594078Z",
+   "achievements": 5,
+   "gamerscore": 217,
+   "totalGamerscore": 1870,
+   "gamePass": false
+  },
+  {
+   "titleId": "1848191014",
+   "name": "TUNIC",
+   "devices": [
+    "PC",
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.39322.13702044937897358.8701ab78-da18-4c36-8c1e-3d4e6dfd60c9.a0be6178-25eb-43e3-9a52-170445da58fc",
+   "minutes": 1758,
+   "lastPlayed": "2022-06-26T01:09:12.2953534Z",
+   "achievements": 26,
+   "gamerscore": 610,
+   "totalGamerscore": 1000,
+   "gamePass": true
+  },
+  {
+   "titleId": "1144039928",
+   "name": "Halo: The Master Chief Collection",
+   "devices": [
+    "PC"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.25919.14011015795942652.ca67db1b-d21e-47e9-bbb4-5ece2ce3f774.c71a2431-5ef1-4c32-92fa-22cca6162053",
+   "minutes": 1520,
+   "lastPlayed": "2015-06-02T01:39:50Z",
+   "achievements": 65,
+   "gamerscore": 520,
+   "totalGamerscore": 7000,
+   "gamePass": true
+  },
+  {
+   "titleId": "1959842755",
+   "name": "Death's Door",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.37438.13605204887272793.456e749a-524b-4372-bb98-1e7f5fac0947.476204f2-bfa7-4ae9-b73f-a3878fca4ac1",
+   "minutes": 1511,
+   "lastPlayed": "2022-09-23T02:36:11.2568853Z",
+   "achievements": 14,
+   "gamerscore": 475,
+   "totalGamerscore": 1000,
+   "gamePass": false
+  },
+  {
+   "titleId": "2030093255",
+   "name": "Forza Horizon 5",
+   "devices": [
+    "PC",
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.28758.13734397844529069.202e3fc9-37d6-4853-a58b-fabe504b71e8.4335e940-f927-4be4-af08-8e689a17bd7a",
+   "minutes": 1184,
+   "lastPlayed": "2024-09-08T18:49:32.5474656Z",
+   "achievements": 18,
+   "gamerscore": 210,
+   "totalGamerscore": 3000,
+   "gamePass": true
+  },
+  {
+   "titleId": "1902585111",
+   "name": "DOOM: The Dark Ages",
+   "devices": [
+    "PC",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.1369.14239344665439398.f72b7e9e-0a95-4e76-b1e3-8989c4d70e2e.b3c057a4-8d69-420d-8d02-9c28587dac55",
+   "minutes": 631,
+   "lastPlayed": "2025-05-22T22:32:11.4007897Z",
+   "achievements": 7,
+   "gamerscore": 180,
+   "totalGamerscore": 1420,
+   "gamePass": true
+  },
+  {
+   "titleId": "374621264",
+   "name": "RESIDENT EVIL 2",
+   "devices": [
+    "PC",
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.38246.71571739681700792.c61fa2d7-3d69-4edf-8e51-accc41d47823.9197ae9d-181d-44ff-a98d-7f64086f509e",
+   "minutes": 586,
+   "lastPlayed": "2019-02-09T04:15:29.8647052Z",
+   "achievements": 12,
+   "gamerscore": 210,
+   "totalGamerscore": 1070,
+   "gamePass": true
+  },
+  {
+   "titleId": "717702870",
+   "name": "OUTRIDERS",
+   "devices": [
+    "PC",
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.11563.64676761359365869.a946f759-7330-4022-9d38-e22a4fc906c9.2ebe06ca-8dd3-4186-a686-22ae0638f86b",
+   "minutes": 578,
+   "lastPlayed": "2021-04-07T04:09:04.7991023Z",
+   "achievements": 6,
+   "gamerscore": 90,
+   "totalGamerscore": 1305,
+   "gamePass": false
+  },
+  {
+   "titleId": "1611895213",
+   "name": "Disney Dreamlight Valley",
+   "devices": [
+    "PC",
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.62890.14365104417622257.42e17a74-81d1-4e35-8c38-a935ba30ef21.80948ce2-63b2-49df-9e97-4ab247b81f10",
+   "minutes": 548,
+   "lastPlayed": "2022-09-11T22:14:59.4268411Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1000,
+   "gamePass": true
+  },
+  {
+   "titleId": "1278031123",
+   "name": "Resident Evil",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.34310.67692664087020494.db738e63-b6d5-4872-854d-74452f0cf9a7.be7084fd-1b57-4800-a9f4-e0d6a1efbd97",
+   "minutes": 332,
+   "lastPlayed": "2019-01-22T00:46:38.0377836Z",
+   "achievements": 5,
+   "gamerscore": 50,
+   "totalGamerscore": 1000,
+   "gamePass": false
+  },
+  {
+   "titleId": "1880727250",
+   "name": "Unpacking",
+   "devices": [
+    "PC",
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.1461.13636460453065260.a236863a-02a2-47fd-bfee-b7b301312a6e.adcf4c68-73b9-45a5-9304-0c3d43be83f8",
+   "minutes": 314,
+   "lastPlayed": "2021-11-14T20:39:04.5559847Z",
+   "achievements": 13,
+   "gamerscore": 290,
+   "totalGamerscore": 1000,
+   "gamePass": false
+  },
+  {
+   "titleId": "1739375565",
+   "name": "Minecraft Dungeons",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.45275.14045794648370014.2229d39b-90c3-496e-8fac-9987450ca4d8.f422dee5-e9ee-4bfb-8f09-742de22ef8c2",
+   "minutes": 295,
+   "lastPlayed": "2020-06-02T05:50:03.8442141Z",
+   "achievements": 6,
+   "gamerscore": 90,
+   "totalGamerscore": 3000,
+   "gamePass": true
+  },
+  {
+   "titleId": "1790216132",
+   "name": "Hades",
+   "devices": [
+    "PC",
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.21604.14093828725404571.e8c4fd85-da7e-4c33-9a85-c97c9f3eeb38.341dc6a4-6800-400a-9ceb-ac8440332943",
+   "minutes": 283,
+   "lastPlayed": "2021-08-17T01:33:45.0998213Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1000,
+   "gamePass": true
+  },
+  {
+   "titleId": "2046562785",
+   "name": "Avowed",
+   "devices": [
+    "PC",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.40346.13624715126573049.35e3abd5-bd41-4efb-bc2a-0bfbdd50b02a.84157e34-31f1-40b6-849a-e8729c39d4b6",
+   "minutes": 259,
+   "lastPlayed": "2025-03-16T20:43:48.8148852Z",
+   "achievements": 1,
+   "gamerscore": 15,
+   "totalGamerscore": 1000,
+   "gamePass": true
+  },
+  {
+   "titleId": "1924130173",
+   "name": "Haven",
+   "devices": [
+    "PC",
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.63125.14474015592034459.e2e750cd-a461-4824-ad07-a9b8c0e9bdfb.87aadc5d-df35-491f-9931-2c5dc2ac5250",
+   "minutes": 209,
+   "lastPlayed": "2020-12-27T21:41:01.1155164Z",
+   "achievements": 4,
+   "gamerscore": 40,
+   "totalGamerscore": 1000,
+   "gamePass": false
+  },
+  {
+   "titleId": "1788708666",
+   "name": "Carto",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.49210.13618730929685273.f357318e-62a9-42cd-9f85-6dbecd80dd13.a745f5b5-14d8-4a1b-8f1d-046c68537d0c",
+   "minutes": 200,
+   "lastPlayed": "2020-11-12T00:43:37.0465991Z",
+   "achievements": 4,
+   "gamerscore": 160,
+   "totalGamerscore": 1000,
+   "gamePass": false
+  },
+  {
+   "titleId": "2043223846",
+   "name": "TUNIC SGDemo",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.39322.14439826571538724.db784f27-f333-409f-adf8-bf67fdf7f66e.ecd2ef30-9a4a-47fe-aa2f-df63bafae72f",
+   "minutes": 195,
+   "lastPlayed": "2021-06-15T02:45:38.2385924Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 0,
+   "gamePass": false
+  },
+  {
+   "titleId": "1857914892",
+   "name": "Boyfriend Dungeon",
+   "devices": [
+    "PC",
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.12748.14034099625755791.53e68a85-57b5-431a-abf6-767b84f7d313.0cc6ad81-291e-4b6d-8f5e-22a75c09eced",
+   "minutes": 169,
+   "lastPlayed": "2021-08-13T00:25:31.9514014Z",
+   "achievements": 3,
+   "gamerscore": 70,
+   "totalGamerscore": 1400,
+   "gamePass": false
+  },
+  {
+   "titleId": "1938834516",
+   "name": "State of Decay 2: Juggernaut Edition",
+   "devices": [
+    "PC",
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.43642.14425140369408817.14846606-f5bc-4fb1-b355-26ef6a25e847.281240fb-379d-4800-9b0a-b36b5935daa7",
+   "minutes": 153,
+   "lastPlayed": "2022-09-29T19:01:51.7160805Z",
+   "achievements": 1,
+   "gamerscore": 5,
+   "totalGamerscore": 2400,
+   "gamePass": true
+  },
+  {
+   "titleId": "2125557798",
+   "name": "Still Wakes the Deep",
+   "devices": [
+    "PC",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.9370.14049385901429569.1b471d6f-67fc-4289-a4a1-f821ac6594e6.4a82d733-4ab1-4800-a7a9-726158deca80",
+   "minutes": 140,
+   "lastPlayed": "2024-09-08T17:53:04.2281621Z",
+   "achievements": 4,
+   "gamerscore": 40,
+   "totalGamerscore": 1385,
+   "gamePass": false
+  },
+  {
+   "titleId": "1958071699",
+   "name": "Guacamelee! Super Turbo Championship Edition",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.46144.70614617482392087.1331b0ab-59f9-438a-8801-8d64124093d2.813590bf-8c0a-4994-a94c-1ae29b9db291",
+   "minutes": 132,
+   "lastPlayed": "2014-07-22T04:49:48Z",
+   "achievements": 6,
+   "gamerscore": 95,
+   "totalGamerscore": 1200,
+   "gamePass": false
+  },
+  {
+   "titleId": "1673787135",
+   "name": "Rain on Your Parade",
+   "devices": [
+    "PC",
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.29705.14369454977035291.312a1827-6832-45f4-885d-562c4148d669.237d0b6c-bda1-446f-b0be-ac5affdbcd2d",
+   "minutes": 87,
+   "lastPlayed": "2021-07-18T05:28:13.9837016Z",
+   "achievements": 1,
+   "gamerscore": 10,
+   "totalGamerscore": 1500,
+   "gamePass": false
+  },
+  {
+   "titleId": "1649675719",
+   "name": "Max: The Curse of Brotherhood",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.34255.64425461392281454.879d20d4-a065-415c-8776-8483672ad5d1.25a30b51-1813-46f5-bc8c-610c11cdc021",
+   "minutes": 49,
+   "lastPlayed": "2014-03-14T05:33:02Z",
+   "achievements": 6,
+   "gamerscore": 75,
+   "totalGamerscore": 1000,
+   "gamePass": true
+  },
+  {
+   "titleId": "964706972",
+   "name": "No Man's Sky",
+   "devices": [
+    "PC",
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.7092.68818099466568894.c45f3219-f40b-416f-b0ee-34cb9652410f.ca4d1687-ccff-4a3c-82c7-967fe95ba8f5",
+   "minutes": 48,
+   "lastPlayed": "2022-06-19T02:33:05.3540553Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1000,
+   "gamePass": true
+  },
+  {
+   "titleId": "122252941",
+   "name": "RESIDENT EVIL 2 1-Shot Demo",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.30142.71622610518356768.6e94aa2b-b39a-44c8-93bf-f12cd705f5f8.6d20894a-2f0d-4833-85a1-6b4c88a7b97b",
+   "minutes": 47,
+   "lastPlayed": "2019-01-21T02:09:50.1990977Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 0,
+   "gamePass": false
+  },
+  {
+   "titleId": "1797613403",
+   "name": "Into the Pit",
+   "devices": [
+    "PC",
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.39935.13564737612475991.b8ee2cbb-c69a-47d9-b4ee-7d6c7fb9fb80.59114524-43b4-4947-8b56-c2d76eaa2619",
+   "minutes": 46,
+   "lastPlayed": "2021-11-15T01:16:57.4909431Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1000,
+   "gamePass": false
+  },
+  {
+   "titleId": "951560105",
+   "name": "Control",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.12883.64090029807136264.88ddb0db-cfad-423c-bb52-c5b649930fb1.d18863ca-36c5-49ab-9877-af99ddf348e5",
+   "minutes": 44,
+   "lastPlayed": "2020-12-06T05:42:48.2982804Z",
+   "achievements": 2,
+   "gamerscore": 30,
+   "totalGamerscore": 1390,
+   "gamePass": true
+  },
+  {
+   "titleId": "2117782696",
+   "name": "Lake Demo",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.33904.13969253581652140.949226f2-9d95-4726-9641-1bd79a7a45c7.fa895986-4c11-44c0-89f0-3e94db936095",
+   "minutes": 40,
+   "lastPlayed": "2021-06-18T21:48:14.041691Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 0,
+   "gamePass": false
+  },
+  {
+   "titleId": "1936146608",
+   "name": "Scorn",
+   "devices": [
+    "PC",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.51381.13699799412731780.9f7b812e-456c-430e-8cec-380f1ca9e4a2.dd9f4725-f6e0-4fe4-9484-9d5f22682786",
+   "minutes": 33,
+   "lastPlayed": "2022-12-28T05:36:48.1422357Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1000,
+   "gamePass": false
+  },
+  {
+   "titleId": "568182861",
+   "name": "ASTRONEER",
+   "devices": [
+    "PC",
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.7065.13510798887933723.57e43f19-4066-429e-b1a2-caea56e427b4.062ba478-f5b0-4cf3-92ba-73edf71889e7",
+   "minutes": 32,
+   "lastPlayed": "2021-07-18T04:55:49.3979013Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1075,
+   "gamePass": true
+  },
+  {
+   "titleId": "2079794073",
+   "name": "Starfield",
+   "devices": [
+    "PC",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.1647.13567343664224659.1eb6fdf9-8a0b-4344-a135-ab17dfa3c609.39331391-9de2-48f8-8643-8eb1bd964383",
+   "minutes": 30,
+   "lastPlayed": "2023-09-21T03:21:10.322359Z",
+   "achievements": 1,
+   "gamerscore": 10,
+   "totalGamerscore": 1470,
+   "gamePass": true
+  },
+  {
+   "titleId": "333628240",
+   "name": "Quantum Break",
+   "devices": [
+    "PC"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.58987.13510798886714035.b2865d36-6481-42f1-b535-9300f0971c58.be79ec74-9c21-4c54-804b-392877794836",
+   "minutes": 30,
+   "lastPlayed": "2019-09-16T02:52:39.8362954Z",
+   "achievements": 1,
+   "gamerscore": 20,
+   "totalGamerscore": 1000,
+   "gamePass": true
+  },
+  {
+   "titleId": "1756421327",
+   "name": "Teenage Mutant Ninja Turtles: Shredder's Revenge",
+   "devices": [
+    "PC",
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.52487.14375592271313618.8101bdfc-97e9-473f-8ca0-07fc83b1846b.b47a3bfe-dbb6-497e-ae52-194d08f3ca14",
+   "minutes": 24,
+   "lastPlayed": "2022-06-19T00:59:49.8927013Z",
+   "achievements": 2,
+   "gamerscore": 75,
+   "totalGamerscore": 1000,
+   "gamePass": false
+  },
+  {
+   "titleId": "1469186547",
+   "name": "Resident Evil 0",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.30547.63104648801353472.1f16b78b-617c-4a28-a573-670db7c75a11.79ad852b-c7d1-482f-9f9f-e9efba855c54",
+   "minutes": 24,
+   "lastPlayed": "2019-01-21T04:34:35.073174Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1000,
+   "gamePass": false
+  },
+  {
+   "titleId": "836165876",
+   "name": "The Ascent",
+   "devices": [
+    "PC",
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.43846.65332188737297236.e956bc32-e423-4920-b547-86181e7ed68d.5374793f-edc7-46b6-8a4f-6270a1154bb4",
+   "minutes": 21,
+   "lastPlayed": "2021-07-30T04:50:42.1793812Z",
+   "achievements": 1,
+   "gamerscore": 5,
+   "totalGamerscore": 1425,
+   "gamePass": false
+  },
+  {
+   "titleId": "1629043783",
+   "name": "River City Girls",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.49662.13744198789091182.d176867c-ff91-4e0a-b1f7-00b2797de9c7.04b933de-5767-4c30-a842-b2f537387c78",
+   "minutes": 20,
+   "lastPlayed": "2020-11-27T20:26:03.6439872Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1000,
+   "gamePass": false
+  },
+  {
+   "titleId": "255219908",
+   "name": "Super Time Force",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.40039.69513894373098429.1122d76e-a258-4379-8450-aa6e3befebc6.a0cb1e52-590a-478b-b526-e5ca2c3e50c6",
+   "minutes": 18,
+   "lastPlayed": "2014-09-05T05:08:34Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1375,
+   "gamePass": false
+  },
+  {
+   "titleId": "58472989",
+   "name": "Killer Instinct",
+   "devices": [
+    "PC"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.18739.13510798886190122.27ebfbc6-d999-40a1-ac11-cba87a75b91a.2e7ec18d-e71e-487b-ae83-fe78b1556228",
+   "minutes": 18,
+   "lastPlayed": "2014-07-15T03:32:36Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 4935,
+   "gamePass": true
+  },
+  {
+   "titleId": "969381141",
+   "name": "A Plague Tale: Innocence",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.61900.68306748966338141.e6f96fac-aa67-4f59-9043-10654607aa79.7472e56d-b2da-462f-8312-d12050d56ec6",
+   "minutes": 10,
+   "lastPlayed": "2020-11-12T06:26:38.6864211Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1000,
+   "gamePass": false
+  },
+  {
+   "titleId": "2067126551",
+   "name": "Forza Motorsport 5",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.54405.69190199968728292.ade7ab99-7609-4a47-a158-a97c35a6bbc2.75d9ed66-4757-437c-b128-266acd4fb170",
+   "minutes": 5,
+   "lastPlayed": "2017-09-10T06:12:45.2392046Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1400,
+   "gamePass": false
+  },
+  {
+   "titleId": "369299403",
+   "name": "Volgarr the Viking",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.8342.64326966355703730.ffbdbd82-3634-435b-9d29-e2911e881a72.325a60ee-f0b1-4e41-b36c-e281644996c5",
+   "minutes": 5,
+   "lastPlayed": "2014-11-05T07:54:17Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1000,
+   "gamePass": false
+  },
+  {
+   "titleId": "1019936697",
+   "name": "#IDARB",
+   "devices": [
+    "PC",
+    "Mobile"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.3347.13510798885955481.62222435-c470-422e-8917-a258d918faa9.d434cb5b-4bdb-448b-9ad5-d7c4ad6d3ced",
+   "minutes": 2,
+   "lastPlayed": "2015-02-04T06:04:02Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1000,
+   "gamePass": false
+  },
+  {
+   "titleId": "1794566092",
+   "name": "Minecraft Launcher",
+   "devices": [
+    "PC"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.1815.14247769038588514.a7fa20d7-bc1c-464b-bf78-16dfcd742fe5.20b70e8c-ab2e-45b9-b8c3-2390ebb38f59",
+   "minutes": null,
+   "lastPlayed": "2026-02-27T17:47:23.0248505Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 0,
+   "gamePass": true
+  },
+  {
+   "titleId": "2139970300",
+   "name": "Moonglow Bay",
+   "devices": [
+    "PC",
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.26735.14100376622407307.0a254901-c335-4f1a-b7e5-91a59e56a4d1.dd846714-a628-47b7-b931-26ea5e36fb03",
+   "minutes": null,
+   "lastPlayed": "2022-03-16T06:02:21.8399498Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1000,
+   "gamePass": false
+  },
+  {
+   "titleId": "1639119975",
+   "name": "Among Us",
+   "devices": [
+    "Win32"
+   ],
+   "image": "https://images-eds-ssl.xboxlive.com/image?url=8Oaj9Ryq1G1_p3lLnXlsaZgGzAie6Mnu24_PawYuDYIoH77pJ.X5Z.MqQPibUVTcPnMMVV2S.gki47PXDl6PGP36s0kxqW_GC.cfG0VpkK4NrkhHeFppNcmN5f_yDVTJPlaS_S6omjRx.c2.tsSbPw--",
+   "minutes": null,
+   "lastPlayed": "2021-10-23T03:20:27.7781057Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 0,
+   "gamePass": false
+  },
+  {
+   "titleId": "1759805434",
+   "name": "Narita Boy",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.28341.13511334762102279.20d0136b-3bfe-4ba4-b8a6-c63db0ef5500.8f5842f1-661e-448f-8620-a35468470afe",
+   "minutes": null,
+   "lastPlayed": "2021-06-15T05:42:04.8909553Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1000,
+   "gamePass": false
+  },
+  {
+   "titleId": "1702713376",
+   "name": "Genesis Noir",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.27867.14234812946294583.310a0a84-edb2-482c-a55c-b54922972168.2b56a84c-5a52-43fc-9e4e-e70fda0c62ff",
+   "minutes": null,
+   "lastPlayed": "2021-03-29T05:27:03.6839171Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1210,
+   "gamePass": true
+  },
+  {
+   "titleId": "1735501645",
+   "name": "ASTRONEER",
+   "devices": [
+    "Win32"
+   ],
+   "image": null,
+   "minutes": null,
+   "lastPlayed": "2020-08-12T04:03:15.3523345Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 0,
+   "gamePass": false
+  },
+  {
+   "titleId": "1831239909",
+   "name": "Death Stranding",
+   "devices": [
+    "Win32"
+   ],
+   "image": "https://images-eds-ssl.xboxlive.com/image?url=8Oaj9Ryq1G1_p3lLnXlsaZgGzAie6Mnu24_PawYuDYIoH77pJ.X5Z.MqQPibUVTcPnMMVV2S.gki47PXDl6PGODJVTNYTE5dRdpok9cslpNAO6DwCOqTu2PSgz87unNhFIlmECAh2jCTcsXLhqY1kg--",
+   "minutes": null,
+   "lastPlayed": "2020-08-09T16:41:02.1582836Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 0,
+   "gamePass": false
+  },
+  {
+   "titleId": "2060719597",
+   "name": "Control",
+   "devices": [
+    "Win32"
+   ],
+   "image": null,
+   "minutes": null,
+   "lastPlayed": "2020-03-14T23:41:48.9819501Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 0,
+   "gamePass": false
+  },
+  {
+   "titleId": "1967200449",
+   "name": "Sid Meier's Civilization VI",
+   "devices": [
+    "Win32"
+   ],
+   "image": "https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBAInhxUS6pI0HjtmvshPyKy_ijC6f5BnpMVSXrUznSzU6qwYWK.k2LeB95Mx7fRE4_D7d.7p_rZlhDXlVJzX5rVSFm3NTwx95oNR0eQL0bYg--",
+   "minutes": null,
+   "lastPlayed": "2020-03-14T23:28:02.6899099Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 0,
+   "gamePass": false
+  },
+  {
+   "titleId": "1762047744",
+   "name": "Destiny 2",
+   "devices": [
+    "Win32"
+   ],
+   "image": "https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBAInhxUS6pI0HjtmvshPyK5xB.ZeLifyx3D2vFT1oxasbUttswJAmzXkESt4HS_v0gDQNx80mnrfmLDpFsK5gb6zgmC9b3YxevgYDn3TDSig--",
+   "minutes": null,
+   "lastPlayed": "2019-11-21T23:17:22.5057785Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 0,
+   "gamePass": false
+  },
+  {
+   "titleId": "1791712750",
+   "name": "Minecraft",
+   "devices": [
+    "Win32"
+   ],
+   "image": "https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBAInhxUS6pI0HjtmvshPyKpwWTprHeUG2HfG4pmZEwqG1NSq4NmJCkpdYNX7I2_MZnlEj2Siz53v7pgxrHSPY2jzHMeYk2oJm_0PtqfvgsMw--",
+   "minutes": null,
+   "lastPlayed": "2019-02-18T23:05:08.9659811Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 0,
+   "gamePass": false
+  },
+  {
+   "titleId": "939455454",
+   "name": "resident evil 4 (2005)",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.54058.65720361252122895.6705784f-9e29-4778-8df4-707828cc2c63.ce3835eb-772e-4592-9b47-5f9c5c933a2a",
+   "minutes": null,
+   "lastPlayed": "2019-01-21T01:35:34.7373083Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1000,
+   "gamePass": false
+  },
+  {
+   "titleId": "1905450963",
+   "name": "No Man's Sky",
+   "devices": [
+    "Win32"
+   ],
+   "image": "https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBAInhxUS6pI0HjtmvshPyK_PRRGHlMSXYxDpDLwaKdtt3k3avSJMmcdpvufry2J.sZxhx0BKaxzzFnwRyhu.2iglfiCvSHfW2QCrdZmmotSg--",
+   "minutes": null,
+   "lastPlayed": "2018-08-12T17:06:20.3979133Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 0,
+   "gamePass": false
+  },
+  {
+   "titleId": "1760522937",
+   "name": "Wolfenstein: The New Order",
+   "devices": [
+    "Win32"
+   ],
+   "image": "https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBAInhxUS6pI0HjtmvshPyKfiHp5xD4hJ0a6_mMTCUcYwZzlDtKJA_IVw9mlul6gzXwACrYVcHZCWoWvW6OQ.BKOJYefhWTmFPetnnwXJRP9Q--",
+   "minutes": null,
+   "lastPlayed": "2018-07-07T06:26:52.069292Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 0,
+   "gamePass": false
+  },
+  {
+   "titleId": "2100192686",
+   "name": "DOOM",
+   "devices": [
+    "Win32"
+   ],
+   "image": null,
+   "minutes": null,
+   "lastPlayed": "2018-07-07T01:53:17.1857057Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 0,
+   "gamePass": false
+  },
+  {
+   "titleId": "1757939507",
+   "name": "Stardew Valley",
+   "devices": [
+    "Win32"
+   ],
+   "image": null,
+   "minutes": null,
+   "lastPlayed": "2018-03-10T03:46:38.6468546Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 0,
+   "gamePass": false
+  },
+  {
+   "titleId": "70112963",
+   "name": "Knight Squad",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.56155.69019489075777328.76d71961-e725-4f6e-829a-5850d4770b21.3b28eabe-29a1-4534-b384-4e21369dfaf7",
+   "minutes": null,
+   "lastPlayed": "2015-12-12T22:39:01Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1000,
+   "gamePass": false
+  },
+  {
+   "titleId": "1989956835",
+   "name": "Evolve",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.19979.66672728066194630.fb74d0f7-c971-4af4-b272-83f62a450d37.1d5cd747-b899-4b66-b9ba-81a545b3721c",
+   "minutes": null,
+   "lastPlayed": "2015-02-10T05:05:54Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1250,
+   "gamePass": false
+  },
+  {
+   "titleId": "1579532320",
+   "name": "Sunset Overdrive",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.19746.69444514893807971.ab5f1b93-5a0c-4e23-9a17-465a62377bd1.a396a069-cf56-40f3-b1b5-9072f1fbd328",
+   "minutes": null,
+   "lastPlayed": "2015-01-18T07:18:14Z",
+   "achievements": 6,
+   "gamerscore": 115,
+   "totalGamerscore": 1925,
+   "gamePass": true
+  },
+  {
+   "titleId": "945174237",
+   "name": "Geometry Wars™ 3: Dimensions Evolved",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.6983.70507094414096366.11bd2814-d7fa-404b-a5bf-f9c6265469e3.5ff0ccec-4e7f-4aab-813a-85e0f243cb82",
+   "minutes": null,
+   "lastPlayed": "2014-11-26T02:31:47Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1000,
+   "gamePass": false
+  },
+  {
+   "titleId": "860666361",
+   "name": "Plants vs. Zombies Garden Warfare",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.57712.70921300667420253.8c8a7ac7-d0bd-46fb-a144-4c5ea316247c.b4f3a4a4-1e61-4685-8c7a-49ef7addd34c",
+   "minutes": null,
+   "lastPlayed": "2014-08-05T05:51:57Z",
+   "achievements": 7,
+   "gamerscore": 80,
+   "totalGamerscore": 1500,
+   "gamePass": false
+  },
+  {
+   "titleId": "470262605",
+   "name": "Destiny Beta",
+   "devices": [],
+   "image": "https://images-eds-ssl.xboxlive.com/image?url=8Oaj9Ryq1G1_p3lLnXlsaZgGzAie6Mnu24_PawYuDYIoH77pJ.X5Z.MqQPibUVTciB5dOoJooEOg0OKLadQ4fZ0hXXGIph8P8RtofpZzOM2b2z3NM8ipbFExvP.0f_eU1RjKx1lE3WsYcjUnXNA93rJmPh8RGdzjLWhSyeIVtjXKD3EiMZdGAAXInxvBCnjdK0unC9k7FMplQZ6iqXN8yT.4alVtBa4pVP2PbZ1oICA-",
+   "minutes": null,
+   "lastPlayed": "2014-08-05T02:07:36Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 0,
+   "gamePass": false
+  },
+  {
+   "titleId": "682562723",
+   "name": "Halo: Spartan Assault",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.34586.70634858521726340.aed5ca97-d1dc-4d71-ae1f-b3f94bf8b727.2b005ed6-f545-40d3-b5f0-8905ca07b05d",
+   "minutes": null,
+   "lastPlayed": "2014-07-15T03:43:28Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1000,
+   "gamePass": true
+  },
+  {
+   "titleId": "556718860",
+   "name": "Assassin's Creed IV Black Flag",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.27892.69748098540497451.a03a4b64-603b-49b8-8644-4924ac7f3076.4c3bd7f3-03cb-4849-a68c-af72c31dda7d",
+   "minutes": null,
+   "lastPlayed": "2014-05-14T05:32:37Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 1250,
+   "gamePass": true
+  },
+  {
+   "titleId": "1292135256",
+   "name": "Titanfall",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.30057.68465370828881560.b2efcf70-9772-4200-a381-cd43cf16f0b2.6a525d31-14fa-4687-9b75-e36099a92dad",
+   "minutes": null,
+   "lastPlayed": "2014-04-02T05:30:27Z",
+   "achievements": 2,
+   "gamerscore": 75,
+   "totalGamerscore": 2000,
+   "gamePass": false
+  },
+  {
+   "titleId": "1624350228",
+   "name": "Project Spark",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.33933.68783502403174492.47390c2c-991c-47aa-892f-c6ae90a18d59.2685cf3b-67cc-4cb3-a2d6-8618082f57ca",
+   "minutes": null,
+   "lastPlayed": "2014-03-24T02:30:31Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 2300,
+   "gamePass": false
+  },
+  {
+   "titleId": "1923160643",
+   "name": "Dead Rising 3",
+   "devices": [
+    "XboxOne",
+    "XboxSeries"
+   ],
+   "image": "https://store-images.s-microsoft.com/image/apps.46880.70960382205507979.a7f66126-5c51-4bb9-9189-dd778315823e.d689f9c7-6d07-4189-b5a5-a5c00e2c75a4",
+   "minutes": null,
+   "lastPlayed": "2014-02-22T07:40:47Z",
+   "achievements": 8,
+   "gamerscore": 80,
+   "totalGamerscore": 1860,
+   "gamePass": false
+  },
+  {
+   "titleId": "1716882494",
+   "name": "Titanfall Beta",
+   "devices": [],
+   "image": "https://images-eds-ssl.xboxlive.com/image?url=8Oaj9Ryq1G1_p3lLnXlsaZgGzAie6Mnu24_PawYuDYIoH77pJ.X5Z.MqQPibUVTcAzhsSTGX.3m9DaI6ViJJu6.B2HQrrXCFFGmOU57uaW.._OWGIx4RKKS0iEF8Ci.blIWtiIllaKW_yGFCKacPPaGKPNCnMAQSQi7iSbIsQmgNcTCEodYU2Tt0homjBTkDUVmscIKic1_t063xglneC4g6V3iyLkXca3Iuj_9dBeQ-",
+   "minutes": null,
+   "lastPlayed": "2014-02-22T07:35:58Z",
+   "achievements": 0,
+   "gamerscore": 0,
+   "totalGamerscore": 0,
+   "gamePass": false
+  }
+ ]
+}
