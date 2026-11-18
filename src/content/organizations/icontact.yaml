@@ -1,4 +1,5 @@
 name: iContact
+logo: ../../assets/images/organizations/icontact/logo.png
 kinds:
   - employer
 tags: []

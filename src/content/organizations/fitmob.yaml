@@ -1,6 +1,8 @@
 tags:
   - fitness
 name: Fitmob
+logo: ../../assets/images/organizations/fitmob/logo.svg
+logoDark: ../../assets/images/organizations/fitmob/logo-dark.svg
 kinds:
   - employer
 industry: Fitness

@@ -67,6 +67,7 @@ const organizations = defineCollection({
       location: text(),
       website: text(),
       logo: image().nullish(),
+      logoDark: image().nullish(),
       description: text(),
       myRole: text(),
       tags,

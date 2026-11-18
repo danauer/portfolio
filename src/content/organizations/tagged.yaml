@@ -1,4 +1,6 @@
 name: Tagged
+logo: ../../assets/images/organizations/tagged/logo.png
+logoDark: ../../assets/images/organizations/tagged/logo-dark.png
 kinds:
   - employer
 tags: []

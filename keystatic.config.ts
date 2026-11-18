@@ -182,6 +182,12 @@ export default config({
           directory: 'src/assets/images/organizations',
           publicPath: '../../assets/images/organizations/',
         }),
+        logoDark: fields.image({
+          label: 'Logo for dark mode',
+          description: 'Optional. A version with light ink, for logos that disappear on a dark background.',
+          directory: 'src/assets/images/organizations',
+          publicPath: '../../assets/images/organizations/',
+        }),
         description: fields.text({ label: 'Description', multiline: true }),
         myRole: fields.text({
           label: 'My role',
