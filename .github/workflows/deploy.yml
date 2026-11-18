@@ -32,6 +32,7 @@ jobs:
           SITE_URL: https://www.auer.co
           BASE_PATH: /
           PUBLIC_CLOUDINARY_CLOUD_NAME: ${{ vars.CLOUDINARY_CLOUD_NAME }}
+          PUBLIC_TMDB_READ_TOKEN: ${{ vars.TMDB_READ_TOKEN }}
       # Audiotool lives on its own orphan branch (no build step) and is served
       # from /audiotool/ alongside the portfolio.
       - uses: actions/checkout@v7
