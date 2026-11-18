@@ -1,0 +1,374 @@
+---
+import Base from '../layouts/Base.astro';
+import WhereToWatch from '../components/watch/WhereToWatch';
+import pixelPattern from '../assets/patterns/pixel-pattern.svg';
+---
+
+<Base
+  title="Where to watch"
+  description="Search any movie or TV show to see where it's streaming, free, or for rent and purchase in the US, with the services you have first."
+>
+  <div class="wtw" style={`--pattern: url(${pixelPattern.src})`}>
+    <h1>Where to watch</h1>
+
+    <WhereToWatch client:only="react" />
+    <noscript><p class="muted">This page needs JavaScript to search.</p></noscript>
+
+    <footer class="wtw-credits">
+      <p>
+        Titles, artwork and availability come from <a href="https://www.themoviedb.org/">TMDB</a>. Where-to-watch data is
+        provided by <a href="https://www.justwatch.com/">JustWatch</a>. This website uses TMDB and the TMDB APIs but is
+        not endorsed, certified, or otherwise approved by TMDB.
+      </p>
+      <p>The services you pick are saved in this browser only.</p>
+    </footer>
+  </div>
+</Base>
+
+<style is:global>
+  .content:has(.wtw-backdrop) { position: relative; }
+  @keyframes wtw-pulse { 50% { opacity: 0.5; } }
+  @keyframes wtw-fade { from { opacity: 0; } }
+  @keyframes wtw-in { from { opacity: 0; transform: translateY(0.5rem); } }
+
+  .wtw {
+    --radius: 10px;
+    --soft: color-mix(in srgb, var(--fg) 6%, transparent);
+    --soft-strong: color-mix(in srgb, var(--fg) 11%, transparent);
+    --skeleton: color-mix(in srgb, var(--fg) 7%, transparent);
+    /* One column down the middle of the page, in every state. */
+    width: min(46rem, 100%);
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+    .muted { color: var(--text-tertiary); }
+    .small { font-size: 0.8125rem; }
+    .kicker {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+    :focus-visible { outline: 2px solid var(--pill); outline-offset: 2px; }
+
+    /* Shared controls ----------------------------------------------------- */
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.95rem;
+      border: 0;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--text-secondary);
+      font: inherit;
+      font-size: 0.875rem;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: background-color 0.15s, color 0.15s;
+    }
+    .button:hover { background: var(--soft-strong); color: var(--text-primary); }
+    .button svg { width: 1rem; height: 1rem; }
+    .link-button {
+      padding: 0;
+      border: 0;
+      background: none;
+      color: var(--text-primary);
+      font: inherit;
+      text-decoration: underline;
+      text-decoration-color: var(--pill);
+      text-underline-offset: 0.2em;
+      cursor: pointer;
+    }
+    .problem {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem 1rem;
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+    .problem p { margin: 0; }
+    .problem code { font-size: 0.85em; }
+
+    /* Chips: where a title is. Your services get the site's accent. */
+    /* inline-block, not flex, so a label too long for its space ends in an ellipsis. */
+    .chip {
+      display: inline-block;
+      align-self: flex-start;
+      max-width: 100%;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-weight: 500;
+      line-height: 1.4;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .chip[data-tone='yours'] { background: var(--pill); color: var(--pill-fg); }
+    .chip[data-tone='paid'], .chip[data-tone='none'] { background: none; color: var(--text-tertiary); padding-inline: 0; }
+
+    /* App ----------------------------------------------------------------- */
+
+    > h1 { margin: 0 auto; width: fit-content; }
+
+    /* Before a search there's nothing but the title and the box, in the vertical middle of the
+       screen (a little above true center, which reads as centered). The credits wait for TMDB content. */
+    &:has(.wtw-app[data-view='home']) {
+      min-height: calc(100svh - 1.5rem - var(--page-end));
+      justify-content: center;
+      padding-bottom: 8vh;
+      .wtw-credits { display: none; }
+    }
+    @media (max-width: 767px) {
+      /* The site header sits above the page on phones. */
+      &:has(.wtw-app[data-view='home']) { min-height: calc(100svh - 4.5rem - 1.5rem - var(--page-end)); }
+    }
+    /* Results ease in under the box once it has moved up. */
+    .filters, .results { animation: wtw-in 0.35s 0.12s ease-out both; }
+    .wtw-app { display: flex; flex-direction: column; gap: 2rem; }
+    .logo { display: block; width: 2.5rem; height: 2.5rem; flex: none; border-radius: 8px; object-fit: cover; background: var(--soft); }
+    .logo-empty { display: grid; place-items: center; font-size: 0.8rem; font-weight: 600; color: var(--text-tertiary); }
+
+    /* Service filters: one chip per service the results are on. Picked ones take the accent. */
+    .filters { display: flex; flex-direction: column; gap: 0.75rem; }
+    .filters-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 1rem; }
+    .service-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
+    .service-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      height: 2.5rem;
+      padding: 0 0.75rem 0 0.3rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--text-secondary);
+      font: inherit;
+      font-size: 0.875rem;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .service-chip:hover { background: var(--soft-strong); color: var(--text-primary); }
+    .service-chip .logo { width: 1.9rem; height: 1.9rem; border-radius: 50%; }
+    .chip-count { font-size: 0.75rem; color: var(--text-tertiary); font-variant-numeric: tabular-nums; }
+    .service-chip[aria-pressed='true'] { border-color: var(--pill); background: color-mix(in srgb, var(--pill) 16%, transparent); color: var(--text-primary); }
+    .service-chip[aria-pressed='true'] .chip-count { color: var(--text-secondary); }
+    .service-chip.more { padding-inline: 1rem; }
+
+    .search label { position: relative; display: block; }
+    .search svg {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      width: 1.25rem;
+      height: 1.25rem;
+      translate: 0 -50%;
+      color: var(--text-tertiary);
+      pointer-events: none;
+    }
+    .search input {
+      width: 100%;
+      padding: 0.9rem 1rem 0.9rem 3rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--bg);
+      color: var(--text-primary);
+      font: inherit;
+      font-size: 1.0625rem;
+      transition: border-color 0.15s;
+    }
+    .search input::-webkit-search-cancel-button { cursor: pointer; }
+    .search input::placeholder { color: var(--text-tertiary); }
+    .search input:hover { border-color: color-mix(in srgb, var(--fg) 25%, transparent); }
+    .search input:focus { outline: none; border-color: var(--pill); box-shadow: 0 0 0 3px color-mix(in srgb, var(--pill) 30%, transparent); }
+
+    .poster {
+      position: relative;
+      display: block;
+      aspect-ratio: 2 / 3;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: var(--skeleton);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--fg) 8%, transparent);
+    }
+    .poster img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+    .poster-empty {
+      display: grid;
+      place-items: center;
+      height: 100%;
+      padding: 0.75rem;
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      text-align: center;
+      color: var(--text-tertiary);
+    }
+
+    .rows-skeleton, .title-skeleton { animation: wtw-pulse 1.4s ease-in-out infinite; }
+
+    /* Search results */
+    .results { display: flex; flex-direction: column; gap: 0.75rem; }
+    .rows { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; }
+    .title-row + .title-row { border-top: 1px solid var(--line); }
+    .title-row a {
+      display: grid;
+      grid-template-columns: 2.75rem minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.6rem 0.5rem;
+      margin-inline: -0.5rem;
+      border-radius: var(--radius);
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+    .title-row a:hover { background: var(--soft); }
+    .title-row .poster { border-radius: 6px; }
+    .row-text { display: flex; flex-direction: column; min-width: 0; }
+    .row-title { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .row-meta { font-size: 0.8125rem; color: var(--text-tertiary); }
+    .title-row .chip { align-self: center; max-width: 11rem; }
+    .rows[data-stale] { opacity: 0.5; transition: opacity 0.2s; }
+    .others { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; margin-top: 0.75rem; }
+    .others .rows { align-self: stretch; }
+    .rows-skeleton { height: 20rem; border-radius: var(--radius); background: var(--skeleton); }
+
+    /* A title */
+    .title-view { display: flex; flex-direction: column; gap: 1.5rem; }
+    .back {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      gap: 0.25rem;
+      padding: 0.3rem 0.75rem 0.3rem 0.45rem;
+      border: 0;
+      border-radius: 999px;
+      background: var(--bg); /* Solid, like the search box, so it reads over the backdrop. */
+      color: var(--text-secondary);
+      font: inherit;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+    .back:hover { background: color-mix(in srgb, var(--bg) 90%, var(--fg)); color: var(--text-primary); }
+    .back svg { width: 1rem; height: 1rem; }
+    .title-skeleton { height: 22rem; border-radius: 16px; background: var(--skeleton); }
+
+    .title-head {
+      display: grid;
+      grid-template-columns: minmax(8rem, 13rem) minmax(0, 1fr);
+      gap: clamp(1.25rem, 4vw, 2.5rem);
+      align-items: end;
+    }
+
+    /* A title's backdrop image fills the top of the page area (everything right of the sidebar, out to
+       the window edge) behind the content, fading out toward the bottom. The
+       homepage's pixel pattern sits on top: a theme-colored fill masked by the 2px checkerboard. */
+    .wtw-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: calc(var(--edge) / -2);
+      z-index: -1;
+      height: min(46rem, 85svh);
+      overflow: hidden;
+      pointer-events: none;
+      background: var(--backdrop) center 20% / cover no-repeat;
+      opacity: 0.5;
+      -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent);
+      mask-image: linear-gradient(to bottom, #000 35%, transparent);
+      animation: wtw-fade 0.6s ease-out both;
+    }
+    .wtw-backdrop::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--bg);
+      -webkit-mask: var(--pattern) 0 0 / 2px 2px repeat;
+      mask: var(--pattern) 0 0 / 2px 2px repeat;
+    }
+    @media (max-width: 767px) {
+      /* No sidebar beside it: the backdrop runs edge to edge. */
+      .wtw-backdrop { left: calc(var(--edge) / -2); }
+    }
+    .title-poster { box-shadow: 0 10px 30px rgb(0 0 0 / 0.3); }
+    .title-info { display: flex; flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+    .title-info h2 { margin: 0; font-size: clamp(1.75rem, 4vw, 2.75rem); }
+    .title-info h2:focus { outline: none; }
+    .title-info .kicker { color: var(--text-secondary); }
+    .genres { margin: 0; font-size: 0.9rem; color: var(--text-secondary); }
+    .overview { margin: 0; max-width: 40rem; color: var(--text-primary); }
+
+    .where { display: flex; flex-direction: column; gap: 1.25rem; }
+    .groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1.5rem; }
+    .group { display: flex; flex-direction: column; gap: 0.6rem; }
+    .group h4 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.6rem; margin: 0; font-size: 1rem; }
+    .group-note { font-family: var(--font-body); font-size: 0.8rem; color: var(--text-tertiary); }
+    .tiles { display: flex; flex-direction: column; gap: 0.4rem; margin: 0; padding: 0; list-style: none; }
+    .tile > a, .tile > span {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.35rem 0.75rem 0.35rem 0.35rem;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      background: var(--soft);
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background-color 0.15s;
+    }
+    .tile > a:hover { background: var(--soft-strong); }
+    .tile[data-mine] > a, .tile[data-mine] > span { border-color: var(--pill); background: color-mix(in srgb, var(--pill) 14%, transparent); }
+    .tile-name { flex: 1; min-width: 0; }
+    .tile-tag { padding: 0.05rem 0.45rem; border-radius: 999px; background: var(--pill); color: var(--pill-fg); font-size: 0.7rem; font-weight: 600; }
+    .fine-print { margin: 0; font-size: 0.8125rem; color: var(--text-tertiary); }
+    .fine-print a { color: var(--text-secondary); text-underline-offset: 0.2em; }
+
+    /* Credits ------------------------------------------------------------- */
+
+    .wtw-credits { padding-top: 1.5rem; border-top: 1px solid var(--line); }
+    .wtw-credits { text-align: center; }
+    .wtw-credits p { margin: 0 0 0.35rem; font-size: 0.8125rem; color: var(--text-tertiary); }
+    .wtw-credits a { color: var(--text-secondary); text-underline-offset: 0.2em; }
+
+    @media (max-width: 34rem) {
+      .title-head { grid-template-columns: 6.5rem minmax(0, 1fr); align-items: start; }
+      .title-info h2 { font-size: 1.5rem; }
+      .title-row .chip { max-width: 7.5rem; }
+      /* One swipeable row of filters instead of a tall stack, running to the screen edges. */
+      .service-chips {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        margin-inline: calc(var(--edge) / -2);
+        padding-inline: calc(var(--edge) / 2);
+        scroll-padding-inline: calc(var(--edge) / 2);
+        scrollbar-width: none;
+      }
+      .service-chips::-webkit-scrollbar { display: none; }
+      .service-chips li { flex: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before { transition: none !important; animation: none !important; }
+    }
+  }
+</style>
