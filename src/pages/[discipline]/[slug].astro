@@ -56,7 +56,7 @@ const hasGallery = d.gallery.length > 0;
             <>
               {d.gallery.map((item) => (
                 <figure>
-                  <Image src={item.image} alt={item.alt ?? ''} width={2000} />
+                  <Image src={item.image} alt={item.alt ?? ''} width={Math.min(item.image.width, 2000)} />
                   {item.caption && <figcaption>{item.caption}</figcaption>}
                 </figure>
               ))}
@@ -158,6 +158,8 @@ const hasGallery = d.gallery.length > 0;
   .project[data-details='hidden'] .columns { grid-template-columns: minmax(0, 1fr); }
   .project[data-details='hidden'] .details { display: none; }
 
+  /* Never stretch an image past its natural size; smaller ones sit centered in the column. */
+  .gallery img { margin-inline: auto; }
   .gallery figure:last-child { margin-bottom: 0; }
 
   .details > :first-child { margin-top: 0; }

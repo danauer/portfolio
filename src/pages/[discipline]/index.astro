@@ -22,8 +22,8 @@ const { label } = disciplines[discipline];
 const projects = await getProjects(discipline);
 
 // The UX page groups projects by client organization. Projects are already
-// newest-first, so sections are ordered by their most recent project, and
-// projects without a client go last. Other disciplines show one flat grid.
+// newest-first, so sections are ordered by their most recent project, then
+// projects without a client, then freelance. Other disciplines show one flat grid.
 type Section = {
   id: string;
   name: string;
@@ -55,6 +55,9 @@ if (unassigned.length) {
   // With no organizations to group under, skip the heading entirely.
   sections.push({ id: 'other', name: sections.length ? 'Other' : '', projects: unassigned });
 }
+// Freelance work isn't one company, so it goes at the very end rather than by recency.
+const freelance = sections.findIndex((s) => s.id === 'freelance');
+if (freelance !== -1) sections.push(...sections.splice(freelance, 1));
 ---
 
 <Base title={label}>
